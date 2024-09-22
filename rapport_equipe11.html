@@ -580,10 +580,10 @@
     <header class="report-header">
         <div class="title-section">
             <div>
-                <h1 class="report-title">Rapport du livrable X</h1>
+                <h1 class="report-title">Rapport de l'application MaVille</h1>
                 <p class="report-summary">
-                    <em>Court résumé du rapport</em> &ndash; Ce livrable se concentre sur... 
-                    lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia distinctio tempora quam nulla quod enim. 
+                    <em>Court résumé du rapport</em> &ndash; Ce livrable se concentre sur...
+                    lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia distinctio tempora quam nulla quod enim.
                     Odit eius dolores repellendus incidunt doloribus delectus at ex sunt error, iste dicta, maiores blanditiis.
                 </p>
             </div>
@@ -766,10 +766,10 @@
                 <div class="scenario" id="cu-1">
                     <div class="scenario-meta">
                         <h4 class="cu-name">
-                            <strong>CU:</strong> Créer une séance
+                            <strong>CU:</strong> Créer un compte résident
                         </h4>
                         <p class="cu-goal">
-                            <strong>Objectif:</strong> Un professionnel souhaite donner une séance d'un service au GYM
+                            <strong>Objectif:</strong> Un résident de la ville souhaite créer un compte sur MaVille.
                         </p>
                         
                         <hr>
@@ -777,22 +777,21 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Acteurs</h5>
                             <ul class="bare-list cu-actors">
-                                <li class="cu-actor">Professionnel (Principal)</li>
-                                <li class="cu-actor">Agent (Secondaire)</li>
+                                <li class="cu-actor">Résident (Principal)</li>
                             </ul>
                         </div>
                         
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Le professionnel a un compte et est présent au GYM.</li>
+                                <li class="dash">Aucune.</li>
                             </ul>
                         </div>
                         
                         <div class="cu-part">
                             <h5 class="cu-part-title">Postconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucun</li>
+                                <li class="dash">Aucune.</li>
                             </ul>
                         </div>
                         
@@ -804,34 +803,22 @@
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Le professionnel se présente à l’accueil et donne son numéro.</li>
-                            <li class="scenario-main-step">L’agent entre le numéro dans le système.</li>
-                            <li class="scenario-main-step">Le système valide le numéro du membre.</li>
-                            <li class="scenario-main-step">Le professionnel indique à l’agent le service qu’il souhaite fournir.</li>
-                            <li class="scenario-main-step">L’agent <a href="#cu-2">consulte le Répertoire des services</a> pour trouver le code de service.</li>
-                            <li class="scenario-main-step">L’agent demande au professionnel le reste des informations requises.</li>
-                            <li class="scenario-main-step">L’agent entre les données dans le système.</li>
-                            <li class="scenario-main-step">Le système affiche les détails de la séance nouvellement créée.</li>
+                            <li class="scenario-main-step">L'utilisateur choisit l'option "Créer un compte comme résident" à l'ouverture de l'application.</li>
+                            <li class="scenario-main-step">L'utilisateur entre un nom et un mot de passe.</li>
+                            <li class="scenario-main-step">Le système valide les informations fournies.</li>
+                            <li class="scenario-main-step">Le système crée le compte résident.</li>
+                            <li class="scenario-main-step">Le système affiche les différents menus de l'application.</li>
                         </ol>
 
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
                                 <li class="scenario-alt-step" value="4">
-                                    Le compte est suspendu.
+                                    Un compte existe déjà avec le même nom d'utilisateur.
                                     <ol class="bare-list">
-                                        <li value="4">Le système affiche Compte suspendu à l'écran</li>
-                                        <li value="4">Le scénario se termine</li>
-                                    </ol>
-                                </li>
-                            </ol>
-                            <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="6">
-                                    Le service souhaité n'est pas offert chez GYM.
-                                    <ol class="bare-list">
-                                        <li value="6">L'agent ne trouve pas le code pour le service demandé.</li>
-                                        <li value="6">L'agent informe le professionnel de la non-disponibilité du service.</li>
-                                        <li value="6">Le scénario se termine.</li>
+                                        <li value="4">Le système invite l'utilisateur à s'authentifier s'il a déjà un compte ou choisir un autre nom sinon.</li>
+                                        <li value="4">Le système retourne au menu principal.</li>
+                                        <li value="4">Le scénario se termine.</li>
                                     </ol>
                                 </li>
                             </ol>
@@ -842,35 +829,35 @@
                 <div class="scenario" id="cu-2">
                     <div class="scenario-meta">
                         <h4 class="cu-name">
-                            <strong>CU:</strong> Consulter le répertoire des services
+                            <strong>CU:</strong> Créer un compte intervenant
                         </h4>
                         <p class="cu-goal">
-                            <strong>Objectif:</strong> Obtenir la liste des services et séances offerts et disponibles
+                            <strong>Objectif:</strong> Un intervenant de la ville souhaite créer un compte sur MaVille.
                         </p>
-                        
+
                         <hr>
 
                         <div class="cu-part">
                             <h5 class="cu-part-title">Acteurs</h5>
                             <ul class="bare-list cu-actors">
-                                <li class="cu-actor">Agent (Principal)</li>
+                                <li class="cu-actor">Intervenant (Principal)</li>
                             </ul>
                         </div>
-                        
+
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucun.</li>
+                                <li class="dash">Avoir un numéro de compagnie valide.</li>
                             </ul>
                         </div>
-                        
+
                         <div class="cu-part">
                             <h5 class="cu-part-title">Postconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucun</li>
+                                <li class="dash">Aucune.</li>
                             </ul>
                         </div>
-                        
+
                         <div class="cu-part cu-part--notes">
                             <h5 class="cu-part-title">Notes</h5>
                             <p class="cu-notes">Notes additionnelles et hypothèses</p>
@@ -879,16 +866,101 @@
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">L’agent ouvre le Répertoire des services.</li>
-                            <li class="scenario-main-step">Le système affiche la liste des services offerts par GYM ainsi que toutes les séances disponibles durant la journée.</li>
+                            <li class="scenario-main-step">L'utilisateur choisit l'option "Créer un compte comme intervenant" à l'ouverture de l'application.</li>
+                            <li class="scenario-main-step">L'utilisateur entre un nom, un mot de passe et son numéro de compagnie.</li>
+                            <li class="scenario-main-step">Le système valide les informations fournies.</li>
+                            <li class="scenario-main-step">Le système crée le compte intervenant.</li>
+                            <li class="scenario-main-step">Le système affiche les différents menus de l'application.</li>
                         </ol>
 
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
-                            <p>Aucun</p>
+                            <ol class="bare-list scenario-alt-steps">
+                                <li class="scenario-alt-step" value="4">
+                                    Un compte existe déjà avec le même nom d'utilisateur.
+                                    <ol class="bare-list">
+                                        <li value="4">Le système affiche un message invitant l'utilisateur à s'authentifier s'il a déjà un compte ou à choisir un autre nom sinon.</li>
+                                        <li value="4">Le système retourne au menu principal.</li>
+                                        <li value="4">Le scénario se termine.</li>
+                                    </ol>
+                                </li>
+                            </ol>
+                            <ol class="bare-list scenario-alt-steps">
+                                <li class="scenario-alt-step" value="4">
+                                    Le numéro de compagnie est invalide.
+                                    <ol class="bare-list">
+                                        <li value="4">Le système affiche un message invitant l'utilisateur à créer un Compte résident.</li>
+                                        <li value="4">Le système retourne au menu principal.</li>
+                                        <li value="4">Le scénario se termine.</li>
+                                    </ol>
+                                </li>
+                            </ol>
                         </div>
                     </div>
                 </div>
+
+                <div class="scenario" id="cu-3">
+                    <div class="scenario-meta">
+                        <h4 class="cu-name">
+                            <strong>CU:</strong> S'authentifier
+                        </h4>
+                        <p class="cu-goal">
+                            <strong>Objectif:</strong> Accéder aux fonctionnalités de l'application
+                        </p>
+
+                        <hr>
+
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Acteurs</h5>
+                            <ul class="bare-list cu-actors">
+                                <li class="cu-actor">Résident ou Intervenant (Principal)</li>
+                            </ul>
+                        </div>
+
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Préconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">Avoir un compte.</li>
+                            </ul>
+                        </div>
+
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Postconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">Aucune.</li>
+                            </ul>
+                        </div>
+
+                        <div class="cu-part cu-part--notes">
+                            <h5 class="cu-part-title">Notes</h5>
+                            <p class="cu-notes">Notes additionnelles et hypothèses</p>
+                        </div>
+                    </div>
+                    <div class="scenario-main">
+                        <h5 class="scenario-main-title">Scénario principal</h5>
+                        <ol class="scenario-main-steps">
+                            <li class="scenario-main-step">L'utilisateur choisit l'option "S'authentifier" à l'ouverture de l'application.</li>
+                            <li class="scenario-main-step">L'utilisateur entre son nom et son mot de passe.</li>
+                            <li class="scenario-main-step">Le système valide les informations fournies.</li>
+                            <li class="scenario-main-step">Le système affiche les menus appropriés en fonction du rôle de l'utilisateur (Intervenant ou Résident).</li>
+                        </ol>
+
+                        <div class="scenario-alt">
+                            <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
+                            <ol class="bare-list scenario-alt-steps">
+                                <li class="scenario-alt-step" value="4">
+                                    Il n'existe pas de compte avec le nom d'utilisateur entré par l'utilisateur.
+                                    <ol class="bare-list">
+                                        <li value="4">Le système affiche un message invitant l'utilisateur à créer un compte.</li>
+                                        <li value="4">Le système retourne au menu principal.</li>
+                                        <li value="4">Le scénario se termine.</li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
 
                   
                 <h3 class="subsection-title">Diagramme d'activités</h3>
