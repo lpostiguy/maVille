@@ -1,5 +1,5 @@
 package Prototype.Pages;
 
-public class appMenu {
+public class MainMenuPage {
 
 }

@@ -1,5 +1,5 @@
 package Prototype;
 
-public class main {
+public class Main {
 
 }

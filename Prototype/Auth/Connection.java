@@ -1,5 +1,5 @@
 package Prototype.Auth;
 
-public class inscription {
+public class Connection {
 
 }
