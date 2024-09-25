@@ -5,4 +5,4 @@ MaVille est une application en ligne de commande développée en Java, conçue p
 
 ORGANISATION DU RÉPERTOIRE :
 - Rapport de l'équipe : Comprend toutes les précisions, l'analyse des exigences, et les cas d'utilisation de l'application.
-- Prototype en ligne de commande : Un prototype simple permettant de simuler l'inscription, la connexion, e
+- Prototype en ligne de commande : Un prototype simple permettant de simuler l'inscription, la connexion, et la navigation des menus.
