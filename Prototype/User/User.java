@@ -5,20 +5,19 @@ import java.lang.reflect.Constructor;
 public class User {
 
     // Attributes
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String email;
     private int password;
     private boolean connected;
-    private String role;
 
     // Getters
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
     public String getEmail() {
@@ -33,17 +32,13 @@ public class User {
         return connected;
     }
 
-    public String getRole() {
-        return role;
-    }
-
     // Setters
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstname) {
+        this.firstName = firstname;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastname) {
+        this.lastName = lastname;
     }
 
     public void setEmail(String email) {
@@ -52,10 +47,6 @@ public class User {
 
     public void setPassword(int password) {
         this.password = password;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public void setConnected(boolean connected) {
