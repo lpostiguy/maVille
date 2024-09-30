@@ -15,7 +15,6 @@ public class Resident extends User {
         setDateOfBirth(dateOfBirth);
         setHomeAddress(homeAddress);
         setPassword(password);
-        setAbove16(isAgeAbove16(dateOfBirth));
 
         // Phone number is optional
         if (!Objects.equals(phoneNumber, "")) {
@@ -27,7 +26,6 @@ public class Resident extends User {
     private String phoneNumber;
     private String dateOfBirth;
     private String homeAddress;
-    private boolean isAbove16;
 
     // Getters
     public String getPhoneNumber() {
@@ -42,9 +40,6 @@ public class Resident extends User {
         return homeAddress;
     }
 
-    public boolean isAbove16() {
-        return isAbove16;
-    }
 
     // Setters
     public void setPhoneNumber(String phoneNumber) {
@@ -57,17 +52,5 @@ public class Resident extends User {
 
     public void setHomeAddress(String homeAddress) {
         this.homeAddress = homeAddress;
-    }
-
-    public void setAbove16(boolean above16) {
-        isAbove16 = above16;
-    }
-
-    // Methods
-    public boolean isAgeAbove16(String dateOfBirth) {
-        LocalDate currentDate = LocalDate.now();
-        int age = ageFinder.findAge(dateOfBirth, currentDate.toString());
-        System.out.println("Age : " + age);
-        return age >= 16;
     }
 }

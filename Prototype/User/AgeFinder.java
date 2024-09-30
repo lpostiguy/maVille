@@ -1,6 +1,6 @@
 package Prototype.User;
 
-public class ageFinder {
+public class AgeFinder {
 
     /**
      * Calculates the age of something by comparing the birthDate and the

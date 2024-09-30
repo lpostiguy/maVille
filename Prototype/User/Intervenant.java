@@ -4,12 +4,12 @@ public class Intervenant extends User {
 
     // Constructor
     public Intervenant(String firstName, String lastName, String email,
-                       String cityId, String entityType, int password) {
+                       String entityType, String cityId, int password) {
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
-        setCityId(cityId);
         setEntityType(entityType);
+        setCityId(cityId);
         setPassword(password);
     }
 
