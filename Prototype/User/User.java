@@ -1,13 +1,12 @@
 package Prototype.User;
 
-import java.lang.reflect.Constructor;
-
 public class User {
 
     // Attributes
     private String firstName;
     private String lastName;
     private String email;
+    private String role;
     private int password;
     private boolean connected;
 
@@ -22,6 +21,10 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     public int getPassword() {
@@ -43,6 +46,10 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public void setPassword(int password) {

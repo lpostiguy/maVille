@@ -42,6 +42,7 @@ public class MainMenuPage {
         System.out.println("[1] Rechercher des travaux");
         System.out.println("[2] Soumettre une requête de travail");
         System.out.println("[3] Signaler un problème à la ville");
+        System.out.println("[4] Modifier ses informations de compte");
         String response = scanner.nextLine();
         switch (response) {
             case "1" -> {
@@ -52,6 +53,9 @@ public class MainMenuPage {
             }
             case "3" -> {
                 return "Signaler un problème à la ville";
+            }
+            case "4" -> {
+                return "Modifier ses informations de compte";
             }
             case null, default -> {
                 return wrongPageChoice("menuLoggedResident");
@@ -64,6 +68,7 @@ public class MainMenuPage {
         System.out.println("[1] Consulter la liste des requêtes de travail");
         System.out.println("[2] Soumettre un nouveau projet de travaux");
         System.out.println("[3] Mettre à jour les informations d'un chantier");
+        System.out.println("[4] Modifier ses informations de compte");
         String response = scanner.nextLine();
         switch (response) {
             case "1" -> {
@@ -74,6 +79,9 @@ public class MainMenuPage {
             }
             case "3" -> {
                 return "Mettre à jour les informations d'un chantier";
+            }
+            case "4" -> {
+                return "Modifier ses informations de compte";
             }
             case null, default -> {
                 return wrongPageChoice("menuLoggedIntervenant");

@@ -15,6 +15,7 @@ public class Resident extends User {
         setDateOfBirth(dateOfBirth);
         setHomeAddress(homeAddress);
         setPassword(password);
+        setRole("RESIDENT");
 
         // Phone number is optional
         if (!Objects.equals(phoneNumber, "")) {

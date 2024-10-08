@@ -11,6 +11,7 @@ public class Intervenant extends User {
         setEntityType(entityType);
         setCityId(cityId);
         setPassword(password);
+        setRole("INTERVENANT");
     }
 
     // Attributes
