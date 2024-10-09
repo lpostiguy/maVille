@@ -965,6 +965,10 @@
           qui a été soumise, et s'informer sur l'état/l'avancement de
           celle-ci.
         </dd>
+        <dt class="glossary-term">Plage horaire</dt>
+        <dd class="glossary-def">
+          Heures qui pouvant être choisis pour des proposition de travaux.
+        </dd>
       </dl>
 
       <h3 class="subsection-title">Cas d'utilisation</h3>
@@ -1538,6 +1542,18 @@
               avis sur le projet et l'intervenant.
             </li>
           </ol>
+          <div class="scenario-alt">
+            <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
+            <ol class="bare-list scenario-alt-steps">
+              <li class="scenario-alt-step" value="2">
+                Aucun avis n'est affiché
+                <ol class="bare-list">
+                  <li value="2">Il n'y a encore aucun avis publié</li>
+                  <li value="2">Problème système, les avis ne s'affichent pas correctement</li>
+                </ol>
+              </li>
+            </ol>
+          </div>
         </div>
       </div>
 
@@ -2159,11 +2175,20 @@
           <div class="scenario-alt">
             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
             <ol class="bare-list scenario-alt-steps">
+              <li class="scenario-alt-step" value="2">
+                Aucun projet n'est affiché car l'intervenant n'en gère encore aucun.
+                
+              </li>
               <li class="scenario-alt-step" value="6">
                 L'intervenant choisit de modifier une autre information.
                 <ol class="bare-list">
                   <li value="6">Retour à l'étape 4.</li>
                 </ol>
+              </li>
+
+              <li class="scenario-alt-step" value="8">
+                Erreur, le projet n'a pas été mis à jour.
+                
               </li>
             </ol>
           </div>
