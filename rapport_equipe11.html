@@ -897,10 +897,16 @@
               Programmation et "debugging" du prototype (toute l'équipe)<br />
               <br />
 
-              Du 7 octobre au 11 octobre (remise):<br /><br />
+              Du 7 octobre au 11 octobre (remise de l'analyse):<br /><br />
               Peaufinement du rapport et du prototype, révision des
               exigences,<br />
-              vérification mutuelle du travail des membres de l'équipe<br />
+              vérification mutuelle du travail des membres de l'équipe<br /><br />
+
+              Reste d'octobre jusqu'à mi-novembre:<br /><br />
+              Conception (Devoir 2)<br /><br/>
+
+              Mi-novembre à décembre:<br /><br />
+              Implémentation et lancement de l'application (Devoir 3)<br/>
             </em>
           </p>
 
@@ -916,44 +922,41 @@
         <section class="main-section">
           <h2 id="requirements" class="section-title">Exigences</h2>
           <p>
-            Après de nombreuses rencontres avec le client et une familiarisation
-            avec les activités de recyclage et compostage, nous avons préparé un
-            glossaire rassemblant les termes et expressions clés caractérisant
-            l'environnement.
+            Nous avons préparé un glossaire rassemblant les termes et expressions clés caractérisant
+            l'application MaVille.
           </p>
 
           <h3 class="subsection-title">Glossaire</h3>
           <dl class="glossary">
             <dt class="glossary-term">Intervenant</dt>
             <dd class="glossary-def">
-              C'est l'acteur qui va s'occupper des soumission des travaux et de
+              L'acteur qui va s'occuper des soumissions des travaux et de
               leurs gestions.
             </dd>
             <dt class="glossary-term">Résident</dt>
             <dd class="glossary-def">
-              C'est l'acteur qui va interagir avec le systeme pour envoyer des
-              demande de travaux ou bien consulter les nouvelles mises à jours
-              de ces derniers.
+              L'acteur qui va interagir avec le système pour envoyer des
+              demandes de travaux ou bien consulter les nouvelles mises à jour.
             </dd>
             <dt class="glossary-term">Compte Intervenant/Résident</dt>
             <dd class="glossary-def">
-              Compte permettantaux intervenants d'utiliser les fonctionnalitées
+              Compte permettant aux intervenants d'utiliser les fonctionnalités
               liées à leurs roles.
             </dd>
             <dt class="glossary-term">Abonnement</dt>
             <dd class="glossary-def">
-              Système permettant de s'abonner un lieu pour pouvoir être à jour
-              sur les changements d'état d'un lieu/recevoir des notifications
-              personnalisée.
+              Système permettant de s'abonner à un lieu pour pouvoir être à jour
+              sur les changements/recevoir des notifications
+              personnalisées.
             </dd>
             <dt class="glossary-term">Notification personalisée</dt>
             <dd class="glossary-def">
-              Fonctionnalitée qu'un acteur peut activer afin d'ëtre toujours à
-              jour sur un lieu pour lequel il est abonner.
+              Fonctionnalité qu'un acteur peut activer afin d'être toujours à
+              jour sur un lieu pour lequel il est abonné.
             </dd>
             <dt class="glossary-term">Requête de travail</dt>
             <dd class="glossary-def">
-              Demande envoyé par un Résident/Intervenant pour faire une
+              Demande envoyée par un Résident/Intervenant pour faire une
               proposition de travail pour un lieu donné.
             </dd>
             <dt class="glossary-term">Suivie d'une requête/travaux</dt>
@@ -963,73 +966,6 @@
               celle-ci.
             </dd>
           </dl>
-
-          <h3 class="subsection-title">Persona (optionnel)</h3>
-
-          <ul class="bare-list personas">
-            <li class="persona">
-              <div
-                style="
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
-                  margin-bottom: 6px;
-                "
-              >
-                <span class="persona-name">Bob &ndash; <em>Comptable</em></span>
-                <div class="persona-stat">
-                  <span
-                    class="persona-type persona-type--pp"
-                    title="Pratico-pratique"
-                    >PP</span
-                  >
-                  <span class="persona-market">40%</span>
-                </div>
-              </div>
-              <span class="persona-info"
-                >Homme célibataire de 42 ans vivant au Canada</span
-              >
-              <div class="persona-goal">
-                <h4 class="persona-title">Buts</h4>
-                <ul class="bare-list">
-                  <li class="check">But principal</li>
-                  <li class="check">But secondaire</li>
-                  <li class="check">Avantages</li>
-                </ul>
-              </div>
-            </li>
-            <li class="persona">
-              <div
-                style="
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
-                  margin-bottom: 6px;
-                "
-              >
-                <span class="persona-name"
-                  >Eva &ndash; <em>Pharmacienne</em></span
-                >
-                <div class="persona-stat">
-                  <span class="persona-type persona-type--eco" title="Ecolo"
-                    >ECO</span
-                  >
-                  <span class="persona-market">20%</span>
-                </div>
-              </div>
-              <span class="persona-info"
-                >Femme mariée de 34 ans vivant au Canada</span
-              >
-              <div class="persona-goal">
-                <h4 class="persona-title">Buts</h4>
-                <ul class="bare-list">
-                  <li class="check">But principal</li>
-                  <li class="check">But secondaire</li>
-                  <li class="check">Avantages</li>
-                </ul>
-              </div>
-            </li>
-          </ul>
 
           <h3 class="subsection-title">Cas d'utilisation</h3>
           <div class="use-case">
@@ -1041,8 +977,11 @@
             <p class="use-case-notes">
               <em>
                 Notes à propos du diagramme <br />
-                - choix des acteurs <br />
-                - choix des relations
+                - Le système de notifications est un acteur secondaire à plusieurs CUs.
+                C'est pour montrer de manière efficace quelles actions vont mener à un envoi
+                de notifications aux utilisateurs.<br />
+                - Pour le résident, le CU "S'authentifier" est inclu dans chacun de ces CUs,
+                mais l'inclusion n'est pas directement affiché pour ne pas surcharger le diagramme.
               </em>
             </p>
           </div>
@@ -2261,9 +2200,9 @@
               <li>
                 Problèmes de modérations des requêtes : Il y aura certainement
                 des requêtes de travaux non sérieuses/fausses qui vont être
-                envoyer, il faut alors instaurer une équipe ou un système
-                algorithmique de modération pour gérer toutes ces fausses
-                requêtes.
+                envoyer, il faudrait alors instaurer un système
+                algorithmique de modération pour gérer toutes les requêtes
+                non-pertinentes.
               </li>
               <li>
                 Risque de sécurité : Il est essentiel de garantir que le système
@@ -2273,26 +2212,25 @@
                 impératif de chiffrer toutes les données sensibles (comme les
                 mots de passe et les adresses résidentielles) des utilisateurs
                 avant leur stockage dans la base de données. Cela permet de
-                prévenir le vol d'informations sensibles dans le cas où un accès
-                non autorisé aux données stockées se produirait.
+                prévenir le vol d'informations sensibles.
               </li>
               <li>
                 Risque de performance : Étant donné que notre système est ouvert
-                aux nouveaux utilisateurs, il existe un risque que le nombre
+                aux nouveaux utilisateurs, il y a un risque que le nombre
                 d'inscriptions augmente rapidement si sa popularité croît. Il
-                est donc essentiel d'assurer une scalabilité adéquate, tant au
-                niveau de la base de données que du serveur. Il faut également
-                veiller à ce que le code, tant du front-end que du back-end,
-                soit optimisé pour la performance. En particulier, il est
-                crucial que la complexité de certaines fonctions critiques, en
-                lien avec le nombre d'utilisateurs, ne soit pas de nature
-                quadratique afin de garantir des performances soutenues.
+                est donc essentiel d'assurer une scalabilité adéquate.
+                Il faut également veiller à ce que le code soit optimisé
+                pour la performance. En particulier, il faudrait s'assurer
+                de ne pas avoir trop de fonctions d'ordre quadratique afin de
+                garantir des performances soutenues.
               </li>
               <li>
-                Risque d'appropriation d'identité, faux comptes : Des
-                utilisateurs malintentionnés peuvent créer de faux comptes pour
-                frauder, escroquer ou nuire à d'autres utilisateurs dans le
-                système.
+                Risque d'exceptions dans le code: Dans une application en ligne de
+                commande comme celle-ci, il est très probable que l'utilisateur
+                commette des "typos". Il faudra donc être rigoureux avec la vérification des
+                entrées des utilisateurs et gérer les exceptions (ne pas assumer
+                qu'ils vont tout faire parfaitement). Cela évitera les problèmes
+                comme des plantages (crash).
               </li>
               <li>
                 Bugs imprévus : Ce type de système, en raison de sa complexité,
@@ -2339,8 +2277,7 @@
                 Accessibilité : En l’absence d’interface graphique, la
                 navigation dans l’application devra être aussi intuitive que
                 possible étant donné la contrainte de l’usage en ligne de
-                commande. Cela inclut la gestion adéquates des erreurs, ou typos
-                qu’un utilisateur peut commettre.
+                commande.
               </li>
             </ol>
           </div>
@@ -2348,14 +2285,14 @@
           <div>
             <h3 class="subsection-title">Besoins matériels</h3>
             <p>
-              <em
-                >Nous avons besoin d'un serveur pour faire rouler le back-end et
-                assurer les échanges entre le front-end, le back-end, et la base
-                de données. Une connexion internet est nécessaire pour permettre
-                aux utilisateurs d'accéder à leur compte. Du côté des
-                utilisateurs, ils auront besoin d'un appareil compatible pour
-                accéder à l'application, qu'il s'agisse d'un ordinateur ou d'un
-                téléphone.
+              <em>
+                L'application sera en ligne de commande, donc les utilisateurs
+                auront besoin d'un ordinateur avec Java, puisque l'application
+                est accessible par la console (donc ne fonctionnerait pas sur un
+                appareil mobile). Pour développer l'application, notre équipe
+                utilisera des ordinateurs avec un JDK installé. L'utilisation de
+                la mémoire ne devrait pas être un souçis, car le programme tel
+                qu'il est décrit ne devrait pas être très "lourd" à rouler.
               </em>
             </p>
           </div>
@@ -2377,14 +2314,15 @@
             <h3 class="subsection-title">Solution d'intégration</h3>
             <p>
               <em>
-                Afin de garantir une intégration fluide et de permettre une
-                communication cohérente entre les différents systèmes, nous
-                envisageons de créer une API pour assurer la liaison entre le
-                front-end et le back-end. Le back-end se chargera de la
-                manipulation des données, tout en veillant à la cohérence des
-                flux d'information avec d'autres systèmes et la base de
-                donnée.</em
-              >
+                Le service "Info entraves et travaux" est très similaire à
+                l'application MaVille. Il serait possible que ces services
+                collaborent et ils pourraient même partager la même base de
+                donnée. Par exemple, "Info entraves et travaux" pourrait
+                demeurer un service en ligne sans authentification qui permet
+                simplement de rechercher des entraves, tandis que MaVille agirait
+                comme une extension de ce service ayant plus de fonctionnalités,
+                comme donner son avis, recevoir des notifications pour des entraves
+                et communiquer avec les intervenants.</em>
             </p>
           </div>
         </section>
