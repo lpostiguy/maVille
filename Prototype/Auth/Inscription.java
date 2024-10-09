@@ -7,9 +7,6 @@ import java.util.Objects;
 
 public class Inscription {
 
-    //TODO: Create a function that is able to check every field for certain
-    // characters that are not allowed to be inputted.
-
     public static boolean isSamePassword(String password1, String password2) {
         return Objects.equals(password1, password2);
     }

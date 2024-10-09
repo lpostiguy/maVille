@@ -91,8 +91,7 @@ public class InscriptionPage {
 
             boolean validDateOfBirth = false;
             while (!validDateOfBirth) {
-                System.out.println("Entrez votre date de naissance afin de " +
-                        "valider votre age. (Format YYYY-MM-DD):");
+                System.out.println("Entrez votre date de naissance afin de " + "valider votre age. (Format YYYY-MM-DD):");
                 dateOfBirth = scanner.nextLine();
                 // Verify that the dateOfBirth is valid format
                 if (isValidDateFormat(dateOfBirth)) {
@@ -123,8 +122,8 @@ public class InscriptionPage {
                 if (!Objects.equals(homeAddress, "")) {
                     validAddress = true;
                 } else {
-                    System.out.println("L'adresse de résidence n'est pas du " +
-                            "format accepté.");
+                    System.out.println("L'adresse de résidence n'est pas du "
+                            + "format accepté.");
                 }
             }
         }

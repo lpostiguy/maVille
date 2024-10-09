@@ -1,5 +1,7 @@
 package Prototype.Pages;
 
+import Prototype.Auth.GlobalUserInfo;
+
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -19,7 +21,13 @@ public class LoginPage {
             String password = scanner.nextLine();
             // TODO: Ajouter la logique qui compare les données rentrées par
             //  le user et les données présentes dans une base de donnée.
-            if (!Objects.equals(password, "")) {
+            if (email.equals(GlobalUserInfo.emailRes) && Objects.equals(password, GlobalUserInfo.passwordRes)) {
+                GlobalUserInfo.setCurrentRole("RESIDENT");
+                System.out.println("Connection réussie");
+                isLoggedIn = true;
+                return true;
+            } else if (email.equals(GlobalUserInfo.emailInt) && Objects.equals(password, GlobalUserInfo.passwordInt)) {
+                GlobalUserInfo.setCurrentRole("INTERVENANT");
                 System.out.println("Connection réussie");
                 isLoggedIn = true;
                 return true;
