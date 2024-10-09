@@ -45,6 +45,8 @@ public class AccountPage {
             case "3" -> {
                 // TODO: Ajouter un fonction qui permet de modifier toutes
                 //  les données de l'utilisateur.
+                System.out.println("Il n'est pas encore possible de modifier" +
+                        " les informations de l'utilisateur.");
                 System.out.println("[1] Retour");
                 String responseModifyUserInfo = scanner.nextLine();
                 if (Objects.equals(responseModifyUserInfo, "1")) {
