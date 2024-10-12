@@ -871,6 +871,9 @@
         </em>
       </p>
       <h3 class="subsection-title">Échéancier</h3>
+      <h4>Grille d'échéancier:</h4>
+      <img style="width: 1000px;" src="images/échéancier.png" alt="Échéancier">
+      <h4>Explication Échéancier:</h4>
       <p>
         <em
         >Semaine du 16 au 22 septembre:<br /><br />
@@ -909,7 +912,6 @@
           Implémentation et lancement de l'application (Devoir 3)<br/>
         </em>
       </p>
-
       <h3 class="subsection-title">Hypothèses </h3>
       <p>
         <em>Lors de ce projet nous avons comme hypothèse que les résidents sont bien capable d'utiliser le systeme, dont qu'ils ont le matériels 
@@ -973,13 +975,21 @@
         <dd class="glossary-def">
           Heures qui pouvant être choisis pour des proposition de travaux.
         </dd>
+        <dt class="glossary-term">Authentification</dt>
+        <dd class="glossary-def">
+          La procédure qui permet de confirmer l'identité d'un utilisateur ou d'un système avant de lui accorder l'accès à une ressource ou un service.
+        </dd>
+        <dt class="glossary-term">Filtre de recherche</dt>
+        <dd class="glossary-def">
+          Un outil qui permet de restreindre ou de spécifier les critères d'une recherche afin d'affiner les résultats obtenus.
+        </dd>
       </dl>
 
       <h3 class="subsection-title">Cas d'utilisation</h3>
       <div class="use-case">
         <img
                 class="use-case-diagram"
-                src="images/use_case_diagram.svg"
+                src="images/diagrammes/use_case_diagram.svg"
                 alt="Diagramme de cas d'utilisation"
         />
         <p class="use-case-notes">
@@ -2210,7 +2220,7 @@
         <h4>Inscription et authentification</h4>
         <img
                 class="activity-diagram"
-                src="images/inscription_diagram.svg"
+                src="images/diagrammes/inscription_diagram.svg"
                 alt="Diagramme d'activités"
         />
       </div>
@@ -2218,7 +2228,7 @@
         <h4>Mon quartier</h4>
         <img
                 class="activity-diagram"
-                src="images/mon_quartier_diagram.svg"
+                src="images/diagrammes/mon_quartier_diagram.svg"
                 alt="Diagramme d'activités"
         />
       </div>
@@ -2227,7 +2237,7 @@
         <h4>Gestionnaire de requêtes</h4>
         <img
                 class="activity-diagram"
-                src="images/requetes_diagram.svg"
+                src="images/diagrammes/requetes_diagram.svg"
                 alt="Diagramme d'activités"
         />
       </div>
@@ -2236,7 +2246,7 @@
         <h4>Signaler un problème</h4>
         <img
                 class="activity-diagram"
-                src="images/problemes_diagram.svg"
+                src="images/diagrammes/problemes_diagram.svg"
                 alt="Diagramme d'activités"
         />
       </div>
@@ -2245,7 +2255,15 @@
         <h4>Consulter les travaux en cours où à venir</h4>
         <img
                 class="activity-diagram"
-                src="images/travaux_diagram.svg"
+                src="images/diagrammes/consulter_travaux_diagram.svg"
+                alt="Diagramme d'activités"
+        />
+      </div>
+      <div class="activity">
+        <h4>Rechercher des travaux</h4>
+        <img
+                class="activity-diagram"
+                src="images/diagrammes/recherche_travaux_diagram.svg"
                 alt="Diagramme d'activités"
         />
       </div>
@@ -2254,7 +2272,7 @@
         <h4>Notifications personnalisées</h4>
         <img
                 class="activity-diagram"
-                src="images/notifications_diagram.png"
+                src="images/diagrammes/notifications_diagram.svg"
                 alt="Diagramme d'activités"
         />
       </div>
@@ -2356,12 +2374,8 @@
         <p>
           <em>
             L'application sera en ligne de commande, donc les utilisateurs
-            auront besoin d'un ordinateur avec Java, puisque l'application
-            est accessible par la console (donc ne fonctionnerait pas sur un
-            appareil mobile). Pour développer l'application, notre équipe
-            utilisera des ordinateurs avec un JDK installé. L'utilisation de
-            la mémoire ne devrait pas être un souçis, car le programme tel
-            qu'il est décrit ne devrait pas être très "lourd" à rouler.
+            auront besoin d'un ordinateur avec accès à internet, puisque l'application
+            est accessible par la console. Pour développer l'application, notre équipe utilisera des ordinateurs avec un JDK JAVA installé. L'utilisation de la mémoire ne devrait pas être un souçis, car le programme tel qu'il est décrit ne devrait pas être très "lourd" à rouler (Donc pas besoin de serveur physique pour l'instant).
           </em>
         </p>
       </div>
@@ -2401,8 +2415,25 @@
 
       <p>
         <em>
-          Indiquez ici les informations nécessaires (commande d'exécution,
-          comptes préconfigurées) pour exécuter et tester le prototype</em
+          Pour exécuter le programme de commande, vous devez utiliser la commande: "java -jar IFT2255-A24-SessionProject.jar" dans le répertoire du projet.
+
+          <p>
+            La création de compte Résident et Intervenant est possible.
+          </p>
+          <p>
+            Pour la connection, voici les informations utilisateurs.
+          </p>
+          <p>
+          Résident:
+          --email: test@resident.com
+          --Mot de passe: Test12345
+        </p>
+        <p>
+          Intervenant:
+          --email: test@intervenant.com
+          --Mot de passe: Test12345
+        </p>
+          </em
         >.
       </p>
     </section>
@@ -2413,12 +2444,6 @@
     Devoir 1 &ndash; Analyse des exigences<br />
     IFT2255 (Génie logiciel) <br />
     Automne 2024
-  </p>
-  <p>
-    <em>
-      Ajoutez tous les liens additionnels nécessaires à la compréhension du
-      rapport ici
-    </em>
   </p>
 </footer>
 </body>
