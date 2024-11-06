@@ -1402,8 +1402,6 @@
         </div>
       </div>
 
-
-
       <div class="scenario" id="cu-5">
         <div class="scenario-meta">
           <h4 class="cu-name">
@@ -2243,15 +2241,6 @@
       </div>
 
       <div class="activity">
-        <h4>Signaler un problème</h4>
-        <img
-                class="activity-diagram"
-                src="images/diagrammes/problemes_diagram.svg"
-                alt="Diagramme d'activités"
-        />
-      </div>
-
-      <div class="activity">
         <h4>Consulter les travaux en cours où à venir</h4>
         <img
                 class="activity-diagram"
@@ -2320,13 +2309,11 @@
             comme des plantages (crash).
           </li>
           <li>
-            Bugs imprévus : Ce type de système, en raison de sa complexité,
-            peut potentiellement contenir un grand nombre de bugs. Comme il
-            sera ouvert au public, il est probable que certains de ces bugs
-            ne soient découverts qu'une fois que les utilisateurs
-            commenceront à l'utiliser. Cela rend essentiel une surveillance
-            continue et des mises à jour régulières pour corriger les
-            problèmes au fur et à mesure qu'ils apparaissent.
+            Communication entre les acteurs: Certaines fonctionnalités de l'application demandées par le client
+            pourraient être implémentées de différentes manières. Puisque l'équipe dispose de peu de temps avec le client,
+            il sera difficile de juger si l'implémentation respecte exactement ce que le client avait en tête.
+            Pour éviter une mauvaise compréhension des désirs du client, des questions lui seront posées lorsque
+            c'est possible et lorsqu'une incertitude est rencontrée.
           </li>
         </ol>
       </div>
@@ -2338,7 +2325,7 @@
             Sécurité : L’application tiendra compte de beaucoup
             d’information sensible sur les utilisateurs (adresses, lieux
             fréquentés et autres). Cette information doit rester
-            confidentielle. Aussi, la vérification et la protection des
+            confidentielle, donc elle sera chiffrée. Aussi, la vérification et la protection des
             identifiants de la ville (codes à 8 chiffres) pour les
             intervenants doit être rigoureuse.
           </li>
@@ -2354,11 +2341,9 @@
             à tout moment.
           </li>
           <li>
-            Fiabilité : Les données utilisateur importantes au bon
-            fonctionnement de l’application (adresses courriels, mots de
-            passe, abonnements aux différent(e)s rues/adresses/quartiers et
-            autres) doivent être sauvegardées adéquatement afin de ne pas
-            les perdre, sans quoi l’application serait inutile.
+            Fiabilité : l'application doit être fiable et fonctionner sans bugs majeurs.
+            Un système de logs détaillés et de surveillance doit permettre de détecter les
+            erreurs et de les corriger rapidement.
           </li>
           <li>
             Accessibilité : En l’absence d’interface graphique, la
