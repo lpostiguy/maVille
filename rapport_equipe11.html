@@ -932,9 +932,9 @@
       <h3 class="subsection-title">Hypothèses </h3>
       <p>
         <em>Lors de ce projet nous avons comme hypothèse que les résidents sont bien capable d'utiliser le systeme, dont qu'ils ont le matériels 
-          adéquoit pour l'utiliser,<br> sans oublier que ça soit assez intuitif à utiliser pour permettre de s'ouvrir  un maximum de monde. On a aussi 
-          admis qu'ils sont au courant du but réel qui est <br> donc par rapport aux travaux public et non autre choses ou d'autres domaines qui sont 
-          dans le domaine privé/particulier. <br> 
+          adéquoit pour l'utiliser,sans oublier que ça soit assez intuitif à utiliser pour permettre de s'ouvrir  un maximum de monde. On a aussi
+          admis qu'ils sont au courant du but réel qui est donc par rapport aux travaux public et non autre choses ou d'autres domaines qui sont
+          dans le domaine privé/particulier.
         Bien sûr on considère aussi que la ville est capable d'assurer sa fonctions par rapport aux travaux comme le fait de respecter les préférences des requêtes <br> 
         et d'être capable de fournir des mises à jours fréquentes des travaux pour les utilisateurs, sans oublier qu'ils ue certaines responsabilité sur un travail <br>
          une fois celui-ci confirmé et débuté.
@@ -2377,7 +2377,11 @@
           <em>
             L'application sera en ligne de commande, donc les utilisateurs
             auront besoin d'un ordinateur avec accès à internet, puisque l'application
-            est accessible par la console. Pour développer l'application, notre équipe utilisera des ordinateurs avec un JDK JAVA installé. L'utilisation de la mémoire ne devrait pas être un souçis, car le programme tel qu'il est décrit ne devrait pas être très "lourd" à rouler (Donc pas besoin de serveur physique pour l'instant).
+            est accessible par la console. Pour développer l'application, notre équipe utilisera des ordinateurs avec un JDK JAVA installé.
+            L'utilisation de la mémoire ne devrait pas être un souçis, car le programme tel qu'il est décrit ne devrait pas être très "lourd"
+            à rouler (Donc pas besoin de serveur physique pour l'instant).
+            L'application sera déployée sur GitHub et sera téléchargeable sous forme de fichier jar.
+            Les données seront hébergées dans une banque de donnée MongoDB.
           </em>
         </p>
       </div>
@@ -2386,11 +2390,15 @@
         <h3 class="subsection-title">Solution de stockage</h3>
         <p>
           <em
-          >Nous allons chiffrer et stocker les données de nos utilisateurs
-            dans une base de données soit MongoDB / MySQL ou dans une
-            fichier format .csv, afin de mieux organiser et structurer
+          > Nous allons chiffrer et stocker les données de nos utilisateurs
+            dans une base de données MongoDB, afin de mieux organiser et structurer
             l'information. L'encryption des données nous assure une sécurité
             plus élevée des données de nos utilisateurs.
+            Le stockage des données utilisera une architecture centralisée, c'est-à-dire qu'elles
+            seront stockées sur un seul serveur dans une seule instance de MongoDB.
+            Les données qui seront stockées seront, par exemple, les informations sur les utilisateurs,
+            les requêtes de travail, les abonnements des utilisateurs et les plages horaires soumises
+            par les résidents (donc surtout du texte).
           </em>
         </p>
       </div>
@@ -2401,13 +2409,16 @@
           <em>
             Le service "Info entraves et travaux" est très similaire à
             l'application MaVille. Il serait possible que ces services
-            collaborent et ils pourraient même partager la même base de
-            donnée. Par exemple, "Info entraves et travaux" pourrait
-            demeurer un service en ligne sans authentification qui permet
-            simplement de rechercher des entraves, tandis que MaVille agirait
-            comme une extension de ce service ayant plus de fonctionnalités,
-            comme donner son avis, recevoir des notifications pour des entraves
-            et communiquer avec les intervenants.</em>
+            collaborent. En effet, certaines des APIs utilisées pour "Info entraves et travaux"
+            sont publiques. Plus précisément, nous allons utiliser les APIs "Liste des travaux en cours"
+            et "Liste des entraves causées par les travaux en cours". Les requêtes pour l'obtention des données seront faites par
+            un protocole HTTP et les données seront traitées à partir de notre base de données MongoDB.
+            Bref, MaVille agira comme une extension des services offerts par la ville.
+            "Info entraves et travaux" demeure un service en ligne sans authentification
+            qui permet simplement de rechercher des entraves, tandis que MaVille permettra d'accéder à
+            d'autres fonctionnalités comme donner son avis, recevoir des notifications pour des entraves
+            et communiquer avec les intervenants.
+          </em>
         </p>
       </div>
     </section>
