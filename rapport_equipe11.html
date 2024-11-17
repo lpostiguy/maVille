@@ -557,7 +557,41 @@
       background-color: #d5d5d5;
     }
 
+    .architecture-diagram {
+      display: block;
+      height: 100%;
+      width: auto;
+      min-height: 800px;
+      min-width: 600px;
+      border-radius: 4px;
+      background-color: #d5d5d5;
+    }
+
+    .sequence-diagram {
+      display: block;
+      height: 100%;
+      width: auto;
+      min-height: 800px;
+      min-width: 600px;
+      border-radius: 4px;
+      background-color: #d5d5d5;
+    }
+
+    .class-diagram {
+      display: block;
+      height: 100%;
+      width: auto;
+      min-height: 800px;
+      min-width: 600px;
+      border-radius: 4px;
+      background-color: #d5d5d5;
+    }
+
     .use-case-notes {
+      margin-left: 12px;
+    }
+
+    .class-notes {
       margin-left: 12px;
     }
 
@@ -979,7 +1013,7 @@
         </dd>
         <dt class="glossary-term">Requête de travail</dt>
         <dd class="glossary-def">
-          Demande envoyée par un Résident/Intervenant pour faire une
+          Demande envoyée par un résident aux intervenants pour faire une
           proposition de travail pour un lieu donné.
         </dd>
         <dt class="glossary-term">Suivie d'une requête/travaux</dt>
@@ -990,7 +1024,7 @@
         </dd>
         <dt class="glossary-term">Plage horaire</dt>
         <dd class="glossary-def">
-          Heures qui pouvant être choisis pour des proposition de travaux.
+          Heures soumises par les résidents pour communiquer aux intervenants les moments qui leur conviendraient pour les travaux.
         </dd>
         <dt class="glossary-term">Authentification</dt>
         <dd class="glossary-def">
@@ -1015,13 +1049,13 @@
 
         <dt class="glossary-term">Code de la ville</dt>
         <dd class="glossary-def">
-          Code à 8 chiffres utilisé comme identifiant à la ville que les résidents doivent entrer lors de la création 
-          de leurs compte résident afin de confirmer les lieux considérés comme pertinent pour eux.
+          Code à 8 chiffres utilisé comme identifiant à la ville que les intervenants doivent entrer lors de la création
+          de leur compte intervenant.
         </dd>
 
         <dt class="glossary-term">Informations Entraves et Travaux </dt>
         <dd class="glossary-def">
-          liste de toutes les entraves (problèmes…) causé par les travaux qui nuisent au bon fonctionnement de certaines 
+          Site web qui montre toutes les entraves (problèmes) causé par les travaux qui nuisent au bon fonctionnement de certaines
           activités de la ville comme la circulation ou encore l’accès à certains services/commerces.
         </dd>
 
@@ -1030,14 +1064,6 @@
          Étiquète associée au projet afin de savoir l’état de l’avancement du projet (ex. en attente, soumis, prévu, en cours, 
           terminé, suspendu)
         </dd>
-
-        <dt class="glossary-term">Signaler un problème  </dt>
-        <dd class="glossary-def">
-          Faire part d’un problème nuisant au bon fonctionnement d’une ou de plusieurs activités de la ville, ou nuisant à 
-          la satisfaction des résidents.
-        </dd>
-
-        
       </dl>
 
       <h3 class="subsection-title">Cas d'utilisation</h3>
@@ -2413,13 +2439,13 @@
         <h3 class="subsection-title">Besoins matériels</h3>
         <p>
           <em>
-            L'application sera en ligne de commande, donc les utilisateurs
-            auront besoin d'un ordinateur avec accès à internet, puisque l'application
-            est accessible par la console. Pour développer l'application, notre équipe utilisera des ordinateurs avec un JDK JAVA installé.
+            L'application est accessible par la console, donc les utilisateurs auront besoin d'un ordinateur.
+            L'ordinateur doit être connecté à Internet puisque nous utilisons une base de donnée MongoDB qui est en ligne.
+            Pour développer l'application, notre équipe utilise des ordinateurs avec un JDK JAVA installé.
+            Nous utilisons aussi le framework Javalin afin de développer l'application avec une architecture REST.
             L'utilisation de la mémoire ne devrait pas être un souçis, car le programme tel qu'il est décrit ne devrait pas être très "lourd"
-            à rouler (Donc pas besoin de serveur physique pour l'instant).
+            à rouler.
             L'application sera déployée sur GitHub et sera téléchargeable sous forme de fichier jar.
-            Les données seront hébergées dans une banque de donnée MongoDB.
           </em>
         </p>
       </div>
@@ -2436,7 +2462,7 @@
             seront stockées sur un seul serveur dans une seule instance de MongoDB.
             Les données qui seront stockées seront, par exemple, les informations sur les utilisateurs,
             les requêtes de travail, les abonnements des utilisateurs et les plages horaires soumises
-            par les résidents (donc surtout du texte).
+            par les résidents.
           </em>
         </p>
       </div>
@@ -2450,7 +2476,7 @@
             collaborent. En effet, certaines des APIs utilisées pour "Info entraves et travaux"
             sont publiques. Plus précisément, nous allons utiliser les APIs "Liste des travaux en cours"
             et "Liste des entraves causées par les travaux en cours". Les requêtes pour l'obtention des données seront faites par
-            un protocole HTTP et les données seront traitées à partir de notre base de données MongoDB.
+            un protocole HTTP afin de récupérer et ajouter les données JSON dans les APIs.
             Bref, MaVille agira comme une extension des services offerts par la ville.
             "Info entraves et travaux" demeure un service en ligne sans authentification
             qui permet simplement de rechercher des entraves, tandis que MaVille permettra d'accéder à
@@ -2459,6 +2485,86 @@
           </em>
         </p>
       </div>
+    </section>
+
+    <section class="main-section">
+      <h2 id="conception" class="section-title">Conception</h2>
+
+      <h3 class="subsection-title">Diagramme de classes</h3>
+      <div class="class">
+        <img
+                class="class-diagram"
+                src="images/diagrammes/class_diagram.svg"
+                alt="Diagramme de classes"
+        />
+        <p class="class-notes">
+          <em>
+            Notes à propos du diagramme
+          </em>
+        </p>
+      </div>
+
+      <h3 class="subsection-title">Diagrammes de séquences</h3>
+      <div class="sequence">
+        <h4>Consulter les entraves</h4>
+        <img
+                class="sequence-diagram"
+                src="images/diagrammes/entraves_diagram.svg"
+                alt="Diagramme de séquence"
+        />
+      </div>
+      <div class="sequence">
+        <h4>Soumettre une requête de travail</h4>
+        <img
+                class="sequence-diagram"
+                src="images/diagrammes/soumettre_requete.svg"
+                alt="Diagramme de séquence"
+        />
+      </div>
+
+      <div class="sequence">
+        <h4>Consulter la liste des requêtes de travail</h4>
+        <img
+                class="sequence-diagram"
+                src="images/diagrammes/consulter_requetes.svg"
+                alt="Diagramme de séquence"
+        />
+      </div>
+
+      <h3 class="subsection-title">Architecture et choix de design</h3>
+      <div class="architecture">
+        <h4>Modèle de l'architecture de MaVille</h4>
+        <img
+                class="architecture-diagram"
+                src="images/diagrammes/architecture.svg"
+                alt="Diagramme d'architecture"
+        />
+      </div>
+
+      <div>
+        <h3 class="subsection-title">Justification du choix de design</h3>
+        <p>
+          <em>
+            Nous utilisons une architecture REST pour notre application (implémentée avec
+            le framework Javalin). Nous trouvons que cette décision augmente la modularité
+            de l’application, car l’API REST est une composante indépendante qui permet de
+            faire la connexion entre le front-end et le back-end tout en diminuant leur couplage.
+            Notre utilisation d’une base de données MongoDB aide aussi à augmenter la modularité
+            et l’encapsulation, car elle permet d’isoler la logique de la gestion des données du
+            reste du programme. De plus, cette base de données favorise l’évolution de l’application,
+            car nous n’aurons pas besoin d’implémenter des modules pour gérer et sérialiser des fichiers
+            CSV. L’utilisation des APIs de la ville de Montréal utilisées dans le service Info entraves
+            et travaux améliore l’interopérabilité du service et de notre application, car nous utilisons
+            les mêmes données sur les entraves et travaux. Nous avons aussi adopté un design MVC afin de diviser
+            les classes du programme en modules spécialisés, ce qui contribue à la cohésion. Les classes du modèle
+            contribuent à l’encapsulation de la logique du programme tandis que les vues reflètent ce qui sera perçu
+            par l’utilisateur. Les contrôleurs interagissent avec ces deux composantes, notamment en notifiant la vue des
+            changements du modèle. Ce design rendra l’application plus flexible pour le devoir 3, car nous devrons y mettre des nouvelles
+            fonctionnalités et cela est plus facile lorsque la logique est bien divisée entre les modules.
+          </em>
+        </p>
+      </div>
+
     </section>
 
     <section class="main-section">
