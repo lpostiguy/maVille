@@ -15,8 +15,7 @@ public class ConsulterEntravesController {
         try {
             URL url =
                 new URL("https://donnees.montreal" + ".ca/api/3/action" +
-                    "/datastore_search?resource_id=a2bc8014-488c" + "-495d" +
-                    "-941b" + "-e7ae1999d1bd");
+                    "/datastore_search?resource_id=a2bc8014-488c" + "-495d" + "-941b" + "-e7ae1999d1bd");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
 

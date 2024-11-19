@@ -16,11 +16,10 @@ public class LoginPage {
     static boolean isLoggedIn = false;
 
     public static User loginPage() {
+        while (!isLoggedIn) {
         System.out.println("[1] Retour");
         System.out.println("Entrez votre adresse courriel:");
         String email = scanner.nextLine();
-
-        while (!isLoggedIn) {
             if (Objects.equals(email, "1")) {
                 return null;
             } else if (email.contains("@")) {
@@ -81,23 +80,11 @@ public class LoginPage {
                         GlobalUserInfo.cityIdInt3,
                         passwordEncryption.encrypt(GlobalUserInfo.passwordInt3));
                 } else {
-                    System.out.println("[1] Retour");
-                    System.out.println("[2] Réessayer");
                     System.out.println("Mauvais mot de passe ou mauvaise " +
                         "adresse" + " courriel");
-                    String response = scanner.nextLine();
-                    if (Objects.equals(response, "1")) {
-                        return null;
-                    }
                 }
             } else {
-                System.out.println("[1] Retour");
-                System.out.println("[2] Réessayer");
                 System.out.println("Adresse courriel invalide");
-                String response = scanner.nextLine();
-                if (Objects.equals(response, "1")) {
-                    return null;
-                }
             }
         }
         return null;

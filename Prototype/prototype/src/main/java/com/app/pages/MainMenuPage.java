@@ -41,38 +41,34 @@ public class MainMenuPage {
     public static String mainMenuLoggedResident() {
         System.out.println("Entrez un numéro pour être redirigé vers ces " +
             "pages:");
-        System.out.println("[1] Rechercher des travaux");
-        System.out.println("[2] Soumettre une requête de travail");
-        System.out.println("[3] Signaler un problème à la ville");
-        System.out.println("[4] Consulter les travaux en cours ou à venir");
-        System.out.println("[5] Consulter les entraves routières");
-        System.out.println("[6] Notifications");
-        System.out.println("[7] Consulter son profil");
-        System.out.println("[8] Se Déconnecter");
+        System.out.println("[1] Consulter ou rechercher des travaux");
+        System.out.println("[2] Consulter les entraves routières");
+        System.out.println("[3] Soumettre une requête de travail");
+        System.out.println("[4] Signaler un problème à la ville");
+        System.out.println("[5] Notifications");
+        System.out.println("[6] Consulter son profil");
+        System.out.println("[7] Se Déconnecter");
         String response = scanner.nextLine();
         switch (response) {
             case "1" -> {
-                return "Rechercher des travaux";
+                return "Consulter ou rechercher des travaux";
             }
             case "2" -> {
-                return "Soumettre une requête de travail";
-            }
-            case "3" -> {
-                return "Signaler un problème à la ville";
-            }
-            case "4" -> {
-                return "Consulter les travaux en cours ou à venir";
-            }
-            case "5" -> {
                 return "Consulter les entraves routières";
             }
-            case "6" -> {
+            case "3" -> {
+                return "Soumettre une requête de travail";
+            }
+            case "4" -> {
+                return "Signaler un problème à la ville";
+            }
+            case "5" -> {
                 return "Notifications";
             }
-            case "7" -> {
+            case "6" -> {
                 return "Consulter son profil";
             }
-            case "8" -> {
+            case "7" -> {
                 return "Se Déconnecter";
             }
             case null, default -> {

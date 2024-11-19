@@ -40,15 +40,8 @@ public class PageRedirect {
                     while (!quitLoggedMenu) {
                         redirect = mainMenuLoggedResident();
                         switch (redirect) {
-                            case "Rechercher des travaux" -> {
-                                System.out.println("Vous êtes maintenant " +
-                                    "sur" + " la" + " page : Rechercher " +
-                                    "des travaux");
-                                System.out.println("Pour l'instant, " +
-                                    "cette " + "page " + "est statique " +
-                                    "et il n'y a" + " pas encore de" + " " +
-                                    "logique.");
-                                // TODO: Send user to Rechercher des travaux
+                            case "Consulter ou rechercher des travaux" -> {
+                                ConsulterTravauxPage.consulterTravauxMenu();
                             }
                             case "Soumettre une requête de travail" -> {
                                 SoumettreRequeteTravailPage.soumettreRequeteTravailMenu(user);
@@ -63,9 +56,6 @@ public class PageRedirect {
                                     "logique.");
                                 // TODO: Send user to Signaler un problème à la
                                 //  ville
-                            }
-                            case "Consulter les travaux en cours ou à venir" -> {
-                                ConsulterTravauxPage.consulterTravauxEnCoursMenu();
                             }
                             case "Consulter les entraves routières" -> {
                                 ConsulterEntravesPage.consulterEntraveMenu();
