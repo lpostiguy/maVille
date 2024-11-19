@@ -6,8 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AgeFinderTest {
 
+
     @Test
     void ageFinderTest() {
-        assertEquals(19, AgeFinder.findAge("2004-06-13", "2024-11-18"));
+        assertEquals(20, AgeFinder.findAge("2004-06-13", "2024-11-18"));
+        assertEquals(0, AgeFinder.findAge("2024-11-18", "2024-11-18"));
     }
 }
