@@ -12,7 +12,7 @@ class PasswordEncryptionTest {
         PasswordEncryption passwordEncryption = new PasswordEncryption();
 
         // Mot de passe exemple
-        String password = "12345";
+        String password = "Wayne12345";
         int expectedHash = password.hashCode();
 
         // on valide
@@ -24,8 +24,8 @@ class PasswordEncryptionTest {
     void encryptDifferentPasswordsTest() {
         PasswordEncryption passwordEncryption = new PasswordEncryption();
 
-        String password1 = "12345";
-        String password2 = "67890";
+        String password1 = "Wayne12345";
+        String password2 = "Marc12345";
 
         // on verifie que les hashs sont différents
         assertNotEquals(passwordEncryption.encrypt(password1), 
