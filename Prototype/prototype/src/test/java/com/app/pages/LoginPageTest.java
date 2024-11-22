@@ -11,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import static com.app.pages.InscriptionPage.passwordEncryption;
 
-class LoginPageTest {
+public class LoginPageTest {
 
     @Test
-    void loginIntervenantTest() {
+    public void loginIntervenantTest() {
         String simulatedInput = "james.williams@intervenant.com\nJames12345";
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
@@ -27,11 +27,12 @@ class LoginPageTest {
         assertEquals("273283", result.getCityId());
         assertEquals("james.williams@intervenant.com", result.getEmail());
         assertEquals("Entreprise", result.getEntityType());
-        assertEquals(1661557291, passwordEncryption.encrypt((""+ result.getPassword())));
+        assertEquals(1661557291,
+            passwordEncryption.encrypt(("" + result.getPassword())));
     }
 
     @Test
-    void unsuccessfulLoginTest() {
+    public void unsuccessfulLoginTest() {
         String simulatedInput = "testtest@intervenant.com\nTest123456\n1";
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
@@ -41,7 +42,7 @@ class LoginPageTest {
     }
 
     @Test
-    void loginResidentTest() {
+    public void loginResidentTest() {
         String simulatedInput = "jacob.wayne@resident.com\nWayne12345";
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
@@ -52,7 +53,8 @@ class LoginPageTest {
         assertEquals("Jacob", result.getFirstName());
         assertEquals("Wayne", result.getLastName());
         assertEquals("jacob.wayne@resident.com", result.getEmail());
-        assertEquals(-570026804, passwordEncryption.encrypt("" + result.getPassword()));
+        assertEquals(-570026804,
+            passwordEncryption.encrypt("" + result.getPassword()));
     }
 
 }

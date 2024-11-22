@@ -17,9 +17,9 @@ public class LoginPage {
 
     public static User loginPage() {
         while (!isLoggedIn) {
-        System.out.println("[1] Retour");
-        System.out.println("Entrez votre adresse courriel:");
-        String email = scanner.nextLine();
+            System.out.println("[1] Retour");
+            System.out.println("Entrez votre adresse courriel:");
+            String email = scanner.nextLine();
             if (Objects.equals(email, "1")) {
                 return null;
             } else if (email.contains("@")) {

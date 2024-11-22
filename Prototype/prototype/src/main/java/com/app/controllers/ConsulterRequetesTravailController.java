@@ -11,7 +11,7 @@ public class ConsulterRequetesTravailController {
     // Méthode pour consulter les requêtes de travail
     public static void consulterRequetesTravail() {
         try {
-            URL url = new URL("http://localhost:7000/requete-travail");
+            URL url = new URL("http://localhost:8000/requete-travail");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
 

@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class ConsulterTravauxController {
 
     private static void displayTravail(Travail travail, Boolean verifierActif) {
-        if(!verifierActif | travailEstActif(travail)) {
+        if (!verifierActif | travailEstActif(travail)) {
             System.out.println("Titre : " + travail.getOccupancy_name());
             System.out.println("Type de travaux : " + travail.getReason_category());
             System.out.println("Quartier  : " + travail.getBoroughid());
@@ -32,75 +32,68 @@ public class ConsulterTravauxController {
     }
 
     // Méthode pour consulter les travaux en cours
-    public static void consulterTravauxEnCours(String filterPar, String recherche, boolean effectuerRecherche) {
+    public static void consulterTravauxEnCours(String filterPar,
+                                               String recherche,
+                                               boolean effectuerRecherche) {
         try {
-            URL url = new URL("https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=cc41b532-f12d-40fb-9f55-eb58c9a2b12b");
+            URL url = new URL("https://donnees.montreal" +
+                ".ca/api/3/action/datastore_search?resource_id=cc41b532-f12d" +
+                "-40fb-9f55-eb58c9a2b12b");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
 
             if (conn.getResponseCode() == 200) {
                 Gson gson = new Gson();
-                try (InputStreamReader reader = new InputStreamReader(conn.getInputStream())) {
-                    ReponseApi reponse = gson.fromJson(reader, ReponseApi.class);
+                try (InputStreamReader reader =
+                         new InputStreamReader(conn.getInputStream())) {
+                    ReponseApi reponse = gson.fromJson(reader,
+                        ReponseApi.class);
 
                     if (reponse != null && reponse.isSuccess() && reponse.getResult() != null) {
-                        ReponseApi.ResultatTravaux resultatTravaux = gson.fromJson(gson.toJson(reponse.getResult()), ReponseApi.ResultatTravaux.class);
+                        ReponseApi.ResultatTravaux resultatTravaux =
+                            gson.fromJson(gson.toJson(reponse.getResult()),
+                                ReponseApi.ResultatTravaux.class);
 
-                        List<Travail> travaux = resultatTravaux.getTravauxRecords();
+                        List<Travail> travaux =
+                            resultatTravaux.getTravauxRecords();
 
                         if (travaux != null) {
                             if (effectuerRecherche && recherche != null && !recherche.isEmpty()) {
                                 System.out.println("Recherche en cours...");
                                 List<String> motsRecherche =
                                     Arrays.stream(recherche.split("\\s+")).toList();
-                                for (String mot : motsRecherche) {
-                                    System.out.println("Mot: " + mot);
-                                }
-                                System.out.println("Résultat de " +
-                                    "votre recherche pour " + recherche + ":");
+                                System.out.println("Résultat de " + "votre " +
+                                    "recherche pour " + recherche + ":");
                                 switch (filterPar.toLowerCase()) {
                                     case "occupancy_name":
-                                        System.out.println("occupancy_name :");
-                                        travaux = travaux.stream()
-                                            .filter(t -> t.getOccupancy_name() != null &&
-                                                motsRecherche.stream()
-                                                    .anyMatch(word -> t.getOccupancy_name().toLowerCase().contains(word.toLowerCase())))
-                                            .collect(Collectors.toList());
+                                        travaux =
+                                            travaux.stream().filter(t -> t.getOccupancy_name() != null && motsRecherche.stream().anyMatch(word -> t.getOccupancy_name().toLowerCase().contains(word.toLowerCase()))).collect(Collectors.toList());
                                         break;
 
                                     case "reason_category":
-                                        System.out.println("reason_category :");
-                                        travaux = travaux.stream()
-                                            .filter(t -> t.getReason_category() != null &&
-                                                motsRecherche.stream()
-                                                    .anyMatch(word -> t.getReason_category().toLowerCase().contains(word.toLowerCase())))
-                                            .collect(Collectors.toList());
+                                        travaux =
+                                            travaux.stream().filter(t -> t.getReason_category() != null && motsRecherche.stream().anyMatch(word -> t.getReason_category().toLowerCase().contains(word.toLowerCase()))).collect(Collectors.toList());
                                         break;
 
                                     case "boroughid":
-                                        System.out.println("boroughid :");
-                                        travaux = travaux.stream()
-                                            .filter(t -> t.getBoroughid() != null &&
-                                                motsRecherche.stream()
-                                                    .anyMatch(word -> t.getBoroughid().toLowerCase().contains(word.toLowerCase())))
-                                            .collect(Collectors.toList());
+                                        travaux =
+                                            travaux.stream().filter(t -> t.getBoroughid() != null && motsRecherche.stream().anyMatch(word -> t.getBoroughid().toLowerCase().contains(word.toLowerCase()))).collect(Collectors.toList());
                                         break;
 
                                     default:
-                                        System.out.println("Type de recherche inconnu : " + filterPar);
+                                        System.out.println("Type de recherche" +
+                                            " inconnu : " + filterPar);
                                         return;
                                 }
 
                                 travaux.forEach(travail -> displayTravail(travail, true));
-                            }
-                            else if (!effectuerRecherche && filterPar != null) {
-                                Map<String, List<Travail>> groupedTravaux = travaux.stream()
-                                    .collect(Collectors.groupingBy(filterPar.equalsIgnoreCase("reason_category")
-                                        ? Travail::getReason_category
-                                        : Travail::getBoroughid));
+                            } else if (!effectuerRecherche && filterPar != null) {
+                                Map<String, List<Travail>> groupedTravaux =
+                                    travaux.stream().collect(Collectors.groupingBy(filterPar.equalsIgnoreCase("reason_category") ? Travail::getReason_category : Travail::getBoroughid));
 
                                 groupedTravaux.forEach((key, group) -> {
-                                    System.out.println("\n" + filterPar + ": " + key);
+                                    System.out.println("\n" + filterPar + ": "
+                                        + key);
                                     group.forEach(travail -> displayTravail(travail, true));
                                 });
                             }
@@ -109,20 +102,22 @@ public class ConsulterTravauxController {
                                 travaux.forEach(travail -> displayTravail(travail, true));
                             }
                         } else {
-                            System.out.println("Aucune donnée trouvée dans la liste des travaux.");
+                            System.out.println("Aucune donnée trouvée dans la" +
+                                " liste des travaux.");
                         }
                     } else {
-                        System.out.println("Aucune donnée trouvée ou erreur dans la réponse de l'API.");
+                        System.out.println("Aucune donnée trouvée ou erreur " +
+                            "dans la réponse de l'API.");
                     }
                 }
             } else {
                 System.out.println("Erreur HTTP : " + conn.getResponseCode());
             }
         } catch (Exception e) {
-            System.err.println("Une erreur s'est produite lors de la consultation des travaux : " + e.getMessage());
+            System.err.println("Une erreur s'est produite lors de la " +
+                "consultation des travaux : " + e.getMessage());
         }
     }
-
 
 
     // Méthode qui vérifie que les travaux sont en cours ou planifiés pour
