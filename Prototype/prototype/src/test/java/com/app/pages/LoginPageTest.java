@@ -39,4 +39,19 @@ class LoginPageTest {
         assertNull(result);
     }
 
+    @Test
+    void loginResidentTest() {
+        String simulatedInput = "test@resident.com\nTest12345";
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+
+        Resident result = (Resident) LoginPage.loginPage();
+
+        assertNotNull(result);
+        assertEquals("RESIDENT", result.getRole());
+        assertEquals("Test First Name", result.getFirstName());
+        assertEquals("Test Last Name", result.getLastName());
+        assertEquals("test@resident.com", result.getEmail());
+        assertEquals(1297444382, passwordEncryption.encrypt("" + result.getPassword()));
+    }
+
 }
