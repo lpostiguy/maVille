@@ -16,8 +16,8 @@ public class InscriptionUtils {
         if (password.length() < 8) {
             returnMessage = "Minimum of 8 character required";
         } else if (!password.matches(regex)) {
-            returnMessage = "Minimum of 1 capital letter and 1" + "number" +
-                " " + "required";
+            returnMessage = "Minimum of 1 capital letter and 1" + " " +
+                "number" + " " + "required";
         }
         return returnMessage;
     }
