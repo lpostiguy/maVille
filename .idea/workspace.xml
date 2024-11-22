@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] Algo de recherche et de filtrage ajoutés.">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[Rapport] Modifs finales sur diagrammes de séquence&#10;Ajout description du diagramme d'architecture">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/diagrammes/consulter_requetes.svg" beforeDir="false" afterPath="$PROJECT_DIR$/images/diagrammes/consulter_requetes.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/diagrammes/soumettre_requete.svg" beforeDir="false" afterPath="$PROJECT_DIR$/images/diagrammes/soumettre_requete.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rapport_equipe11.html" beforeDir="false" afterPath="$PROJECT_DIR$/rapport_equipe11.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/pages/LoginPageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/pages/LoginPageTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +63,11 @@
     "JUnit.AgeFinderTest.ageFinderTest.executor": "Run",
     "JUnit.AgeFinderTest.executor": "Run",
     "JUnit.InscriptionUtilsTest.isAbove16Test.executor": "Run",
+    "JUnit.InscriptionUtilsTest.isValidPasswordTest.executor": "Run",
+    "JUnit.LoginPageTest.executor": "Run",
+    "JUnit.LoginPageTest.loginIntervenantTest.executor": "Run",
+    "JUnit.LoginPageTest.loginResidentTest.executor": "Run",
+    "JUnit.LoginPageTest.unsuccessfulLoginTest.executor": "Run",
     "Maven.prototype [clean].executor": "Run",
     "Maven.prototype [compile].executor": "Run",
     "Maven.prototype [deploy].executor": "Run",
@@ -89,35 +91,7 @@
       <recent name="com.app.models" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.InscriptionUtilsTest.isAbove16Test">
-    <configuration name="JsonFormating" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="21" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="com.app.utils.JsonFormating" />
-      <module name="prototype" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.app.pages.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="JsonFormatting" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.app.utils.JsonFormatting" />
-      <module name="prototype (1)" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.app.pages.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.RegexCheckerTest.testIsValidPhoneNumberFormat">
     <configuration name="Run Main" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="openjdk-21" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -127,38 +101,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AgeFinderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="prototype" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.app.utils.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.app.utils" />
-      <option name="MAIN_CLASS_NAME" value="com.app.utils.AgeFinderTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AgeFinderTest.ageFinderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="prototype" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.app.utils.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.app.utils" />
-      <option name="MAIN_CLASS_NAME" value="com.app.utils.AgeFinderTest" />
-      <option name="METHOD_NAME" value="ageFinderTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="InscriptionUtilsTest.isAbove16Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="InscriptionUtilsTest.isSamePasswordTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="prototype" />
       <extension name="coverage">
         <pattern>
@@ -168,7 +111,71 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.app.utils" />
       <option name="MAIN_CLASS_NAME" value="com.app.utils.InscriptionUtilsTest" />
-      <option name="METHOD_NAME" value="isAbove16Test" />
+      <option name="METHOD_NAME" value="isSamePasswordTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PasswordEncryptionTest.encryptDifferentPasswordsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="prototype" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.app.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.app.utils" />
+      <option name="MAIN_CLASS_NAME" value="com.app.utils.PasswordEncryptionTest" />
+      <option name="METHOD_NAME" value="encryptDifferentPasswordsTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PasswordEncryptionTest.encryptPasswordTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="prototype" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.app.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.app.utils" />
+      <option name="MAIN_CLASS_NAME" value="com.app.utils.PasswordEncryptionTest" />
+      <option name="METHOD_NAME" value="encryptPasswordTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RegexCheckerTest.testIsValidDateFormat" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="prototype" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.app.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.app.utils" />
+      <option name="MAIN_CLASS_NAME" value="com.app.utils.RegexCheckerTest" />
+      <option name="METHOD_NAME" value="testIsValidDateFormat" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RegexCheckerTest.testIsValidPhoneNumberFormat" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="prototype" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.app.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.app.utils" />
+      <option name="MAIN_CLASS_NAME" value="com.app.utils.RegexCheckerTest" />
+      <option name="METHOD_NAME" value="testIsValidPhoneNumberFormat" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -176,19 +183,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.Run Main" />
-      <item itemvalue="Application.JsonFormating" />
-      <item itemvalue="Application.JsonFormatting" />
-      <item itemvalue="JUnit.AgeFinderTest" />
-      <item itemvalue="JUnit.AgeFinderTest.ageFinderTest" />
-      <item itemvalue="JUnit.InscriptionUtilsTest.isAbove16Test" />
+      <item itemvalue="JUnit.InscriptionUtilsTest.isSamePasswordTest" />
+      <item itemvalue="JUnit.PasswordEncryptionTest.encryptDifferentPasswordsTest" />
+      <item itemvalue="JUnit.PasswordEncryptionTest.encryptPasswordTest" />
+      <item itemvalue="JUnit.RegexCheckerTest.testIsValidDateFormat" />
+      <item itemvalue="JUnit.RegexCheckerTest.testIsValidPhoneNumberFormat" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.InscriptionUtilsTest.isAbove16Test" />
-        <item itemvalue="JUnit.AgeFinderTest.ageFinderTest" />
-        <item itemvalue="JUnit.AgeFinderTest" />
-        <item itemvalue="Application.JsonFormating" />
-        <item itemvalue="Application.JsonFormatting" />
+        <item itemvalue="JUnit.RegexCheckerTest.testIsValidPhoneNumberFormat" />
+        <item itemvalue="JUnit.RegexCheckerTest.testIsValidDateFormat" />
+        <item itemvalue="JUnit.PasswordEncryptionTest.encryptDifferentPasswordsTest" />
+        <item itemvalue="JUnit.PasswordEncryptionTest.encryptPasswordTest" />
+        <item itemvalue="JUnit.InscriptionUtilsTest.isSamePasswordTest" />
       </list>
     </recent_temporary>
   </component>
@@ -233,7 +240,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732043617485</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="[Rapport] Modifs finales sur diagrammes de séquence&#10;Ajout description du diagramme d'architecture">
+      <option name="closed" value="true" />
+      <created>1732307441122</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732307441122</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -253,6 +268,22 @@
     <MESSAGE value="[PROTOTYPE] Ajout de 3 comptes résidents et 3 comptes intervenants hardcoded." />
     <MESSAGE value="[PROTOTYPE] Séparation MVC des controllers et des pages." />
     <MESSAGE value="[PROTOTYPE] Algo de recherche et de filtrage ajoutés." />
-    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] Algo de recherche et de filtrage ajoutés." />
+    <MESSAGE value="[Rapport] Modifs finales sur diagrammes de séquence&#10;Ajout description du diagramme d'architecture" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Rapport] Modifs finales sur diagrammes de séquence&#10;Ajout description du diagramme d'architecture" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/utils/InscriptionUtilsTest.java</url>
+          <line>34</line>
+          <properties class="com.app.utils.InscriptionUtilsTest" method="isValidPasswordTest">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
