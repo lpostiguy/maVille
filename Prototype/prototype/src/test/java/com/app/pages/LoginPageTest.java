@@ -27,7 +27,7 @@ class LoginPageTest {
         assertEquals("273283", result.getCityId());
         assertEquals("james.williams@intervenant.com", result.getEmail());
         assertEquals("Entreprise", result.getEntityType());
-        assertEquals("James12345", passwordEncryption.encrypt((""+ result.getPassword())));
+        assertEquals(1661557291, passwordEncryption.encrypt((""+ result.getPassword())));
     }
 
     @Test
@@ -52,7 +52,7 @@ class LoginPageTest {
         assertEquals("Jacob", result.getFirstName());
         assertEquals("Wayne", result.getLastName());
         assertEquals("jacob.wayne@resident.com", result.getEmail());
-        assertEquals("Wayne12345", passwordEncryption.encrypt("" + result.getPassword()));
+        assertEquals(-570026804, passwordEncryption.encrypt("" + result.getPassword()));
     }
 
 }
