@@ -52,5 +52,19 @@ class InscriptionUtilsTest {
             "Un mot de passe sans chiffre devrait retourner un message d'erreur.");
     }
 
+    @Test
+    void isSamePasswordTest() {
+        // Cas où les mots de passe sont identiques
+        assertTrue(InscriptionUtils.isSamePassword("Password1", "Password1"),
+            "Les mots de passe identiques, même avec des espaces aux extrémités, devraient être considérés comme identiques.");
+
+        // Cas où les mots de passes ne sont pas identiques
+        assertFalse(InscriptionUtils.isSamePassword(" Password1 ", "Password1"),
+            "Les mots de passe avec des espaces ne devraient pas être identiques.");
+
+        assertFalse(InscriptionUtils.isSamePassword("Password1", "password1"),
+            "Les mots de passe devraient être sensibles à la casse.");
+    }
+
 }
 

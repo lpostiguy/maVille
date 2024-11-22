@@ -43,6 +43,10 @@ class RegexCheckerTest {
             "Une chaîne qui n'est pas un numéro ne devrait pas être valide.");
         assertFalse(RegexChecker.isValidPhoneNumberFormat("123-4567-890"),
             "Un numéro de téléphone avec une mauvaise structure ne devrait pas être valide.");
+        assertFalse(RegexChecker.isValidPhoneNumberFormat("12-45-89-67-24"),
+            "Un numéro de téléphone avec un format incorrect ne devrait pas être valide.");
+        assertFalse(RegexChecker.isValidPhoneNumberFormat("+1 1234567890"),
+            "Un numéro de téléphone avec une mauvaise structure ne devrait pas être valide.");
     }
 
 
