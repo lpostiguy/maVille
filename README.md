@@ -14,7 +14,7 @@ ORGANISATION DU RÉPERTOIRE :
 
 POUR EXÉCUTER L'APPLICATION:
 
-Pour exécuter le programme de commande, vous devez utiliser la commande: "java -jar IFT2255-A24-SessionProject.jar" 
+Pour exécuter le programme de commande, vous devez utiliser la commande: "java -jar prototype-1.1.jar" 
 dans le répertoire du projet.
 
 --------------------------------------------
