@@ -57,9 +57,3 @@ email: bruce.cuban@intervenant.com
 mot de passe : Bruce12345
 
 --------------------------------------------
-
-POUR RUN LES TESTS UNITAIRES:
-
-Pour exécuter tous les tests unitaires en même temps, vous devez aller dans src/test/java/com/example/AppTest.java 
-et run la classe AppTest.
-
