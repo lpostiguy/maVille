@@ -1,20 +1,37 @@
 package com.app.models.User;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "userRole"
+)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = Resident.class, name = "RESIDENT"),
+    @JsonSubTypes.Type(value = Intervenant.class, name = "INTERVENANT")
+})
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class User {
 
     // Attributes
-    private String id;
+    private String userId;
     private String firstName;
     private String lastName;
     private String email;
-    private String role;
+    private String userRole;
     private int password;
     private boolean connected;
 
     // Getters
 
-    public String getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
     public String getFirstName() {
@@ -29,8 +46,8 @@ public class User {
         return email;
     }
 
-    public String getRole() {
-        return role;
+    public String getUserRole() {
+        return userRole;
     }
 
     public int getPassword() {
@@ -43,8 +60,8 @@ public class User {
 
     // Setters
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserId(String id) {
+        this.userId = id;
     }
 
     public void setFirstName(String firstname) {
@@ -59,8 +76,8 @@ public class User {
         this.email = email;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setUserRole(String role) {
+        this.userRole = role;
     }
 
     public void setPassword(int password) {

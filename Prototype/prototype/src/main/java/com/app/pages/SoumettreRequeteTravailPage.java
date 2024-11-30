@@ -1,12 +1,6 @@
 package com.app.pages;
 
 import com.app.models.User.User;
-
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 import java.util.Scanner;
 
 import static com.app.controllers.SoumettreRequeteTravailController.soumettreRequeteTravail;
@@ -18,7 +12,8 @@ public class SoumettreRequeteTravailPage {
     public static void soumettreRequeteTravailMenu(User user) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Veuillez entrer les informations suivantes pour " + "soumettre une nouvelle requête de travail.");
+        System.out.println("Veuillez entrer les informations suivantes pour " +
+            "soumettre une nouvelle requête de travail.");
 
         System.out.print("Titre : ");
         String titre = scanner.nextLine();
@@ -37,14 +32,15 @@ public class SoumettreRequeteTravailPage {
             if (isValidDateFormat(dateDebutEspere)) {
                 dateDebutEspereValide = true;
             } else {
-                System.out.println("La date de début espérée entrée n'est " + "pas du format YYYY-MM-DD");
+                System.out.println("La date de début espérée entrée n'est " +
+                    "pas du format YYYY-MM-DD");
             }
         }
 
         // Appel de la méthode pour soumettre la requête avec les données
         // entrées
         System.out.println(soumettreRequeteTravail(titre, description,
-            typeTravaux, dateDebutEspere, user.getId()));
+            typeTravaux, dateDebutEspere, user.getUserId()));
         System.out.println("\n[1] Retour au menu principal");
         while (!scanner.nextLine().equals("1")) {
             System.out.println("\n[1] Retour au menu principal");

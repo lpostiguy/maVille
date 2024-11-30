@@ -29,7 +29,7 @@ public class AccountPage {
                 System.out.println("Nom: " + user.getLastName());
                 System.out.println("Adresse courriel: " + user.getEmail());
                 // Information specific to resident role
-                if (Objects.equals(user.getRole(), "RESIDENT")) {
+                if (Objects.equals(user.getUserRole(), "RESIDENT")) {
                     residentPrintInfo((Resident) user);
                 }
                 // Information specific to intervenant role

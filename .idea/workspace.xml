@@ -5,10 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] Algo de recherche et de filtrage ajoutés.">
-      <change afterPath="$PROJECT_DIR$/Prototype/prototype/dependency-reduced-pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/InscriptionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prototype-1.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/Intervenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/Intervenant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/Resident.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/AccountPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/AccountPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/InscriptionPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/InscriptionPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/LoginPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/PageRedirect.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/PageRedirect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/SoumettreRequeteTravailPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/SoumettreRequeteTravailPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/GlobalUserInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/GlobalUserInfo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,18 +34,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Yootna"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Yootna&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/lpostiguy/IFT2255-A24-SessionProject-equipe-11.git",
-    "accountId": "e8f2f241-06bd-4423-96ed-2db4b0c33d1a"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/lpostiguy/IFT2255-A24-SessionProject-equipe-11.git&quot;,
+    &quot;accountId&quot;: &quot;e8f2f241-06bd-4423-96ed-2db4b0c33d1a&quot;
   }
-}]]></component>
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -55,37 +64,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.JsonFormating.executor": "Run",
-    "Application.JsonFormatting.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.Run Main.executor": "Run",
-    "JUnit.AppTest.executor": "Run",
-    "JUnit.AppTest.runAllTests.executor": "Run",
-    "JUnit.LoginPageTest.loginIntervenantTest.executor": "Run",
-    "JUnit.LoginPageTest.loginResidentTest.executor": "Run",
-    "JUnit.LoginPageTest.unsuccessfulLoginTest.executor": "Run",
-    "Maven.prototype [clean].executor": "Run",
-    "Maven.prototype [compile].executor": "Run",
-    "Maven.prototype [deploy].executor": "Run",
-    "Maven.prototype [install].executor": "Run",
-    "Maven.prototype [org.apache.maven.plugins:maven-jar-plugin:3.4.1:help].executor": "Run",
-    "Maven.prototype [org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar].executor": "Run",
-    "Maven.prototype [package].executor": "Run",
-    "Maven.prototype [test].executor": "Run",
-    "Maven.prototype [validate].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ostil/Documents/Université/Session 2/Prog 2/TP2/TP2_LouisPhilippeOstiguy_NoahTremblayTaillon",
-    "settings.editor.selected.configurable": "preferences.keymap"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.JsonFormating.executor&quot;: &quot;Run&quot;,
+    &quot;Application.JsonFormatting.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Run Main.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AppTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AppTest.runAllTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LoginPageTest.loginIntervenantTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LoginPageTest.loginResidentTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LoginPageTest.unsuccessfulLoginTest.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [deploy].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [org.apache.maven.plugins:maven-jar-plugin:3.4.1:help].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [validate].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ostil/Documents/Université/Session 2/Prog 2/TP2/TP2_LouisPhilippeOstiguy_NoahTremblayTaillon&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\antho\Documents\IFT2255-A24-SessionProject-equipe" />
@@ -96,7 +105,7 @@
       <recent name="com.app.models" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Run Main">
     <configuration name="Run Main" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="21" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />

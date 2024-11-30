@@ -36,7 +36,7 @@ public class PageRedirect {
             if (successfulLogin) {
                 // Access the loggedIn menu
                 // TODO: Check if the user is a Intervenant or a resident
-                if (Objects.equals(GlobalUserInfo.currentRole, "RESIDENT") || Objects.equals(user.getRole(), "RESIDENT")) {
+                if (Objects.equals(GlobalUserInfo.currentRole, "RESIDENT") || Objects.equals(user.getUserRole(), "RESIDENT")) {
                     while (!quitLoggedMenu) {
                         redirect = mainMenuLoggedResident();
                         switch (redirect) {
@@ -82,7 +82,7 @@ public class PageRedirect {
                         }
                     }
                 } else if (Objects.equals(GlobalUserInfo.currentRole,
-                    "INTERVENANT") || Objects.equals(user.getRole(),
+                    "INTERVENANT") || Objects.equals(user.getUserRole(),
                     "INTERVENANT")) {
                     while (!quitLoggedMenu) {
                         redirect = mainMenuLoggedIntervenant();

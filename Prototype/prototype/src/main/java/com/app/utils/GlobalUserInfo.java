@@ -3,6 +3,7 @@ package com.app.utils;
 public class GlobalUserInfo {
 
     public static String currentRole = "";
+    public static String currentUserId = "";
 
     // Hard Coded Resident 1
     public static String firstNameRes1 = "Jacob";
@@ -58,5 +59,9 @@ public class GlobalUserInfo {
 
     public static void setCurrentRole(String currentRole) {
         GlobalUserInfo.currentRole = currentRole;
+    }
+
+    public static void setCurrentUserId(String currentUserId) {
+        GlobalUserInfo.currentUserId = currentUserId;
     }
 }

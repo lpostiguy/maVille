@@ -5,11 +5,13 @@ import java.util.Objects;
 import java.util.Scanner;
 
 
+import com.app.utils.GlobalUserInfo;
 import com.app.utils.PasswordEncryption;
 import com.app.models.User.Intervenant;
 import com.app.models.User.Resident;
 import com.app.models.User.User;
 
+import static com.app.controllers.InscriptionController.addNewUser;
 import static com.app.utils.InscriptionUtils.*;
 import static com.app.utils.RegexChecker.*;
 
@@ -188,7 +190,12 @@ public class InscriptionPage {
                 //  the hash buckets are user classes
                 Resident resident = new Resident(firstName, lastName, email,
                     phoneNumber, dateOfBirth, homeAddress, encryptedPassword);
+                addNewUser(resident.getUserId(), firstName, lastName,
+                    email, phoneNumber, dateOfBirth, homeAddress,
+                    "", "", String.valueOf(encryptedPassword), resident.getUserRole());
                 System.out.println("Inscription réussite !");
+                GlobalUserInfo.setCurrentRole("RESIDENT");
+                GlobalUserInfo.setCurrentUserId(resident.getUserId());
                 user = resident;
                 return resident;
             } else {
@@ -199,7 +206,12 @@ public class InscriptionPage {
             //  the hash buckets are user classes
             Intervenant intervenant = new Intervenant(firstName, lastName,
                 email, entityType, cityId, encryptedPassword);
+            addNewUser(intervenant.getUserId(), firstName, lastName, email, phoneNumber,
+                dateOfBirth, homeAddress, entityType, cityId, String.valueOf(encryptedPassword),
+                intervenant.getUserRole());
             System.out.println("Inscription réussite !");
+            GlobalUserInfo.setCurrentRole("INTERVENANT");
+            GlobalUserInfo.setCurrentUserId(intervenant.getUserId());
             user = intervenant;
             return intervenant;
         }

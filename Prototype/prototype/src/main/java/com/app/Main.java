@@ -1,6 +1,7 @@
 package com.app;
 
 import com.app.controllers.RequeteTravailController;
+import com.app.controllers.UserController;
 import com.app.pages.PageRedirect;
 import io.javalin.Javalin;
 
@@ -10,6 +11,7 @@ public class Main {
         Javalin app = Javalin.create().start(8000);
 
         RequeteTravailController.registerRoutes(app);
+        UserController.registerRoutes(app);
 
         System.out.println("""
              __       __  ______       __     __ ______ __       __       ________\s
