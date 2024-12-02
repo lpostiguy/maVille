@@ -28,7 +28,7 @@ public class InscriptionController {
                                     String entityType,
                                     String cityId,
                                     String password,
-                                    String userRole) {
+                                    String userRole, String boroughId) {
         try {
             URL url = new URL("http://localhost:8000/users");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -42,9 +42,9 @@ public class InscriptionController {
                     "\"email\": \"%s\", \"phoneNumber\": \"%s\", " +
                     "\"dateOfBirth\": \"%s\", \"homeAddress\": \"%s\", " +
                     "\"entityType\": \"%s\", \"cityId\": \"%s\", " +
-                    "\"password\": \"%s\", \"userRole\": \"%s\""
+                    "\"password\": \"%s\", \"userRole\": \"%s\", \"boroughId\": \"%s\""
                     + "}", userId, firstName, lastName, email, phoneNumber,
-                dateOfBirth, homeAddress, entityType, cityId, password, userRole);
+                dateOfBirth, homeAddress, entityType, cityId, password, userRole, boroughId);
 
             try (OutputStream os = conn.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);

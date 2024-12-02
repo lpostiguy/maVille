@@ -39,16 +39,12 @@ public class UserController {
                     doc.append("phoneNumber", resident.getPhoneNumber())
                         .append("dateOfBirth", resident.getDateOfBirth())
                         .append("homeAddress", resident.getHomeAddress())
-                        .append("cityId", "")
-                        .append("entityType", "")
-                        .append("notifications", initialNotifs);
+                        .append("notifications", initialNotifs)
+                        .append("boroughId", resident.getBoroughId());
 
                 } else if (user instanceof com.app.models.User.Intervenant intervenant) {
                     doc.append("entityType", intervenant.getEntityType())
-                        .append("cityId", intervenant.getCityId())
-                        .append("phoneNumber", "")
-                        .append("dateOfBirth", "")
-                        .append("homeAddress", "");
+                        .append("cityId", intervenant.getCityId());
                 }
 
                 collectionUsers.insertOne(doc);

@@ -10,6 +10,7 @@ import com.app.utils.PasswordEncryption;
 import com.app.models.User.Intervenant;
 import com.app.models.User.Resident;
 import com.app.models.User.User;
+import com.app.utils.PostalCodeMapping;
 
 import static com.app.controllers.InscriptionController.addNewUser;
 import static com.app.utils.InscriptionUtils.*;
@@ -33,6 +34,7 @@ public class InscriptionPage {
     static String phoneNumber;
     static String dateOfBirth;
     static String homeAddress;
+    static String boroughId;
 
     // Intervenant Specific Attributes
     static String entityType;
@@ -121,14 +123,19 @@ public class InscriptionPage {
 
             boolean validAddress = false;
             while (!validAddress) {
-                System.out.println("Entrez votre adresse de résidence:");
+                System.out.println("Entrez votre adresse de résidence: Numéro, rue, code postal");
                 homeAddress = scanner.nextLine();
-                // Verify that the homeAddress is valid format
-                if (!Objects.equals(homeAddress, "")) {
-                    validAddress = true;
-                } else {
-                    System.out.println("L'adresse de résidence n'est pas du " + "format accepté.");
+                PostalCodeMapping postalCodeMapping = new PostalCodeMapping("codesPostaux.csv");
+                String borough = postalCodeMapping.getDistrictByPostalCode(homeAddress);
+                if (borough == null) System.out.println("Veuillez respecter le format.");
+                else if (borough.equals("Quartier inconnu")) {
+                    System.out.println("Quartier inconnu. Veuillez réessayer.");
                 }
+                else {
+                    validAddress = true;
+                    boroughId = borough;
+                }
+
             }
         }
 
@@ -189,13 +196,14 @@ public class InscriptionPage {
                 // TODO: Store the users info into a Hash table where
                 //  the hash buckets are user classes
                 Resident resident = new Resident(firstName, lastName, email,
-                    phoneNumber, dateOfBirth, homeAddress, encryptedPassword);
+                    phoneNumber, dateOfBirth, homeAddress, encryptedPassword, boroughId);
                 addNewUser(resident.getUserId(), firstName, lastName,
                     email, phoneNumber, dateOfBirth, homeAddress,
-                    "", "", String.valueOf(encryptedPassword), resident.getUserRole());
+                    "", "", String.valueOf(encryptedPassword), resident.getUserRole(), boroughId);
                 System.out.println("Inscription réussite !");
                 GlobalUserInfo.setCurrentRole("RESIDENT");
                 GlobalUserInfo.setCurrentUserId(resident.getUserId());
+                GlobalUserInfo.setCurrentBoroughId(resident.getBoroughId());
                 user = resident;
                 return resident;
             } else {
@@ -208,7 +216,7 @@ public class InscriptionPage {
                 email, entityType, cityId, encryptedPassword);
             addNewUser(intervenant.getUserId(), firstName, lastName, email, phoneNumber,
                 dateOfBirth, homeAddress, entityType, cityId, String.valueOf(encryptedPassword),
-                intervenant.getUserRole());
+                intervenant.getUserRole(), boroughId);
             System.out.println("Inscription réussite !");
             GlobalUserInfo.setCurrentRole("INTERVENANT");
             GlobalUserInfo.setCurrentUserId(intervenant.getUserId());
