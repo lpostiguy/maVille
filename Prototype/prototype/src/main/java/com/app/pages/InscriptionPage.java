@@ -5,7 +5,6 @@ import java.util.Objects;
 import java.util.Scanner;
 
 
-import com.app.utils.GlobalUserInfo;
 import com.app.utils.PasswordEncryption;
 import com.app.models.User.Intervenant;
 import com.app.models.User.Resident;
@@ -201,9 +200,6 @@ public class InscriptionPage {
                     email, phoneNumber, dateOfBirth, homeAddress,
                     "", "", String.valueOf(encryptedPassword), resident.getUserRole(), boroughId);
                 System.out.println("Inscription réussite !");
-                GlobalUserInfo.setCurrentRole("RESIDENT");
-                GlobalUserInfo.setCurrentUserId(resident.getUserId());
-                GlobalUserInfo.setCurrentBoroughId(resident.getBoroughId());
                 user = resident;
                 return resident;
             } else {
@@ -218,8 +214,6 @@ public class InscriptionPage {
                 dateOfBirth, homeAddress, entityType, cityId, String.valueOf(encryptedPassword),
                 intervenant.getUserRole(), boroughId);
             System.out.println("Inscription réussite !");
-            GlobalUserInfo.setCurrentRole("INTERVENANT");
-            GlobalUserInfo.setCurrentUserId(intervenant.getUserId());
             user = intervenant;
             return intervenant;
         }

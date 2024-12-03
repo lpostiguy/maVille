@@ -3,7 +3,6 @@ package com.app.pages;
 import com.app.models.User.Resident;
 import com.app.models.User.Intervenant;
 import com.app.models.User.User;
-import com.app.utils.GlobalUserInfo;
 import org.bson.Document;
 
 import static com.app.controllers.UserController.findUserByEmail;
@@ -11,7 +10,6 @@ import static com.app.controllers.UserController.findUserByEmail;
 import java.util.Objects;
 import java.util.Scanner;
 
-import static com.app.pages.InscriptionPage.homeAddress;
 import static com.app.pages.InscriptionPage.passwordEncryption;
 
 public class LoginPage {
@@ -37,8 +35,6 @@ public class LoginPage {
                     Integer storedPassword = userInfo.getInteger("password");
                     if (Objects.equals(encryptedPassword, storedPassword)) {
                         String role = userInfo.getString("userRole");
-                        GlobalUserInfo.setCurrentRole(role);
-                        GlobalUserInfo.setCurrentUserId(userInfo.getString("userId"));
                         System.out.println("Connexion réussie!");
 
                         if (Objects.equals(role, "RESIDENT")) {

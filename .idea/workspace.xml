@@ -4,16 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] Inscription et log-in ajouté.">
-      <change afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/PostalCodeMapping.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/resources/codesPostaux.csv" afterDir="false" />
+    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] Association de l'adresse résidentielle à un quartier.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/InscriptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/InscriptionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/Resident.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/InscriptionPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/InscriptionPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/GlobalUserInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/GlobalUserInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/LoginPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/PageRedirect.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/PageRedirect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/GlobalUserInfo.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -260,7 +256,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733009988940</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="[PROTOTYPE] Association de l'adresse résidentielle à un quartier.">
+      <option name="closed" value="true" />
+      <created>1733182117961</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1733182117961</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -281,6 +285,7 @@
     <MESSAGE value="[PROTOTYPE] Séparation MVC des controllers et des pages." />
     <MESSAGE value="[PROTOTYPE] Algo de recherche et de filtrage ajoutés." />
     <MESSAGE value="[PROTOTYPE] Inscription et log-in ajouté." />
-    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] Inscription et log-in ajouté." />
+    <MESSAGE value="[PROTOTYPE] Association de l'adresse résidentielle à un quartier." />
+    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] Association de l'adresse résidentielle à un quartier." />
   </component>
 </project>

@@ -4,7 +4,6 @@ package com.app.pages;
 import java.util.Objects;
 
 import com.app.models.User.User;
-import com.app.utils.GlobalUserInfo;
 
 import static com.app.pages.ConsulterRequetesTravailPage.consulterRequeteTravailMenu;
 import static com.app.pages.MainMenuPage.mainMenuLoggedIntervenant;
@@ -36,7 +35,7 @@ public class PageRedirect {
             if (successfulLogin) {
                 // Access the loggedIn menu
                 // TODO: Check if the user is a Intervenant or a resident
-                if (Objects.equals(GlobalUserInfo.currentRole, "RESIDENT") || Objects.equals(user.getUserRole(), "RESIDENT")) {
+                if (Objects.equals(user.getUserRole(), "RESIDENT")) {
                     while (!quitLoggedMenu) {
                         redirect = mainMenuLoggedResident();
                         switch (redirect) {
@@ -81,8 +80,7 @@ public class PageRedirect {
                             }
                         }
                     }
-                } else if (Objects.equals(GlobalUserInfo.currentRole,
-                    "INTERVENANT") || Objects.equals(user.getUserRole(),
+                } else if (Objects.equals(user.getUserRole(),
                     "INTERVENANT")) {
                     while (!quitLoggedMenu) {
                         redirect = mainMenuLoggedIntervenant();
