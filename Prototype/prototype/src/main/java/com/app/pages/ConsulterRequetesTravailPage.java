@@ -2,7 +2,7 @@ package com.app.pages;
 
 import java.util.Scanner;
 
-import static com.app.controllers.ConsulterRequetesTravailController.consulterRequetesTravail;
+import static com.app.controllers.RequeteTravailController.consulterRequetesTravail;
 
 public class ConsulterRequetesTravailPage {
 

@@ -1,7 +1,13 @@
 package com.app.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.bson.Document;
+import org.bson.types.ObjectId;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 
 public class RequeteTravail {
 
@@ -9,18 +15,27 @@ public class RequeteTravail {
     private String description;
     private String typeTravaux;
     private String dateDebutEspere;
-    private String demandeurRequeteId;
+    @JsonProperty("_id")
+    private Document id;
+    @JsonProperty("demandeurRequete")
+    private String demandeurRequete;
+    @JsonProperty("open")
+    private boolean isOpen;
+    @JsonProperty("candidatures")
+    private Candidature[] candidatures;
 
     @JsonCreator
     public RequeteTravail(@JsonProperty("titre") String titre, @JsonProperty(
         "description") String description,
                           @JsonProperty("typeTravaux") String typeTravaux,
-                          @JsonProperty("dateDebutEspere") String dateDebutEspere, @JsonProperty("demandeurRequeteId") String demandeurRequeteId) {
+                          @JsonProperty("dateDebutEspere") String dateDebutEspere, @JsonProperty("demandeurRequete") String demandeurRequete,
+                          @JsonProperty("_id") Document objectId) {
         this.titre = titre;
         this.description = description;
         this.typeTravaux = typeTravaux;
         this.dateDebutEspere = dateDebutEspere;
-        this.demandeurRequeteId = demandeurRequeteId;
+        this.demandeurRequete = demandeurRequete;
+        this.id = objectId;
     }
 
     // Getters
@@ -40,9 +55,13 @@ public class RequeteTravail {
         return dateDebutEspere;
     }
 
-    public String getDemandeurRequeteId() {
-        return demandeurRequeteId;
+    public String getDemandeurRequete() {
+        return demandeurRequete;
     }
+
+    public boolean getOpen() { return isOpen;}
+
+    public Document getId() { return id;}
 
     // Setters
     public void setTitre(String titre) {
@@ -57,7 +76,11 @@ public class RequeteTravail {
         this.typeTravaux = typeTravaux;
     }
 
-    public void setDemandeurRequeteId(String demandeurRequeteId) {
-        this.demandeurRequeteId = demandeurRequeteId;
+    public void setDemandeurRequete(String demandeurRequete) {
+        this.demandeurRequete = demandeurRequete;
+    }
+
+    public void setOpen(boolean open) {
+        this.isOpen = open;
     }
 }

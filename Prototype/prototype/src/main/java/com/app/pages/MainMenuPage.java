@@ -44,7 +44,7 @@ public class MainMenuPage {
         System.out.println("[1] Consulter ou rechercher des travaux");
         System.out.println("[2] Consulter les entraves routières");
         System.out.println("[3] Soumettre une requête de travail");
-        System.out.println("[4] Signaler un problème à la ville");
+        System.out.println("[4] Faire le suivi d'une requête de travail");
         System.out.println("[5] Notifications");
         System.out.println("[6] Consulter son profil");
         System.out.println("[7] Se Déconnecter");
@@ -60,7 +60,7 @@ public class MainMenuPage {
                 return "Soumettre une requête de travail";
             }
             case "4" -> {
-                return "Signaler un problème à la ville";
+                return "Faire le suivi d'une requête de travail";
             }
             case "5" -> {
                 return "Notifications";

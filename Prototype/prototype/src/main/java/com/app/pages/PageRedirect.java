@@ -34,7 +34,6 @@ public class PageRedirect {
             }
             if (successfulLogin) {
                 // Access the loggedIn menu
-                // TODO: Check if the user is a Intervenant or a resident
                 if (Objects.equals(user.getUserRole(), "RESIDENT")) {
                     while (!quitLoggedMenu) {
                         redirect = mainMenuLoggedResident();
@@ -44,6 +43,9 @@ public class PageRedirect {
                             }
                             case "Soumettre une requête de travail" -> {
                                 SoumettreRequeteTravailPage.soumettreRequeteTravailMenu(user);
+                            }
+                            case "Faire le suivi d'une requête de travail" -> {
+                                SoumettreRequeteTravailPage.consulterRequeteTravailMenu(user);
                             }
                             case "Signaler un problème à la ville" -> {
                                 System.out.println("Vous êtes maintenant " +

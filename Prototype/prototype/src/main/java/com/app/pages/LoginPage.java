@@ -42,7 +42,7 @@ public class LoginPage {
                                 userInfo.getString("lastName"), userInfo.getString("email"),
                                 userInfo.getString("phoneNumber"), userInfo.getString("dateOfBirth"),
                                 userInfo.getString("homeAddress"), userInfo.getInteger("password"),
-                                userInfo.getString("userId"));
+                                userInfo.getString("userId"), userInfo.getString("boroughId"));
                         }
                         else {
                             return new Intervenant(userInfo.getString("firstName"),

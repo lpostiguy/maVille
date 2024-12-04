@@ -2,7 +2,7 @@ package com.app.models;
 
 public class Travail {
 
-    // Attribus
+    // Attributs
     private int _id;
     private String id;
     private String permit_permit_id;

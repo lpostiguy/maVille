@@ -11,7 +11,7 @@ import com.app.models.User.Resident;
 import com.app.models.User.User;
 import com.app.utils.PostalCodeMapping;
 
-import static com.app.controllers.InscriptionController.addNewUser;
+import static com.app.controllers.UserController.addNewUser;
 import static com.app.utils.InscriptionUtils.*;
 import static com.app.utils.RegexChecker.*;
 
