@@ -40,9 +40,11 @@ public class InscriptionPage {
     static String cityId;
 
     public static User inscriptionPage() {
+        System.out.println("\n----------- Inscription -----------");
         System.out.println("[1] Retour");
         System.out.println("[2] S'inscrire comme résident");
         System.out.println("[3] S'inscrire comme intervenant");
+        System.out.println("\n-----------------------------------");
         String choice = scanner.nextLine();
         switch (choice) {
             case "1" -> {
@@ -122,15 +124,18 @@ public class InscriptionPage {
 
             boolean validAddress = false;
             while (!validAddress) {
-                System.out.println("Entrez votre adresse de résidence: Numéro, rue, code postal");
+                System.out.println("Entrez votre adresse de résidence: " +
+                    "Numéro, rue, code postal");
                 homeAddress = scanner.nextLine();
-                PostalCodeMapping postalCodeMapping = new PostalCodeMapping("codesPostaux.csv");
-                String borough = postalCodeMapping.getDistrictByPostalCode(homeAddress);
-                if (borough == null) System.out.println("Veuillez respecter le format.");
+                PostalCodeMapping postalCodeMapping = new PostalCodeMapping(
+                    "codesPostaux.csv");
+                String borough =
+                    postalCodeMapping.getDistrictByPostalCode(homeAddress);
+                if (borough == null)
+                    System.out.println("Veuillez respecter le format.");
                 else if (borough.equals("Quartier inconnu")) {
                     System.out.println("Quartier inconnu. Veuillez réessayer.");
-                }
-                else {
+                } else {
                     validAddress = true;
                     boroughId = borough;
                 }
@@ -195,10 +200,12 @@ public class InscriptionPage {
                 // TODO: Store the users info into a Hash table where
                 //  the hash buckets are user classes
                 Resident resident = new Resident(firstName, lastName, email,
-                    phoneNumber, dateOfBirth, homeAddress, encryptedPassword, boroughId);
-                addNewUser(resident.getUserId(), firstName, lastName,
-                    email, phoneNumber, dateOfBirth, homeAddress,
-                    "", "", String.valueOf(encryptedPassword), resident.getUserRole(), boroughId);
+                    phoneNumber, dateOfBirth, homeAddress, encryptedPassword,
+                    boroughId);
+                addNewUser(resident.getUserId(), firstName, lastName, email,
+                    phoneNumber, dateOfBirth, homeAddress, "", "",
+                    String.valueOf(encryptedPassword), resident.getUserRole()
+                    , boroughId);
                 System.out.println("Inscription réussite !");
                 user = resident;
                 return resident;
@@ -210,9 +217,10 @@ public class InscriptionPage {
             //  the hash buckets are user classes
             Intervenant intervenant = new Intervenant(firstName, lastName,
                 email, entityType, cityId, encryptedPassword);
-            addNewUser(intervenant.getUserId(), firstName, lastName, email, phoneNumber,
-                dateOfBirth, homeAddress, entityType, cityId, String.valueOf(encryptedPassword),
-                intervenant.getUserRole(), boroughId);
+            addNewUser(intervenant.getUserId(), firstName, lastName, email,
+                phoneNumber, dateOfBirth, homeAddress, entityType, cityId,
+                String.valueOf(encryptedPassword), intervenant.getUserRole(),
+                boroughId);
             System.out.println("Inscription réussite !");
             user = intervenant;
             return intervenant;

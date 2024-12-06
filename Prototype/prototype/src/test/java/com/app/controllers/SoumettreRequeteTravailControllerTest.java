@@ -27,8 +27,8 @@ public class SoumettreRequeteTravailControllerTest {
     @Test
     public void soumettreRequeteTravailTest() {
         assertEquals("Requête de travail ajoutée avec succès.",
-                soumettreRequeteTravail("Travaux Maison", "Comptoir de la " +
-                        "cuisine" + " " + "à réparer.", "Réparation Mineur",
-                        "2024-12-03", "263edbx2bi67zshn32", true));
+            soumettreRequeteTravail("Travaux Maison", "Comptoir de la " +
+                "cuisine" + " " + "à réparer.", "Réparation Mineur", "2024-12" +
+                "-03", "263edbx2bi67zshn32", true));
     }
 }

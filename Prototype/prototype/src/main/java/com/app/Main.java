@@ -5,10 +5,6 @@ import com.app.controllers.UserController;
 import com.app.pages.PageRedirect;
 import io.javalin.Javalin;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 public class Main {
 
     public static void main(String[] args) {

@@ -11,18 +11,15 @@ public class JsonFormattingTest {
         // JSON d'entrée
         String inputJson =
             "{\n" + "  \"titre\": \"Réparation de route\",\n" + "  " +
-                "\"description\": \"Nid de poule nécessitant une réparation " +
-                "immédiate\",\n" + "  \"typeTravaux\": \"Réparation\",\n" +
-                "  \"dateDebutEspere\": \"2024-12-01\",\n" + "  " +
-                "\"demandeurRequeteId\": \"67890\"\n" + "}";
+                "\"description\": \"Nid de poule nécessitant une réparation " + "immédiate\",\n" + "  \"typeTravaux\": \"Réparation\",\n" + "  \"dateDebutEspere\": \"2024-12-01\",\n" + "  " + "\"demandeurRequeteId\": \"67890\"\n" + "}";
 
         // Texte attendu
-        String expectedOutput = "titre: Réparation de route\n" + "description" +
-            ": Nid de poule nécessitant une réparation immédiate\n" +
+        String expectedOutput = "titre: Réparation de route\n" + "description"
+            + ": Nid de poule nécessitant une réparation immédiate\n" +
             "typeTravaux: Réparation\n" + "dateDebutEspere: 2024-12-01\n" +
             "demandeurRequeteId: 67890\n";
 
-        String actualOutput = JsonFormatting.jsonToText(inputJson);
+        String actualOutput = JsonFormatting.jsonToTextRequeteTravail(inputJson);
 
         assertEquals(expectedOutput, actualOutput);
     }

@@ -13,9 +13,11 @@ public class ConsulterTravauxPage {
         boolean filtrer;
         boolean rechercher;
         while (true) {
+            System.out.println("\n------ Menu Consulter Travaux ------");
             System.out.println("\n[1] Retour au menu principal");
             System.out.println("[2] Rechercher des travaux");
             System.out.println("[3] Filtrer les travaux en cours");
+            System.out.println("------------------------------------");
             String responseMenu = scanner.nextLine();
             switch (responseMenu) {
                 case "1" -> {
@@ -27,11 +29,14 @@ public class ConsulterTravauxPage {
                         boolean validEntry = false;
                         String responseRecherche = null;
                         while (!validEntry) {
+                            System.out.println("\n----- Menu Recherche " +
+                                "Travaux" +
+                                " -----");
                             System.out.println("\n[1] Retour");
-                            System.out.println("[2] Rechercher des travaux " +
-                                "par titre");
+                            System.out.println("[2] Rechercher des travaux " + "par titre");
                             System.out.println("[3] Rechercher des travaux " + "par type de travaux");
                             System.out.println("[4] Rechercher des travaux " + "par quartier");
+                            System.out.println("------------------------------------");
                             responseRecherche = scanner.nextLine();
                             switch (responseRecherche) {
                                 case "1", "2", "3", "4" -> validEntry = true;
@@ -55,8 +60,8 @@ public class ConsulterTravauxPage {
                                 System.out.println("– Travaux routiers");
                                 System.out.println("– Travaux de gaz ou " +
                                     "électricité");
-                                System.out.println("– Construction ou " +
-                                    "rénovation");
+                                System.out.println("– Construction ou " + "r" +
+                                    "énovation");
                                 System.out.println("– Entretien paysager");
                                 System.out.println("– Travaux liés aux " +
                                     "transports en commun");
@@ -65,8 +70,7 @@ public class ConsulterTravauxPage {
                                 System.out.println("– Travaux souterrains");
                                 System.out.println("– Travaux résidentiel");
                                 System.out.println("– Entretien urbain");
-                                System.out.println("– Entretien des réseaux " +
-                                    "de télécommunication");
+                                System.out.println("– Entretien des réseaux " + "de télécommunication");
                                 System.out.println(
                                     "----------------------------");
                                 System.out.println("Entrer un type de " +
@@ -83,8 +87,7 @@ public class ConsulterTravauxPage {
                                     quartierRecherche, true);
                             }
                             default -> {
-                                System.out.println("Voici la liste de tout " +
-                                    "les " + "travaux, sans recherche: ");
+                                System.out.println("Voici la liste de tout " + "les " + "travaux, sans recherche: ");
                                 consulterTravauxEnCours(null, null, true);
                             }
                         }
@@ -113,34 +116,32 @@ public class ConsulterTravauxPage {
                 case "3" -> {
                     filtrer = true;
                     while (filtrer) {
+                        System.out.println("\n------ Menu Filtrer " +
+                            "Travaux" +
+                            "------");
                         System.out.println("\n[1] Retour");
-                        System.out.println("[2] Filter les travaux en cours " +
-                            "par type de travaux");
-                        System.out.println("[3] Filter les travaux en cours " +
-                            "par quartier");
-                        System.out.println("[4] Ne pas filter les travaux en " +
-                            "cours.");
+                        System.out.println("[2] Filter les travaux en cours " + "par type de travaux");
+                        System.out.println("[3] Filter les travaux en cours " + "par quartier");
+                        System.out.println("[4] Ne pas filter les travaux en "
+                            + "cours.");
+                        System.out.println("------------------------------------");
                         String responseFilter = scanner.nextLine();
                         switch (responseFilter) {
                             case "1" -> {
                                 filtrer = false;
                             }
                             case "2" -> {
-                                System.out.println("Voici la liste de tout " +
-                                    "les travaux groupés par type de travaux:" +
-                                    " ");
+                                System.out.println("Voici la liste de tout " + "les travaux groupés par type de travaux:" + " ");
                                 consulterTravauxEnCours("reason_category",
                                     null, false);
                             }
                             case "3" -> {
-                                System.out.println("Voici la liste de tout " +
-                                    "les travaux groupés par quartier: ");
+                                System.out.println("Voici la liste de tout " + "les travaux groupés par quartier: ");
                                 consulterTravauxEnCours("boroughid", null,
                                     false);
                             }
                             default -> {
-                                System.out.println("Voici la liste de tout " +
-                                    "les travaux en cours sans filtre: ");
+                                System.out.println("Voici la liste de tout " + "les travaux en cours sans filtre: ");
                                 consulterTravauxEnCours(null, null, false);
                             }
                         }

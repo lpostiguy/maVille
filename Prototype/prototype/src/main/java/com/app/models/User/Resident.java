@@ -37,7 +37,8 @@ public class Resident extends User {
     // Constructor
     public Resident(String firstName, String lastName, String email,
                     String phoneNumber, String dateOfBirth,
-                    String homeAddress, int password, String userId, String boroughId) {
+                    String homeAddress, int password, String userId,
+                    String boroughId) {
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
@@ -72,7 +73,9 @@ public class Resident extends User {
         return homeAddress;
     }
 
-    public String getBoroughId() { return boroughId; }
+    public String getBoroughId() {
+        return boroughId;
+    }
 
 
     // Setters
@@ -87,6 +90,7 @@ public class Resident extends User {
     public void setHomeAddress(String homeAddress) {
         this.homeAddress = homeAddress;
     }
+
     public void setBoroughId(String boroughId) {
         this.boroughId = boroughId;
     }

@@ -39,8 +39,9 @@ public class MainMenuPage {
     }
 
     public static String mainMenuLoggedResident() {
-        System.out.println("Entrez un numéro pour être redirigé vers ces " +
+        System.out.println("\nEntrez un numéro pour être redirigé vers ces " +
             "pages:");
+        System.out.println("---------- Menu Principal ----------");
         System.out.println("[1] Consulter ou rechercher des travaux");
         System.out.println("[2] Consulter les entraves routières");
         System.out.println("[3] Soumettre une requête de travail");
@@ -48,6 +49,7 @@ public class MainMenuPage {
         System.out.println("[5] Notifications");
         System.out.println("[6] Consulter son profil");
         System.out.println("[7] Se Déconnecter");
+        System.out.println("------------------------------------");
         String response = scanner.nextLine();
         switch (response) {
             case "1" -> {
@@ -78,13 +80,15 @@ public class MainMenuPage {
     }
 
     public static String mainMenuLoggedIntervenant() {
-        System.out.println("Entrez un numéro pour être redirigé vers ces " +
+        System.out.println("\nEntrez un numéro pour être redirigé vers ces " +
             "pages:");
+        System.out.println("---------- Menu Principal ----------");
         System.out.println("[1] Consulter la liste des requêtes de travail");
         System.out.println("[2] Soumettre un nouveau projet de travaux");
         System.out.println("[3] Mettre à jour les informations d'un chantier");
         System.out.println("[4] Consulter son profil");
         System.out.println("[5] Se Déconnecter");
+        System.out.println("------------------------------------");
         String response = scanner.nextLine();
         switch (response) {
             case "1" -> {

@@ -30,7 +30,8 @@ public class LoginPage {
                 if (userInfo != null) {
                     System.out.println("Entrez votre mot de passe:");
                     String password = scanner.nextLine();
-                    int encryptedPassword = passwordEncryption.encrypt(password);
+                    int encryptedPassword =
+                        passwordEncryption.encrypt(password);
 
                     Integer storedPassword = userInfo.getInteger("password");
                     if (Objects.equals(encryptedPassword, storedPassword)) {
@@ -38,31 +39,33 @@ public class LoginPage {
                         System.out.println("Connexion réussie!");
 
                         if (Objects.equals(role, "RESIDENT")) {
-                            return new Resident(userInfo.getString("firstName"),
-                                userInfo.getString("lastName"), userInfo.getString("email"),
-                                userInfo.getString("phoneNumber"), userInfo.getString("dateOfBirth"),
-                                userInfo.getString("homeAddress"), userInfo.getInteger("password"),
-                                userInfo.getString("userId"), userInfo.getString("boroughId"));
-                        }
-                        else {
-                            return new Intervenant(userInfo.getString("firstName"),
-                                userInfo.getString("lastName"), userInfo.getString("email"),
-                                userInfo.getString("entityType"), userInfo.getString("cityId"),
+                            return new Resident(userInfo.getString("firstName"
+                            ), userInfo.getString("lastName"),
+                                userInfo.getString("email"),
+                                userInfo.getString("phoneNumber"),
+                                userInfo.getString("dateOfBirth"),
+                                userInfo.getString("homeAddress"),
+                                userInfo.getInteger("password"),
+                                userInfo.getString("userId"),
+                                userInfo.getString("boroughId"));
+                        } else {
+                            return new Intervenant(userInfo.getString(
+                                "firstName"), userInfo.getString("lastName"),
+                                userInfo.getString("email"),
+                                userInfo.getString("entityType"),
+                                userInfo.getString("cityId"),
                                 userInfo.getInteger("password"),
                                 userInfo.getString("userId"));
                         }
+                    } else {
+                        System.out.println("Mauvais mot de passe ou mauvaise "
+                            + "adresse" + " courriel");
                     }
-                    else {
-                        System.out.println("Mauvais mot de passe ou mauvaise " +
-                            "adresse" + " courriel");
-                    }
-                }
-
-                else {
+                } else {
                     System.out.println("Cette adresse courriel n'est pas " +
                         "associée à un compte.");
-                    }
                 }
+            }
         }
         return null;
     }

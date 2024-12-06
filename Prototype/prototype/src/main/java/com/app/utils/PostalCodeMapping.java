@@ -13,8 +13,10 @@ public class PostalCodeMapping {
     }
 
     private void loadPostalCodeData(String csvFilePath) {
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(csvFilePath)) {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        try (InputStream inputStream =
+                 getClass().getClassLoader().getResourceAsStream(csvFilePath)) {
+            BufferedReader reader =
+                new BufferedReader(new InputStreamReader(inputStream));
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
@@ -35,13 +37,14 @@ public class PostalCodeMapping {
 
         if (parts.length == 3) {
             postalCode = parts[2].trim();
-        }
-        else return null;
+        } else
+            return null;
 
         if (postalCode.length() == 6) {
             String prefix = postalCode.substring(0, 3);
-            return postalCodeToDistrict.getOrDefault(prefix, "Quartier inconnu");
-        }
-        else return "Quartier inconnu";
+            return postalCodeToDistrict.getOrDefault(prefix, "Quartier " +
+                "inconnu");
+        } else
+            return "Quartier inconnu";
     }
 }

@@ -21,7 +21,7 @@ public class LoginPageTest {
         Intervenant result = (Intervenant) LoginPage.loginPage();
 
         assertNotNull(result);
-        assertEquals("INTERVENANT", result.getRole());
+        assertEquals("INTERVENANT", result.getUserRole());
         assertEquals("James", result.getFirstName());
         assertEquals("Williams", result.getLastName());
         assertEquals("273283", result.getCityId());
@@ -49,7 +49,7 @@ public class LoginPageTest {
         Resident result = (Resident) LoginPage.loginPage();
 
         assertNotNull(result);
-        assertEquals("RESIDENT", result.getRole());
+        assertEquals("RESIDENT", result.getUserRole());
         assertEquals("Jacob", result.getFirstName());
         assertEquals("Wayne", result.getLastName());
         assertEquals("jacob.wayne@resident.com", result.getEmail());

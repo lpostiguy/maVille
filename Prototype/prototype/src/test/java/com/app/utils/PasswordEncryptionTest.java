@@ -16,8 +16,8 @@ public class PasswordEncryptionTest {
         int expectedHash = password.hashCode();
 
         // on valide
-        assertEquals(expectedHash, passwordEncryption.encrypt(password), "Le " +
-            "mot de passe chiffré ne correspond pas au résultat attendu.");
+        assertEquals(expectedHash, passwordEncryption.encrypt(password), "Le "
+            + "mot de passe chiffré ne correspond pas au résultat attendu.");
     }
 
     @Test

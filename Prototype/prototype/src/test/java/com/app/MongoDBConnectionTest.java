@@ -18,8 +18,8 @@ public class MongoDBConnectionTest {
     public void connexionDoitPointerVersLaBonneBaseDeDonnees() {
         // Vérifie que la base de données a le bon nom
         MongoDatabase database = MongoDBConnection.getDatabase();
-        assertEquals("MaVilleDataBase", database.getName(), "Le nom de la " +
-            "base de données doit être 'MaVilleDataBase'");
+        assertEquals("MaVilleDataBase", database.getName(),
+            "Le nom de la " + "base de données doit être 'MaVilleDataBase'");
     }
 
     @Test

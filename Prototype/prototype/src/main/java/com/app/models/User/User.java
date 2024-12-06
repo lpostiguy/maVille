@@ -5,15 +5,10 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "userRole"
-)
-@JsonSubTypes({
-    @JsonSubTypes.Type(value = Resident.class, name = "RESIDENT"),
-    @JsonSubTypes.Type(value = Intervenant.class, name = "INTERVENANT")
-})
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY,
+    property = "userRole")
+@JsonSubTypes({@JsonSubTypes.Type(value = Resident.class, name = "RESIDENT"),
+    @JsonSubTypes.Type(value = Intervenant.class, name = "INTERVENANT")})
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 

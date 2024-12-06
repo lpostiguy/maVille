@@ -36,9 +36,9 @@ public class ConsulterTravauxController {
                                                String recherche,
                                                boolean effectuerRecherche) {
         try {
-            URL url = new URL("https://donnees.montreal" +
-                ".ca/api/3/action/datastore_search?resource_id=cc41b532-f12d" +
-                "-40fb-9f55-eb58c9a2b12b");
+            URL url = new URL("https://donnees.montreal" + ".ca/api/3/action" +
+                "/datastore_search?resource_id=cc41b532-f12d" + "-40fb-9f55" +
+                "-eb58c9a2b12b");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
 
@@ -62,8 +62,7 @@ public class ConsulterTravauxController {
                                 System.out.println("Recherche en cours...");
                                 List<String> motsRecherche =
                                     Arrays.stream(recherche.split("\\s+")).toList();
-                                System.out.println("Résultat de " + "votre " +
-                                    "recherche pour " + recherche + ":");
+                                System.out.println("Résultat de " + "votre " + "recherche pour " + recherche + ":");
                                 switch (filterPar.toLowerCase()) {
                                     case "occupancy_name":
                                         travaux =
@@ -81,8 +80,8 @@ public class ConsulterTravauxController {
                                         break;
 
                                     default:
-                                        System.out.println("Type de recherche" +
-                                            " inconnu : " + filterPar);
+                                        System.out.println("Type de " +
+                                            "recherche" + " inconnu : " + filterPar);
                                         return;
                                 }
 
@@ -102,12 +101,11 @@ public class ConsulterTravauxController {
                                 travaux.forEach(travail -> displayTravail(travail, true));
                             }
                         } else {
-                            System.out.println("Aucune donnée trouvée dans la" +
-                                " liste des travaux.");
+                            System.out.println("Aucune donnée trouvée dans " +
+                                "la" + " liste des travaux.");
                         }
                     } else {
-                        System.out.println("Aucune donnée trouvée ou erreur " +
-                            "dans la réponse de l'API.");
+                        System.out.println("Aucune donnée trouvée ou erreur " + "dans la réponse de l'API.");
                     }
                 }
             } else {

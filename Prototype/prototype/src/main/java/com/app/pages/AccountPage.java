@@ -12,11 +12,13 @@ public class AccountPage {
     static Scanner scanner = new Scanner(System.in);
 
     public static boolean accountPageMenu(User user) {
-        System.out.println("Entrez un numéro pour être redirigé vers ces " +
+        System.out.println("\nEntrez un numéro pour être redirigé vers ces " +
             "pages:");
-        System.out.println("\n[1] Retour au menu principal");
+        System.out.println("-------- Menu Info Compte --------");
+        System.out.println("[1] Retour au menu principal");
         System.out.println("[2] Voir toutes mes données");
-        System.out.println("[3] Modifier mes données");
+        System.out.println("[3] Modifier mes préférence d'horaire");
+        System.out.println("-----------------------------------");
         String responseMenu = scanner.nextLine();
         switch (responseMenu) {
             case "1" -> {
@@ -46,7 +48,7 @@ public class AccountPage {
             case "3" -> {
                 // TODO: Ajouter un fonction qui permet de modifier toutes
                 //  les données de l'utilisateur.
-                System.out.println("Il n'est pas encore possible de modifier" + " les informations de l'utilisateur.");
+                System.out.println("Il n'est pas encore possible de modifier ses préférences d'horaire");
                 System.out.println("\n[1] Retour au menu principal");
                 String responseModifyUserInfo = scanner.nextLine();
                 if (Objects.equals(responseModifyUserInfo, "1")) {

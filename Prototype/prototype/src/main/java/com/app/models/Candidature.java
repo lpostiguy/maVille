@@ -12,8 +12,8 @@ public class Candidature {
     private boolean isConfirmed;
     private String userId;
 
-    public Candidature(String dateFin, String dateDebut,
-                       String userId, boolean isAccepted, boolean isConfirmed) {
+    public Candidature(String dateFin, String dateDebut, String userId,
+                       boolean isAccepted, boolean isConfirmed) {
         this.dateFin = dateFin;
         this.dateDebut = dateDebut;
         this.isAccepted = isAccepted;

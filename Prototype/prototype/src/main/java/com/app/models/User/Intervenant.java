@@ -25,7 +25,8 @@ public class Intervenant extends User {
 
     // Constructor
     public Intervenant(String firstName, String lastName, String email,
-                       String entityType, String cityId, int password, String userId) {
+                       String entityType, String cityId, int password,
+                       String userId) {
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);

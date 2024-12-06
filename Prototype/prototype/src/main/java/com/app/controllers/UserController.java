@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserController {
+
     private static final Logger logger =
         LoggerFactory.getLogger(UserController.class);
     private static final MongoCollection<Document> collectionUsers =
@@ -29,34 +30,25 @@ public class UserController {
 
                 Document initialNotifs = new Document();
 
-                Document doc = new Document()
-                    .append("userId", user.getUserId())
-                    .append("firstName", user.getFirstName())
-                    .append("lastName", user.getLastName())
-                    .append("email", user.getEmail())
-                    .append("password", user.getPassword())
-                    .append("connected", user.isConnected())
-                    .append("userRole", user.getUserRole());
+                Document doc = new Document().append("userId",
+                    user.getUserId()).append("firstName",
+                    user.getFirstName()).append("lastName",
+                    user.getLastName()).append("email", user.getEmail()).append("password", user.getPassword()).append("connected", user.isConnected()).append("userRole", user.getUserRole());
 
                 // Ajouter des champs spécifiques aux sous-classes
                 if (user instanceof com.app.models.User.Resident resident) {
-                    doc.append("phoneNumber", resident.getPhoneNumber())
-                        .append("dateOfBirth", resident.getDateOfBirth())
-                        .append("homeAddress", resident.getHomeAddress())
-                        .append("notifications", initialNotifs)
-                        .append("boroughId", resident.getBoroughId());
+                    doc.append("phoneNumber", resident.getPhoneNumber()).append("dateOfBirth", resident.getDateOfBirth()).append("homeAddress", resident.getHomeAddress()).append("notifications", initialNotifs).append("boroughId", resident.getBoroughId());
 
                 } else if (user instanceof com.app.models.User.Intervenant intervenant) {
-                    doc.append("entityType", intervenant.getEntityType())
-                        .append("cityId", intervenant.getCityId());
+                    doc.append("entityType", intervenant.getEntityType()).append("cityId", intervenant.getCityId());
                 }
 
                 collectionUsers.insertOne(doc);
 
-                ctx.status(201).result("Utilisateur ajouté avec " +
-                    "succès.");
+                ctx.status(201).result("Utilisateur ajouté avec " + "succès.");
             } catch (Exception e) {
-                logger.error("Erreur lors de la création de l'utilisateur: ", e);
+                logger.error("Erreur lors de la création de l'utilisateur: ",
+                    e);
                 ctx.status(500).result("Erreur Serveur");
             }
         });
@@ -67,7 +59,8 @@ public class UserController {
                     collectionUsers.find().into(new ArrayList<>());
                 ctx.json(requetes);
             } catch (Exception e) {
-                logger.error("Erreur lors de la récupération des utilisateurs: ", e);
+                logger.error("Erreur lors de la récupération des " +
+                    "utilisateurs: ", e);
                 ctx.status(500).result("Erreur Serveur");
             }
         });
@@ -77,16 +70,11 @@ public class UserController {
         return collectionUsers.find(new Document("email", email)).first();
     }
 
-    public static String addNewUser(String userId,
-                                    String firstName,
-                                    String lastName,
-                                    String email,
-                                    String phoneNumber,
-                                    String dateOfBirth,
-                                    String homeAddress,
-                                    String entityType,
-                                    String cityId,
-                                    String password,
+    public static String addNewUser(String userId, String firstName,
+                                    String lastName, String email,
+                                    String phoneNumber, String dateOfBirth,
+                                    String homeAddress, String entityType,
+                                    String cityId, String password,
                                     String userRole, String boroughId) {
         try {
             URL url = new URL("http://localhost:8000/users");
@@ -96,14 +84,16 @@ public class UserController {
             conn.setDoOutput(true);
 
             // Construire les données JSON en fonction des entrées utilisateur
-            String jsonInputString = String.format("{ \"userId\": \"%s\", " +
-                    "\"firstName\": \"%s\", \"lastName\": \"%s\", " +
-                    "\"email\": \"%s\", \"phoneNumber\": \"%s\", " +
-                    "\"dateOfBirth\": \"%s\", \"homeAddress\": \"%s\", " +
-                    "\"entityType\": \"%s\", \"cityId\": \"%s\", " +
-                    "\"password\": \"%s\", \"userRole\": \"%s\", \"boroughId\": \"%s\""
-                    + "}", userId, firstName, lastName, email, phoneNumber,
-                dateOfBirth, homeAddress, entityType, cityId, password, userRole, boroughId);
+            String jsonInputString =
+                String.format("{ \"userId\": \"%s\", " + "\"firstName\": " +
+                    "\"%s\", \"lastName\": \"%s\", " + "\"email\": \"%s\", " +
+                    "\"phoneNumber\": \"%s\", " + "\"dateOfBirth\": \"%s\", " +
+                    "\"homeAddress\": \"%s\", " + "\"entityType\": \"%s\", " +
+                    "\"cityId\": \"%s\", " + "\"password\": \"%s\", " +
+                    "\"userRole\": \"%s\", \"boroughId\": \"%s\"" + "}",
+                    userId, firstName, lastName, email, phoneNumber,
+                    dateOfBirth, homeAddress, entityType, cityId, password,
+                    userRole, boroughId);
 
             try (OutputStream os = conn.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);

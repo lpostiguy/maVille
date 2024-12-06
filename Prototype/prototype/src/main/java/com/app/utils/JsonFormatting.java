@@ -9,8 +9,7 @@ import java.util.Map;
 
 public class JsonFormatting {
 
-    // Methode qui enlève "_id" et converti le JSON à du texte normal
-    public static String jsonToText(String jsonString) {
+    public static String jsonToTextRequeteTravail(String jsonString) {
         Gson gson = new GsonBuilder().create();
         JsonElement jsonElement = gson.fromJson(jsonString, JsonElement.class);
 
@@ -28,7 +27,7 @@ public class JsonFormatting {
     private static String parseJsonObject(JsonObject jsonObject) {
         StringBuilder plainText = new StringBuilder();
         for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
-            if (entry.getKey().equals("_id")) {
+            if (entry.getKey().equals("_id") || entry.getKey().equals("id") || entry.getKey().equals("demandeurRequete") || entry.getKey().equals("actif")) {
                 continue;
             }
             plainText.append(entry.getKey()).append(": ");

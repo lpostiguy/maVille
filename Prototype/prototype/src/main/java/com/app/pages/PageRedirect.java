@@ -45,7 +45,7 @@ public class PageRedirect {
                                 SoumettreRequeteTravailPage.soumettreRequeteTravailMenu(user);
                             }
                             case "Faire le suivi d'une requête de travail" -> {
-                                SoumettreRequeteTravailPage.consulterRequeteTravailMenu(user);
+                                ConsulterRequetesTravailPage.suiviRequeteTravailMenu(user);
                             }
                             case "Signaler un problème à la ville" -> {
                                 System.out.println("Vous êtes maintenant " +
@@ -82,8 +82,7 @@ public class PageRedirect {
                             }
                         }
                     }
-                } else if (Objects.equals(user.getUserRole(),
-                    "INTERVENANT")) {
+                } else if (Objects.equals(user.getUserRole(), "INTERVENANT")) {
                     while (!quitLoggedMenu) {
                         redirect = mainMenuLoggedIntervenant();
                         switch (redirect) {

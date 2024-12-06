@@ -4,22 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] Delete GlobalUserInfo (obsolete)">
-      <change afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Candidature.java" afterDir="false" />
+    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] Algo de recherche et de filtrage ajoutés.">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/ConsulterRequetesTravailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/ConsulterRequetesTravailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/InscriptionController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/dependency-reduced-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/dependency-reduced-pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/ConsulterRequetesTravailController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/ConsulterTravauxController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/ConsulterTravauxController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/RequeteTravailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/RequeteTravailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/SoumettreRequeteTravailController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Candidature.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Candidature.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/RequeteTravail.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/RequeteTravail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Travail.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Travail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/Intervenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/Intervenant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/Resident.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/AccountPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/AccountPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterRequetesTravailPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterRequetesTravailPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterTravauxPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterTravauxPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/InscriptionPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/InscriptionPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/LoginPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/MainMenuPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/MainMenuPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/PageRedirect.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/PageRedirect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/SoumettreRequeteTravailPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/SoumettreRequeteTravailPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/JsonFormatting.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/JsonFormatting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/PostalCodeMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/PostalCodeMapping.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/MongoDBConnectionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/MongoDBConnectionTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/controllers/SoumettreRequeteTravailControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/controllers/SoumettreRequeteTravailControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/pages/LoginPageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/pages/LoginPageTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/utils/InscriptionUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/utils/InscriptionUtilsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/utils/JsonFormattingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/utils/JsonFormattingTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/utils/PasswordEncryptionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/utils/PasswordEncryptionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/utils/RegexCheckerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/utils/RegexCheckerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +45,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="Class" />
       </list>
     </option>
@@ -100,8 +115,6 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\antho\Documents\IFT2255-A24-SessionProject-equipe-11-final\Prototype\prototype\src\main\resources" />
-      <recent name="C:\Users\antho\Documents\IFT2255-A24-SessionProject-equipe-11-final\Prototype\prototype\src\main\java\com\app\data" />
       <recent name="C:\Users\antho\Documents\IFT2255-A24-SessionProject-equipe" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -111,11 +124,17 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.Run Main">
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.app.Main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Run Main" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="21" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.app.Main" />
-      <module name="prototype" />
+      <module name="prototype (1)" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -201,6 +220,7 @@
     </configuration>
     <list>
       <item itemvalue="Application.Run Main" />
+      <item itemvalue="Application.Main" />
       <item itemvalue="JUnit.AppTest" />
       <item itemvalue="JUnit.AppTest.runAllTests" />
       <item itemvalue="JUnit.LoginPageTest.loginIntervenantTest" />
@@ -258,31 +278,7 @@
       <option name="project" value="LOCAL" />
       <updated>1732043617485</updated>
     </task>
-    <task id="LOCAL-00005" summary="[PROTOTYPE] Inscription et log-in ajouté.">
-      <option name="closed" value="true" />
-      <created>1733009988940</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1733009988940</updated>
-    </task>
-    <task id="LOCAL-00006" summary="[PROTOTYPE] Association de l'adresse résidentielle à un quartier.">
-      <option name="closed" value="true" />
-      <created>1733182117961</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1733182117961</updated>
-    </task>
-    <task id="LOCAL-00007" summary="[PROTOTYPE] Delete GlobalUserInfo (obsolete)">
-      <option name="closed" value="true" />
-      <created>1733247775420</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1733247775420</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -302,9 +298,6 @@
     <MESSAGE value="[PROTOTYPE] Ajout de 3 comptes résidents et 3 comptes intervenants hardcoded." />
     <MESSAGE value="[PROTOTYPE] Séparation MVC des controllers et des pages." />
     <MESSAGE value="[PROTOTYPE] Algo de recherche et de filtrage ajoutés." />
-    <MESSAGE value="[PROTOTYPE] Inscription et log-in ajouté." />
-    <MESSAGE value="[PROTOTYPE] Association de l'adresse résidentielle à un quartier." />
-    <MESSAGE value="[PROTOTYPE] Delete GlobalUserInfo (obsolete)" />
-    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] Delete GlobalUserInfo (obsolete)" />
+    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] Algo de recherche et de filtrage ajoutés." />
   </component>
 </project>
