@@ -1,20 +1,19 @@
 package com.app.models.User;
 
+import com.app.models.Notification;
 import com.app.utils.InscriptionUtils;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 public class Resident extends User {
 
-
-    public Resident() {
-        setUserRole("RESIDENT");
-    }
-
-    // Constructor
+    // Constructor pour création de compte
     public Resident(String firstName, String lastName, String email,
                     String phoneNumber, String dateOfBirth,
                     String homeAddress, int password, String boroughId) {
@@ -34,11 +33,12 @@ public class Resident extends User {
         }
     }
 
-    // Constructor
+    // Constructor pour se connecter
     public Resident(String firstName, String lastName, String email,
                     String phoneNumber, String dateOfBirth,
                     String homeAddress, int password, String userId,
-                    String boroughId) {
+                    String boroughId, List<Notification> notifications,
+                    List<String> preferencesHoraires) {
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
@@ -47,6 +47,9 @@ public class Resident extends User {
         setPassword(password);
         setUserRole("RESIDENT");
         setUserId(userId);
+        setBoroughId(boroughId);
+        setNotifications(notifications);
+        setPreferencesHoraires(preferencesHoraires);
 
         // Phone number is optional
         if (!Objects.equals(phoneNumber, "")) {
@@ -59,6 +62,8 @@ public class Resident extends User {
     private String dateOfBirth;
     private String homeAddress;
     private String boroughId;
+    @JsonProperty("preferencesHoraires")
+    private List<String> preferencesHoraires;
 
     // Getters
     public String getPhoneNumber() {
@@ -75,6 +80,9 @@ public class Resident extends User {
 
     public String getBoroughId() {
         return boroughId;
+    }
+    public List<String> getPreferencesHoraires() {
+        return preferencesHoraires;
     }
 
 
@@ -93,5 +101,8 @@ public class Resident extends User {
 
     public void setBoroughId(String boroughId) {
         this.boroughId = boroughId;
+    }
+    public void setPreferencesHoraires(List<String> preferencesHoraires) {
+        this.preferencesHoraires = preferencesHoraires;
     }
 }

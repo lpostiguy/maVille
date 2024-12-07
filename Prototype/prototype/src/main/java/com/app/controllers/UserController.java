@@ -55,9 +55,9 @@ public class UserController {
 
         app.get("/users", ctx -> {
             try {
-                List<Document> requetes =
+                List<Document> users =
                     collectionUsers.find().into(new ArrayList<>());
-                ctx.json(requetes);
+                ctx.json(users);
             } catch (Exception e) {
                 logger.error("Erreur lors de la récupération des " +
                     "utilisateurs: ", e);

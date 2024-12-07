@@ -1,5 +1,6 @@
 package com.app.pages;
 
+import com.app.models.Notification;
 import com.app.models.User.Resident;
 import com.app.models.User.Intervenant;
 import com.app.models.User.User;
@@ -7,8 +8,7 @@ import org.bson.Document;
 
 import static com.app.controllers.UserController.findUserByEmail;
 
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 import static com.app.pages.InscriptionPage.passwordEncryption;
 
@@ -37,6 +37,20 @@ public class LoginPage {
                     if (Objects.equals(encryptedPassword, storedPassword)) {
                         String role = userInfo.getString("userRole");
                         System.out.println("Connexion réussie!");
+                        List<Document> notificationsBrute = userInfo.getList("notifications", Document.class);
+                        List<Notification> notifications = new ArrayList<>();
+
+                        if (notificationsBrute != null) {
+                            for (Document rawNotification : notificationsBrute) {
+                                notifications.add(new Notification(
+                                    rawNotification.getString("msg"),
+                                    rawNotification.getString("id"),
+                                    rawNotification.getBoolean("vu")
+                                ));
+                            }
+                        }
+
+                        List<String> preferencesHoraires = userInfo.getList("preferencesHoraires", String.class);
 
                         if (Objects.equals(role, "RESIDENT")) {
                             return new Resident(userInfo.getString("firstName"
@@ -47,7 +61,9 @@ public class LoginPage {
                                 userInfo.getString("homeAddress"),
                                 userInfo.getInteger("password"),
                                 userInfo.getString("userId"),
-                                userInfo.getString("boroughId"));
+                                userInfo.getString("boroughId"),
+                                notifications,
+                                preferencesHoraires);
                         } else {
                             return new Intervenant(userInfo.getString(
                                 "firstName"), userInfo.getString("lastName"),
@@ -55,7 +71,8 @@ public class LoginPage {
                                 userInfo.getString("entityType"),
                                 userInfo.getString("cityId"),
                                 userInfo.getInteger("password"),
-                                userInfo.getString("userId"));
+                                userInfo.getString("userId"),
+                                notifications);
                         }
                     } else {
                         System.out.println("Mauvais mot de passe ou mauvaise "

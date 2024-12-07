@@ -1,12 +1,15 @@
 package com.app.models.User;
 
+import com.app.models.Notification;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.util.List;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY,
-    property = "userRole")
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "userRole")
 @JsonSubTypes({@JsonSubTypes.Type(value = Resident.class, name = "RESIDENT"),
     @JsonSubTypes.Type(value = Intervenant.class, name = "INTERVENANT")})
 
@@ -23,8 +26,10 @@ public class User {
     private int password;
     private boolean connected;
 
-    // Getters
+    @JsonProperty("notifications")
+    private List<Notification> notifications;
 
+    // Getters
     public String getUserId() {
         return userId;
     }
@@ -48,13 +53,15 @@ public class User {
     public int getPassword() {
         return password;
     }
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
 
     public boolean isConnected() {
         return connected;
     }
 
     // Setters
-
     public void setUserId(String id) {
         this.userId = id;
     }
@@ -81,6 +88,9 @@ public class User {
 
     public void setConnected(boolean connected) {
         this.connected = connected;
+    }
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
     }
 }
 

@@ -1,16 +1,15 @@
 package com.app.models.User;
 
+import com.app.models.Notification;
 import com.app.utils.InscriptionUtils;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Intervenant extends User {
 
-    public Intervenant() {
-        setUserRole("INTERVENANT");
-    }
-
-    // Constructor
+    // Constructor pour création de compte
     public Intervenant(String firstName, String lastName, String email,
                        String entityType, String cityId, int password) {
         setFirstName(firstName);
@@ -23,10 +22,10 @@ public class Intervenant extends User {
         setUserId(InscriptionUtils.RandomIDGenerator());
     }
 
-    // Constructor
+    // Constructor pour se connecter
     public Intervenant(String firstName, String lastName, String email,
                        String entityType, String cityId, int password,
-                       String userId) {
+                       String userId, List<Notification> notifications) {
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
@@ -34,6 +33,7 @@ public class Intervenant extends User {
         setCityId(cityId);
         setPassword(password);
         setUserRole("INTERVENANT");
+        setNotifications(notifications);
         setUserId(userId);
     }
 

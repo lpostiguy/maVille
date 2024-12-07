@@ -4,6 +4,7 @@ import com.app.models.User.User;
 import com.app.models.User.Resident;
 import com.app.models.User.Intervenant;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -17,7 +18,9 @@ public class AccountPage {
         System.out.println("-------- Menu Info Compte --------");
         System.out.println("[1] Retour au menu principal");
         System.out.println("[2] Voir toutes mes données");
-        System.out.println("[3] Modifier mes préférence d'horaire");
+        if (Objects.equals(user.getUserRole(), "RESIDENT")) {
+            System.out.println("[3] Voir mes préférence d'horaire");
+        }
         System.out.println("-----------------------------------");
         String responseMenu = scanner.nextLine();
         switch (responseMenu) {
@@ -45,15 +48,43 @@ public class AccountPage {
                 }
 
             }
-            case "3" -> {
-                // TODO: Ajouter un fonction qui permet de modifier toutes
-                //  les données de l'utilisateur.
-                System.out.println("Il n'est pas encore possible de modifier ses préférences d'horaire");
-                System.out.println("\n[1] Retour au menu principal");
-                String responseModifyUserInfo = scanner.nextLine();
-                if (Objects.equals(responseModifyUserInfo, "1")) {
-                    return false;
+                case "3" -> {
+                    if (user instanceof Resident resident) {
+                    System.out.println("Voici vos préférence horaire:");
+                        System.out.println("-----------------------------------");
+                        List<String> preferencesHoraires = resident.getPreferencesHoraires();
+                    if (preferencesHoraires != null && !preferencesHoraires.isEmpty()) {
+                        for (String préférence : preferencesHoraires) {
+                            System.out.println(préférence);
+                        }
+                        System.out.println("-----------------------------------");
+                        System.out.println("\n[1] Retour");
+                        System.out.println("[2] Modifier mes préférence d'horaire");
+                        String responseModifyUserInfo = scanner.nextLine();
+                        if (Objects.equals(responseModifyUserInfo, "1")) {
+                            return false;
+                        }
+                        else if(Objects.equals(responseModifyUserInfo, "2")) {
+                            // TODO: Ajouter un fonction qui permet de modifier ses préférences d'horaires
+                        }
+                    }
+                    else {
+                        System.out.println("Aucune préférence horaire.");
+                        System.out.println("-----------------------------------");
+                        System.out.println("\n[1] Retour");
+                        System.out.println("[2] Ajouter des préférences d'horaires");
+                        String responseModifyUserInfo = scanner.nextLine();
+                        if (Objects.equals(responseModifyUserInfo, "1")) {
+                            return false;
+                        }
+                        else if(Objects.equals(responseModifyUserInfo, "2")) {
+                            // TODO: Ajouter un fonction qui permet d'ajouter des préférences d'horaires
+                        }
+                    }
                 }
+                    else {
+                        return accountPageMenu(user);
+                    }
             }
             default -> {
                 return accountPageMenu(user);

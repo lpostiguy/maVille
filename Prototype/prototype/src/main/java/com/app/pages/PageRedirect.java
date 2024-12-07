@@ -3,6 +3,7 @@ package com.app.pages;
 
 import java.util.Objects;
 
+import com.app.models.User.Resident;
 import com.app.models.User.User;
 
 import static com.app.pages.ConsulterRequetesTravailPage.consulterRequeteTravailMenu;
@@ -36,7 +37,7 @@ public class PageRedirect {
                 // Access the loggedIn menu
                 if (Objects.equals(user.getUserRole(), "RESIDENT")) {
                     while (!quitLoggedMenu) {
-                        redirect = mainMenuLoggedResident();
+                        redirect = mainMenuLoggedResident((Resident) user);
                         switch (redirect) {
                             case "Consulter ou rechercher des travaux" -> {
                                 ConsulterTravauxPage.consulterTravauxMenu();
