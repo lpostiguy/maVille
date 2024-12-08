@@ -1,17 +1,23 @@
 package com.app.controllers;
 
 import com.app.MongoDBConnection;
+import com.app.models.Notification;
 import com.app.models.User.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.UpdateOptions;
 import io.javalin.Javalin;
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,7 +25,7 @@ import java.util.Scanner;
 public class NotificationsController {
 
     private static final Logger logger =
-        LoggerFactory.getLogger(RequeteTravailController.class);
+        LoggerFactory.getLogger(NotificationsController.class);
     private static final MongoCollection<Document> collectionUsers =
         MongoDBConnection.getDatabase().getCollection("users");
 
@@ -59,9 +65,7 @@ public class NotificationsController {
                 if (userDoc != null) {
                     List<Document> notifications = userDoc.getList("notifications", Document.class);
                     // Filtrer uniquement les notifications non lues
-                    List<Document> unreadNotifications = notifications.stream()
-                        .filter(notification -> !notification.getBoolean("vu"))
-                        .toList();
+                    List<Document> unreadNotifications = notifications.stream().filter(notification -> !notification.getBoolean("vu")).toList();
 
                     ctx.json(unreadNotifications);
                 } else {
@@ -72,6 +76,89 @@ public class NotificationsController {
                 ctx.status(500).result("Erreur Serveur");
             }
         });
+
+        app.patch("/users/{userId}/notifications/update/{id}", ctx -> {
+            try {
+                String id = ctx.pathParam("id");
+                String userId = ctx.pathParam("userId");
+                Document updates = Document.parse(ctx.body());
+
+                // Filtre : chercher l'utilisateur et la notification spécifique
+                Document filter = new Document("userId", userId).append("notifications.id", id);
+
+                // Mise à jour : cibler uniquement la notification spécifique
+                Document update = new Document("$set", new Document("notifications.$[elem].vu", updates.getBoolean("vu")));
+
+                // Utiliser un tableau de filtres pour identifier l'élément spécifique
+                var result = collectionUsers.updateOne(filter, update, new UpdateOptions().arrayFilters(List.of(new Document("elem.id", id))));
+
+                if (result.getModifiedCount() > 0) {
+                    ctx.status(200).result("Notification mise à jour avec succès.");
+                } else {
+                    ctx.status(404).result("Aucune notification trouvée pour l'ID spécifié.");
+                }
+            } catch (Exception e) {
+                logger.error("Erreur lors de la mise à jour de la notification : ", e);
+                ctx.status(500).result("Erreur serveur : " + e.getMessage());
+            }
+        });
+    }
+
+
+        public static boolean mettreAJourStatutNotification(Boolean vu,
+                                                            User user,
+                                                        List<Notification> notifications) {
+
+            String userId = user.getUserId();
+
+        boolean allUpdatesSuccessful = false;
+
+        for (Notification notification : notifications) {
+            try {
+                // Vérification de l'identifiant de la requête
+                String idNotification = notification.getId();
+                if (idNotification == null || idNotification.isEmpty()) {
+                    System.err.println("L'identifiant 'id' est manquant ou invalide.");
+                    allUpdatesSuccessful = false;
+                    continue;
+                }
+
+                // Construire l'URL de la requête
+                String url = "http://localhost:8000/users/" + userId +
+                    "/notifications/update/" + idNotification;
+
+                // Construire le corps de la requête JSON
+                String chargeJson = String.format("{\"vu\": %b}", vu);
+
+                // Créer un client HTTP
+                HttpClient client = HttpClient.newHttpClient();
+
+                // Construire la requête PATCH
+                HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .method("PATCH", HttpRequest.BodyPublishers.ofString(chargeJson))
+                    .header("Content-Type", "application/json; utf-8")
+                    .build();
+
+                // Envoyer la requête
+                HttpResponse<String> response = client.send(request,
+                    HttpResponse.BodyHandlers.ofString());
+
+                // Vérifier la réponse
+                if (response.statusCode() != 200) {
+                    System.err.println("Erreur lors de la mise à jour : HTTP " + response.statusCode());
+                    System.err.println("Message d'erreur : " + response.body());
+                    allUpdatesSuccessful = false;
+                }
+
+            } catch (Exception e) {
+                System.err.println("Une exception s'est produite : " + e.getMessage());
+                e.printStackTrace();
+                allUpdatesSuccessful = false;
+            }
+        }
+
+        return allUpdatesSuccessful;
     }
 
     public static List<Document> consulterNotificationsNonLues(User user) {

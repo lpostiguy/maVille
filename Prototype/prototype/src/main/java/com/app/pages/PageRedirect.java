@@ -48,34 +48,14 @@ public class PageRedirect {
                             case "Faire le suivi d'une requête de travail" -> {
                                 ConsulterRequetesTravailPage.suiviRequeteTravailMenu(user);
                             }
-                            case "Signaler un problème à la ville" -> {
-                                System.out.println("Vous êtes maintenant " +
-                                    "sur" + " la" + " page : Signaler un" +
-                                    " problème à " + "la ville");
-                                System.out.println("Pour l'instant, " +
-                                    "cette " + "page " + "est statique " +
-                                    "et il n'y a" + " pas encore de" + " " +
-                                    "logique.");
-                                // TODO: Send user to Signaler un problème à la
-                                //  ville
-                            }
                             case "Consulter les entraves routières" -> {
                                 ConsulterEntravesPage.consulterEntraveMenu();
                             }
                             case "Notifications" -> {
-                                System.out.println("Vous êtes maintenant " +
-                                    "sur" + " la" + " page : Notifications");
-                                System.out.println("Pour l'instant, " +
-                                    "cette " + "page " + "est statique " +
-                                    "et il n'y a" + " pas encore de" + " " +
-                                    "logique.");
-                                // TODO: Send user to Signaler un problème à la
-                                //  ville
+                                NotificationPage.consulterNotifications(user);
                             }
                             case "Consulter son profil" -> {
                                 AccountPage.accountPageMenu(user);
-                                // TODO: Access the user info from the data
-                                //  base
                             }
                             case "Se Déconnecter" -> {
                                 quitLoggedMenu = true;

@@ -1,5 +1,7 @@
 package com.app.models;
 
+import org.bson.Document;
+
 public class Notification {
     private String msg;
     private String id;
@@ -10,6 +12,16 @@ public class Notification {
         this.msg = msg;
         this.id = id;
         this.vu = vu;
+    }
+
+    // Méthode de conversion à partir d'un Document
+    public static Notification fromDocument(Document document) {
+        String msg = document.getString("msg");
+        String id = document.getString("id");
+        boolean vu = document.getBoolean("vu");
+
+        // Créer une instance de Notification
+        return new Notification(msg, id, vu);
     }
 
     // Getters
