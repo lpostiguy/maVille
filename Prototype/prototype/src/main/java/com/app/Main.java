@@ -1,6 +1,7 @@
 package com.app;
 
 import com.app.controllers.NotificationsController;
+import com.app.controllers.PreferenceHoraireController;
 import com.app.controllers.RequeteTravailController;
 import com.app.controllers.UserController;
 import com.app.pages.PageRedirect;
@@ -14,6 +15,7 @@ public class Main {
         RequeteTravailController.registerRoutes(app);
         UserController.registerRoutes(app);
         NotificationsController.registerRoutes(app);
+        PreferenceHoraireController.registerRoutes(app);
 
         System.out.println("""
              __       __  ______       __     __ ______ __       __       ________\s

@@ -44,7 +44,7 @@ public class InscriptionPage {
         System.out.println("[1] Retour");
         System.out.println("[2] S'inscrire comme résident");
         System.out.println("[3] S'inscrire comme intervenant");
-        System.out.println("\n-----------------------------------");
+        System.out.println("-----------------------------------");
         String choice = scanner.nextLine();
         switch (choice) {
             case "1" -> {
@@ -87,10 +87,6 @@ public class InscriptionPage {
             email = scanner.nextLine();
             // Verify that the email is valid
             if (email.contains("@")) {
-                // TODO: Ajouter la logique qui compare l'adresse courriel
-                //  rentrées par
-                //  le user et les données présentes dans une base de
-                //  donnée.
                 validEmail = true;
             }
         }
@@ -103,7 +99,7 @@ public class InscriptionPage {
                 System.out.println("Entrez votre date de naissance afin de " + "valider votre age. (format YYYY-MM-DD):");
                 dateOfBirth = scanner.nextLine();
                 // Verify that the dateOfBirth is valid format
-                if (isValidDateFormat(dateOfBirth)) {
+                if (estFormatDateValide(dateOfBirth)) {
                     validDateOfBirth = true;
                 } else {
                     System.out.println("La date de naissance entrée n'est " + "pas du format YYYY-MM-DD");
@@ -115,7 +111,7 @@ public class InscriptionPage {
                 System.out.println("Entrez votre numéro de téléphone:");
                 phoneNumber = scanner.nextLine();
                 // Verify that the phoneNumber is valid format
-                if (isValidPhoneNumberFormat(phoneNumber)) {
+                if (estFormatNumeroTelephoneValide(phoneNumber)) {
                     validPhoneNumber = true;
                 } else {
                     System.out.println("Le numéro de téléphone entrée n'est " + "pas du format " + "0000-000-000");

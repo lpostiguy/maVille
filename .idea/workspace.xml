@@ -4,12 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] Notifications &amp; Préférences d'horaire ajoutés.">
-      <change afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/NotificationPage.java" afterDir="false" />
+    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] Page Notifications ajoutée">
+      <change afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/PreferenceHoraireController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/PreferenceHoraire.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterNotificationPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/NotificationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/NotificationsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Notification.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Notification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/Intervenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/Intervenant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/Resident.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/AccountPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/AccountPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/InscriptionPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/InscriptionPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/LoginPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/NotificationPage.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/PageRedirect.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/PageRedirect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/SoumettreRequeteTravailPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/SoumettreRequeteTravailPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/RegexChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/RegexChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/utils/RegexCheckerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/utils/RegexCheckerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -268,7 +282,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733536642689</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="[PROTOTYPE] Page Notifications ajoutée">
+      <option name="closed" value="true" />
+      <created>1733633346236</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1733633346236</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -290,6 +312,7 @@
     <MESSAGE value="[PROTOTYPE] Algo de recherche et de filtrage ajoutés." />
     <MESSAGE value="[PROTOTYPE] Archiver &amp; Effacer RequeteTravail ajouté" />
     <MESSAGE value="[PROTOTYPE] Notifications &amp; Préférences d'horaire ajoutés." />
-    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] Notifications &amp; Préférences d'horaire ajoutés." />
+    <MESSAGE value="[PROTOTYPE] Page Notifications ajoutée" />
+    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] Page Notifications ajoutée" />
   </component>
 </project>

@@ -52,7 +52,7 @@ public class PageRedirect {
                                 ConsulterEntravesPage.consulterEntraveMenu();
                             }
                             case "Notifications" -> {
-                                NotificationPage.consulterNotifications(user);
+                                ConsulterNotificationPage.consulterNotifications((Resident) user);
                             }
                             case "Consulter son profil" -> {
                                 AccountPage.accountPageMenu(user);

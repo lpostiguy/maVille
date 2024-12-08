@@ -5,7 +5,7 @@ import com.app.models.User.User;
 import java.util.Scanner;
 
 import static com.app.controllers.RequeteTravailController.soumettreRequeteTravail;
-import static com.app.utils.RegexChecker.isValidDateFormat;
+import static com.app.utils.RegexChecker.estFormatDateValide;
 
 public class SoumettreRequeteTravailPage {
 
@@ -30,7 +30,7 @@ public class SoumettreRequeteTravailPage {
         while (!dateDebutEspereValide) {
             System.out.println("Date de début espérée (format YYYY-MM-DD):");
             dateDebutEspere = scanner.nextLine();
-            if (isValidDateFormat(dateDebutEspere)) {
+            if (estFormatDateValide(dateDebutEspere)) {
                 dateDebutEspereValide = true;
             } else {
                 System.out.println("La date de début espérée entrée n'est " + "pas du format YYYY-MM-DD");

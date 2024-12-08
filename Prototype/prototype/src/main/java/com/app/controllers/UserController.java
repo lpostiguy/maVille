@@ -28,7 +28,8 @@ public class UserController {
             try {
                 User user = ctx.bodyAsClass(User.class);
 
-                Document initialNotifs = new Document();
+                List<Document> notificationsInitiales = new ArrayList<>();
+                List<String> preferencesHorairesInitiales = new ArrayList<>();
 
                 Document doc = new Document().append("userId",
                     user.getUserId()).append("firstName",
@@ -37,7 +38,7 @@ public class UserController {
 
                 // Ajouter des champs spécifiques aux sous-classes
                 if (user instanceof com.app.models.User.Resident resident) {
-                    doc.append("phoneNumber", resident.getPhoneNumber()).append("dateOfBirth", resident.getDateOfBirth()).append("homeAddress", resident.getHomeAddress()).append("notifications", initialNotifs).append("boroughId", resident.getBoroughId());
+                    doc.append("phoneNumber", resident.getPhoneNumber()).append("dateOfBirth", resident.getDateOfBirth()).append("homeAddress", resident.getHomeAddress()).append("notifications", notificationsInitiales).append("preferencesHoraires", preferencesHorairesInitiales).append("boroughId", resident.getBoroughId());
 
                 } else if (user instanceof com.app.models.User.Intervenant intervenant) {
                     doc.append("entityType", intervenant.getEntityType()).append("cityId", intervenant.getCityId());

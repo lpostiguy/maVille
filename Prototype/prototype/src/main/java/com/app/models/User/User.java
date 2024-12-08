@@ -26,8 +26,6 @@ public class User {
     private int password;
     private boolean connected;
 
-    @JsonProperty("notifications")
-    private List<Notification> notifications;
 
     // Getters
     public String getUserId() {
@@ -52,9 +50,6 @@ public class User {
 
     public int getPassword() {
         return password;
-    }
-    public List<Notification> getNotifications() {
-        return notifications;
     }
 
     public boolean isConnected() {
@@ -88,9 +83,6 @@ public class User {
 
     public void setConnected(boolean connected) {
         this.connected = connected;
-    }
-    public void setNotifications(List<Notification> notifications) {
-        this.notifications = notifications;
     }
 }
 

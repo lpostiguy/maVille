@@ -7,21 +7,25 @@ public class Notification {
     private String id;
     private boolean vu;
 
+    // Constructeur par défaut
+    public Notification() {
+    }
+
     // Constructeur
-    public Notification(String msg, String id, boolean vu) {
-        this.msg = msg;
+    public Notification(String id, String msg, boolean vu) {
         this.id = id;
+        this.msg = msg;
         this.vu = vu;
     }
 
     // Méthode de conversion à partir d'un Document
     public static Notification fromDocument(Document document) {
-        String msg = document.getString("msg");
         String id = document.getString("id");
+        String msg = document.getString("msg");
         boolean vu = document.getBoolean("vu");
 
         // Créer une instance de Notification
-        return new Notification(msg, id, vu);
+        return new Notification(id, msg, vu);
     }
 
     // Getters

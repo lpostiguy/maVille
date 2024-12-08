@@ -9,6 +9,11 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Intervenant extends User {
 
+    // Constructeur par défaut
+    public Intervenant() {
+        setUserRole("INTERVENANT");
+    }
+
     // Constructor pour création de compte
     public Intervenant(String firstName, String lastName, String email,
                        String entityType, String cityId, int password) {
@@ -33,7 +38,6 @@ public class Intervenant extends User {
         setCityId(cityId);
         setPassword(password);
         setUserRole("INTERVENANT");
-        setNotifications(notifications);
         setUserId(userId);
     }
 

@@ -1,6 +1,7 @@
 package com.app.pages;
 
 import com.app.models.Notification;
+import com.app.models.PreferenceHoraire;
 import com.app.models.User.Resident;
 import com.app.models.User.Intervenant;
 import com.app.models.User.User;
@@ -37,20 +38,34 @@ public class LoginPage {
                     if (Objects.equals(encryptedPassword, storedPassword)) {
                         String role = userInfo.getString("userRole");
                         System.out.println("Connexion réussie!");
-                        List<Document> notificationsBrute = userInfo.getList("notifications", Document.class);
+                        List<Document> notificationsDoc = userInfo.getList("notifications", Document.class);
                         List<Notification> notifications = new ArrayList<>();
 
-                        if (notificationsBrute != null) {
-                            for (Document rawNotification : notificationsBrute) {
+                        if (notificationsDoc != null) {
+                            for (Document notificationDoc :
+                                notificationsDoc) {
                                 notifications.add(new Notification(
-                                    rawNotification.getString("msg"),
-                                    rawNotification.getString("id"),
-                                    rawNotification.getBoolean("vu")
+                                    notificationDoc.getString("msg"),
+                                    notificationDoc.getString("id"),
+                                    notificationDoc.getBoolean("vu")
                                 ));
                             }
                         }
 
-                        List<String> preferencesHoraires = userInfo.getList("preferencesHoraires", String.class);
+                        List<Document> preferencesHorairesDoc =
+                            userInfo.getList("notifications", Document.class);
+                        List<PreferenceHoraire> preferencesHoraires =
+                            new ArrayList<>();
+
+                        if (preferencesHorairesDoc != null) {
+                            for (Document preferenceHoraireDoc : preferencesHorairesDoc) {
+                                preferencesHoraires.add(new PreferenceHoraire(
+                                    preferenceHoraireDoc.getString("jour"),
+                                    preferenceHoraireDoc.getString("heureDebut"),
+                                    preferenceHoraireDoc.getString("heureFin")
+                                ));
+                            }
+                        }
 
                         if (Objects.equals(role, "RESIDENT")) {
                             return new Resident(userInfo.getString("firstName"

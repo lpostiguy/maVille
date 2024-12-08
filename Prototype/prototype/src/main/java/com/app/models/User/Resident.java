@@ -1,17 +1,22 @@
 package com.app.models.User;
 
 import com.app.models.Notification;
+import com.app.models.PreferenceHoraire;
 import com.app.utils.InscriptionUtils;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 public class Resident extends User {
+
+    // Constructeur par défaut
+    public Resident() {
+        setUserRole("RESIDENT");
+    }
 
     // Constructor pour création de compte
     public Resident(String firstName, String lastName, String email,
@@ -38,7 +43,7 @@ public class Resident extends User {
                     String phoneNumber, String dateOfBirth,
                     String homeAddress, int password, String userId,
                     String boroughId, List<Notification> notifications,
-                    List<String> preferencesHoraires) {
+                    List<PreferenceHoraire> preferencesHoraires) {
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
@@ -63,7 +68,9 @@ public class Resident extends User {
     private String homeAddress;
     private String boroughId;
     @JsonProperty("preferencesHoraires")
-    private List<String> preferencesHoraires;
+    private List<PreferenceHoraire> preferencesHoraires;
+    @JsonProperty("notifications")
+    private List<Notification> notifications;
 
     // Getters
     public String getPhoneNumber() {
@@ -81,8 +88,13 @@ public class Resident extends User {
     public String getBoroughId() {
         return boroughId;
     }
-    public List<String> getPreferencesHoraires() {
+
+    public List<PreferenceHoraire> getPreferencesHoraires() {
         return preferencesHoraires;
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
     }
 
 
@@ -102,7 +114,12 @@ public class Resident extends User {
     public void setBoroughId(String boroughId) {
         this.boroughId = boroughId;
     }
-    public void setPreferencesHoraires(List<String> preferencesHoraires) {
+
+    public void setPreferencesHoraires(List<PreferenceHoraire> preferencesHoraires) {
         this.preferencesHoraires = preferencesHoraires;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
     }
 }
