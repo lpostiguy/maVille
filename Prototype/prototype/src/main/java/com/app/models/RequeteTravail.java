@@ -74,6 +74,8 @@ public class RequeteTravail {
         return id;
     }
 
+    public List<Candidature> getCandidatures() { return this.candidatures; }
+
     // Setters
     public void setTitre(String titre) {
         this.titre = titre;

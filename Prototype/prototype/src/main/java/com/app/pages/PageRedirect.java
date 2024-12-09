@@ -69,7 +69,7 @@ public class PageRedirect {
                         switch (redirect) {
                             case "Consulter la liste des requêtes de " +
                                 "travail" -> {
-                                consulterRequeteTravailMenu();
+                                consulterRequeteTravailMenu(user);
                             }
                             case "Soumettre un nouveau projet de travaux" -> {
                                 System.out.println("Vous êtes maintenant " +

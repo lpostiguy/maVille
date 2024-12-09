@@ -1,9 +1,6 @@
 package com.app;
 
-import com.app.controllers.NotificationsController;
-import com.app.controllers.PreferenceHoraireController;
-import com.app.controllers.RequeteTravailController;
-import com.app.controllers.UserController;
+import com.app.controllers.*;
 import com.app.pages.PageRedirect;
 import io.javalin.Javalin;
 
@@ -15,6 +12,7 @@ public class Main {
         RequeteTravailController.registerRoutes(app);
         UserController.registerRoutes(app);
         NotificationsController.registerRoutes(app);
+        CandidatureController.registerRoutes(app);
         PreferenceHoraireController.registerRoutes(app);
 
         System.out.println("""

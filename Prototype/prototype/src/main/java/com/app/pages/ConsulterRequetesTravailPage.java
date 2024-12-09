@@ -12,7 +12,7 @@ import static com.app.controllers.RequeteTravailController.*;
 public class ConsulterRequetesTravailPage {
 
     // Méthode de menu pour l'utilisateur
-    public static void consulterRequeteTravailMenu() {
+    public static void consulterRequeteTravailMenu(User user) {
         List<RequeteTravail> requetes = consulterRequetesTravail();
         if (requetes == null) {
             System.out.println("Il n'y a pas de requêtes de travail pour " +
@@ -94,7 +94,6 @@ public class ConsulterRequetesTravailPage {
             System.out.println("-----------------------------------");
 
             boolean isValidChoice = false;
-            boolean isValidSecondChoice = false;
             while (!isValidChoice) {
                 System.out.println("\n---- Menu Suivi Requete Travail ----");
                 System.out.println("[1] Retour au menu principal");
@@ -108,6 +107,9 @@ public class ConsulterRequetesTravailPage {
                 switch (choice) {
                     case "1" -> {
                         return;
+                    }
+                    case "2" -> {
+                        CandidaturePage.soumettreCandidaturePage(user, requeteChoisie);
                     }
                     default -> { System.out.println("L'option choisie n'est pas " +
                         "disponible");
@@ -206,7 +208,8 @@ public class ConsulterRequetesTravailPage {
                     System.out.println("[2] Désarchiver la requête");
                 }
                 System.out.println("[3] Effacer la requête");
-                System.out.println("[4] Faire le suivi d'une autre requête");
+                System.out.println("[4] Consulter les candidatures");
+                System.out.println("[5] Faire le suivi d'une autre requête");
                 System.out.println("------------------------------------");
                 Scanner scanner2 = new Scanner(System.in);
                 String choice = scanner2.nextLine();
@@ -231,6 +234,10 @@ public class ConsulterRequetesTravailPage {
                             }
                         }
                     }
+                    case "4" -> {
+                        isValidChoice = true;
+                        CandidaturePage.consulterCandidaturePage(user, requeteChoisie);
+                    }
                     case "3" -> {
                         isValidChoice = true;
                         deleteRequeteTravail(requeteChoisie);
@@ -248,7 +255,7 @@ public class ConsulterRequetesTravailPage {
                             }
                         }
                     }
-                    case "4" -> {
+                    case "5" -> {
                         isValidChoice = true;
                         suiviRequeteTravailMenu(user);
                     }
