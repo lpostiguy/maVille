@@ -8,6 +8,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 public class RequeteTravail {
@@ -23,20 +26,24 @@ public class RequeteTravail {
     @JsonProperty("actif")
     private boolean actif;
     @JsonProperty("candidatures")
-    private Candidature[] candidatures;
+    private List<Candidature> candidatures;
 
-    @JsonCreator
+    // Constructeur pour créer une nouvelle requête
     public RequeteTravail(@JsonProperty("titre") String titre, @JsonProperty(
         "description") String description,
                           @JsonProperty("typeTravaux") String typeTravaux,
-                          @JsonProperty("dateDebutEspere") String dateDebutEspere, @JsonProperty("demandeurRequete") String demandeurRequete) {
+                          @JsonProperty("dateDebutEspere") String dateDebutEspere, @JsonProperty("demandeurRequete") String demandeurRequete,
+                          @JsonProperty("actif") boolean actif, @JsonProperty("id") String id, @JsonProperty("candidatures") List<Candidature> candidatures) {
         this.titre = titre;
         this.description = description;
         this.typeTravaux = typeTravaux;
         this.dateDebutEspere = dateDebutEspere;
         this.demandeurRequete = demandeurRequete;
-        this.id = InscriptionUtils.RandomIDGenerator();
+        this.id = id;
+        this.actif = actif;
+        this.candidatures = candidatures;
     }
+
 
     // Getters
     public String getTitre() {
@@ -87,4 +94,6 @@ public class RequeteTravail {
     public void setActif(boolean open) {
         this.actif = open;
     }
+
+    public void setId(String id){ this.id = id;}
 }

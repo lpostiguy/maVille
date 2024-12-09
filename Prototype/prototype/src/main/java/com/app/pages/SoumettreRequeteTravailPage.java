@@ -2,6 +2,7 @@ package com.app.pages;
 
 import com.app.models.User.User;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static com.app.controllers.RequeteTravailController.soumettreRequeteTravail;
@@ -40,7 +41,7 @@ public class SoumettreRequeteTravailPage {
         // Appel de la méthode pour soumettre la requête avec les données
         // entrées
         System.out.println(soumettreRequeteTravail(titre, description,
-            typeTravaux, dateDebutEspere, user.getUserId(), true));
+            typeTravaux, dateDebutEspere, user.getUserId(), true, new ArrayList<>()));
         System.out.println("\n[1] Retour au menu principal");
         while (!scanner.nextLine().equals("1")) {
             System.out.println("\n[1] Retour au menu principal");

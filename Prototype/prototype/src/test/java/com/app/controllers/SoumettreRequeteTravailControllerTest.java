@@ -5,6 +5,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static com.app.controllers.RequeteTravailController.soumettreRequeteTravail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -29,6 +31,6 @@ public class SoumettreRequeteTravailControllerTest {
         assertEquals("Requête de travail ajoutée avec succès.",
             soumettreRequeteTravail("Travaux Maison", "Comptoir de la " +
                 "cuisine" + " " + "à réparer.", "Réparation Mineur", "2024-12" +
-                "-03", "263edbx2bi67zshn32", true));
+                "-03", "263edbx2bi67zshn32", true, new ArrayList<>()));
     }
 }

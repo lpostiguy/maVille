@@ -1,8 +1,10 @@
 package com.app.controllers;
 
 import com.app.MongoDBConnection;
+import com.app.models.Candidature;
 import com.app.models.RequeteTravail;
 import com.app.models.User.User;
+import com.app.utils.InscriptionUtils;
 import com.app.utils.JsonFormatting;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,9 +36,10 @@ public class RequeteTravailController {
     public static void registerRoutes(Javalin app) {
 
         app.get("/requete-travail", ctx -> {
-            try {
-                Document filter = new Document("actif", true);
 
+            Document filter = new Document("actif", true);
+
+            try {
                 List<Document> requetes =
                     collectionRequeteTravail.find(filter).into(new ArrayList<>());
                 ctx.json(requetes);
@@ -76,6 +79,9 @@ public class RequeteTravailController {
         app.post("/requete-travail", ctx -> {
             try {
                 RequeteTravail requeteTravail = ctx.bodyAsClass(RequeteTravail.class);
+                requeteTravail.setId(InscriptionUtils.RandomIDGenerator());
+
+                List<Document> candidaturesInitiales = new ArrayList<>();
 
                 // Validation des champs requis
                 if (requeteTravail.getTitre() == null || requeteTravail.getDescription() == null || requeteTravail.getTypeTravaux() == null || requeteTravail.getDateDebutEspere() == null || requeteTravail.getDemandeurRequete() == null) {
@@ -84,7 +90,8 @@ public class RequeteTravailController {
                 }
 
                 // Insertion dans MongoDB
-                Document doc = new Document("id", requeteTravail.getId()).append("titre", requeteTravail.getTitre()).append("description", requeteTravail.getDescription()).append("typeTravaux", requeteTravail.getTypeTravaux()).append("dateDebutEspere", requeteTravail.getDateDebutEspere()).append("demandeurRequete", requeteTravail.getDemandeurRequete()).append("actif", requeteTravail.getActif());
+                Document doc = new Document("id", requeteTravail.getId()).append("titre", requeteTravail.getTitre()).append("description", requeteTravail.getDescription()).append("typeTravaux", requeteTravail.getTypeTravaux()).append("dateDebutEspere", requeteTravail.getDateDebutEspere()).append("demandeurRequete", requeteTravail.getDemandeurRequete()).append("actif", requeteTravail.getActif())
+                    .append("candidatures", candidaturesInitiales);
                 collectionRequeteTravail.insertOne(doc);
 
                 ctx.status(201).result("Requête de travail ajoutée avec " + "succès.");
@@ -122,7 +129,8 @@ public class RequeteTravailController {
                 if (result.getModifiedCount() > 0) {
                     ctx.status(200).result("Requête mise à jour avec succès.");
                 } else {
-                    ctx.status(404).result("Aucune requête trouvée pour l'ID " + "spécifié.");
+                    ctx.status(404).result("Aucune requête trouvée pour l'ID "
+                        + "spécifié.");
                 }
             } catch (Exception e) {
                 ctx.status(500).result("Erreur serveur : " + e.getMessage());
@@ -159,7 +167,7 @@ public class RequeteTravailController {
                                                  String typeTravaux,
                                                  String dateDebutEspere,
                                                  String demandeurRequete,
-                                                 boolean actif) {
+                                                 boolean actif, ArrayList<Candidature> candidatures) {
         try {
             URL url = new URL("http://localhost:8000/requete-travail");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -171,7 +179,8 @@ public class RequeteTravailController {
             String jsonInputString = String.format("{ \"titre\": \"%s\", " +
                 "\"description\": \"%s\", \"typeTravaux\": \"%s\", " +
                 "\"dateDebutEspere\": \"%s\", \"demandeurRequete\": \"%s\", " +
-                "\"actif\": \"%s\"" + "}", titre, description, typeTravaux,
+                "\"actif\": \"%s\"}",
+                titre, description, typeTravaux,
                 dateDebutEspere, demandeurRequete, actif);
 
             try (OutputStream os = conn.getOutputStream()) {
@@ -190,7 +199,7 @@ public class RequeteTravailController {
     }
 
     // Méthode pour consulter les requêtes de travail de tous les utilisateurs
-    public static String consulterRequetesTravail() {
+    public static List<RequeteTravail> consulterRequetesTravail() {
         try {
             URL url = new URL("http://localhost:8000/requete-travail");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -203,9 +212,12 @@ public class RequeteTravailController {
                             reponse.append(scanner.nextLine());
                     }
                 }
-                String formattedJson =
-                    JsonFormatting.jsonToTextRequeteTravail(reponse.toString());
-                return formattedJson;
+                ObjectMapper objectMapper = new ObjectMapper();
+                List<RequeteTravail> requetes =
+                    objectMapper.readValue(reponse.toString(),
+                        new TypeReference<>() {
+                        });
+                return requetes;
 
             } else {
                 System.out.println("Erreur : " + conn.getResponseCode());
@@ -213,7 +225,7 @@ public class RequeteTravailController {
         } catch (Exception e) {
             //e.printStackTrace();
         }
-        return "Aucune requête de travail n'est disponible";
+        return null;
     }
 
     public static List<RequeteTravail> consulterRequetesTravail(User user) {
@@ -235,7 +247,6 @@ public class RequeteTravailController {
                     objectMapper.readValue(reponse.toString(),
                         new TypeReference<List<RequeteTravail>>() {
                 });
-
                 return requetes;
 
             } else {

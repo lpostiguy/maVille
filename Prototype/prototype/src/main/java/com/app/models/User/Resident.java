@@ -44,6 +44,7 @@ public class Resident extends User {
                     String homeAddress, int password, String userId,
                     String boroughId, List<Notification> notifications,
                     List<PreferenceHoraire> preferencesHoraires) {
+
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);

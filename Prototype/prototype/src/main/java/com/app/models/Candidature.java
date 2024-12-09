@@ -8,15 +8,15 @@ public class Candidature {
 
     private String dateFin;
     private String dateDebut;
-    private boolean isAccepted;
+    private String status;
     private boolean isConfirmed;
     private String userId;
 
     public Candidature(String dateFin, String dateDebut, String userId,
-                       boolean isAccepted, boolean isConfirmed) {
+                       String status, boolean isConfirmed) {
         this.dateFin = dateFin;
         this.dateDebut = dateDebut;
-        this.isAccepted = isAccepted;
+        this.status = status;
         this.isConfirmed = isConfirmed;
         this.userId = userId;
     }
@@ -31,8 +31,8 @@ public class Candidature {
         return this.dateDebut;
     }
 
-    public boolean isAccepted() {
-        return this.isAccepted;
+    public String isAccepted() {
+        return this.status;
     }
 
     public boolean isConfirmed() {
@@ -57,8 +57,8 @@ public class Candidature {
         this.userId = userId;
     }
 
-    public void setAccepted(boolean isAccepted) {
-        this.isAccepted = isAccepted;
+    public void setAccepted(String status) {
+        this.status = status;
     }
 
     public void setConfirmed(boolean isConfirmed) {

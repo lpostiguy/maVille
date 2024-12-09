@@ -71,6 +71,10 @@ public class UserController {
         return collectionUsers.find(new Document("email", email)).first();
     }
 
+    public static Document findUserById(String id) {
+        return collectionUsers.find(new Document("userId", id)).first();
+    }
+
     public static String addNewUser(String userId, String firstName,
                                     String lastName, String email,
                                     String phoneNumber, String dateOfBirth,
