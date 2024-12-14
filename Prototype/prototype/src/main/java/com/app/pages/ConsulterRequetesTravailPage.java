@@ -1,6 +1,7 @@
 package com.app.pages;
 
 import com.app.controllers.UserController;
+import com.app.models.Candidature;
 import com.app.models.RequeteTravail;
 import com.app.models.User.User;
 import org.bson.Document;
@@ -11,7 +12,7 @@ import static com.app.controllers.RequeteTravailController.*;
 
 public class ConsulterRequetesTravailPage {
 
-    // Méthode de menu pour l'utilisateur
+    // Méthode de menu pour l'intervenant
     public static void consulterRequeteTravailMenu(User user) {
         List<RequeteTravail> requetes = consulterRequetesTravail();
         if (requetes == null) {
@@ -27,38 +28,15 @@ public class ConsulterRequetesTravailPage {
 
             // Afficher les requêtes actives
 
-            boolean aucuneRequeteActive = true;
-            System.out.println("\n------ Requêtes actives -----");
+            System.out.println("\n------ Requêtes -----");
             for (int i = 0; i < requetes.size(); i++) {
                 if (requetes.get(i).getActif()) {
-                    aucuneRequeteActive = false;
                     nbRequetePrint++;
                     indexMapping.put(nbRequetePrint, i); // Associer l'indice
                     // affiché à l'indice réel
                     System.out.printf("[%d] %s%n", nbRequetePrint,
                         requetes.get(i).getTitre());
                 }
-            }
-
-            if(aucuneRequeteActive) {
-                System.out.println("Aucune requête n'est active");
-            }
-
-            boolean aucuneRequeteArchive = true;
-            // Afficher les requêtes inactives
-            System.out.println("\n----- Requêtes archivée -----");
-            for (int i = 0; i < requetes.size(); i++) {
-                if (!requetes.get(i).getActif()) {
-                    aucuneRequeteArchive = false;
-                    nbRequetePrint++;
-                    indexMapping.put(nbRequetePrint, i); // Associer l'indice
-                    // affiché à l'indice réel
-                    System.out.printf("[%d] %s%n", nbRequetePrint,
-                        requetes.get(i).getTitre());
-                }
-            }
-            if(aucuneRequeteArchive) {
-                System.out.println("Aucune requête n'est archivée");
             }
 
             // Lecture de l'entrée utilisateur
@@ -90,17 +68,28 @@ public class ConsulterRequetesTravailPage {
             System.out.println("Description : " + requeteChoisie.getDescription());
             System.out.println("Type de travaux : " + requeteChoisie.getTypeTravaux());
             System.out.println("Date de début espéré : " + requeteChoisie.getDateDebutEspere());
-            System.out.println("Statut: " + requeteChoisie.getActif());
             System.out.println("-----------------------------------");
+
+            Candidature candidatureIntervenant = null;
+            if (requeteChoisie.getCandidatures() != null) {
+                for (Candidature candidature : requeteChoisie.getCandidatures()) {
+                    if (Objects.equals(candidature.getUserId(), user.getUserId())) {
+                        candidatureIntervenant = candidature;
+                    }
+                }
+            }
 
             boolean isValidChoice = false;
             while (!isValidChoice) {
                 System.out.println("\n---- Menu Suivi Requete Travail ----");
                 System.out.println("[1] Retour au menu principal");
-                if (requeteChoisie.getActif()) {
-                    System.out.println("[2] Soumettre une candidature");
+                System.out.println("[2] Voir une autre requête");
+                if (requeteChoisie.getActif() && candidatureIntervenant == null ) {
+                    System.out.println("[3] Soumettre une candidature");
                 }
-                System.out.println("[3] Voir une autre requête");
+                else if (candidatureIntervenant != null) {
+                    System.out.println("[3] Voir votre candidature");
+                }
                 System.out.println("------------------------------------");
                 Scanner scanner2 = new Scanner(System.in);
                 String choice = scanner2.nextLine();
@@ -108,11 +97,24 @@ public class ConsulterRequetesTravailPage {
                     case "1" -> {
                         return;
                     }
+                    case "3" -> {
+                        if (requeteChoisie.getActif() && candidatureIntervenant == null ) {
+                            isValidChoice = true;
+                            CandidaturePage.soumettreCandidaturePage(user, requeteChoisie);
+                        }
+                        else if (candidatureIntervenant != null) {
+                            isValidChoice = true;
+                            CandidaturePage.suiviCandidaturePage(user, requeteChoisie, candidatureIntervenant);
+                        }
+                        else { System.out.println("L'option choisie n'est pas " +
+                            "disponible."); }
+                    }
                     case "2" -> {
-                        CandidaturePage.soumettreCandidaturePage(user, requeteChoisie);
+                        isValidChoice = true;
+                        consulterRequeteTravailMenu(user);
                     }
                     default -> { System.out.println("L'option choisie n'est pas " +
-                        "disponible");
+                        "disponible.");
                     }
                 }
             }
@@ -194,7 +196,7 @@ public class ConsulterRequetesTravailPage {
             System.out.println("Description : " + requeteChoisie.getDescription());
             System.out.println("Type de travaux : " + requeteChoisie.getTypeTravaux());
             System.out.println("Date de début espéré : " + requeteChoisie.getDateDebutEspere());
-            System.out.println("Statut: " + requeteChoisie.getActif());
+            System.out.println("Statut: " + ((requeteChoisie.getActif()) ? "Ouverte" : "Fermée" ));
             System.out.println("-----------------------------------");
 
             boolean isValidChoice = false;

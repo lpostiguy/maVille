@@ -12,9 +12,100 @@ import org.bson.Document;
 import java.util.*;
 
 import static com.app.controllers.CandidatureController.soumettreCandidature;
+import static com.app.controllers.RequeteTravailController.deleteRequeteTravail;
+import static com.app.controllers.RequeteTravailController.mettreAJourStatutRequeteTravail;
 import static com.app.utils.RegexChecker.estFormatDateValide;
 
 public class CandidaturePage {
+
+    public static void suiviCandidaturePage(User user, RequeteTravail requete, Candidature candidature) {
+
+        System.out.println("\n------ Détails de la candidature ------");
+        System.out.println("Date de début prévue : " + candidature.getDateDebut());
+        System.out.println("Date de fin prévue : " + candidature.getDateFin());
+        if (!Objects.equals(candidature.getIntervenantMsg(), "")) {
+            System.out.println("Votre message: " + candidature.getIntervenantMsg());
+        }
+        if (!Objects.equals(candidature.getResidentMsg(), "")) {
+            System.out.println("Message du résident: " + candidature.getResidentMsg());
+        }
+        System.out.println("Statut: " + candidature.getStatus());
+        if (Objects.equals(candidature.getStatus(), "ACCEPTED")) {
+            System.out.println("Confirmée: " + (candidature.isConfirmed() ? "Oui" : "En attente"));
+        }
+        System.out.println("-----------------------------------");
+
+        boolean isValidChoice = false;
+        boolean isValidSecondChoice = false;
+        while (!isValidChoice) {
+            System.out.println("\n---- Menu Suivi Candidature ----");
+            System.out.println("[1] Retour au menu principal");
+            if (!candidature.isConfirmed()) {
+                System.out.println("[2] Soustraire la candidature");
+            }
+            if (Objects.equals(candidature.getStatus(), "ACCEPTED") && !candidature.isConfirmed()) {
+                System.out.println("[3] Confirmer la candidature");
+            }
+            System.out.println("------------------------------------");
+            Scanner scanner2 = new Scanner(System.in);
+            String choice = scanner2.nextLine();
+
+            switch (choice) {
+                case "1" -> {
+                    return;
+                }
+                case "2" -> {
+                    if (!candidature.isConfirmed()) {
+                        isValidChoice = true;
+                        CandidatureController.supprimerCandidature(requete.getId(), candidature.getId());
+                        while (!isValidSecondChoice) {
+                            System.out.println("[1] Retour au menu principal");
+                            System.out.println("[2] Soumettre une nouvelle candidature");
+                            Scanner scanner3 = new Scanner(System.in);
+                            String secondChoice = scanner3.nextLine();
+                            if (Objects.equals(secondChoice, "1")) {
+                                return;
+                            } else if (Objects.equals(secondChoice, "2")) {
+                                isValidSecondChoice = true;
+                                CandidaturePage.soumettreCandidaturePage(user, requete);
+                            }
+                        }
+                    }
+                }
+
+                case "3" -> {
+                    if (Objects.equals(candidature.getStatus(), "ACCEPTED") && !candidature.isConfirmed()) {
+                        isValidChoice = true;
+                        candidature.setConfirmed(true);
+                        String response = CandidatureController.confirmerCandidature(requete.getId(), candidature.getId());
+                        if (response.equals("Candidature mise à jour partiellement avec succès.")) {
+                            System.out.println("Candidature confirmée avec succès.");
+                            NotificationsController.envoyerNotification(user.getFirstName() + " " + user.getLastName()
+                                + " a confirmé(e) sa candidature pour votre requête de travail: " + requete.getTitre(), requete.getDemandeurRequete());
+                        }
+                        while (!isValidSecondChoice) {
+                            System.out.println("[1] Retour au menu principal");
+                            System.out.println("[2] Retour aux requêtes");
+                            Scanner scanner3 = new Scanner(System.in);
+                            String secondChoice = scanner3.nextLine();
+                            if (Objects.equals(secondChoice, "1")) {
+                                return;
+                            } else if (Objects.equals(secondChoice, "2")) {
+                                isValidSecondChoice = true;
+                                ConsulterRequetesTravailPage.consulterRequeteTravailMenu(user);
+                            }
+                        }
+                    }
+                }
+
+                default -> {
+                    System.out.println("L'option choisie n'est pas " +
+                        "disponible");
+                }
+            }
+        }
+
+    }
 
     public static void soumettreCandidaturePage(User user, RequeteTravail requete) {
 
@@ -56,9 +147,9 @@ public class CandidaturePage {
         // entrées
         String result = soumettreCandidature(requete.getId(), requete.getDemandeurRequete(), dateFin, dateDebut,
             "PENDING", false, user.getUserId(), message, "");
-        if (result == "Requête de travail ajoutée avec succès.") {
+        if (result.equals("Requête de travail ajoutée avec succès.")) {
             System.out.print(result);
-            NotificationsController.envoyerNotification("" + user.getFirstName() + " " + user.getLastName()
+            NotificationsController.envoyerNotification(user.getFirstName() + " " + user.getLastName()
             + " a appliqué pour votre requête de travail: " + requete.getTitre(), requete.getDemandeurRequete());
         }
 
@@ -119,7 +210,7 @@ public class CandidaturePage {
             String lastName = intervenant.getString("lastName");
             String type = intervenant.getString("entityType");
 
-            System.out.println("\n------ Détails de la requête ------");
+            System.out.println("\n------ Détails de la candidature ------");
             System.out.println("Nom de l'intervenant : " + firstName + " " + lastName);
             System.out.println("Type d'entreprise : " + type);
             System.out.println("Date de début prévue : " + candidatureChoisie.getDateDebut());
@@ -127,7 +218,13 @@ public class CandidaturePage {
             if (!Objects.equals(candidatureChoisie.getIntervenantMsg(), "")) {
                 System.out.println("Message de l'intervenant : " + candidatureChoisie.getIntervenantMsg());
             }
+            if (!Objects.equals(candidatureChoisie.getResidentMsg(), "")) {
+                System.out.println("Votre message: " + candidatureChoisie.getIntervenantMsg());
+            }
             System.out.println("Statut: " + candidatureChoisie.getStatus());
+            if (Objects.equals(candidatureChoisie.getStatus(), "ACCEPTED")) {
+                System.out.println("Confirmée: " + (candidatureChoisie.isConfirmed() ? "Oui" : "En attente"));
+            }
             System.out.println("-----------------------------------");
 
             boolean isValidChoice = false;
@@ -183,6 +280,5 @@ public class CandidaturePage {
         if (Objects.equals(response, "Candidature mise à jour partiellement avec succès.")) {
             System.out.println("Votre réponse a été envoyée à l'intervenant.");
         }
-        System.out.println(response);
     }
 }

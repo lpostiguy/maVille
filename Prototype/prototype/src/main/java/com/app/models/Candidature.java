@@ -10,7 +10,7 @@ public class Candidature {
     private String dateFin;
     private String dateDebut;
     private String status;
-    private boolean isConfirmed;
+    private boolean confirmed;
     private String userId;
     private String residentMsg;
     private String intervenantMsg;
@@ -37,11 +37,11 @@ public class Candidature {
     }
 
     public Candidature(String dateFin, String dateDebut, String userId,
-                       String status, boolean isConfirmed, String residentMsg, String intervenantMsg, String id) {
+                       String status, boolean confirmed, String residentMsg, String intervenantMsg, String id) {
         this.dateFin = dateFin;
         this.dateDebut = dateDebut;
         this.status = status;
-        this.isConfirmed = isConfirmed;
+        this.confirmed = confirmed;
         this.userId = userId;
         this.residentMsg = residentMsg;
         this.intervenantMsg = intervenantMsg;
@@ -63,7 +63,7 @@ public class Candidature {
     }
 
     public boolean isConfirmed() {
-        return this.isConfirmed;
+        return this.confirmed;
     }
 
     public String getUserId() {
@@ -99,7 +99,7 @@ public class Candidature {
     }
 
     public void setConfirmed(boolean isConfirmed) {
-        this.isConfirmed = isConfirmed;
+        this.confirmed = isConfirmed;
     }
 
     public void setIntervenantMsg(String intervenantMsg) {

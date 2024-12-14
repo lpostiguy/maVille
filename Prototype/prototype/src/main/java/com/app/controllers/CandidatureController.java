@@ -79,7 +79,7 @@ public class CandidatureController {
                     .append("dateFin", candidature.getDateFin())
                     .append("dateDebut", candidature.getDateDebut())
                     .append("status", candidature.getStatus())
-                    .append("isConfirmed", candidature.isConfirmed())
+                    .append("confirmed", candidature.isConfirmed())
                     .append("userId", candidature.getUserId())
                     .append("residentMsg", candidature.getResidentMsg())
                     .append("intervenantMsg", candidature.getIntervenantMsg());
@@ -99,6 +99,28 @@ public class CandidatureController {
                 logger.error("Erreur lors de l'envoi de la candidature : ", e);
                 ctx.status(500).result("Erreur Serveur");
             }
+        });
+
+        app.patch("/requete-travail/{id}/candidatures/{candidatureId}/delete", ctx -> {
+            String requeteId = ctx.pathParam("id");
+            String candidatureId = ctx.pathParam("candidatureId");
+
+            Document requete = collectionRequetesTravail.find(new Document("id", requeteId)).first();
+            if (requete == null) {
+                ctx.status(404).result("Requête non trouvée.");
+                return;
+            }
+
+            List<Document> candidatures = requete.getList("candidatures", Document.class);
+
+            // Supprimer la candidature
+            candidatures.removeIf(c -> c.getString("id").equals(candidatureId));
+
+            // Sauvegarder la mise à jour dans MongoDB
+            collectionRequetesTravail.updateOne(new Document("id", requeteId),
+                new Document("$set", new Document("candidatures", candidatures)));
+
+            ctx.status(200).result("Candidature supprimée.");
         });
 
         app.patch("/requete-travail/{id}/candidatures/{candidatureId}/status", ctx -> {
@@ -125,6 +147,7 @@ public class CandidatureController {
             Document updateFields = ctx.bodyAsClass(Document.class);
             if (updateFields.containsKey("status")) {
                 candidature.put("status", updateFields.getString("status"));
+                candidature.put("residentMsg", updateFields.getString("residentMsg"));
             }
 
             // Sauvegarder la mise à jour dans MongoDB
@@ -156,8 +179,8 @@ public class CandidatureController {
 
             // Mettre à jour les champs modifiables
             Document updateFields = ctx.bodyAsClass(Document.class);
-            if (updateFields.containsKey("isConfirmed")) {
-                candidature.put("isConfirmed", updateFields.getBoolean("isConfirmed"));
+            if (updateFields.containsKey("confirmed")) {
+                candidature.put("confirmed", updateFields.getBoolean("confirmed"));
             }
 
             // Sauvegarder la mise à jour dans MongoDB
@@ -184,7 +207,7 @@ public class CandidatureController {
             // Construire les données JSON en fonction des entrées utilisateur
             String jsonInputString = String.format("{ \"userId\": \"%s\"," +
                 "\"dateDebut\": \"%s\", \"dateFin\": \"%s\"," +
-                "\"status\": \"%s\", \"isConfirmed\": \"%b\", \"intervenantMsg\": \"%s\"," +
+                "\"status\": \"%s\", \"confirmed\": \"%b\", \"intervenantMsg\": \"%s\"," +
                 "\"residentMsg\": \"%s\"" + "}", userId, dateDebut, dateFin, status, isConfirmed,
             intervenantMsg, residentMsg);
 
@@ -250,5 +273,72 @@ public class CandidatureController {
             return "Erreur";
         }
         return "Candidature mise à jour partiellement avec succès.";
+    }
+
+    public static String confirmerCandidature(String requeteId, String candidatureId) {
+        try {
+            // Construire l'URL pour la requête PATCH
+            String url = "http://localhost:8000/requete-travail/" + requeteId + "/candidatures/" + candidatureId + "/isconfirmed";
+
+            // Construire les données JSON avec uniquement les champs à modifier
+            StringBuilder jsonBuilder = new StringBuilder("{");
+            jsonBuilder.append("\"confirmed\":").append(true).append("}");
+
+            String jsonInputString = jsonBuilder.toString();
+
+            HttpClient client = HttpClient.newHttpClient();
+
+            HttpRequest request =
+                HttpRequest.newBuilder().uri(URI.create(url)).method(
+                    "PATCH",
+                    HttpRequest.BodyPublishers.ofString(jsonInputString)).header("Content-Type", "application/json; utf-8").build();
+
+            // Envoyer la requête
+            HttpResponse<String> response = client.send(request,
+                HttpResponse.BodyHandlers.ofString());
+            // Vérifier la réponse
+            if (response.statusCode() != 200) {
+                System.err.println("Erreur lors de la mise à jour : HTTP "
+                    + response.statusCode());
+                System.err.println("Message d'erreur : " + response.body());
+            }
+
+
+        } catch (Exception e) {
+            logger.error("Erreur lors de la modification: ", e);
+            return "Erreur";
+        }
+        return "Candidature mise à jour partiellement avec succès.";
+    }
+
+    public static String supprimerCandidature(String requeteId, String candidatureId) {
+        try {
+            // Construire l'URL pour la requête PATCH
+            String url = "http://localhost:8000/requete-travail/" + requeteId + "/candidatures/" + candidatureId + "/delete";
+
+
+            HttpClient client = HttpClient.newHttpClient();
+
+            HttpRequest request =
+                HttpRequest.newBuilder().uri(URI.create(url)).method(
+                    "PATCH",
+                    HttpRequest.BodyPublishers.ofString("")).header("Content-Type", "application/json; utf-8").build();
+
+            // Envoyer la requête
+            HttpResponse<String> response = client.send(request,
+                HttpResponse.BodyHandlers.ofString());
+            // Vérifier la réponse
+            if (response.statusCode() != 200) {
+                System.err.println("Erreur lors de la mise à jour : HTTP "
+                    + response.statusCode());
+                System.err.println("Message d'erreur : " + response.body());
+            }
+
+
+        } catch (Exception e) {
+            logger.error("Erreur lors de la modification: ", e);
+            return "Erreur";
+        }
+        return "Candidature supprimée avec succès.";
     }
 }
