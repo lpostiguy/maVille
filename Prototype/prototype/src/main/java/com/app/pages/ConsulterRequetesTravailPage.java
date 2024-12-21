@@ -18,6 +18,19 @@ public class ConsulterRequetesTravailPage {
         if (requetes == null) {
             System.out.println("Il n'y a pas de requêtes de travail pour " +
                 "l'instant.");
+            Scanner scanner = new Scanner(System.in);
+            boolean validChoice = false;
+            while (!validChoice) {
+                System.out.println("[1] Retour au menu principal");
+                String choice = scanner.nextLine();
+                if (choice.equals("1")) {
+                    validChoice = true;
+                    return;
+                } else {
+                    System.out.println("Veuillez entrer un choix valide.");
+                }
+            }
+
         }
         else {
             System.out.println("Sélectionnez la requête que vous voulez " +
@@ -58,17 +71,7 @@ public class ConsulterRequetesTravailPage {
 
             // Récupérer la requête choisie
             RequeteTravail requeteChoisie = requetes.get(indexReel);
-            Document resident = UserController.findUserById(requeteChoisie.getDemandeurRequete());
-            String firstName = resident.getString("firstName");
-            String lastName = resident.getString("lastName");
-
-            System.out.println("\n------ Détails de la requête ------");
-            System.out.println("Titre : " + requeteChoisie.getTitre());
-            System.out.println("Nom du résident: " + firstName + " " + lastName);
-            System.out.println("Description : " + requeteChoisie.getDescription());
-            System.out.println("Type de travaux : " + requeteChoisie.getTypeTravaux());
-            System.out.println("Date de début espéré : " + requeteChoisie.getDateDebutEspere());
-            System.out.println("-----------------------------------");
+            printRequete(requeteChoisie);
 
             Candidature candidatureIntervenant = null;
             if (requeteChoisie.getCandidatures() != null) {
@@ -124,9 +127,23 @@ public class ConsulterRequetesTravailPage {
 
     public static void suiviRequeteTravailMenu(User user) {
         List<RequeteTravail> requetes = consulterRequetesTravail(user);
-        if (requetes == null) {
+        if (requetes.isEmpty()) {
             System.out.println("Vous n'avez pas de requêtes de travail pour " +
                 "l'instant.");
+
+            Scanner scanner = new Scanner(System.in);
+            boolean validChoice = false;
+            while (!validChoice) {
+                System.out.println("[1] Retour au menu principal");
+                String choice = scanner.nextLine();
+                if (choice.equals("1")) {
+                    validChoice = true;
+                    return;
+                } else {
+                    System.out.println("Veuillez entrer un choix valide.");
+                }
+            }
+
         } else {
             System.out.println("Sélectionnez la requête dont vous voulez " +
                 "faire le suivi:");
@@ -191,13 +208,7 @@ public class ConsulterRequetesTravailPage {
 
             // Récupérer la requête choisie
             RequeteTravail requeteChoisie = requetes.get(indexReel);
-            System.out.println("\n------ Détails de la requête ------");
-            System.out.println("Titre : " + requeteChoisie.getTitre());
-            System.out.println("Description : " + requeteChoisie.getDescription());
-            System.out.println("Type de travaux : " + requeteChoisie.getTypeTravaux());
-            System.out.println("Date de début espéré : " + requeteChoisie.getDateDebutEspere());
-            System.out.println("Statut: " + ((requeteChoisie.getActif()) ? "Ouverte" : "Fermée" ));
-            System.out.println("-----------------------------------");
+            printRequete(requeteChoisie);
 
             boolean isValidChoice = false;
             boolean isValidSecondChoice = false;
@@ -268,5 +279,23 @@ public class ConsulterRequetesTravailPage {
                 }
             }
         }
+    }
+
+    public static void printRequete(RequeteTravail requete) {
+
+        Document resident = UserController.findUserById(requete.getDemandeurRequete());
+        String firstName = resident.getString("firstName");
+        String lastName = resident.getString("lastName");
+        String quartier = resident.getString("boroughId");
+
+        System.out.println("\n------ Détails de la requête ------");
+        System.out.println("Demandeur : " + firstName + " " + lastName);
+        System.out.println("Titre : " + requete.getTitre());
+        System.out.println("Description : " + requete.getDescription());
+        System.out.println("Type de travaux : " + requete.getTypeTravaux());
+        System.out.println("Quartier : " + quartier);
+        System.out.println("Date de début espéré : " + requete.getDateDebutEspere());
+        System.out.println("Statut: " + ((requete.getActif()) ? "Ouverte" : "Fermée" ));
+        System.out.println("-----------------------------------");
     }
 }

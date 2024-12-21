@@ -2,10 +2,8 @@ package com.app.controllers;
 
 import com.app.MongoDBConnection;
 import com.app.models.Candidature;
-import com.app.models.Notification;
 import com.app.utils.InscriptionUtils;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.model.UpdateOptions;
 import io.javalin.Javalin;
 import org.bson.Document;
 import org.slf4j.Logger;

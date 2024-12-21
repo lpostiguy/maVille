@@ -4,7 +4,6 @@ import java.util.Objects;
 import java.util.Scanner;
 
 import static com.app.controllers.ConsulterEntravesController.consulterEntraves;
-import static com.app.controllers.ConsulterTravauxController.consulterTravauxEnCours;
 
 public class ConsulterEntravesPage {
 
@@ -119,7 +118,6 @@ public class ConsulterEntravesPage {
 //        System.out.println("\n[1] Retour au menu principal");
 //        while (!scanner.nextLine().equals("1")) {
 //            System.out.println("\n[1] Retour au menu principal");
-
 
             }
         }
