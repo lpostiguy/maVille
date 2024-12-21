@@ -71,6 +71,10 @@ public class UserController {
         return collectionUsers.find(new Document("email", email)).first();
     }
 
+    public static Document findUserByCityId(String cityId) {
+        return collectionUsers.find(new Document("cityId", cityId)).first();
+    }
+
     public static Document findUserById(String id) {
         return collectionUsers.find(new Document("userId", id)).first();
     }

@@ -4,6 +4,7 @@ import com.app.models.Entrave;
 import com.app.models.Travail;
 import com.google.gson.annotations.SerializedName;
 
+import javax.xml.transform.Result;
 import java.util.List;
 
 public class ReponseApi {
@@ -56,7 +57,7 @@ public class ReponseApi {
         return result;
     }
 
-    public void setResult(Object result) {
+    public void setResult(ResultatEntraves result) {
         this.result = result;
     }
 }

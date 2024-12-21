@@ -18,9 +18,10 @@ import java.util.stream.Collectors;
 
 public class ConsulterTravauxController {
 
-    private static void displayTravail(Travail travail, Boolean verifierActif) {
+    private static void displayTravail(Travail travail, boolean verifierActif) {
         if (!verifierActif | travailEstActif(travail)) {
             System.out.println("Titre : " + travail.getOccupancy_name());
+            System.out.println("Id : " + travail.getId());
             System.out.println("Type de travaux : " + travail.getReason_category());
             System.out.println("Quartier  : " + travail.getBoroughid());
             System.out.println("Date de début : " + travail.getDuration_start_date());
@@ -96,7 +97,7 @@ public class ConsulterTravauxController {
                                     group.forEach(travail -> displayTravail(travail, true));
                                 });
                             }
-                            // Par défault : Tous montrer
+                            // Par défaut : Tout montrer
                             else {
                                 travaux.forEach(travail -> displayTravail(travail, true));
                             }

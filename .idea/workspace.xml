@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] Ajout: Suivi candidature, confirmer candidature (intervenant)">
+    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] Fix problèmes configuration Maven">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/dependency-reduced-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/dependency-reduced-pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/pages/LoginPageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/pages/LoginPageTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/ConsulterEntravesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/ConsulterEntravesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/ConsulterTravauxController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/ConsulterTravauxController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Entrave.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Entrave.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterEntravesPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterEntravesPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/InscriptionPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/InscriptionPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/ReponseApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/ReponseApi.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,38 +59,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.JsonFormating.executor": "Run",
-    "Application.JsonFormatting.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.Run Main.executor": "Run",
-    "JUnit.AppTest.executor": "Run",
-    "JUnit.AppTest.runAllTests.executor": "Run",
-    "JUnit.LoginPageTest.loginIntervenantTest.executor": "Run",
-    "JUnit.LoginPageTest.loginResidentTest.executor": "Run",
-    "JUnit.LoginPageTest.unsuccessfulLoginTest.executor": "Run",
-    "Maven.prototype [clean].executor": "Run",
-    "Maven.prototype [compile].executor": "Run",
-    "Maven.prototype [deploy].executor": "Run",
-    "Maven.prototype [install].executor": "Run",
-    "Maven.prototype [org.apache.maven.plugins:maven-jar-plugin:3.4.1:help].executor": "Run",
-    "Maven.prototype [org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar].executor": "Run",
-    "Maven.prototype [org.jacoco:jacoco-maven-plugin:0.8.4:check].executor": "Run",
-    "Maven.prototype [package].executor": "Run",
-    "Maven.prototype [test].executor": "Run",
-    "Maven.prototype [validate].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ostil/Documents/Université/Session 2/Prog 2/TP2/TP2_LouisPhilippeOstiguy_NoahTremblayTaillon",
-    "settings.editor.selected.configurable": "coverage"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.JsonFormating.executor&quot;: &quot;Run&quot;,
+    &quot;Application.JsonFormatting.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Run Main.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AppTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AppTest.runAllTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LoginPageTest.loginIntervenantTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LoginPageTest.loginResidentTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LoginPageTest.unsuccessfulLoginTest.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [deploy].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [org.apache.maven.plugins:maven-jar-plugin:3.4.1:help].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [org.jacoco:jacoco-maven-plugin:0.8.4:check].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [validate].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ostil/Documents/Université/Session 2/Prog 2/TP2/TP2_LouisPhilippeOstiguy_NoahTremblayTaillon&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;coverage&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\antho\Documents\IFT2255-A24-SessionProject-equipe" />
@@ -300,7 +304,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734152116172</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="[PROTOTYPE] Fix problèmes configuration Maven">
+      <option name="closed" value="true" />
+      <created>1734489149121</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1734489149121</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -326,6 +338,7 @@
     <MESSAGE value="[PROTOTYPE] CU Suivi d'une requête continué" />
     <MESSAGE value="[PROTOTYPE] Ajout: Poser candidature (intervenant), accepter ou refuser candidature (résident)" />
     <MESSAGE value="[PROTOTYPE] Ajout: Suivi candidature, confirmer candidature (intervenant)" />
-    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] Ajout: Suivi candidature, confirmer candidature (intervenant)" />
+    <MESSAGE value="[PROTOTYPE] Fix problèmes configuration Maven" />
+    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] Fix problèmes configuration Maven" />
   </component>
 </project>

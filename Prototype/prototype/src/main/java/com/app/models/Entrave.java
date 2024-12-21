@@ -1,9 +1,13 @@
 package com.app.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Entrave {
 
-    // Attribus
+    // Attributs
+    @SerializedName("_id")
     private int _id;
+    @SerializedName("id_request")
     private String id_request;
     private String streetid;
     private String streetimpactwidth;

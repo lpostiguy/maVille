@@ -12,6 +12,8 @@ import com.app.models.User.User;
 import com.app.utils.PostalCodeMapping;
 
 import static com.app.controllers.UserController.addNewUser;
+import static com.app.controllers.UserController.findUserByEmail;
+import static com.app.controllers.UserController.findUserByCityId;
 import static com.app.utils.InscriptionUtils.*;
 import static com.app.utils.RegexChecker.*;
 
@@ -85,8 +87,12 @@ public class InscriptionPage {
         while (!validEmail) {
             System.out.println("Entrez votre adresse courriel:");
             email = scanner.nextLine();
-            // Verify that the email is valid
-            if (email.contains("@")) {
+            // Verify that the email is valid and not used
+            if (!findUserByEmail(email).isEmpty()) {
+                System.out.println("Cette adresse courriel est déjà associée à un compte." +
+                    " Veuillez entrer une autre adresse courriel.");
+            }
+            else if (email.contains("@")) {
                 validEmail = true;
             }
         }
@@ -109,9 +115,10 @@ public class InscriptionPage {
             boolean validPhoneNumber = false;
             while (!validPhoneNumber) {
                 System.out.println("Entrez votre numéro de téléphone:");
+                System.out.println("(N'entrez rien pour sauter cette étape.)");
                 phoneNumber = scanner.nextLine();
                 // Verify that the phoneNumber is valid format
-                if (estFormatNumeroTelephoneValide(phoneNumber)) {
+                if (estFormatNumeroTelephoneValide(phoneNumber) || phoneNumber.isEmpty()) {
                     validPhoneNumber = true;
                 } else {
                     System.out.println("Le numéro de téléphone entrée n'est " + "pas du format " + "0000-000-000");
@@ -155,11 +162,17 @@ public class InscriptionPage {
 
             boolean validCityId = false;
             while (!validCityId) {
-                System.out.println("Entrez votre Identifiant de " + "ville:");
+                System.out.println("Entrez votre identifiant de la ville:");
                 cityId = scanner.nextLine();
-                // Verify that the cityId is not null
-                if (!Objects.equals(cityId, "")) {
+                // Verify that the cityId is valid
+                if (cityId.length() != 8) {
+                    System.out.println("Cet identifiant de la ville n'est pas valide. Veuillez réessayer.");
+                }
+                else if (findUserByCityId(cityId).isEmpty()) {
                     validCityId = true;
+                }
+                else {
+                    System.out.println("Cet identifiant est déjà associé à un compte. Veuillez réessayer.");
                 }
             }
         }
@@ -193,8 +206,6 @@ public class InscriptionPage {
 
         if (Objects.equals(role, "Résident")) {
             if (isAgeAbove16(dateOfBirth)) {
-                // TODO: Store the users info into a Hash table where
-                //  the hash buckets are user classes
                 Resident resident = new Resident(firstName, lastName, email,
                     phoneNumber, dateOfBirth, homeAddress, encryptedPassword,
                     boroughId);
@@ -209,8 +220,6 @@ public class InscriptionPage {
                 inscriptionPage();
             }
         } else {
-            // TODO: Store the users info into a Hash table where
-            //  the hash buckets are user classes
             Intervenant intervenant = new Intervenant(firstName, lastName,
                 email, entityType, cityId, encryptedPassword);
             addNewUser(intervenant.getUserId(), firstName, lastName, email,
