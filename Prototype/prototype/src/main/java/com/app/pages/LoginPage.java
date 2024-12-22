@@ -40,7 +40,6 @@ public class LoginPage {
                         System.out.println("Connexion réussie!");
                         List<Document> notificationsDoc = userInfo.getList("notifications", Document.class);
                         List<Notification> notifications = new ArrayList<>();
-
                         if (notificationsDoc != null) {
                             for (Document notificationDoc :
                                 notificationsDoc) {

@@ -1,6 +1,7 @@
 package com.example;
 
 import com.app.MongoDBConnectionTest;
+import com.app.controllers.SoumettreRequeteTravailControllerTest;
 import com.app.pages.LoginPageTest;
 import com.app.utils.*;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,12 @@ public class AppTest {
 
     @Test
     public void runAllTests() {
+
+        SoumettreRequeteTravailControllerTest soumettreRequeteTest = new SoumettreRequeteTravailControllerTest();
+        soumettreRequeteTest.soumettreRequeteTravailTest();
+        soumettreRequeteTest.soumettreRequeteTravailMissingFieldTest();
+        soumettreRequeteTest.soumettreRequeteTravailServerError();
+
         MongoDBConnectionTest mongoTestClass = new MongoDBConnectionTest();
         mongoTestClass.connexionDoitRetournerUneBaseDeDonneesNonNulle();
         mongoTestClass.connexionDoitPointerVersLaBonneBaseDeDonnees();
@@ -21,14 +28,8 @@ public class AppTest {
         RegexCheckerTest regexCheckerTestClass = new RegexCheckerTest();
         regexCheckerTestClass.testIsValidDateFormat();
         regexCheckerTestClass.testIsValidPhoneNumberFormat();
+        regexCheckerTestClass.testIsValidHourFormat();
 
-        PasswordEncryptionTest passwordEncryptionTestClass =
-            new PasswordEncryptionTest();
-        passwordEncryptionTestClass.encryptPasswordTest();
-        passwordEncryptionTestClass.encryptDifferentPasswordsTest();
-
-        JsonFormattingTest jsonFormattingTestClass = new JsonFormattingTest();
-        jsonFormattingTestClass.jsonToTextFormatterJsonEnTexteSansId();
 
         InscriptionUtilsTest inscriptionUtilsTestClass =
             new InscriptionUtilsTest();
@@ -36,11 +37,10 @@ public class AppTest {
         inscriptionUtilsTestClass.isValidPasswordTest();
         inscriptionUtilsTestClass.isSamePasswordTest();
 
-        AgeFinderTest ageFinderTestClass = new AgeFinderTest();
-        ageFinderTestClass.ageFinderTest();
-
-        LoginPageTest loginPageTestClass = new LoginPageTest();
-        loginPageTestClass.loginIntervenantTest();
+        LoginPageTest loginPageTest = new LoginPageTest();
+        loginPageTest.findUserByCityIdTest();
+        loginPageTest.findUserByEmailTest();
+        loginPageTest.unsuccessfulLoginTest();
 
         System.out.println("All tests completed");
     }

@@ -1,5 +1,7 @@
 package com.app.pages;
 
+import com.app.MongoDBConnection;
+import com.app.controllers.RequeteTravailController;
 import com.app.models.User.User;
 
 import java.util.ArrayList;

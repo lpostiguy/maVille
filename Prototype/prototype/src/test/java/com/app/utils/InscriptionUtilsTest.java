@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class InscriptionUtilsTest {
 
+    // Vérifier que la méthode isAgeAbove16 associe le bon âge avec la date entrée.
     @Test
     public void isAbove16Test() {
         // Cas 1 : Âge supérieur à 16 ans
@@ -33,6 +34,8 @@ public class InscriptionUtilsTest {
                 "validée.");
     }
 
+    // Vérifier que isValidPassword renvoie le bon message dépendamment de l'erreur
+    // présente (ou non) dans l'entrée de l'utilisateur
     @Test
     public void isValidPasswordTest() {
         // Cas où le mot de passe est valide
@@ -56,6 +59,9 @@ public class InscriptionUtilsTest {
             "Un mot de passe " + "sans chiffre devrait retourner un message " +
                 "d'erreur.");
     }
+
+    // Vérifier que la méthode isSamePassword retourne true si et seulement si
+    // les mots de passes sont identiques.
 
     @Test
     public void isSamePasswordTest() {

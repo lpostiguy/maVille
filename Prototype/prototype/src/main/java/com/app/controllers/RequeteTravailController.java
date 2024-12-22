@@ -5,7 +5,6 @@ import com.app.models.Candidature;
 import com.app.models.RequeteTravail;
 import com.app.models.User.User;
 import com.app.utils.InscriptionUtils;
-import com.app.utils.JsonFormatting;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoCollection;
@@ -24,14 +23,18 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class RequeteTravailController {
 
     private static final Logger logger =
         LoggerFactory.getLogger(RequeteTravailController.class);
-    private static final MongoCollection<Document> collectionRequeteTravail =
-        MongoDBConnection.getDatabase().getCollection("requete-travail");
+    private static MongoCollection<Document> collectionRequeteTravail = MongoDBConnection.getDatabase().getCollection("requete-travail");
+
+    public RequeteTravailController(MongoCollection<Document> collection) {
+        collectionRequeteTravail = collection;
+    }
 
     public static void registerRoutes(Javalin app) {
 
@@ -84,7 +87,7 @@ public class RequeteTravailController {
                 List<Document> candidaturesInitiales = new ArrayList<>();
 
                 // Validation des champs requis
-                if (requeteTravail.getTitre() == null || requeteTravail.getDescription() == null || requeteTravail.getTypeTravaux() == null || requeteTravail.getDateDebutEspere() == null || requeteTravail.getDemandeurRequete() == null) {
+                if (Objects.equals(requeteTravail.getTitre(), "null") || Objects.equals(requeteTravail.getDescription(), "null") || Objects.equals(requeteTravail.getTypeTravaux(), "null") || Objects.equals(requeteTravail.getDateDebutEspere(), "null") || Objects.equals(requeteTravail.getDemandeurRequete(), "null")) {
                     ctx.status(400).result("Tous les champs sont requis.");
                     return;
                 }

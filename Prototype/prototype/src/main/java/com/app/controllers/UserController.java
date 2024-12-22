@@ -19,8 +19,7 @@ public class UserController {
 
     private static final Logger logger =
         LoggerFactory.getLogger(UserController.class);
-    private static final MongoCollection<Document> collectionUsers =
-        MongoDBConnection.getDatabase().getCollection("users");
+    private static MongoCollection<Document> collectionUsers = MongoDBConnection.getDatabase().getCollection("users");
 
     public static void registerRoutes(Javalin app) {
 

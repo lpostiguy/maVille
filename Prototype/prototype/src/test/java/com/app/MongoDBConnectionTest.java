@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MongoDBConnectionTest {
 
+    // Vérifier que la base de donnée n'est pas nulle.
     @Test
     public void connexionDoitRetournerUneBaseDeDonneesNonNulle() {
         // Vérifie que la connexion renvoie une base de données non nulle
@@ -14,6 +15,7 @@ public class MongoDBConnectionTest {
         assertNotNull(database, "La base de données ne doit pas être nulle");
     }
 
+    // Vérifier que la connexion est faite à la bonne base de donnée.
     @Test
     public void connexionDoitPointerVersLaBonneBaseDeDonnees() {
         // Vérifie que la base de données a le bon nom
@@ -22,6 +24,7 @@ public class MongoDBConnectionTest {
             "Le nom de la " + "base de données doit être 'MaVilleDataBase'");
     }
 
+    // Vérifier qu'un échec de la connexion à la base donnée ne lance pas d'exception.
     @Test
     public void connexionDoitEtreResilienteAuxErreurs() {
         // Simule une erreur dans la connexion pour vérifier que
