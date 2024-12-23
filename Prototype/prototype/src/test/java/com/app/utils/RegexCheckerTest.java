@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RegexCheckerTest {
 
+    // Vérifier que le seul format valide pour la date est YYYY-MM-DD.
     @Test
     public void testIsValidDateFormat() {
         // Cas valides
@@ -28,6 +29,8 @@ public class RegexCheckerTest {
                 "valide.");
     }
 
+    // Vérifier que le seul format valide pour le numéro de téléphone est
+    // 000-000-0000
     @Test
     public void testIsValidPhoneNumberFormat() {
         // Cas valides
@@ -52,6 +55,17 @@ public class RegexCheckerTest {
         assertFalse(RegexChecker.estFormatNumeroTelephoneValide("+1 1234567890"),
             "Un numéro de téléphone avec une mauvaise structure ne devrait " + "pas être valide.");
     }
+
+    // Vérifier que le seul format valide pour l'heure est HH:mm où
+    // 0 <= HH < 24 et 0 <= mm < 60
+    @Test
+    public void testIsValidHourFormat() {
+        assertTrue(RegexChecker.estFormatHeureValide("18:03"));
+        assertTrue(RegexChecker.estFormatHeureValide("00:00"));
+        assertFalse(RegexChecker.estFormatHeureValide(""));
+        assertFalse(RegexChecker.estFormatHeureValide("24:00"));
+    }
+
 
 
 }

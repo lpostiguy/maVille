@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class PostalCodeMapping {
 
-    private Map<String, String> postalCodeToDistrict = new HashMap<>();
+    private final Map<String, String> postalCodeToDistrict = new HashMap<>();
 
     public PostalCodeMapping(String csvFilePath) {
         loadPostalCodeData(csvFilePath);

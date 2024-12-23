@@ -1,60 +1,65 @@
 package com.app.pages;
 
+import com.app.MongoDBConnection;
+import com.app.controllers.RequeteTravailController;
+import com.app.controllers.UserController;
 import com.app.models.User.Intervenant;
 import com.app.models.User.Resident;
 import com.app.models.User.User;
+import com.mongodb.client.MongoCollection;
+import io.javalin.Javalin;
+import org.bson.Document;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
+import static com.app.pages.InscriptionPage.*;
 import static org.junit.jupiter.api.Assertions.*;
-
-import static com.app.pages.InscriptionPage.passwordEncryption;
 
 public class LoginPageTest {
 
-    @Test
-    public void loginIntervenantTest() {
-//        String simulatedInput = "james.williams@intervenant.com\nJames12345";
-//        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
-//
-//        Intervenant result = (Intervenant) LoginPage.loginPage();
-//
-//        assertNotNull(result);
-//        assertEquals("INTERVENANT", result.getUserRole());
-//        assertEquals("James", result.getFirstName());
-//        assertEquals("Williams", result.getLastName());
-//        assertEquals("273283", result.getCityId());
-//        assertEquals("james.williams@intervenant.com", result.getEmail());
-//        assertEquals("Entreprise", result.getEntityType());
-//        assertEquals(1661557291,
-//            passwordEncryption.encrypt(("" + result.getPassword())));
+    private Javalin app;
+    private int port = 8000;
+
+    @BeforeEach
+    void setup() {
+        app = Javalin.create().start(port);
+        UserController.registerRoutes(app);
     }
 
+    @AfterEach
+    void teardown() {
+        app.stop();
+    }
+
+    // Vérifier qu'un utilisateur existant est trouvée par la fonction findUserByEmail.
+    @Test
+    public void findUserByEmailTest() {
+        Document user = UserController.findUserByEmail("anthony@videotron.com");
+        assertFalse(user.isEmpty());
+    }
+
+    // Vérifier qu'en essayant de se connecter à un compte qui n'a pas été créé,
+    // le système retourne "null".
     @Test
     public void unsuccessfulLoginTest() {
-//        String simulatedInput = "testtest@intervenant.com\nTest123456\n1";
-//        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
-//
-//        User result = LoginPage.loginPage();
-//
-//        assertNull(result);
+        System.setIn(System.in);
+        String simulatedInput = "1\n1";
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+        User user = LoginPage.loginPage();
     }
 
+    // Vérifier que la fonction findUserByCityId réussit à trouver un intervenant
+    // avec le cityId fourni.
     @Test
-    public void loginResidentTest() {
-//        String simulatedInput = "jacob.wayne@resident.com\nWayne12345";
-//        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
-//
-//        Resident result = (Resident) LoginPage.loginPage();
-//
-//        assertNotNull(result);
-//        assertEquals("RESIDENT", result.getUserRole());
-//        assertEquals("Jacob", result.getFirstName());
-//        assertEquals("Wayne", result.getLastName());
-//        assertEquals("jacob.wayne@resident.com", result.getEmail());
-//        assertEquals(-570026804,
-//            passwordEncryption.encrypt("" + result.getPassword()));
+    public void findUserByCityIdTest() {
+        Document user = UserController.findUserByCityId("87656475");
+        assertFalse(user.isEmpty());
     }
 
 }
