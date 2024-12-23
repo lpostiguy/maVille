@@ -31,7 +31,8 @@ public class ProjetPage {
         if (projets.isEmpty()) {
             System.out.println("Vous n'avez pas encore soumis de " + "projet");
         } else {
-            for (i = 0; i < projets.size(); i++) {
+            System.out.println("projets.size()" + projets.size());
+            for (i = 0; i < projets.size();) {
                 i++;
                 System.out.printf("\n[%d] %s%n", i,
                     projets.get(i - 1).toString());
