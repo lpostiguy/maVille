@@ -22,7 +22,7 @@ dans le répertoire du projet.
 POUR TESTER L'APPLICATION:
 
 Pour tester l'application, voici les informations de connection
-pour 3 résidents et pour 3 intervenants que vous pouvez entrer lors de la connection:
+pour 5 résidents et pour 5 intervenants que vous pouvez entrer lors de la connection:
  
 Résidents:  
 
