@@ -1,10 +1,11 @@
 package com.app.models.User;
 
 import com.app.models.Notification;
-import com.app.utils.InscriptionUtils;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
+
+import static com.app.utils.GenerateurId.RandomIDGenerator;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Intervenant extends User {
@@ -24,7 +25,7 @@ public class Intervenant extends User {
         setCityId(cityId);
         setPassword(password);
         setUserRole("INTERVENANT");
-        setUserId(InscriptionUtils.RandomIDGenerator());
+        setUserId(RandomIDGenerator());
     }
 
     // Constructor pour se connecter

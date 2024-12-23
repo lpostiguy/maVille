@@ -14,6 +14,7 @@ public class Main {
         NotificationsController.registerRoutes(app);
         CandidatureController.registerRoutes(app);
         PreferenceHoraireController.registerRoutes(app);
+        ProjetController.registerRoutes(app);
 
         System.out.println("""
              __       __  ______       __     __ ______ __       __       ________\s

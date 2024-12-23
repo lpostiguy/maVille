@@ -21,13 +21,10 @@ public class ConsulterTravauxController {
     private static void displayTravail(Travail travail, boolean verifierActif) {
         if (!verifierActif | travailEstActif(travail)) {
             System.out.println("Titre : " + travail.getOccupancy_name());
-            System.out.println("Id : " + travail.getId());
             System.out.println("Type de travaux : " + travail.getReason_category());
             System.out.println("Quartier  : " + travail.getBoroughid());
             System.out.println("Date de début : " + travail.getDuration_start_date());
             System.out.println("Date de fin : " + travail.getDuration_end_date());
-            System.out.println("Longitude : " + travail.getLongitude());
-            System.out.println("Latitude : " + travail.getLatitude());
             System.out.println("----------------------------");
         }
     }

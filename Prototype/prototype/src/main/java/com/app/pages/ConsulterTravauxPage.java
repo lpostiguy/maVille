@@ -1,9 +1,13 @@
 package com.app.pages;
 
+import com.app.models.Projet;
+
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
 import static com.app.controllers.ConsulterTravauxController.consulterTravauxEnCours;
+import static com.app.controllers.ProjetController.consulterProjets;
 
 public class ConsulterTravauxPage {
 
@@ -13,10 +17,11 @@ public class ConsulterTravauxPage {
         boolean filtrer;
         boolean rechercher;
         while (true) {
-            System.out.println("\n------ Menu Consulter Travaux ------");
-            System.out.println("\n[1] Retour au menu principal");
+            System.out.println("\n------ Menu Consulter Travaux et Projets------");
+            System.out.println("[1] Retour au menu principal");
             System.out.println("[2] Rechercher des travaux");
             System.out.println("[3] Filtrer les travaux en cours");
+            System.out.println("[4] Consulter les projets");
             System.out.println("------------------------------------");
             String responseMenu = scanner.nextLine();
             switch (responseMenu) {
@@ -163,6 +168,22 @@ public class ConsulterTravauxPage {
                                 filtrer = false;
                             }
                         }
+                    }
+                }
+                case "4" -> {
+                    List<Projet> projets = consulterProjets();
+                    if(projets.isEmpty()) {
+                        System.out.println("Aucun projets n'existe pour le moment");
+                    }
+                    else {
+                        System.out.println("Voici la liste des projets:");
+                        for (Projet projet : projets) {
+                            System.out.println(projets.toString());
+                        }
+                    }
+                    System.out.println("\n[1] Retour");
+                    while (!scanner.nextLine().equals("1")) {
+                        System.out.println("\n[1] Retour");
                     }
                 }
             }

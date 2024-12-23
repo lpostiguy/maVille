@@ -199,7 +199,7 @@ public class ConsulterRequetesTravailPage {
                 if (scanner.hasNextInt()) {
                     choix = scanner.nextInt();
                 } else {
-                    scanner.next(); // Consommer l'entrée invalide
+                    scanner.next();
                 }
             }
 

@@ -2,7 +2,6 @@ package com.app.controllers;
 
 import com.app.MongoDBConnection;
 import com.app.models.Candidature;
-import com.app.utils.InscriptionUtils;
 import com.mongodb.client.MongoCollection;
 import io.javalin.Javalin;
 import org.bson.Document;
@@ -18,6 +17,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+
+import static com.app.utils.GenerateurId.RandomIDGenerator;
 
 public class CandidatureController {
 
@@ -61,7 +62,7 @@ public class CandidatureController {
                 String id = ctx.pathParam("id");
 
                 Candidature candidature = ctx.bodyAsClass(Candidature.class);
-                candidature.setId(InscriptionUtils.RandomIDGenerator());
+                candidature.setId(RandomIDGenerator());
 
                 Document requestDoc = collectionRequetesTravail.find(new Document("id"
                     , id)).first();

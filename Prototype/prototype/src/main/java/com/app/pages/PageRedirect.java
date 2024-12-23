@@ -71,34 +71,11 @@ public class PageRedirect {
                                 "travail" -> {
                                 consulterRequeteTravailMenu(user);
                             }
-                            case "Soumettre un nouveau projet de travaux" -> {
-                                System.out.println("Vous êtes maintenant " +
-                                    "sur" + " la" + " page : Soumettre " +
-                                    "un nouveau " + "projet de" + " " +
-                                    "travaux.");
-                                System.out.println("Pour l'instant, " +
-                                    "cette " + "page " + "est statique " +
-                                    "et il n'y a" + " pas encore de" + " " +
-                                    "logique.");
-                                // TODO: Send user to Soumettre un nouveau
-                                //  projet de travaux
-                            }
-                            case "Mettre à jour les informations d'un " +
-                                "chantier" -> {
-                                System.out.println("Vous êtes maintenant " +
-                                    "sur" + " la" + " page : Mettre à " +
-                                    "jour les " + "informations" + " " + "d" + "'un chantier.");
-                                System.out.println("Pour l'instant, " +
-                                    "cette " + "page " + "est statique " +
-                                    "et il n'y a" + " pas encore de" + " " +
-                                    "logique.");
-                                // TODO: Send user to Mettre à jour les
-                                //  informations d'un chantier
+                            case "Soumettre ou consulter des projets" -> {
+                                ProjetPage.soumettreProjetMenu(user);
                             }
                             case "Consulter son profil" -> {
                                 AccountPage.accountPageMenu(user);
-                                // TODO: Access the user info from the data
-                                //  base
                             }
                             case "Se Déconnecter" -> {
                                 quitLoggedMenu = true;

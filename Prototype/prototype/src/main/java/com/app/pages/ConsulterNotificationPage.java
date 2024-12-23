@@ -39,7 +39,7 @@ public class ConsulterNotificationPage {
         if(!notifications.isEmpty()) {
         System.out.println(titre);
         for (int i = 0; i < notifications.size(); i++) {
-            System.out.println("Message notification " + (i + 1) + " : " + notifications.get(i).getMsg());
+            System.out.println("\nMessage notification " + (i + 1) + " : \n" + notifications.get(i).getMsg());
         }
         }
         else {

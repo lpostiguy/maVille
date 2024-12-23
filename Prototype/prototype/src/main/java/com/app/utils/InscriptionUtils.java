@@ -27,8 +27,4 @@ public class InscriptionUtils {
         int age = AgeFinder.findAge(dateOfBirth, currentDate.toString());
         return age >= 16;
     }
-
-    public static String RandomIDGenerator() {
-        return UUID.randomUUID().toString();
-    }
 }

@@ -2,12 +2,13 @@ package com.app.models.User;
 
 import com.app.models.Notification;
 import com.app.models.PreferenceHoraire;
-import com.app.utils.InscriptionUtils;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 import java.util.Objects;
+
+import static com.app.utils.GenerateurId.RandomIDGenerator;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 
@@ -29,7 +30,7 @@ public class Resident extends User {
         setHomeAddress(homeAddress);
         setPassword(password);
         setUserRole("RESIDENT");
-        setUserId(InscriptionUtils.RandomIDGenerator());
+        setUserId(RandomIDGenerator());
         setBoroughId(boroughId);
 
         // Phone number is optional

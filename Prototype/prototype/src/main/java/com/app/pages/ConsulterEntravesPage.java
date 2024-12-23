@@ -14,7 +14,7 @@ public class ConsulterEntravesPage {
         boolean rechercher;
         while (true) {
             System.out.println("\n------ Menu Consulter Entraves ------");
-            System.out.println("\n[1] Retour au menu principal");
+            System.out.println("[1] Retour au menu principal");
             System.out.println("[2] Rechercher des entraves");
             System.out.println("[3] Filtrer les entraves par rue");
             System.out.println("------------------------------------");
@@ -112,13 +112,6 @@ public class ConsulterEntravesPage {
                         }
                     }
                 }
-
-//        System.out.println("Voici la liste de toutes les entraves routières: ");
-//        consulterEntraves();
-//        System.out.println("\n[1] Retour au menu principal");
-//        while (!scanner.nextLine().equals("1")) {
-//            System.out.println("\n[1] Retour au menu principal");
-
             }
         }
     }

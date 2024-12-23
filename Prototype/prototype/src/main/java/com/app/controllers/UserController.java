@@ -2,6 +2,7 @@ package com.app.controllers;
 
 import com.app.MongoDBConnection;
 import com.app.models.User.User;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import io.javalin.Javalin;
 import org.bson.Document;
@@ -77,6 +78,21 @@ public class UserController {
     public static Document findUserById(String id) {
         return collectionUsers.find(new Document("userId", id)).first();
     }
+
+    public static List<String> findUsersByBoroughId(String boroughId) {
+        // Rechercher les utilisateurs correspondant à boroughId
+        FindIterable<Document> result = collectionUsers.find(new Document("boroughId", boroughId));
+
+        // Convertir les résultats en une liste
+        List<String> users = new ArrayList<>();
+        for (Document doc : result) {
+            String userId = doc.getString("userId");
+            users.add(userId);
+        }
+
+        return users;
+    }
+
 
     public static String addNewUser(String userId, String firstName,
                                     String lastName, String email,
