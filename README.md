@@ -5,6 +5,31 @@ MaVille est une application en ligne de commande développée en Java, conçue p
 
 --------------------------------------------
 
+FONCTIONNALITÉS DE L'APPLICATION PAR RÔLE
+
+Lorsqu'un résident est connecté dans l'applicaition MaVille, il peut:
+- Créer un compte
+- Se connecter/déconnecter
+- Voir ses notifications
+- Consulter les travaux en cours
+- Consulter les travaux à venir (3 prochains mois)
+- Chercher ou filtrer les travaux par quartier
+- Consulter les entraves engendrées par un travail
+- Chercher ou filtrer les entraves par rue
+- Soumettre une requête de travail
+- Faire le suivi d'une requête de travail
+    
+Lorsqu'un intervenant est connecté dans l'applicaition MaVille, il peut:
+- Créer un compte
+- Se connecter/déconnecter
+- Consulter les requêtes de travai
+- Soumettre/Soustraire sa candidature
+- Faire le suivi de sa candidature
+- Soumettre un projet
+- Modifier le statut d'un projet
+
+--------------------------------------------
+
 ORGANISATION DU RÉPERTOIRE :
 - Rapport de l'équipe : Comprend toutes les précisions, l'analyse des exigences, et les cas d'utilisation de l'application
 - Prototype en ligne de commande : Un prototype simple permettant de simuler l'inscription, la connexion, et la navigation des menus
