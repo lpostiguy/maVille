@@ -8,49 +8,105 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] Tests unitaires">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/CandidatureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/CandidatureController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/ConsulterEntravesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/ConsulterEntravesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/ConsulterTravauxController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/ConsulterTravauxController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/NotificationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/NotificationsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/PreferenceHoraireController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/PreferenceHoraireController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/ProjetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/ProjetController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/RequeteTravailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/RequeteTravailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Candidature.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Candidature.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Entrave.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Entrave.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Notification.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Notification.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/PreferenceHoraire.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/PreferenceHoraire.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Projet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Projet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/RequeteTravail.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/RequeteTravail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Travail.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/Travail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/Intervenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/Intervenant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/Resident.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/models/User/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/AccountPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/AccountPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/CandidaturePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/CandidaturePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterEntravesPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterEntravesPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterNotificationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterNotificationPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterRequetesTravailPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterRequetesTravailPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterTravauxPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterTravauxPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/InscriptionPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/InscriptionPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/LoginPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/MainMenuPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/MainMenuPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/PageRedirect.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/PageRedirect.java" afterDir="false" />
+    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] JavaDoc, JaCoco report">
+      <change afterPath="$PROJECT_DIR$/JavaDoc/allclasses-index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/allpackages-index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/Main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/MongoDBConnection.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/controllers/CandidatureController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/controllers/ConsulterEntravesController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/controllers/ConsulterTravauxController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/controllers/NotificationsController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/controllers/PreferenceHoraireController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/controllers/ProjetController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/controllers/RequeteTravailController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/controllers/UserController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/controllers/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/controllers/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/models/Candidature.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/models/Entrave.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/models/Notification.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/models/PreferenceHoraire.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/models/Projet.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/models/RequeteTravail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/models/Travail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/models/User/Intervenant.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/models/User/Resident.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/models/User/User.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/models/User/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/models/User/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/models/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/models/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/pages/AccountPage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/pages/CandidaturePage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/pages/ConsulterEntravesPage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/pages/ConsulterNotificationPage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/pages/ConsulterRequetesTravailPage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/pages/ConsulterTravauxPage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/pages/InscriptionPage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/pages/LoginPage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/pages/MainMenuPage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/pages/PageRedirect.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/pages/ProjetPage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/pages/SoumettreRequeteTravailPage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/pages/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/pages/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/utils/AgeFinder.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/utils/GenerateurId.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/utils/InscriptionUtils.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/utils/PasswordEncryption.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/utils/PostalCodeMapping.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/utils/RegexChecker.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/utils/ReponseApi.ResultatEntraves.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/utils/ReponseApi.ResultatTravaux.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/utils/ReponseApi.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/utils/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/com/app/utils/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/copy.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/element-list" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/help-doc.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-10.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-11.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-12.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-13.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-14.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-15.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-3.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-4.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-5.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-6.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-7.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-8.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-9.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/legal/ADDITIONAL_LICENSE_INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/legal/ASSEMBLY_EXCEPTION" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/legal/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/legal/jquery.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/legal/jqueryUI.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/link.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/member-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/module-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/overview-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/overview-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/package-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/resources/glass.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/resources/x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/script-dir/jquery-3.6.1.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/script-dir/jquery-ui.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/script-dir/jquery-ui.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/search-page.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/search.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/search.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/stylesheet.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/tag-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaDoc/type-search-index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ProjetPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ProjetPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/SoumettreRequeteTravailPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/SoumettreRequeteTravailPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/AgeFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/AgeFinder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/GenerateurId.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/GenerateurId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/InscriptionUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/InscriptionUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/JsonFormatting.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/PasswordEncryption.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/PasswordEncryption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/PostalCodeMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/PostalCodeMapping.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/RegexChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/RegexChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/ReponseApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/utils/ReponseApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/controllers/SoumettreRequeteTravailControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/test/java/com/app/controllers/SoumettreRequeteTravailControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,39 +153,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.JsonFormating.executor": "Run",
-    "Application.JsonFormatting.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.Run Main.executor": "Run",
-    "JUnit.AppTest.executor": "Run",
-    "JUnit.AppTest.runAllTests.executor": "Run",
-    "JUnit.LoginPageTest.loginIntervenantTest.executor": "Run",
-    "JUnit.LoginPageTest.loginResidentTest.executor": "Run",
-    "JUnit.LoginPageTest.unsuccessfulLoginTest.executor": "Run",
-    "Maven.prototype [clean].executor": "Run",
-    "Maven.prototype [compile].executor": "Run",
-    "Maven.prototype [deploy].executor": "Run",
-    "Maven.prototype [install].executor": "Run",
-    "Maven.prototype [org.apache.maven.plugins:maven-jar-plugin:3.4.1:help].executor": "Run",
-    "Maven.prototype [org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar].executor": "Run",
-    "Maven.prototype [org.jacoco:jacoco-maven-plugin:0.8.11:report].executor": "Run",
-    "Maven.prototype [org.jacoco:jacoco-maven-plugin:0.8.4:check].executor": "Run",
-    "Maven.prototype [package].executor": "Run",
-    "Maven.prototype [test].executor": "Run",
-    "Maven.prototype [validate].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ostil/Documents/Université/Session 2/Prog 2/TP2/TP2_LouisPhilippeOstiguy_NoahTremblayTaillon",
-    "settings.editor.selected.configurable": "coverage"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.JsonFormating.executor&quot;: &quot;Run&quot;,
+    &quot;Application.JsonFormatting.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Run Main.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AppTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AppTest.runAllTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LoginPageTest.loginIntervenantTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LoginPageTest.loginResidentTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LoginPageTest.unsuccessfulLoginTest.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [deploy].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [org.apache.maven.plugins:maven-jar-plugin:3.4.1:help].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [org.jacoco:jacoco-maven-plugin:0.8.11:report].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [org.jacoco:jacoco-maven-plugin:0.8.4:check].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.prototype [validate].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ostil/Documents/Université/Session 2/Prog 2/TP2/TP2_LouisPhilippeOstiguy_NoahTremblayTaillon&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;coverage&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\antho\Documents\IFT2255-A24-SessionProject-equipe" />
@@ -359,7 +415,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734808924180</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="[PROTOTYPE] JavaDoc, JaCoco report">
+      <option name="closed" value="true" />
+      <created>1734985509723</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1734985509723</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -387,6 +451,7 @@
     <MESSAGE value="[PROTOTYPE] Ajout: Suivi candidature, confirmer candidature (intervenant)" />
     <MESSAGE value="[PROTOTYPE] Fix problèmes configuration Maven" />
     <MESSAGE value="[PROTOTYPE] Filtrer/Chercher entrave" />
-    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] Filtrer/Chercher entrave" />
+    <MESSAGE value="[PROTOTYPE] JavaDoc, JaCoco report" />
+    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] JavaDoc, JaCoco report" />
   </component>
 </project>

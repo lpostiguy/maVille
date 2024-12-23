@@ -164,7 +164,7 @@ public class ProjetPage {
             }
         }
 
-        if(!nomUsers.isEmpty()) {
+        if (!nomUsers.isEmpty()) {
             System.out.println("\nVoici tous les conflits d'horaires " + "avec les résidents des quartiers affectés par votre " + "projet:");
 
             int userIndex = 0;
@@ -193,11 +193,10 @@ public class ProjetPage {
 
         boolean entreValide = false;
         while (!entreValide) {
-            if(!nomUsers.isEmpty()) {
+            if (!nomUsers.isEmpty()) {
                 System.out.println("\n[1] Ne pas envoyer le projet et" + " revenir au menu des projets");
                 System.out.println("[2] Soumettre ce projet malgré " + "les conflits horaires");
-            }
-            else {
+            } else {
                 System.out.println("\n[1] Annuler la soumission " +
                     "du projet");
                 System.out.println("[2] Confirmer la soumission " +
