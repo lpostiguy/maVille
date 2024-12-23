@@ -87,7 +87,7 @@ public class PageRedirect {
                                 consulterRequeteTravailMenu(user);
                             }
                             case "Soumettre ou consulter des projets" -> {
-                                ProjetPage.soumettreProjetMenu(user);
+                                ProjetPage.projetMenu(user);
                             }
                             case "Consulter son profil" -> {
                                 AccountPage.accountPageMenu(user);
