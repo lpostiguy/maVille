@@ -93,6 +93,21 @@ public class UserController {
         return users;
     }
 
+    public static List<String> findUsersNameByUserId(String userId) {
+        // Rechercher les informations utilisateurs correspondant à boroughId
+        FindIterable<Document> result = collectionUsers.find(new Document("userId", userId));
+
+        // Convertir les résultats en une liste
+        List<String> users = new ArrayList<>();
+        for (Document doc : result) {
+            String prenom = doc.getString("firstName");
+            String nom = doc.getString("lastName");
+            users.add(prenom + " " + nom);
+        }
+
+        return users;
+    }
+
 
     public static String addNewUser(String userId, String firstName,
                                     String lastName, String email,

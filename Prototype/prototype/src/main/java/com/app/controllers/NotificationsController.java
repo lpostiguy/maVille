@@ -151,9 +151,9 @@ public class NotificationsController {
                         "l'ID spécifié.");
                 }
             } catch (Exception e) {
-                logger.error("Erreur lors de la mise à jour de la " +
-                    "notification : ", e);
-                ctx.status(500).result("Erreur serveur : " + e.getMessage());
+                //logger.error("Erreur lors de la mise à jour de la " +
+                    //"notification : ", e);
+                //ctx.status(500).result("Erreur serveur : " + e.getMessage());
             }
         });
     }
@@ -198,9 +198,10 @@ public class NotificationsController {
 
                 // Vérifier la réponse
                 if (response.statusCode() != 200) {
-                    System.err.println("Erreur lors de la mise à jour : HTTP "
-                        + response.statusCode());
-                    System.err.println("Message d'erreur : " + response.body());
+                    //System.err.println("Erreur lors de la mise à jour : HTTP "
+                    //    + response.statusCode());
+                    //System.err.println("Message d'erreur : " + response
+                    // .body());
                     allUpdatesSuccessful = false;
                 }
 

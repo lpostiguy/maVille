@@ -2,12 +2,14 @@ package com.app.pages;
 
 import com.app.models.Projet;
 import com.app.models.User.User;
+import org.bson.Document;
 
 import java.util.*;
 
 import static com.app.controllers.NotificationsController.envoyerNotification;
+import static com.app.controllers.PreferenceHoraireController.recupererPreferencesHoraires;
 import static com.app.controllers.ProjetController.*;
-import static com.app.controllers.UserController.findUsersByBoroughId;
+import static com.app.controllers.UserController.*;
 import static com.app.utils.RegexChecker.estFormatDateValide;
 
 public class ProjetPage {
@@ -21,7 +23,7 @@ public class ProjetPage {
             System.out.println("[1] Retour au menu principal");
             System.out.println("[2] Consulter ses projets");
             System.out.println("[3] Soumettre un projet");
-            System.out.println("------------------------------------");
+            System.out.println("---------------------------");
             String responseMenu = scanner.nextLine();
             switch (responseMenu) {
                 case "1" -> {
@@ -150,32 +152,90 @@ public class ProjetPage {
                         }
                     }
 
-                    // Appel de la méthode pour soumettre le projet avec les données entrées
-                    System.out.println(soumettreProjet(user.getUserId(), titre, description, typeTravaux, dateDebut, dateFin, quartiersAffectes, ruesAffectees, "prévu"));
                     List<String> userIds = new ArrayList<>();
                     for (String quartierAffecte : quartiersAffectes) {
-                        List<String> userBoroughIds = findUsersByBoroughId(quartierAffecte);
-                        if (!userBoroughIds.isEmpty()) {
-                            userIds.addAll(userBoroughIds);
+                        List<String> boroughIdsUsers =
+                            findUsersByBoroughId(quartierAffecte);
+                        if (!boroughIdsUsers.isEmpty()) {
+                            userIds.addAll(boroughIdsUsers);
                         }
                     }
-                    if (!userIds.isEmpty()) {
-                        String message = "'\n" + "Un nouveau projet à été " +
-                            "créé dans votre quartier: \n" +
-                            "------------------------------------\n" +
-                            "Titre : '" + titre + "'\n" +
-                            "Description : '" + description + "'\n" +
-                            "Date de Debut : '" + dateDebut + "'\n" +
-                            "Date de Fin : '" + dateFin + "'\n" +
-                            "Type de Travaux : '" + typeTravaux + "'\n" +
-                            "Quartiers Affectés : " + quartiersAffectes + "\n" +
-                            "Rues Affectées : " + ruesAffectees + "\n" +
-                            "Statut : 'prévu'";
-                        String jsonSafeMessage = message.replace("\n", "\\n");
+
+                    // Liste pour les noms des utilisateurs
+                    List<String> nomUsers = new ArrayList<>();
+                    for (String userId : userIds) {
+                        List<String> infosUsers = findUsersNameByUserId(userId);
+                        if (!infosUsers.isEmpty()) {
+                            nomUsers.addAll(infosUsers);
+                        }
+                    }
+
+                    if(!nomUsers.isEmpty()) {
+                        System.out.println("\nVoici tous les conflits d'horaires " + "avec les résidents des quartiers affectés par votre " + "projet:");
+
+                        int userIndex = 0;
                         for (String userId : userIds) {
-                            envoyerNotification(jsonSafeMessage, userId);
+                            List<Document> preferences = recupererPreferencesHoraires(userId);
+
+                            // Afficher l'utilisateur et ses préférences
+                            System.out.println("\nUtilisateur : " + nomUsers.get(userIndex) + " :");
+
+                            if (preferences.isEmpty()) {
+                                System.out.println("  Aucune préférence horaire disponible.");
+                            } else {
+                                System.out.println("  Préférences horaires :");
+                                for (Document preference : preferences) {
+                                    String jour = preference.getString("jour");
+                                    String heureDebut = preference.getString("heureDebut");
+                                    String heureFin = preference.getString("heureFin");
+
+                                    // Affichage formaté
+                                    System.out.printf("    - Jour : %s, Heure de début : %s, Heure de fin : %s%n", jour, heureDebut, heureFin);
+                                }
+                            }
+                            userIndex++;
                         }
                     }
+
+                    boolean entreValide = false;
+                    while (!entreValide) {
+                        if(!nomUsers.isEmpty()) {
+                            System.out.println("\n[1] Ne pas envoyer le projet et" + " revenir au menu des projets");
+                            System.out.println("[2] Soumettre ce projet malgré " + "les conflits horaires");
+                        }
+                        else {
+                            System.out.println("\n[1] Annuler la soumission " +
+                                "du projet");
+                            System.out.println("[2] Confirmer la soumission " +
+                                "du projet");
+                        }
+                        Scanner scanner2 = new Scanner(System.in);
+                        String choix2 = scanner2.nextLine();
+                        if (Objects.equals(choix2, "1")) {
+                            entreValide = true;
+                        } else if (Objects.equals(choix2, "2")) {
+                            entreValide = true;
+                            // Appel de la méthode pour soumettre le projet avec les données entrées
+                            System.out.println(soumettreProjet(user.getUserId(), titre, description, typeTravaux, dateDebut, dateFin, quartiersAffectes, ruesAffectees, "prévu"));
+                            if (!userIds.isEmpty()) {
+                                String message = "Un nouveau projet à été " +
+                                    "créé dans votre quartier: \n" +
+                                    "------------------------------------\n" +
+                                    "Titre : '" + titre + "'\n" +
+                                    "Description : '" + description + "'\n" +
+                                    "Date de Debut : '" + dateDebut + "'\n" +
+                                    "Date de Fin : '" + dateFin + "'\n" +
+                                    "Type de Travaux : '" + typeTravaux + "'\n" +
+                                    "Quartiers Affectés : " + quartiersAffectes + "\n" +
+                                    "Rues Affectées : " + ruesAffectees + "\n" +
+                                    "Statut : 'prévu'";
+                                String jsonSafeMessage = message.replace("\n", "\\n");
+                                for (String userId : userIds) {
+                                    envoyerNotification(jsonSafeMessage, userId);
+                                }
+                            }
+                    }
+                }
                 }
             }
         }
