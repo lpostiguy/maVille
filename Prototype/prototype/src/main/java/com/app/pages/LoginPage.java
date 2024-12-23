@@ -13,11 +13,25 @@ import java.util.*;
 
 import static com.app.pages.InscriptionPage.passwordEncryption;
 
+/**
+ * Cette classe est responsable de la gestion de la connexion des utilisateurs.
+ * Permet aux utilisateurs de se connecter en vérifiant leur adresse email
+ * et leur mot de passe.
+ */
 public class LoginPage {
 
     static Scanner scanner = new Scanner(System.in);
     static boolean isLoggedIn = false;
 
+    /**
+     * Méthode principale pour gérer la page de connexion.
+     * Permet à l'utilisateur de saisir son adresse courriel et son mot de passe.
+     * Si les informations sont correctes, l'utilisateur est connecté.
+     *
+     * @return L'utilisateur connecté sous forme d'une instance de `Resident`
+     * ou `Intervenant`, ou `null` si l'utilisateur choisit de revenir au menu
+     * principal.
+     */
     public static User loginPage() {
         while (!isLoggedIn) {
             System.out.println("[1] Retour");

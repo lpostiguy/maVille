@@ -8,6 +8,10 @@ import java.util.List;
 
 import static com.app.utils.GenerateurId.RandomIDGenerator;
 
+/**
+ * Cette classe représente un projet avec ses caractéristiques, incluant les
+ * dates, la description, les zones affectées, et son statut.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 public class Projet {

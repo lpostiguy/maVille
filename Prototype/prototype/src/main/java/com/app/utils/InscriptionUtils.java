@@ -4,6 +4,13 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Cette classe contient des méthodes utilitaires pour la gestion de
+ * l'inscription des utilisateurs.
+ * Elle fournit des méthodes pour valider des mots de passe, vérifier si les
+ * mots de passe sont identiques, et vérifier si l'utilisateur a l'âge requis
+ * pour s'inscrire (16 ans).
+ */
 public class InscriptionUtils {
 
     public static boolean isSamePassword(String password1, String password2) {

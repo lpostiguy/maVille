@@ -9,9 +9,13 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.app.utils.GenerateurId.RandomIDGenerator;
-
+/**
+ * Cette classe représente un utilisateur ayant un rôle spécifique
+ * de Résident.
+ * Cette classe étend la classe `User` et ajoute des attributs spécifiques au
+ * résident.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
-
 public class Resident extends User {
 
     // Constructeur par défaut

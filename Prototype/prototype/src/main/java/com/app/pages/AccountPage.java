@@ -11,9 +11,27 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Cette classe gère les fonctionnalités liées à la gestion des
+ * informations de compte utilisateur, y compris la visualisation des données,
+ * les préférences horaires pour les résidents, et les informations spécifiques
+ * aux intervenants.
+ */
+
 public class AccountPage {
 
     static Scanner scanner = new Scanner(System.in);
+
+    /**
+     * Affiche le menu de la page de compte et permet à l'utilisateur de
+     * naviguer entre différentes options, telles que la visualisation des
+     * données utilisateur et la gestion des préférences horaires (pour les
+     * résidents)
+     *
+     * @param user l'utilisateur connecté
+     * @return {@code false} si l'utilisateur choisit de quitter la page de
+     * compte, sinon reste dans le menu.
+     */
 
     public static boolean accountPageMenu(User user) {
         System.out.println("\nEntrez un numéro pour être redirigé vers ces pages:");
@@ -61,6 +79,13 @@ public class AccountPage {
         }
         return false;
     }
+
+    /**
+     * Gère les préférences horaires d'un résident, y compris leur récupération,
+     * leur ajout ou modification, et leur suppression.
+     *
+     * @param userId l'identifiant du résidnet.
+     */
 
     private static void gérerPreferencesHoraires(String userId) {
         Boolean isValidInput = false;
@@ -164,6 +189,11 @@ public class AccountPage {
         }
     }
 
+    /**
+     * Affiche les informations spécifiques à un utilisateur de type résident.
+     *
+     * @param resident l'utilisateur résident
+     */
     public static void residentPrintInfo(Resident resident) {
         System.out.println("Adresse de résidence: " + resident.getHomeAddress());
         if (!Objects.equals(resident.getPhoneNumber(), "")) {
@@ -172,6 +202,12 @@ public class AccountPage {
         System.out.println("Date de naissance: " + resident.getDateOfBirth());
     }
 
+    /**
+     * Affiche les informations spécifiques à un utilisateur de type
+     * intervenant.
+     *
+     * @param intervenant l'utilisateur intervenant
+     */
     public static void intervenantPrintInfo(Intervenant intervenant) {
         System.out.println("Type d'entité: " + intervenant.getEntityType());
         System.out.println("Identifiant de la ville: " + intervenant.getCityId());

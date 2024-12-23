@@ -4,6 +4,11 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Cette classe permet de charger et de gérer une correspondance entre les
+ * codes postaux et les quartiers. Elle charge les données de codes postaux
+ * depuis un fichier CSV.
+ */
 public class PostalCodeMapping {
 
     private final Map<String, String> postalCodeToDistrict = new HashMap<>();
@@ -31,6 +36,17 @@ public class PostalCodeMapping {
         }
     }
 
+    /**
+     * Récupère le district correspondant à un code postal dans une adresse donnée.
+     * Le code postal est extrait de l'adresse, et si le préfixe du code postal est trouvé,
+     * le district correspondant est renvoyé. Si le code postal est invalide ou inconnu,
+     * un message approprié est retourné.
+     *
+     * @param address L'adresse contenant le code postal. L'adresse doit être au format :
+     *                [rue, ville, code postal].
+     * @return Le district correspondant au code postal ou un message d'erreur si le code
+     *         postal est inconnu ou invalide.
+     */
     public String getDistrictByPostalCode(String address) {
         String[] parts = address.split(",");
         String postalCode = "";

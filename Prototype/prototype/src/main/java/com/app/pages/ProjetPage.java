@@ -10,9 +10,22 @@ import static com.app.controllers.ProjetController.*;
 import static com.app.controllers.UserController.findUsersByBoroughId;
 import static com.app.utils.RegexChecker.estFormatDateValide;
 
+/**
+ * Cette classe gère les pages et les interactions liées aux projets dans
+ * l'application. Elle permet à un intervenant de consulter ses projets, de
+ * soumettre un nouveau projet, et de modifier le statut d'un projet existant.
+ * Elle gère également l'envoi de notifications aux utilisateurs concernés par
+ * les projets soumis ou modifiés.
+ */
 public class ProjetPage {
 
-    // Méthode de menu pour l'utilisateur
+    /**
+     * Affiche le menu des projets et permet à l'utilisateur de naviguer entre
+     * les différentes options. L'utilisateur peut consulter ses projets,
+     * soumettre un nouveau projet ou revenir au menu principal.
+     *
+     * @param user L'utilisateur connecté, qui est un intervenant dans ce cas.
+     */
     public static void soumettreProjetMenu(User user) {
         Scanner scanner = new Scanner(System.in);
 

@@ -3,6 +3,10 @@ package com.app.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.bson.Document;
 
+/**
+ * Cette classe représente une candidature faite par un résident et contient des
+ * informations liées à la candidature.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 public class Candidature {
@@ -16,7 +20,7 @@ public class Candidature {
     private String intervenantMsg;
     private String id;
 
-    // Constructeur par défaut
+    // Constructeur par défaut (Obligatoire pour la désérialisation).
     public Candidature() {
 
     }
@@ -78,14 +82,6 @@ public class Candidature {
 
     // Setters
 
-    public void setDateFin(String dateFin) {
-        this.dateFin = dateFin;
-    }
-
-    public void setDateDebut(String dateDebut) {
-        this.dateDebut = dateDebut;
-    }
-
     public void setUserId(String userId) {
         this.userId = userId;
     }
@@ -100,10 +96,6 @@ public class Candidature {
 
     public void setConfirmed(boolean isConfirmed) {
         this.confirmed = isConfirmed;
-    }
-
-    public void setIntervenantMsg(String intervenantMsg) {
-        this.intervenantMsg = intervenantMsg;
     }
 
     public void setId(String id) {

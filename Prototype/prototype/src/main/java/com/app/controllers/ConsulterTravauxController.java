@@ -16,6 +16,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Classe qui gère la consultation des travaux en cours via l'API de la ville de
+ * Montréal. Cette classe permet de récupérer, de filtrer et d'afficher les
+ * travaux en fonction des critères fournis par l'utilisateur.
+ */
 public class ConsulterTravauxController {
 
     private static void displayTravail(Travail travail, boolean verifierActif) {
@@ -29,7 +34,18 @@ public class ConsulterTravauxController {
         }
     }
 
-    // Méthode pour consulter les travaux en cours
+    /**
+     * Consulte les travaux en cours en fonction des critères de filtrage
+     * spécifiés.
+     *
+     * @param filterPar        Le critère par lequel les travaux doivent être
+     *                        regroupés (par exemple, "reason_category" ou
+     *                        "boroughid").
+     * @param recherche        Le terme de recherche à utiliser pour filtrer les
+     *                        travaux.
+     * @param effectuerRecherche Si true, effectue une recherche sur les travaux
+     *                          en fonction de "filterPar" et "recherche".
+     */
     public static void consulterTravauxEnCours(String filterPar,
                                                String recherche,
                                                boolean effectuerRecherche) {

@@ -1,14 +1,21 @@
 package com.app.utils;
 
+/**
+ * Cette classe permet de calculer l'âge d'une personne en fonction de sa date
+ * de naissance et de la date actuelle.
+ */
 public class AgeFinder {
 
     /**
-     * Calculates the age of something by comparing the birthDate and the
-     * currentDate.
+     * Calcule l'âge d'une personne à partir de sa date de naissance et de
+     * la date actuelle.
      *
-     * @param birthDate   the birthdate in “YYYY-MM-DD” format
-     * @param currentDate the current date in “YYYY-MM-DD” format
-     * @return the number of years between the currentDate, and the birthDate
+     * @param birthDate La date de naissance de la personne au format
+     *                 "YYYY-MM-DD".
+     * @param currentDate La date actuelle au format "YYYY-MM-DD".
+     * @return L'âge de la personne en années entières.
+     * @throws IllegalArgumentException Si l'un des paramètres de date est
+     * invalide.
      */
     public static int findAge(String birthDate, String currentDate) {
 

@@ -17,6 +17,11 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+/**
+ * Classe qui gère la consultation des entraves via l'API de la ville de
+ * Montréal. Cette classe permet d'effectuer des recherches, de filtrer et
+ * d'afficher les informations des entraves.
+ */
 public class ConsulterEntravesController {
 
     private static void displayEntrave(Entrave entrave) {
@@ -30,7 +35,24 @@ public class ConsulterEntravesController {
         System.out.println("----------------------------");
         }
 
-    // Méthode pour consulter les entraves
+    /**
+     * Consulte les entraves à partir de l'API ouverte de la ville de Montréal.
+     * Cette méthode permet de filtrer et d'afficher les résultats en fonction
+     * des critères donnés.
+     *
+     * @param filterPar        Le champ par lequel les entraves doivent être
+     *                         regroupées, par exemple "street_id".
+     *                         Peut être null si aucun regroupement n'est
+     *                         nécessaire.
+     * @param recherche        Le terme de recherche à utiliser pour filtrer les
+     *                         entraves. Si effectuerRecherche est true
+     *                         et recherche est non vide, la recherche sera
+     *                         effectuée sur ce champ.
+     * @param effectuerRecherche Indicateur booléen pour savoir si une recherche
+     *                          doit être effectuée.
+     *                          Si true, la méthode applique la recherche selon
+     *                          filterPar et recherche.
+     */
     public static void consulterEntraves(String filterPar, String recherche, boolean effectuerRecherche) {
         try {
             URL url =

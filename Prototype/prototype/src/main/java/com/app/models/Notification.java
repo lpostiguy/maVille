@@ -2,12 +2,16 @@ package com.app.models;
 
 import org.bson.Document;
 
+/**
+ * Cette classe représente une notification pour le résident, avec un message,
+ * un identifiant unique, et un indicateur pour savoir si elle a été vue ou non.
+ */
 public class Notification {
     private String msg;
     private String id;
     private boolean vu;
 
-    // Constructeur par défaut
+    // Constructeur par défaut (Obligatoire pour la désérialisation)
     public Notification() {
     }
 
@@ -42,15 +46,7 @@ public class Notification {
     }
 
     // Setters
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
     public void setId(String id) {
         this.id = id;
-    }
-
-    public void setVu(boolean vu) {
-        this.vu = vu;
     }
 }

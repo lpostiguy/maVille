@@ -20,6 +20,12 @@ import java.util.List;
 
 import static com.app.utils.GenerateurId.RandomIDGenerator;
 
+/**
+ * Contrôleur responsable de la gestion des candidatures dans l'application.
+ * Cette classe permet de soumettre, modifier, supprimer et récupérer les
+ * candidatures associées à des requêtes de travail dans la base de données
+ * MongoDB.
+ */
 public class CandidatureController {
 
     private static final Logger logger =
@@ -27,6 +33,14 @@ public class CandidatureController {
     private static final MongoCollection<Document> collectionRequetesTravail =
         MongoDBConnection.getDatabase().getCollection("requete-travail");
 
+    /**
+     * Enregistre les routes HTTP pour la gestion des candidatures.
+     * Ces routes incluent la création, la suppression, et la mise à jour
+     * des candidatures.
+     *
+     * @param app Instance de l'application Javalin pour l'enregistrement des
+     *           routes.
+     */
     public static void registerRoutes(Javalin app) {
 
         // Pour chercher toutes les notifications
@@ -190,6 +204,25 @@ public class CandidatureController {
         });
     }
 
+    /**
+     * Soumet une candidature pour une requête de travail en envoyant une
+     * requête HTTP POST à l'API. Cette méthode envoie les détails de la
+     * candidature au serveur pour les enregistrer dans la base de données.
+     *
+     * @param requeteId L'ID de la requête de travail pour laquelle la
+     *                 candidature est soumise.
+     * @param demandeurRequete L'ID de la personne qui a soumis la
+     *                        requête.
+     * @param dateFin La date de fin de la candidature.
+     * @param dateDebut La date de début de la candidature.
+     * @param status Le statut de la candidature
+     * @param isConfirmed Indique si la candidature est confirmée ou non.
+     * @param userId L'ID de l'utilisateur qui soumet la candidature.
+     * @param intervenantMsg Le message entré par l'intervenant.
+     * @param residentMsg Le message entré par le résident.
+     * @return Une chaîne de caractères indiquant le résultat de la soumission
+     * de la candidature (succès ou erreur).
+     */
     public static String soumettreCandidature(String requeteId, String demandeurRequete,
                                             String dateFin, String dateDebut,
                                             String status, boolean isConfirmed,
@@ -225,6 +258,22 @@ public class CandidatureController {
         }
     }
 
+    /**
+     * Modifie le statut d'une candidature en envoyant une requête HTTP PATCH à
+     * l'API.
+     * Cette méthode permet de mettre à jour le statut d'une candidature
+     * ainsi que le message associé.
+     *
+     * @param requeteId L'ID de la requête de travail à laquelle appartient la
+     *                 candidature.
+     * @param candidatureId L'ID de la candidature dont le statut doit être
+     *                     modifié.
+     * @param status Le nouveau statut de la candidature.
+     * @param residentMsg Le message entré par le résident, à mettre à jour dans
+     *                   la candidature.
+     * @return Une chaîne de caractères indiquant le résultat de la mise à jour
+     * du statut de la candidature (succès ou erreur).
+     */
     public static String modifierStatutCandidature(String requeteId, String candidatureId,
                                                    String status, String residentMsg) {
         try {
@@ -274,6 +323,17 @@ public class CandidatureController {
         return "Candidature mise à jour partiellement avec succès.";
     }
 
+    /**
+     * Confirme une candidature en envoyant une requête HTTP PATCH pour mettre à
+     * jour le statut de la candidature.
+     * La méthode marque la candidature comme confirmée dans la base de données.
+     *
+     * @param requeteId L'ID de la requête de travail pour laquelle la
+     *                 candidature est soumise.
+     * @param candidatureId L'ID de la candidature à confirmer.
+     * @return Une chaîne de caractères indiquant le résultat de l'opération
+     * (succès ou erreur).
+     */
     public static String confirmerCandidature(String requeteId, String candidatureId) {
         try {
             // Construire l'URL pour la requête PATCH
@@ -310,6 +370,18 @@ public class CandidatureController {
         return "Candidature mise à jour partiellement avec succès.";
     }
 
+    /**
+     * Supprime une candidature en envoyant une requête HTTP PATCH pour la
+     * marquer comme supprimée.
+     * Cette méthode met à jour le statut de la candidature en la supprimant de
+     * la base de données.
+     *
+     * @param requeteId L'ID de la requête de travail pour laquelle la
+     *                 candidature est associée.
+     * @param candidatureId L'ID de la candidature à supprimer.
+     * @return Une chaîne de caractères indiquant le résultat de l'opération
+     * (succès ou erreur).
+     */
     public static String supprimerCandidature(String requeteId, String candidatureId) {
         try {
             // Construire l'URL pour la requête PATCH

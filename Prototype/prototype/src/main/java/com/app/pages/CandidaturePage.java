@@ -13,7 +13,20 @@ import java.util.*;
 import static com.app.controllers.CandidatureController.soumettreCandidature;
 import static com.app.utils.RegexChecker.estFormatDateValide;
 
+/**
+ * Cette classe gère les actions liées aux candidatures,
+ * y compris leur soumission, suivi, modification, et consultation.
+ */
 public class CandidaturePage {
+
+    /**
+     * Affiche les informations d'une candidature du côté de l'intervenant
+     * et propose des actions pour la gérer.
+     *
+     * @param user        l'utilisateur connecté
+     * @param requete     la requête de travail associée à la candidature
+     * @param candidature la candidature à suivre
+     */
 
     public static void suiviCandidaturePage(User user, RequeteTravail requete, Candidature candidature) {
 
@@ -93,9 +106,15 @@ public class CandidaturePage {
                 }
             }
         }
-
     }
 
+    /**
+     * Permet à un intervenant de soumettre une candidature pour une requête de
+     * travail.
+     *
+     * @param user    l'utilisateur connecté
+     * @param requete la requête de travail ciblée
+     */
     public static void soumettreCandidaturePage(User user, RequeteTravail requete) {
 
         Scanner scanner = new Scanner(System.in);
@@ -147,6 +166,14 @@ public class CandidaturePage {
             System.out.println("\n[1] Retour au menu principal");
         }
     }
+
+    /**
+     * Permet à un résident de voir les candidatures pour une requête de travail
+     * et d'avoir l'option de l'accepter ou de la refuser.
+     *
+     * @param user    l'utilisateur connecté
+     * @param requete la requête de travail ciblée
+     */
 
     public static void consulterCandidaturePage(User user, RequeteTravail requete) {
         List<Candidature> candidatures = requete.getCandidatures();
@@ -242,7 +269,7 @@ public class CandidaturePage {
         }
     }
 
-    public static void changerStatutCandidaturePage(User user, RequeteTravail requete, Candidature candidature, String accept) {
+    private static void changerStatutCandidaturePage(User user, RequeteTravail requete, Candidature candidature, String accept) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Entrez optionnellement un message à l'intervenant : ");
         String message = scanner.nextLine();
@@ -257,7 +284,7 @@ public class CandidaturePage {
         }
     }
 
-    public static void printCandidature(Candidature candidature) {
+    private static void printCandidature(Candidature candidature) {
 
         Document intervenant = UserController.findUserById(candidature.getUserId());
         String firstName = intervenant.getString("firstName");
