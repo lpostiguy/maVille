@@ -100,7 +100,7 @@ public class InscriptionPage {
             System.out.println("Entrez votre adresse courriel:");
             email = scanner.nextLine();
             // Verify that the email is valid and not used
-            if (!findUserByEmail(email).isEmpty()) {
+            if (findUserByEmail(email) != null) {
                 System.out.println("Cette adresse courriel est déjà associée à un compte." +
                     " Veuillez entrer une autre adresse courriel.");
             }
@@ -163,7 +163,7 @@ public class InscriptionPage {
             boolean validEntityType = false;
             while (!validEntityType) {
                 System.out.println("Entrez votre type d'entité (" +
-                    "Entreprise" + " " + "public, " + "Entrepreneur " + "priv"
+                    "Entreprise" + " " + "publique, " + "Entrepreneur " + "priv"
                     + "é, Particulier):");
                 entityType = scanner.nextLine();
                 // Verify that the entityType is not null
@@ -174,13 +174,14 @@ public class InscriptionPage {
 
             boolean validCityId = false;
             while (!validCityId) {
-                System.out.println("Entrez votre identifiant de la ville:");
+                System.out.println("Entrez votre identifiant de la ville (8 " +
+                    "chiffres):");
                 cityId = scanner.nextLine();
                 // Verify that the cityId is valid
                 if (cityId.length() != 8) {
                     System.out.println("Cet identifiant de la ville n'est pas valide. Veuillez réessayer.");
                 }
-                else if (findUserByCityId(cityId).isEmpty()) {
+                else if (findUserByCityId(cityId) == null) {
                     validCityId = true;
                 }
                 else {

@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AnalysisUIOptions">
-    <option name="ANALYZE_TEST_SOURCES" value="false" />
-    <option name="SCOPE_TYPE" value="4" />
-  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] JavaDoc, JaCoco report">
+    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] Intervenant informé conflit préférences horaires résidents soumission projet">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterRequetesTravailPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterRequetesTravailPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/InscriptionPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/InscriptionPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ProjetPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ProjetPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +73,6 @@
     &quot;Maven.prototype [install].executor&quot;: &quot;Run&quot;,
     &quot;Maven.prototype [org.apache.maven.plugins:maven-jar-plugin:3.4.1:help].executor&quot;: &quot;Run&quot;,
     &quot;Maven.prototype [org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.prototype [org.jacoco:jacoco-maven-plugin:0.8.11:report].executor&quot;: &quot;Run&quot;,
     &quot;Maven.prototype [org.jacoco:jacoco-maven-plugin:0.8.4:check].executor&quot;: &quot;Run&quot;,
     &quot;Maven.prototype [package].executor&quot;: &quot;Run&quot;,
     &quot;Maven.prototype [test].executor&quot;: &quot;Run&quot;,
@@ -112,7 +108,7 @@
       <option name="ALTERNATIVE_JRE_PATH" value="21" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.app.Main" />
-      <module name="prototype" />
+      <module name="prototype (1)" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -320,21 +316,21 @@
       <option name="project" value="LOCAL" />
       <updated>1734808924180</updated>
     </task>
-    <task id="LOCAL-00013" summary="[PROTOTYPE] JavaDoc, JaCoco report">
+    <task id="LOCAL-00013" summary="[PROTOTYPE] Consulter et Soumettre Projets ajoutés">
       <option name="closed" value="true" />
-      <created>1734985509723</created>
+      <created>1734940449996</created>
       <option name="number" value="00013" />
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
-      <updated>1734985509723</updated>
+      <updated>1734940449996</updated>
     </task>
-    <task id="LOCAL-00014" summary="[PROTOTYPE] JavaDoc, JaCoco report">
+    <task id="LOCAL-00014" summary="[PROTOTYPE] Intervenant informé conflit préférences horaires résidents soumission projet">
       <option name="closed" value="true" />
-      <created>1734986403530</created>
+      <created>1734982271388</created>
       <option name="number" value="00014" />
       <option name="presentableId" value="LOCAL-00014" />
       <option name="project" value="LOCAL" />
-      <updated>1734986403530</updated>
+      <updated>1734982271388</updated>
     </task>
     <option name="localTasksCounter" value="15" />
     <servers />
@@ -364,7 +360,8 @@
     <MESSAGE value="[PROTOTYPE] Ajout: Suivi candidature, confirmer candidature (intervenant)" />
     <MESSAGE value="[PROTOTYPE] Fix problèmes configuration Maven" />
     <MESSAGE value="[PROTOTYPE] Filtrer/Chercher entrave" />
-    <MESSAGE value="[PROTOTYPE] JavaDoc, JaCoco report" />
-    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] JavaDoc, JaCoco report" />
+    <MESSAGE value="[PROTOTYPE] Consulter et Soumettre Projets ajoutés" />
+    <MESSAGE value="[PROTOTYPE] Intervenant informé conflit préférences horaires résidents soumission projet" />
+    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] Intervenant informé conflit préférences horaires résidents soumission projet" />
   </component>
 </project>

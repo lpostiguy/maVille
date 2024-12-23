@@ -27,12 +27,14 @@ public class ProjetPage {
         System.out.println("\n------ Vos Projets -----");
 
         List<Projet> projets = consulterProjet(user);
-        int i = 1;
+        int i = 0;
         if (projets.isEmpty()) {
             System.out.println("Vous n'avez pas encore soumis de " + "projet");
         } else {
-            for (i = 1; i < projets.size(); i++) {
-                System.out.printf("\n[%d] %s%n", i, projets.get(i).toString());
+            for (i = 0; i < projets.size(); i++) {
+                i++;
+                System.out.printf("\n[%d] %s%n", i,
+                    projets.get(i - 1).toString());
             }
         }
         boolean entreValide = false;
@@ -52,9 +54,9 @@ public class ProjetPage {
                     System.out.println("Veuillez entrer le numéro du " +
                         "projet dont vous souhaitez modifier le statut:");
                     Scanner scanner3 = new Scanner(System.in);
-                    int numProjet = scanner3.nextInt();
+                    int numProjet = scanner3.nextInt() - 1;
 
-                    while (!(numProjet <= i)) {
+                    while (!(numProjet <= i )) {
                         System.out.print("\nEntrez un numéro valide : ");
                         if (scanner.hasNextInt()) {
                             numProjet = scanner.nextInt();

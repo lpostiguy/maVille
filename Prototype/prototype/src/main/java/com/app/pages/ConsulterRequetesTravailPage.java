@@ -26,7 +26,7 @@ public class ConsulterRequetesTravailPage {
      */
     public static void consulterRequeteTravailMenu(User user) {
         List<RequeteTravail> requetes = consulterRequetesTravail();
-        if (requetes == null) {
+        if (requetes.isEmpty()) {
             System.out.println("Il n'y a pas de requêtes de travail pour " +
                 "l'instant.");
             Scanner scanner = new Scanner(System.in);
