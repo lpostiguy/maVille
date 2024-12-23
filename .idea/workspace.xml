@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] Consulter et Soumettre Projets ajoutés">
+    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] Intervenant informé conflit préférences horaires résidents soumission projet">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/NotificationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/NotificationsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/PageRedirect.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/PageRedirect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ProjetPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ProjetPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -324,7 +323,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734940449996</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="[PROTOTYPE] Intervenant informé conflit préférences horaires résidents soumission projet">
+      <option name="closed" value="true" />
+      <created>1734982271388</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1734982271388</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -353,6 +360,7 @@
     <MESSAGE value="[PROTOTYPE] Fix problèmes configuration Maven" />
     <MESSAGE value="[PROTOTYPE] Filtrer/Chercher entrave" />
     <MESSAGE value="[PROTOTYPE] Consulter et Soumettre Projets ajoutés" />
-    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] Consulter et Soumettre Projets ajoutés" />
+    <MESSAGE value="[PROTOTYPE] Intervenant informé conflit préférences horaires résidents soumission projet" />
+    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] Intervenant informé conflit préférences horaires résidents soumission projet" />
   </component>
 </project>
