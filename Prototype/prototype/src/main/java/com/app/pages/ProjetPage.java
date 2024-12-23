@@ -39,46 +39,51 @@ public class ProjetPage {
 
         while (!entreValide) {
             System.out.println("\n[1] Retour");
-            System.out.println("[2] Modifier le statut d'un projet");
+            if (!projets.isEmpty()) {
+                System.out.println("[2] Modifier le statut d'un projet");
+            }
             Scanner scanner2 = new Scanner(System.in);
             String choix2 = scanner2.nextLine();
             if (Objects.equals(choix2, "1")) {
                 entreValide = true;
             } else if (Objects.equals(choix2, "2")) {
-                entreValide = true;
-                System.out.println("Veuillez entrer le numéro du " +
-                    "projet dont vous souhaitez modifier le statut:");
-                Scanner scanner3 = new Scanner(System.in);
-                int numProjet = scanner3.nextInt();
+                if (!projets.isEmpty()) {
+                    entreValide = true;
+                    System.out.println("Veuillez entrer le numéro du " +
+                        "projet dont vous souhaitez modifier le statut:");
+                    Scanner scanner3 = new Scanner(System.in);
+                    int numProjet = scanner3.nextInt();
 
-                while (!(numProjet <= i)) {
-                    System.out.print("\nEntrez un numéro valide : ");
-                    if (scanner.hasNextInt()) {
-                        numProjet = scanner.nextInt();
-                    } else {
-                        scanner.next();
-                    }
-                }
-                System.out.print("\nEntrer un statut (En cours, Suspendu, Terminé): ");
-                String statut = scanner2.nextLine();
-                boolean miseAJour = mettreAJourStatutProjet(statut, projets.get(numProjet));
-
-                if (miseAJour) {
-                    List<String> userIds = new ArrayList<>();
-                    for (String quartierAffecte :
-                        projets.get(numProjet).getQuartiersAffectes()) {
-                        List<String> userBoroughIds = findUsersByBoroughId(quartierAffecte);
-                        if (!userBoroughIds.isEmpty()) {
-                            userIds.addAll(userBoroughIds);
+                    while (!(numProjet <= i)) {
+                        System.out.print("\nEntrez un numéro valide : ");
+                        if (scanner.hasNextInt()) {
+                            numProjet = scanner.nextInt();
+                        } else {
+                            scanner.next();
                         }
                     }
-                    if (!userIds.isEmpty()) {
-                        for (String userId : userIds) {
-                            envoyerNotification("Le statut du " +
-                                    "projet " + projets.get(numProjet).getTitre() +
-                                    " dans votre quartier a été " +
-                                    "mis à jour de: '" + projets.get(numProjet).getStatut() + "' à: '" + statut + "'.",
-                                userId);
+                    System.out.print("\nEntrer un statut (En cours, Suspendu, Terminé): ");
+                    String statut = scanner2.nextLine();
+                    boolean miseAJour = mettreAJourStatutProjet(statut, projets.get(numProjet));
+
+
+                    if (miseAJour) {
+                        List<String> userIds = new ArrayList<>();
+                        for (String quartierAffecte :
+                            projets.get(numProjet).getQuartiersAffectes()) {
+                            List<String> userBoroughIds = findUsersByBoroughId(quartierAffecte);
+                            if (!userBoroughIds.isEmpty()) {
+                                userIds.addAll(userBoroughIds);
+                            }
+                        }
+                        if (!userIds.isEmpty()) {
+                            for (String userId : userIds) {
+                                envoyerNotification("Le statut du " +
+                                        "projet " + projets.get(numProjet).getTitre() +
+                                        " dans votre quartier a été " +
+                                        "mis à jour de: '" + projets.get(numProjet).getStatut() + "' à: '" + statut + "'.",
+                                    userId);
+                            }
                         }
                     }
                 }

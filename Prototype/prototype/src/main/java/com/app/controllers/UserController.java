@@ -202,4 +202,5 @@ public class UserController {
             return "Erreur lors de l'ajout de l'utilisateur.";
         }
     }
+
 }
