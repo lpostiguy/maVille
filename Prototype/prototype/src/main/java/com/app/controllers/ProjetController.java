@@ -26,6 +26,10 @@ import java.util.stream.Collectors;
 
 import static com.app.utils.GenerateurId.RandomIDGenerator;
 
+/**
+ * Contrôleur responsable de la gestion des projets dans l'application.
+ * Permet la création, la modification, la consultation et la mise à jour des projets.
+ */
 public class ProjetController {
 
     private static final Logger logger =
@@ -33,6 +37,11 @@ public class ProjetController {
     private static final MongoCollection<Document> collectionProjets =
         MongoDBConnection.getDatabase().getCollection("projets");
 
+    /**
+     * Enregistre les routes du contrôleur pour l'application Javalin.
+     *
+     * @param app Instance de l'application Javalin
+     */
     public static void registerRoutes(Javalin app) {
 
         app.get("/projets", ctx -> {
@@ -134,7 +143,20 @@ public class ProjetController {
         });
     }
 
-    // Méthode pour soumettre une nouvelle requête de travail
+    /**
+     * Soumet un projet via une requête HTTP POST.
+     *
+     * @param idSoumissionnaireProjet Identifiant du soumissionnaire
+     * @param titre Titre du projet
+     * @param description Description du projet
+     * @param typeTravaux Type des travaux à réaliser
+     * @param dateDebut Date de début des travaux
+     * @param dateFin Date de fin des travaux
+     * @param quartiersAffectes List des quartiers affectés par le projet
+     * @param ruesAffectees List des rues affectées par le projet
+     * @param statut Statut du projet
+     * @return Message indiquant si la soumission a été réussie ou non
+     */
     public static String soumettreProjet(String idSoumissionnaireProjet,
                                                  String titre,
                                                  String description,
@@ -193,7 +215,11 @@ public class ProjetController {
         }
     }
 
-    // Méthode pour consulter les projets de tous les intervenants
+    /**
+     * Récupère la liste des projets pour tous les intervenants via l'API.
+     *
+     * @return Liste des projets récupérés depuis l'API
+     */
     public static List<Projet> consulterProjets() {
         try {
             URL url = new URL("http://localhost:8000/projets");
@@ -223,6 +249,11 @@ public class ProjetController {
         return null;
     }
 
+    /**
+     * Récupère la liste des projets pour un intervenant spécifique via l'API.
+     * @param user Intervenant qui a créé le projet
+     * @return Liste des projets récupérés depuis l'API
+     */
     public static List<Projet> consulterProjet(User user) {
         try {
             URL url =
@@ -253,6 +284,13 @@ public class ProjetController {
         return null;
     }
 
+    /**
+     * Modifie un projet existant via l'API.
+     *
+     * @param statut Statut du projet à mettre à jour
+     * @param projet Projet existant à mettre à jour
+     * @return True si le projet a été mis à jour avec succès, false sinon.
+     */
     public static boolean mettreAJourStatutProjet(String statut,
                                                           Projet projet) {
         try {

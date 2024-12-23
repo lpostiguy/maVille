@@ -1,7 +1,6 @@
 package com.app.controllers;
 
 import com.app.MongoDBConnection;
-import com.app.models.Candidature;
 import com.app.models.RequeteTravail;
 import com.app.models.User.User;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -26,6 +25,12 @@ import java.util.Scanner;
 
 import static com.app.utils.GenerateurId.RandomIDGenerator;
 
+/**
+ * Ce contrôleur gère les actions liées aux requêtes de travail.
+ * Elle permet de créer, récupérer, mettre à jour et supprimer des requêtes
+ * de travail via l'API utilisant le framework Javalin et la base de données
+ * MongoDB.
+ */
 public class RequeteTravailController {
 
     private static final Logger logger =
@@ -33,6 +38,11 @@ public class RequeteTravailController {
     private static final MongoCollection<Document> collectionRequeteTravail =
         MongoDBConnection.getDatabase().getCollection("requete-travail");
 
+    /**
+     * Enregistre les routes du contrôleur pour l'application Javalin.
+     *
+     * @param app Instance de l'application Javalin
+     */
     public static void registerRoutes(Javalin app) {
 
         app.get("/requete-travail", ctx -> {
@@ -161,13 +171,24 @@ public class RequeteTravailController {
         });
     }
 
-    // Méthode pour soumettre une nouvelle requête de travail
+    /**
+     * Soumet une nouvelle requête de travail via une requête HTTP POST.
+     *
+     * @param titre            Le titre de la requête de travail.
+     * @param description      La description de la requête de travail.
+     * @param typeTravaux      Le type de travaux demandés.
+     * @param dateDebutEspere  La date de début souhaitée pour les travaux.
+     * @param demandeurRequete L'utilisateur qui soumet la requête de travail.
+     * @param actif            Indicateur si la requête est active.
+     * @return Un message indiquant si la requête a été ajoutée avec succès ou
+     * non.
+     */
     public static String soumettreRequeteTravail(String titre,
                                                  String description,
                                                  String typeTravaux,
                                                  String dateDebutEspere,
                                                  String demandeurRequete,
-                                                 boolean actif, ArrayList<Candidature> candidatures) {
+                                                 boolean actif) {
         try {
             URL url = new URL("http://localhost:8000/requete-travail");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -198,7 +219,11 @@ public class RequeteTravailController {
         }
     }
 
-    // Méthode pour consulter les requêtes de travail de tous les utilisateurs
+    /**
+     * Consulte toutes les requêtes de travail actives.
+     *
+     * @return Une liste de toutes les requêtes de travail active.
+     */
     public static List<RequeteTravail> consulterRequetesTravail() {
         try {
             URL url = new URL("http://localhost:8000/requete-travail");
@@ -228,6 +253,12 @@ public class RequeteTravailController {
         return null;
     }
 
+    /**
+     * Consulte les requêtes de travail soumises par un utilisateur spécifique.
+     *
+     * @param user L'utilisateur dont on souhaite récupérer les requêtes.
+     * @return Une liste de requêtes de travail soumises par l'utilisateur.
+     */
     public static List<RequeteTravail> consulterRequetesTravail(User user) {
         try {
             URL url =
@@ -258,6 +289,14 @@ public class RequeteTravailController {
         return null;
     }
 
+    /**
+     * Met à jour le statut d'une requête de travail.
+     *
+     * @param actif          Le nouvel état actif de la requête (true pour
+     *                      actif, false pour archivé).
+     * @param requeteTravail La requête de travail à mettre à jour.
+     * @return true si la mise à jour a été effectuée avec succès, false sinon.
+     */
     public static boolean mettreAJourStatutRequeteTravail(Boolean actif,
                                                           RequeteTravail requeteTravail) {
         try {
@@ -307,6 +346,12 @@ public class RequeteTravailController {
         return false;
     }
 
+    /**
+     * Supprime une requête de travail.
+     *
+     * @param requeteTravail La requête de travail à supprimer.
+     * @return true si la suppression a été effectuée avec succès, false sinon.
+     */
     public static boolean deleteRequeteTravail(RequeteTravail requeteTravail) {
         try {
             // Vérification de l'identifiant de la requête

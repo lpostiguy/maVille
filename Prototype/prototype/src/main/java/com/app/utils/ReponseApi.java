@@ -3,8 +3,6 @@ package com.app.utils;
 import com.app.models.Entrave;
 import com.app.models.Travail;
 import com.google.gson.annotations.SerializedName;
-
-import javax.xml.transform.Result;
 import java.util.List;
 
 public class ReponseApi {

@@ -10,9 +10,23 @@ import java.util.Scanner;
 import static com.app.controllers.RequeteTravailController.soumettreRequeteTravail;
 import static com.app.utils.RegexChecker.estFormatDateValide;
 
+/**
+ * Cette classe gère l'interface utilisateur pour la soumission d'une requête
+ * de travail. Elle permet à un résident de soumettre une nouvelle requête
+ * en entrant les informations nécessaires.
+ */
+
 public class SoumettreRequeteTravailPage {
 
-    // Méthode de menu pour l'utilisateur
+    /**
+     * Affiche le menu pour soumettre une nouvelle requête de travail et guide
+     * l'utilisateur dans la saisie des informations nécessaires à la création
+     * de la requête. Après la soumission, l'utilisateur peut retourner au menu
+     * principal.
+     *
+     * @param user L'utilisateur connecté qui soumet la requête de travail
+     *             (résident)
+     */
     public static void soumettreRequeteTravailMenu(User user) {
         Scanner scanner = new Scanner(System.in);
 
@@ -43,7 +57,7 @@ public class SoumettreRequeteTravailPage {
         // Appel de la méthode pour soumettre la requête avec les données
         // entrées
         System.out.println(soumettreRequeteTravail(titre, description,
-            typeTravaux, dateDebutEspere, user.getUserId(), true, new ArrayList<>()));
+            typeTravaux, dateDebutEspere, user.getUserId(), true));
         System.out.println("\n[1] Retour au menu principal");
         while (!scanner.nextLine().equals("1")) {
             System.out.println("\n[1] Retour au menu principal");

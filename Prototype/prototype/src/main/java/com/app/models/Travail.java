@@ -1,5 +1,11 @@
 package com.app.models;
 
+/**
+ * Cette classe représente un travail avec des informations sur
+ * son identification, sa durée, son emplacement et d'autres métadonnées
+ * associées. Elle est utilisée pour désérialiser l'information dans l'API
+ * Entrave et travaux de la ville de Montréal.
+ */
 public class Travail {
 
     // Attributs

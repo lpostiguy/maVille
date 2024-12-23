@@ -9,9 +9,21 @@ import java.util.Scanner;
 import static com.app.controllers.ConsulterTravauxController.consulterTravauxEnCours;
 import static com.app.controllers.ProjetController.consulterProjets;
 
+
+/**
+ * Cette classe représente la page permettant de consulter les travaux et
+ * projets. Elle fournit un menu interactif pour effectuer des recherches,
+ * appliquer des filtres, et consulter les projets actifs.
+ */
+
 public class ConsulterTravauxPage {
 
-    // Méthode de menu pour l'utilisateur
+    /**
+     * Affiche le menu principal pour consulter les travaux et projets du côté
+     * du résident. Permet au résident de naviguer dans différentes options pour
+     * rechercher, filtrer ou consulter les travaux en cours, ainsi que de
+     * consulter la liste des projets.
+     */
     public static void consulterTravauxMenu() {
         Scanner scanner = new Scanner(System.in);
         boolean filtrer;

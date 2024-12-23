@@ -10,9 +10,24 @@ import static com.app.pages.ConsulterRequetesTravailPage.consulterRequeteTravail
 import static com.app.pages.MainMenuPage.mainMenuLoggedIntervenant;
 import static com.app.pages.MainMenuPage.mainMenuLoggedResident;
 
-
+/**
+ * Cette classe est responsable de la gestion de la redirection entre les pages
+ * en fonction du rôle de l'utilisateur et de son état de connexion.
+ * Elle gère l'affichage des menus de connexion, d'inscription, ainsi que des
+ * menus après connexion pour les utilisateurs de type "RESIDENT" ou
+ * "INTERVENANT".
+ */
 public class PageRedirect {
 
+    /**
+     * Méthode principale qui gère la redirection vers les différentes pages de
+     * l'application.
+     * Elle permet à l'utilisateur de se connecter ou de s'inscrire, puis
+     * redirige vers un menu spécifique en fonction du rôle de l'utilisateur
+     * ("RESIDENT" ou "INTERVENANT").
+     * Après la connexion, selon le rôle de l'utilisateur, un menu différent
+     * sera affiché avec des options de navigation adaptées.
+     */
     public static void pageRedirect() {
         while (true) {
             boolean successfulLogin = false;
@@ -20,7 +35,7 @@ public class PageRedirect {
             User user = new User();
             String redirect = MainMenuPage.mainMenu();
             switch (redirect) {
-                case "Connection" -> {
+                case "Connexion" -> {
                     user = LoginPage.loginPage();
                     if (user != null) {
                         successfulLogin = true;

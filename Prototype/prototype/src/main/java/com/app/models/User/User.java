@@ -8,13 +8,14 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.util.List;
 
+/**
+ * Cette classe représente un utilisateur n'ayant pas de rôle défini.
+ */
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "userRole")
 @JsonSubTypes({@JsonSubTypes.Type(value = Resident.class, name = "RESIDENT"),
     @JsonSubTypes.Type(value = Intervenant.class, name = "INTERVENANT")})
-
 @JsonIgnoreProperties(ignoreUnknown = true)
-
 public class User {
 
     // Attributes
@@ -24,8 +25,6 @@ public class User {
     private String email;
     private String userRole;
     private int password;
-    private boolean connected;
-
 
     // Getters
     public String getUserId() {
@@ -51,11 +50,6 @@ public class User {
     public int getPassword() {
         return password;
     }
-
-    public boolean isConnected() {
-        return connected;
-    }
-
     // Setters
     public void setUserId(String id) {
         this.userId = id;
@@ -79,10 +73,6 @@ public class User {
 
     public void setPassword(int password) {
         this.password = password;
-    }
-
-    public void setConnected(boolean connected) {
-        this.connected = connected;
     }
 }
 

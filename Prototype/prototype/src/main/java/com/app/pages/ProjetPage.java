@@ -13,6 +13,13 @@ import static com.app.controllers.ProjetController.soumettreProjet;
 import static com.app.controllers.UserController.*;
 import static com.app.utils.RegexChecker.estFormatDateValide;
 
+/**
+ * Cette classe gère les pages et les interactions liées aux projets dans
+ * l'application. Elle permet à un intervenant de consulter ses projets, de
+ * soumettre un nouveau projet, et de modifier le statut d'un projet existant.
+ * Elle gère également l'envoi de notifications aux utilisateurs concernés par
+ * les projets soumis ou modifiés.
+ */
 public class ProjetPage {
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -157,7 +164,7 @@ public class ProjetPage {
             }
         }
 
-        if(!nomUsers.isEmpty()) {
+        if (!nomUsers.isEmpty()) {
             System.out.println("\nVoici tous les conflits d'horaires " + "avec les résidents des quartiers affectés par votre " + "projet:");
 
             int userIndex = 0;
@@ -186,11 +193,10 @@ public class ProjetPage {
 
         boolean entreValide = false;
         while (!entreValide) {
-            if(!nomUsers.isEmpty()) {
+            if (!nomUsers.isEmpty()) {
                 System.out.println("\n[1] Ne pas envoyer le projet et" + " revenir au menu des projets");
                 System.out.println("[2] Soumettre ce projet malgré " + "les conflits horaires");
-            }
-            else {
+            } else {
                 System.out.println("\n[1] Annuler la soumission " +
                     "du projet");
                 System.out.println("[2] Confirmer la soumission " +

@@ -24,6 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Contrôleur responsable de la gestion des notifications pour les résidents.
+ * Publie, modifie et récupère les notifications des résidents.
+ */
 public class NotificationsController {
 
     private static final Logger logger =
@@ -31,6 +35,11 @@ public class NotificationsController {
     private static final MongoCollection<Document> collectionUsers =
         MongoDBConnection.getDatabase().getCollection("users");
 
+    /**
+     * Enregistre les routes du contrôleur pour l'application Javalin.
+     *
+     * @param app Instance de l'application Javalin
+     */
     public static void registerRoutes(Javalin app) {
 
         // Pour chercher toutes les notifications
@@ -158,7 +167,15 @@ public class NotificationsController {
         });
     }
 
-
+    /**
+     * Met à jour le statut de la notification pour un résident.
+     *
+     * @param vu           Le statut de la notification (lue ou non lue)
+     * @param user         L'utilisateur pour lequel les notifications sont
+     *                    mises à jour
+     * @param notifications La liste des notifications à mettre à jour
+     * @return true si toutes les mises à jour ont réussi, sinon false
+     */
     public static boolean mettreAJourStatutNotification(Boolean vu, User user
         , List<Notification> notifications) {
         String userId = user.getUserId();
@@ -215,6 +232,13 @@ public class NotificationsController {
         return allUpdatesSuccessful;
     }
 
+    /**
+     * Consulter les notifications non lues pour un résident.
+     *
+     * @param user L'utilisateur pour lequel les notifications non lues
+     *            sont consultées
+     * @return Liste des notifications non lues
+     */
     public static List<Document> consulterNotificationsNonLues(User user) {
         try {
             // Construire l'URL pour l'endpoint des notifications non lues
@@ -256,6 +280,13 @@ public class NotificationsController {
         return new ArrayList<>();
     }
 
+    /**
+     * Consulter toutes les notifications d'un résident.
+     *
+     * @param user L'utilisateur pour lequel toutes les notifications
+     *            sont consultées
+     * @return Liste de toutes les notifications
+     */
     public static List<Document> consulterToutesLesNotifications(User user) {
         try {
             // Construire l'URL pour l'endpoint des notifications non lues
@@ -297,6 +328,12 @@ public class NotificationsController {
         return new ArrayList<>();
     }
 
+    /**
+     * Envoie une notification à un résident.
+     *
+     * @param msg        Le message de la notification
+     * @param receveurId L'identifiant du résident receveur
+     */
     public static void envoyerNotification(String msg,
                                            String receveurId) {
         try {

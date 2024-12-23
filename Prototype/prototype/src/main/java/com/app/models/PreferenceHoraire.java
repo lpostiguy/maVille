@@ -2,6 +2,11 @@ package com.app.models;
 
 import java.util.Objects;
 
+/**
+ * Cette classe représente une préférence horaire d'un utilisateur,
+ * avec un jour de la semaine et une plage horaire (heure de début et heure de
+ * fin).
+ */
 public class PreferenceHoraire {
     private String jour;
     private String heureDebut;

@@ -10,9 +10,20 @@ import java.util.*;
 
 import static com.app.controllers.RequeteTravailController.*;
 
+/**
+ * Cette classe gère l'affichage et le suivi des requêtes de travail pour les
+ * utilisateurs. Elle permet aux intervenants de consulter les requêtes
+ * ouvertes, de soumettre ou de suivre des candidatures, et aux résidents de
+ * suivre ou gérer leurs propres requêtes.
+ */
 public class ConsulterRequetesTravailPage {
 
-    // Méthode de menu pour l'intervenant
+    /**
+     * Affiche le menu permettant à un intervenant de consulter les requêtes de
+     * travail disponibles.
+     *
+     * @param user l'utilisateur connecté (de type intervenant).
+     */
     public static void consulterRequeteTravailMenu(User user) {
         List<RequeteTravail> requetes = consulterRequetesTravail();
         if (requetes == null) {
@@ -124,7 +135,11 @@ public class ConsulterRequetesTravailPage {
         }
     }
 
-
+    /**
+     * Affiche le menu de suivi pour les requêtes créées par le résident.
+     *
+     * @param user l'utilisateur connecté (de type résident).
+     */
     public static void suiviRequeteTravailMenu(User user) {
         List<RequeteTravail> requetes = consulterRequetesTravail(user);
         if (requetes.isEmpty()) {
@@ -281,7 +296,7 @@ public class ConsulterRequetesTravailPage {
         }
     }
 
-    public static void printRequete(RequeteTravail requete) {
+    private static void printRequete(RequeteTravail requete) {
 
         Document resident = UserController.findUserById(requete.getDemandeurRequete());
         String firstName = resident.getString("firstName");

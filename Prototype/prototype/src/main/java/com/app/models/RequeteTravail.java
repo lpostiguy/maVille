@@ -11,6 +11,11 @@ import org.bson.types.ObjectId;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Cette classe représente une requête de travail soumise par un résident.
+ * Elle contient les informations concernant le type de travail, les détails du
+ * demandeur, et les candidatures associées à cette requête, entre autres.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 public class RequeteTravail {

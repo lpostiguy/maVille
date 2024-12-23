@@ -17,6 +17,12 @@ import static com.app.controllers.UserController.findUserByCityId;
 import static com.app.utils.InscriptionUtils.*;
 import static com.app.utils.RegexChecker.*;
 
+/**
+ * Cette classe est responsable de la gestion de l'inscription des utilisateurs.
+ * Elle permet l'inscription en tant que Résident ou Intervenant,
+ * avec validation des données utilisateur et enregistrement dans le système.
+ */
+
 public class InscriptionPage {
 
     static Scanner scanner = new Scanner(System.in);
@@ -24,23 +30,31 @@ public class InscriptionPage {
     static User user = new User();
     static String role;
 
-    // User Attributes
+    // Attributs communs à tous les utilisateurs
     static String firstName;
     static String lastName;
     static String email;
     static String password;
     static int encryptedPassword;
 
-    // Resident Specific Attributes
+    // Attributs uniques au résident
     static String phoneNumber;
     static String dateOfBirth;
     static String homeAddress;
     static String boroughId;
 
-    // Intervenant Specific Attributes
+    // Attributs uniques à l'intervenant
     static String entityType;
     static String cityId;
 
+    /**
+     * Méthode principale pour afficher la page d'inscription.
+     * Propose le choix de rôle (Résident ou Intervenant)
+     * et gère le processus d'inscription complet.
+     *
+     * @return L'utilisateur inscrit (instance de "Resident" ou "Intervenant"),
+     * ou `null` si l'utilisateur revient au menu.
+     */
     public static User inscriptionPage() {
         System.out.println("\n----------- Inscription -----------");
         System.out.println("[1] Retour");
@@ -49,19 +63,17 @@ public class InscriptionPage {
         System.out.println("-----------------------------------");
         String choice = scanner.nextLine();
         switch (choice) {
-            case "1" -> {
+            case "1":
                 return null;
-            }
-            case "2" -> {
+            case "2":
                 role = "Résident";
-            }
-            case "3" -> {
+                break;
+            case "3":
                 role = "Intervenant";
-            }
-            case null, default -> {
+                break;
+            case null, default:
                 return inscriptionPage();
             }
-        }
         System.out.println("Suivre les instructions suivantes pour " + "s" +
             "'inscrire.");
         boolean validFirstName = false;

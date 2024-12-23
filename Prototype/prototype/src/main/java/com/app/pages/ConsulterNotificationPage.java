@@ -10,8 +10,22 @@ import java.util.stream.Collectors;
 
 import static com.app.controllers.NotificationsController.*;
 
+/**
+ * Cette classe gère l'affichage et la gestion des notifications pour un
+ * résident. Elle permet de consulter les notifications non lues, d'afficher
+ * toutes les notifications, et de mettre à jour leur statut.
+ */
 public class ConsulterNotificationPage {
 
+    /**
+     * Permet à un résident de consulter ses notifications.
+     * Affiche les notifications non lues en priorité, puis toutes les
+     * notifications si aucune n'est non lue. Les notifications non lues sont
+     * marquées comme lues après consultation.
+     *
+     * @param resident l'utilisateur de type résident pour lequel les
+     * notifications sont affichées.
+     */
     public static void consulterNotifications(Resident resident) {
         try {
             List<Document> notificationsNonLues = consulterNotificationsNonLues(resident);

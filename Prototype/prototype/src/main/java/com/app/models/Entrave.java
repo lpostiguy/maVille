@@ -2,6 +2,12 @@ package com.app.models;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Cette classe représente une entrave avec des informations sur
+ * son identification, sa durée, son emplacement et d'autres métadonnées
+ * associées. Elle est utilisée pour désérialiser l'information dans l'API
+ * Entrave et travaux de la ville de Montréal.
+ */
 public class Entrave {
 
     // Attributs

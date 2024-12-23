@@ -5,9 +5,17 @@ import java.util.Scanner;
 
 import static com.app.controllers.ConsulterEntravesController.consulterEntraves;
 
+/**
+ * Cette classe gère l'interface du résident pour consulter les entraves,
+ * y compris leur recherche et filtrage par divers critères.
+ */
 public class ConsulterEntravesPage {
 
-    // Méthode de menu pour l'utilisateur
+    /**
+     * Affiche le menu principal pour consulter les entraves.
+     * Permet à l'utilisateur de revenir au menu principal, de rechercher des
+     * entraves, ou de les filtrer par rue.
+     */
     public static void consulterEntraveMenu() {
         Scanner scanner = new Scanner(System.in);
         boolean filtrer;

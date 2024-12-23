@@ -17,6 +17,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Contrôleur responsable de la gestion des préférences horaires pour les
+ * résidents.
+ * Publie, modifie, récupère et supprime les préférences horaires des résidents.
+ */
 public class PreferenceHoraireController {
 
     private static final Logger logger = LoggerFactory.getLogger(PreferenceHoraireController.class);
@@ -26,7 +31,9 @@ public class PreferenceHoraireController {
     private static final String BASE_URL = "http://localhost:8000/users";
 
     /**
-     * Enregistre les routes pour la gestion des préférences horaires.
+     * Enregistre les routes du contrôleur pour l'application Javalin.
+     *
+     * @param app Instance de l'application Javalin
      */
     public static void registerRoutes(Javalin app) {
 
@@ -210,6 +217,14 @@ public class PreferenceHoraireController {
         });
     }
 
+    /**
+     * Récupère les préférences horaires d'un utilisateur via l'API.
+     *
+     * @param userId L'ID de l'utilisateur pour lequel les préférences
+     *              horaires doivent être récupérées.
+     * @return Une liste de documents représentant les préférences horaires
+     * de l'utilisateur.
+     */
     // Récupérer les préférences horaires d'un utilisateur via API
     public static List<Document> recupererPreferencesHoraires(String userId) {
         try {
@@ -229,7 +244,18 @@ public class PreferenceHoraireController {
         return new ArrayList<>();
     }
 
-    // Ajouter ou modifier une préférence horaire via API
+    /**
+     * Ajoute ou modifie une préférence horaire d'un utilisateur via l'API.
+     *
+     * @param userId    L'ID de l'utilisateur pour lequel la préférence horaire
+     *                  doit être ajoutée ou modifiée.
+     * @param jour      Le jour de la semaine pour lequel la préférence horaire
+     *                 est définie.
+     * @param heureDebut L'heure de début de la préférence horaire.
+     * @param heureFin  L'heure de fin de la préférence horaire.
+     * @return true si la préférence horaire a été ajoutée ou modifiée avec
+     * succès, false sinon.
+     */
     public static boolean ajouterOuModifierPreferenceHoraire(String userId, String jour, String heureDebut, String heureFin) {
         try {
             URL url = new URL(BASE_URL + "/" + userId + "/preferencesHoraires");
@@ -260,7 +286,16 @@ public class PreferenceHoraireController {
     }
 
 
-    // Supprimer une préférence horaire via API
+    /**
+     * Supprime une préférence horaire d'un utilisateur via l'API.
+     *
+     * @param userId L'ID de l'utilisateur pour lequel la préférence horaire
+     *              doit être supprimée.
+     * @param jour   Le jour de la semaine pour lequel la préférence horaire
+     *               doit être supprimée.
+     * @return true si la préférence horaire a été supprimée avec succès,
+     * false sinon.
+     */
     public static boolean supprimerPreferenceHoraire(String userId, String jour) {
         try {
             URL url = new URL(BASE_URL + "/" + userId + "/preferencesHoraires/" + jour);

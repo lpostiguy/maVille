@@ -6,16 +6,21 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 
 import static com.app.utils.GenerateurId.RandomIDGenerator;
-
+/**
+ * Cette classe représente un utilisateur ayant un rôle spécifique
+ * d'Intervenant.
+ * Cette classe étend la classe `User` et ajoute des attributs spécifiques à
+ * l'intervenant.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Intervenant extends User {
 
-    // Constructeur par défaut
+    // Constructeur par défaut (obligatoire pour la désérialisation)
     public Intervenant() {
         setUserRole("INTERVENANT");
     }
 
-    // Constructor pour création de compte
+    // Constructeur pour création de compte
     public Intervenant(String firstName, String lastName, String email,
                        String entityType, String cityId, int password) {
         setFirstName(firstName);
@@ -28,7 +33,7 @@ public class Intervenant extends User {
         setUserId(RandomIDGenerator());
     }
 
-    // Constructor pour se connecter
+    // Constructeur pour se connecter
     public Intervenant(String firstName, String lastName, String email,
                        String entityType, String cityId, int password,
                        String userId, List<Notification> notifications) {
