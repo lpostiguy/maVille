@@ -759,7 +759,7 @@
   <div class="title-section">
     <div>
       <h1 class="report-title">
-        Rapport du livrable 2: Conception de la solution pour l'application MaVille
+        Rapport du livrable 3: Implémentation de la solution pour l'application MaVille
       </h1>
       <p class="report-summary">
         <em>Court résumé du rapport</em> &ndash; Ce livrable se concentre
@@ -768,6 +768,7 @@
         et les risques à prendre en compte lors du développement. Il inclut
         aussi un prototype qui sert de preuve de concept. Dans ce livrable, il y a aussi les éléments de conception
         pour l'application, comme un choix d'architecture, un diagramme de classes et des diagrammes de séquence.
+        Finalement, il y a un lien vers la documentation JavaDoc et une vidéo qui présente le projet <em>MaVille</em>.
       </p>
     </div>
 
@@ -913,9 +914,29 @@
 
         <li class="nav-item">
           <h3 class="nav-item-title">
-            <a class="nav-item-title__link" href="#prototype">Prototype</a>
+            <a class="nav-item-title__link" href="#manuel-utilisation">Manuel d'utilisation</a>
+          </h3>
           </h3>
         </li>
+
+        <li class="nav-item">
+          <h3 class="nav-item-title">
+            <a class="nav-item-title__link" href="#rapport_tests">Rapport de tests</a>
+          </h3>
+        </li>
+
+        <li class="nav-item">
+          <h3 class="nav-item-title">
+            <a class="nav-item-title__link" href="#documentation JavaDoc">Documentation JavaDoc</a>
+          </h3>
+        </li>
+
+        <li class="nav-item">
+          <h3 class="nav-item-title">
+            <a class="nav-item-title__link" href="#demonstration">Démonstration</a>
+          </h3>
+        </li>
+
       </ul>
     </nav>
   </aside>
@@ -2309,6 +2330,7 @@
         <h4>Inscription et authentification</h4>
         <img
                 class="activity-diagram"
+                style="width:1200px"
                 src="images/diagrammes/inscription_diagram.svg"
                 alt="Diagramme d'activités"
         />
@@ -2317,6 +2339,7 @@
         <h4>Mon quartier</h4>
         <img
                 class="activity-diagram"
+                style="width:1000px"
                 src="images/diagrammes/mon_quartier_diagram.svg"
                 alt="Diagramme d'activités"
         />
@@ -2326,6 +2349,7 @@
         <h4>Gestionnaire de requêtes</h4>
         <img
                 class="activity-diagram"
+                style="width:1200px"
                 src="images/diagrammes/requetes_diagram.svg"
                 alt="Diagramme d'activités"
         />
@@ -2335,6 +2359,7 @@
         <h4>Consulter les travaux en cours où à venir</h4>
         <img
                 class="activity-diagram"
+                style="width:900px"
                 src="images/diagrammes/consulter_travaux_diagram.svg"
                 alt="Diagramme d'activités"
         />
@@ -2343,6 +2368,7 @@
         <h4>Rechercher des travaux</h4>
         <img
                 class="activity-diagram"
+                style="width:1350px"
                 src="images/diagrammes/recherche_travaux_diagram.svg"
                 alt="Diagramme d'activités"
         />
@@ -2352,6 +2378,7 @@
         <h4>Notifications personnalisées</h4>
         <img
                 class="activity-diagram"
+                style="width:1200px"
                 src="images/diagrammes/notifications_diagram.svg"
                 alt="Diagramme d'activités"
         />
@@ -2505,7 +2532,7 @@
         <img
                 class="class-diagram"
                 style="width:1400px"
-                src="images/diagrammes/diagramme_classe.svg"
+                src="images/diagrammes/Diagramme_classes_MaVille.svg"
                 alt="Diagramme de classes"
         />
         <p class="class-notes">
@@ -2588,17 +2615,13 @@
     </section>
 
     <section class="main-section">
-      <h2 id="prototype" class="section-title">Prototype</h2>
+      <h2 id="manuel-utilisation" class="section-title">Manuel D'utilisation</h2>
 
       <p>
-        <em>
           Pour exécuter le programme de commande, vous devez utiliser la commande: "java -jar IFT2255-A24-SessionProject.jar" dans le répertoire du projet.
 
           <p>
-            La création de compte Résident et Intervenant est possible et est enregistrée dans une base de données.
-          </p>
-          <p>
-            Pour la connection, voici les informations utilisateurs des 3 résidents et 3 intervenants.
+            L'application est initialisée avec la configuration suivante:
           </p>
           <p>
 
@@ -2613,6 +2636,15 @@
             <b>Résident 3</b> <br>
             email: max.ronald@resident.com <br>
             mot de passe : Max12345 <br><br>
+
+            <b>Résident 4</b> <br>
+            email:  <br>
+            mot de passe :  <br><br>
+
+            <b>Résident 5</b> <br>
+            email:  <br>
+            mot de passe :  <br><br>
+
 -------------------------------------------- <br><br>
             <b>Intervenant 1</b> <br>
             email: james.williams@intervenant.com <br>
@@ -2626,16 +2658,90 @@
             email: bruce.cuban@intervenant.com <br>
             mot de passe : Bruce12345 <br><br>
 
-        </p>
-          </em
-        >
+            <b>Intervenant 4</b> <br>
+            email: <br>
+            mot de passe :  <br><br>
+
+            <b>Intervenant 5</b> <br>
+            email: <br>
+            mot de passe :  <br><br>
+
+-------------------------------------------- <br><br>
+            <b> Requête de travail #1</b> <br>
+            ... : <br>
+            ... :  <br><br>
+
+            <b> Requête de travail #2</b> <br>
+            ... : <br>
+            ... :  <br><br>
+
+            <b> Requête de travail #3</b> <br>
+            ... : <br>
+            ... :  <br><br>
+
+            <b> Requête de travail #4</b> <br>
+            ... : <br>
+            ... :  <br><br>
+
+            <b> Requête de travail #5</b> <br>
+            ... : <br>
+            ... :  <br><br>
+
+-------------------------------------------- <br><br>
+            <b> Projet #1</b> <br>
+            ... : <br>
+            ... :  <br><br>
+
+            <b> Projet #2</b> <br>
+            ... : <br>
+            ... :  <br><br>
+
+            <b> Projet #3</b> <br>
+            ... : <br>
+            ... :  <br><br>
+
+            <b> Projet #4</b> <br>
+            ... : <br>
+            ... :  <br><br>
+
+            <b> Projet #5</b> <br>
+            ... : <br>
+            ... :  <br><br>
+
+
+
+          </p>
+    </section>
+
+    <section class="main-section">
+      <h2 id="rapport_tests" class="section-title">Rapport de tests</h2>
+
+      <p>
+        Voici le lien vers notre rapport de tests:
       </p>
     </section>
+
+    <section class="main-section">
+      <h2 id="documentation JavaDoc" class="section-title">Documentation JavaDoc</h2>
+
+      <p>
+        Voici le lien vers la documentation JavaDoc:
+      </p>
+    </section>
+
+    <section class="main-section">
+      <h2 id="demonstration" class="section-title">Démonstration</h2>
+
+      <p>
+        Voici la présentation du projet <em>MaVille</em>:
+      </p>
+    </section>
+
   </div>
 </main>
 <footer class="report-footer">
   <p>
-    Devoir 2 &ndash; Conception<br />
+    Projet <em>MaVille</em> <br />
     IFT2255 (Génie logiciel) <br />
     Automne 2024
   </p>
