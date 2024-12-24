@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Travail.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.models</a> &gt; <span class="el_source">Travail.java</span></div><h1>Travail.java</h1><pre class="source lang-java linenums">package com.app.models;
+
+/**
+ * Cette classe représente un travail avec des informations sur
+ * son identification, sa durée, son emplacement et d'autres métadonnées
+ * associées. Elle est utilisée pour désérialiser l'information dans l'API
+ * Entrave et travaux de la ville de Montréal.
+ */
+<span class="nc" id="L9">public class Travail {</span>
+
+    // Attributs
+    private int _id;
+    private String id;
+    private String permit_permit_id;
+    private String contractnumber;
+    private String boroughid;
+    private String permitcategory;
+    private String currentstatus;
+    private String duration_start_date;
+    private String duration_end_date;
+    private String reason_category;
+    private String occupancy_name;
+    private String submittercategory;
+    private String organizationname;
+    private boolean duration_days_mon_active;
+    private boolean duration_days_tue_active;
+    private boolean duration_days_wed_active;
+    private boolean duration_days_thu_active;
+    private boolean duration_days_fri_active;
+    private boolean duration_days_sat_active;
+    private boolean duration_days_sun_active;
+    private String duration_days_mon_start_time;
+    private String duration_days_mon_end_time;
+    private String duration_days_tue_start_time;
+    private String duration_days_tue_end_time;
+    private String duration_days_wed_start_time;
+    private String duration_days_wed_end_time;
+    private String duration_days_thu_start_time;
+    private String duration_days_thu_end_time;
+    private String duration_days_fri_start_time;
+    private String duration_days_fri_end_time;
+    private String duration_days_sun_start_time;
+    private String duration_days_sun_end_time;
+    private double longitude;
+    private double latitude;
+
+    // Getters
+    public int get_id() {
+<span class="nc" id="L49">        return _id;</span>
+    }
+
+    public String getId() {
+<span class="nc" id="L53">        return id;</span>
+    }
+
+    public String getPermit_permit_id() {
+<span class="nc" id="L57">        return permit_permit_id;</span>
+    }
+
+    public String getContractnumber() {
+<span class="nc" id="L61">        return contractnumber;</span>
+    }
+
+    public String getBoroughid() {
+<span class="nc" id="L65">        return boroughid;</span>
+    }
+
+    public String getPermitcategory() {
+<span class="nc" id="L69">        return permitcategory;</span>
+    }
+
+    public String getCurrentstatus() {
+<span class="nc" id="L73">        return currentstatus;</span>
+    }
+
+    public String getDuration_start_date() {
+<span class="nc" id="L77">        return duration_start_date;</span>
+    }
+
+    public String getDuration_end_date() {
+<span class="nc" id="L81">        return duration_end_date;</span>
+    }
+
+    public String getReason_category() {
+<span class="nc" id="L85">        return reason_category;</span>
+    }
+
+    public String getOccupancy_name() {
+<span class="nc" id="L89">        return occupancy_name;</span>
+    }
+
+    public String getSubmittercategory() {
+<span class="nc" id="L93">        return submittercategory;</span>
+    }
+
+    public String getOrganizationname() {
+<span class="nc" id="L97">        return organizationname;</span>
+    }
+
+    public boolean isDuration_days_mon_active() {
+<span class="nc" id="L101">        return duration_days_mon_active;</span>
+    }
+
+    public boolean isDuration_days_tue_active() {
+<span class="nc" id="L105">        return duration_days_tue_active;</span>
+    }
+
+    public boolean isDuration_days_wed_active() {
+<span class="nc" id="L109">        return duration_days_wed_active;</span>
+    }
+
+    public boolean isDuration_days_thu_active() {
+<span class="nc" id="L113">        return duration_days_thu_active;</span>
+    }
+
+    public boolean isDuration_days_fri_active() {
+<span class="nc" id="L117">        return duration_days_fri_active;</span>
+    }
+
+    public boolean isDuration_days_sat_active() {
+<span class="nc" id="L121">        return duration_days_sat_active;</span>
+    }
+
+    public boolean isDuration_days_sun_active() {
+<span class="nc" id="L125">        return duration_days_sun_active;</span>
+    }
+
+    public String getDuration_days_mon_start_time() {
+<span class="nc" id="L129">        return duration_days_mon_start_time;</span>
+    }
+
+    public String getDuration_days_mon_end_time() {
+<span class="nc" id="L133">        return duration_days_mon_end_time;</span>
+    }
+
+    public String getDuration_days_tue_start_time() {
+<span class="nc" id="L137">        return duration_days_tue_start_time;</span>
+    }
+
+    public String getDuration_days_tue_end_time() {
+<span class="nc" id="L141">        return duration_days_tue_end_time;</span>
+    }
+
+    public String getDuration_days_wed_start_time() {
+<span class="nc" id="L145">        return duration_days_wed_start_time;</span>
+    }
+
+    public String getDuration_days_wed_end_time() {
+<span class="nc" id="L149">        return duration_days_wed_end_time;</span>
+    }
+
+    public String getDuration_days_thu_start_time() {
+<span class="nc" id="L153">        return duration_days_thu_start_time;</span>
+    }
+
+    public String getDuration_days_thu_end_time() {
+<span class="nc" id="L157">        return duration_days_thu_end_time;</span>
+    }
+
+    public String getDuration_days_fri_start_time() {
+<span class="nc" id="L161">        return duration_days_fri_start_time;</span>
+    }
+
+    public String getDuration_days_fri_end_time() {
+<span class="nc" id="L165">        return duration_days_fri_end_time;</span>
+    }
+
+    public String getDuration_days_sun_start_time() {
+<span class="nc" id="L169">        return duration_days_sun_start_time;</span>
+    }
+
+    public String getDuration_days_sun_end_time() {
+<span class="nc" id="L173">        return duration_days_sun_end_time;</span>
+    }
+
+    public double getLongitude() {
+<span class="nc" id="L177">        return longitude;</span>
+    }
+
+    public double getLatitude() {
+<span class="nc" id="L181">        return latitude;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

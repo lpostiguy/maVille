@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PreferenceHoraireController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.controllers</a> &gt; <span class="el_source">PreferenceHoraireController.java</span></div><h1>PreferenceHoraireController.java</h1><pre class="source lang-java linenums">package com.app.controllers;
+
+import com.app.MongoDBConnection;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.UpdateOptions;
+import io.javalin.Javalin;
+import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Contrôleur responsable de la gestion des préférences horaires pour les
+ * résidents.
+ * Publie, modifie, récupère et supprime les préférences horaires des résidents.
+ */
+<span class="nc" id="L25">public class PreferenceHoraireController {</span>
+
+<span class="nc" id="L27">    private static final Logger logger = LoggerFactory.getLogger(PreferenceHoraireController.class);</span>
+<span class="nc" id="L28">    private static final MongoCollection&lt;Document&gt; collectionUtilisateurs =</span>
+<span class="nc" id="L29">        MongoDBConnection.getDatabase().getCollection(&quot;users&quot;);</span>
+
+    private static final String BASE_URL = &quot;http://localhost:8000/users&quot;;
+
+    /**
+     * Enregistre les routes du contrôleur pour l'application Javalin.
+     *
+     * @param app Instance de l'application Javalin
+     */
+    public static void registerRoutes(Javalin app) {
+
+        // Route pour récupérer les préférences horaires d'un utilisateur
+<span class="nc" id="L41">        app.get(&quot;/users/{userId}/preferencesHoraires&quot;, ctx -&gt; {</span>
+            try {
+<span class="nc" id="L43">                String userId = ctx.pathParam(&quot;userId&quot;);</span>
+
+                // Rechercher l'utilisateur dans MongoDB
+<span class="nc" id="L46">                Document utilisateur = collectionUtilisateurs.find(new Document(&quot;userId&quot;, userId)).first();</span>
+
+<span class="nc bnc" id="L48" title="All 2 branches missed.">                if (utilisateur == null) {</span>
+<span class="nc" id="L49">                    ctx.status(404).result(&quot;Utilisateur non trouvé.&quot;);</span>
+<span class="nc" id="L50">                    return;</span>
+                }
+
+                // Extraire les préférences horaires
+<span class="nc" id="L54">                List&lt;Document&gt; preferencesHoraires = utilisateur.getList(&quot;preferencesHoraires&quot;, Document.class);</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">                ctx.json(preferencesHoraires != null ? preferencesHoraires : new ArrayList&lt;&gt;());</span>
+<span class="nc" id="L56">            } catch (Exception e) {</span>
+<span class="nc" id="L57">                logger.error(&quot;Erreur lors de la récupération des préférences horaires : &quot;, e);</span>
+<span class="nc" id="L58">                ctx.status(500).result(&quot;Erreur Serveur.&quot;);</span>
+<span class="nc" id="L59">            }</span>
+<span class="nc" id="L60">        });</span>
+
+        // Route pour créer des préférences horaires si aucune n'existe
+<span class="nc" id="L63">        app.post(&quot;/users/{userId}/preferencesHoraires&quot;, ctx -&gt; {</span>
+            try {
+<span class="nc" id="L65">                String userId = ctx.pathParam(&quot;userId&quot;);</span>
+<span class="nc" id="L66">                Document preferenceRecu = Document.parse(ctx.body());</span>
+
+                // Validation des champs obligatoires
+<span class="nc" id="L69">                String jour = preferenceRecu.getString(&quot;jour&quot;);</span>
+<span class="nc" id="L70">                String heureDebut = preferenceRecu.getString(&quot;heureDebut&quot;);</span>
+<span class="nc" id="L71">                String heureFin = preferenceRecu.getString(&quot;heureFin&quot;);</span>
+
+<span class="nc bnc" id="L73" title="All 6 branches missed.">                if (jour == null || heureDebut == null || heureFin == null) {</span>
+<span class="nc" id="L74">                    ctx.status(400).result(&quot;Les champs 'jour', 'heureDebut', et 'heureFin' sont obligatoires.&quot;);</span>
+<span class="nc" id="L75">                    return;</span>
+                }
+
+                // Rechercher l'utilisateur dans MongoDB
+<span class="nc" id="L79">                Document utilisateur = collectionUtilisateurs.find(new Document(&quot;userId&quot;, userId)).first();</span>
+
+<span class="nc bnc" id="L81" title="All 2 branches missed.">                if (utilisateur == null) {</span>
+<span class="nc" id="L82">                    ctx.status(404).result(&quot;Utilisateur non trouvé.&quot;);</span>
+<span class="nc" id="L83">                    return;</span>
+                }
+
+                // Vérifier si l'utilisateur a déjà des préférences horaires
+<span class="nc" id="L87">                List&lt;Document&gt; preferencesHoraires = utilisateur.getList(&quot;preferencesHoraires&quot;, Document.class);</span>
+
+<span class="nc bnc" id="L89" title="All 4 branches missed.">                if (preferencesHoraires != null &amp;&amp; !preferencesHoraires.isEmpty()) {</span>
+<span class="nc" id="L90">                    ctx.status(400).result(&quot;L'utilisateur a déjà des préférences horaires. Utilisez PATCH pour les modifier.&quot;);</span>
+<span class="nc" id="L91">                    return;</span>
+                }
+
+                // Ajouter une nouvelle liste de préférences horaires
+<span class="nc" id="L95">                List&lt;Document&gt; nouvellesPreferences = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L96">                nouvellesPreferences.add(new Document()</span>
+<span class="nc" id="L97">                    .append(&quot;jour&quot;, jour)</span>
+<span class="nc" id="L98">                    .append(&quot;heureDebut&quot;, heureDebut)</span>
+<span class="nc" id="L99">                    .append(&quot;heureFin&quot;, heureFin));</span>
+
+                // Mettre à jour dans MongoDB
+<span class="nc" id="L102">                collectionUtilisateurs.updateOne(</span>
+                    new Document(&quot;userId&quot;, userId),
+                    new Document(&quot;$set&quot;, new Document(&quot;preferencesHoraires&quot;, nouvellesPreferences)),
+<span class="nc" id="L105">                    new UpdateOptions().upsert(true)</span>
+                );
+
+<span class="nc" id="L108">                ctx.status(201).result(&quot;Préférences horaires créées avec succès.&quot;);</span>
+<span class="nc" id="L109">            } catch (Exception e) {</span>
+<span class="nc" id="L110">                logger.error(&quot;Erreur lors de la création des préférences horaires : &quot;, e);</span>
+<span class="nc" id="L111">                ctx.status(500).result(&quot;Erreur Serveur.&quot;);</span>
+<span class="nc" id="L112">            }</span>
+<span class="nc" id="L113">        });</span>
+
+        // Route pour ajouter ou modifier une préférence horaire
+<span class="nc" id="L116">        app.patch(&quot;/users/{userId}/preferencesHoraires&quot;, ctx -&gt; {</span>
+            try {
+<span class="nc" id="L118">                String userId = ctx.pathParam(&quot;userId&quot;);</span>
+<span class="nc" id="L119">                Document preferenceRecu = Document.parse(ctx.body());</span>
+
+                // Validation des champs obligatoires
+<span class="nc" id="L122">                String jour = preferenceRecu.getString(&quot;jour&quot;);</span>
+<span class="nc" id="L123">                String heureDebut = preferenceRecu.getString(&quot;heureDebut&quot;);</span>
+<span class="nc" id="L124">                String heureFin = preferenceRecu.getString(&quot;heureFin&quot;);</span>
+
+<span class="nc bnc" id="L126" title="All 6 branches missed.">                if (jour == null || heureDebut == null || heureFin == null) {</span>
+<span class="nc" id="L127">                    ctx.status(400).result(&quot;Les champs 'jour', 'heureDebut', et 'heureFin' sont obligatoires.&quot;);</span>
+<span class="nc" id="L128">                    return;</span>
+                }
+
+                // Rechercher l'utilisateur dans MongoDB
+<span class="nc" id="L132">                Document utilisateur = collectionUtilisateurs.find(new Document(&quot;userId&quot;, userId)).first();</span>
+
+<span class="nc bnc" id="L134" title="All 2 branches missed.">                if (utilisateur == null) {</span>
+<span class="nc" id="L135">                    ctx.status(404).result(&quot;Utilisateur non trouvé.&quot;);</span>
+<span class="nc" id="L136">                    return;</span>
+                }
+
+                // Récupérer ou initialiser les préférences horaires existantes
+<span class="nc" id="L140">                List&lt;Document&gt; preferencesHoraires = utilisateur.getList(&quot;preferencesHoraires&quot;, Document.class);</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">                if (preferencesHoraires == null) preferencesHoraires = new ArrayList&lt;&gt;();</span>
+
+                // Vérifier si le jour existe déjà dans les préférences
+<span class="nc" id="L144">                boolean jourExistant = preferencesHoraires.stream()</span>
+<span class="nc" id="L145">                    .anyMatch(preference -&gt; preference.getString(&quot;jour&quot;).equalsIgnoreCase(jour));</span>
+
+<span class="nc bnc" id="L147" title="All 2 branches missed.">                if (jourExistant) {</span>
+                    // Modifier la préférence existante
+<span class="nc" id="L149">                    preferencesHoraires.forEach(preference -&gt; {</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">                        if (preference.getString(&quot;jour&quot;).equalsIgnoreCase(jour)) {</span>
+<span class="nc" id="L151">                            preference.put(&quot;heureDebut&quot;, heureDebut);</span>
+<span class="nc" id="L152">                            preference.put(&quot;heureFin&quot;, heureFin);</span>
+                        }
+<span class="nc" id="L154">                    });</span>
+                } else {
+                    // Ajouter une nouvelle préférence
+<span class="nc" id="L157">                    preferencesHoraires.add(new Document()</span>
+<span class="nc" id="L158">                        .append(&quot;jour&quot;, jour)</span>
+<span class="nc" id="L159">                        .append(&quot;heureDebut&quot;, heureDebut)</span>
+<span class="nc" id="L160">                        .append(&quot;heureFin&quot;, heureFin));</span>
+                }
+
+                // Mettre à jour les préférences horaires dans MongoDB
+<span class="nc" id="L164">                collectionUtilisateurs.updateOne(</span>
+                    new Document(&quot;userId&quot;, userId),
+                    new Document(&quot;$set&quot;, new Document(&quot;preferencesHoraires&quot;, preferencesHoraires))
+                );
+
+<span class="nc" id="L169">                ctx.status(200).result(&quot;Préférence horaire mise à jour avec succès.&quot;);</span>
+<span class="nc" id="L170">            } catch (Exception e) {</span>
+<span class="nc" id="L171">                logger.error(&quot;Erreur lors de la mise à jour des préférences horaires : &quot;, e);</span>
+<span class="nc" id="L172">                ctx.status(500).result(&quot;Erreur Serveur.&quot;);</span>
+<span class="nc" id="L173">            }</span>
+<span class="nc" id="L174">        });</span>
+
+        // Route pour supprimer une préférence horaire
+<span class="nc" id="L177">        app.delete(&quot;/users/{userId}/preferencesHoraires/{jour}&quot;, ctx -&gt; {</span>
+            try {
+<span class="nc" id="L179">                String userId = ctx.pathParam(&quot;userId&quot;);</span>
+<span class="nc" id="L180">                String jour = ctx.pathParam(&quot;jour&quot;);</span>
+
+                // Rechercher l'utilisateur dans MongoDB
+<span class="nc" id="L183">                Document utilisateur = collectionUtilisateurs.find(new Document(&quot;userId&quot;, userId)).first();</span>
+
+<span class="nc bnc" id="L185" title="All 2 branches missed.">                if (utilisateur == null) {</span>
+<span class="nc" id="L186">                    ctx.status(404).result(&quot;Utilisateur non trouvé.&quot;);</span>
+<span class="nc" id="L187">                    return;</span>
+                }
+
+                // Récupérer les préférences horaires existantes
+<span class="nc" id="L191">                List&lt;Document&gt; preferencesHoraires = utilisateur.getList(&quot;preferencesHoraires&quot;, Document.class);</span>
+<span class="nc bnc" id="L192" title="All 4 branches missed.">                if (preferencesHoraires == null || preferencesHoraires.isEmpty()) {</span>
+<span class="nc" id="L193">                    ctx.status(404).result(&quot;Aucune préférence horaire trouvée.&quot;);</span>
+<span class="nc" id="L194">                    return;</span>
+                }
+
+                // Supprimer la préférence correspondant au jour
+<span class="nc" id="L198">                boolean supprimé = preferencesHoraires.removeIf(preference -&gt;</span>
+<span class="nc" id="L199">                    preference.getString(&quot;jour&quot;).equalsIgnoreCase(jour));</span>
+
+<span class="nc bnc" id="L201" title="All 2 branches missed.">                if (!supprimé) {</span>
+<span class="nc" id="L202">                    ctx.status(404).result(&quot;Préférence horaire pour le jour spécifié introuvable.&quot;);</span>
+<span class="nc" id="L203">                    return;</span>
+                }
+
+                // Mettre à jour les préférences horaires dans MongoDB
+<span class="nc" id="L207">                collectionUtilisateurs.updateOne(</span>
+                    new Document(&quot;userId&quot;, userId),
+                    new Document(&quot;$set&quot;, new Document(&quot;preferencesHoraires&quot;, preferencesHoraires))
+                );
+
+<span class="nc" id="L212">                ctx.status(200).result(&quot;Préférence horaire supprimée avec succès.&quot;);</span>
+<span class="nc" id="L213">            } catch (Exception e) {</span>
+<span class="nc" id="L214">                logger.error(&quot;Erreur lors de la suppression de la préférence horaire : &quot;, e);</span>
+<span class="nc" id="L215">                ctx.status(500).result(&quot;Erreur Serveur.&quot;);</span>
+<span class="nc" id="L216">            }</span>
+<span class="nc" id="L217">        });</span>
+<span class="nc" id="L218">    }</span>
+
+    /**
+     * Récupère les préférences horaires d'un utilisateur via l'API.
+     *
+     * @param userId L'ID de l'utilisateur pour lequel les préférences
+     *              horaires doivent être récupérées.
+     * @return Une liste de documents représentant les préférences horaires
+     * de l'utilisateur.
+     */
+    // Récupérer les préférences horaires d'un utilisateur via API
+    public static List&lt;Document&gt; recupererPreferencesHoraires(String userId) {
+        try {
+<span class="nc" id="L231">            URL url = new URL(BASE_URL + &quot;/&quot; + userId + &quot;/preferencesHoraires&quot;);</span>
+<span class="nc" id="L232">            HttpURLConnection conn = (HttpURLConnection) url.openConnection();</span>
+<span class="nc" id="L233">            conn.setRequestMethod(&quot;GET&quot;);</span>
+
+<span class="nc bnc" id="L235" title="All 2 branches missed.">            if (conn.getResponseCode() == 200) {</span>
+<span class="nc" id="L236">                ObjectMapper mapper = new ObjectMapper();</span>
+<span class="nc" id="L237">                return mapper.readValue(conn.getInputStream(), new TypeReference&lt;List&lt;Document&gt;&gt;() {});</span>
+            } else {
+<span class="nc" id="L239">                System.out.println(&quot;Erreur lors de la récupération des préférences horaires : &quot; + conn.getResponseCode());</span>
+            }
+<span class="nc" id="L241">        } catch (Exception e) {</span>
+<span class="nc" id="L242">            e.printStackTrace();</span>
+<span class="nc" id="L243">        }</span>
+<span class="nc" id="L244">        return new ArrayList&lt;&gt;();</span>
+    }
+
+    /**
+     * Ajoute ou modifie une préférence horaire d'un utilisateur via l'API.
+     *
+     * @param userId    L'ID de l'utilisateur pour lequel la préférence horaire
+     *                  doit être ajoutée ou modifiée.
+     * @param jour      Le jour de la semaine pour lequel la préférence horaire
+     *                 est définie.
+     * @param heureDebut L'heure de début de la préférence horaire.
+     * @param heureFin  L'heure de fin de la préférence horaire.
+     * @return true si la préférence horaire a été ajoutée ou modifiée avec
+     * succès, false sinon.
+     */
+    public static boolean ajouterOuModifierPreferenceHoraire(String userId, String jour, String heureDebut, String heureFin) {
+        try {
+<span class="nc" id="L261">            URL url = new URL(BASE_URL + &quot;/&quot; + userId + &quot;/preferencesHoraires&quot;);</span>
+<span class="nc" id="L262">            HttpURLConnection conn = (HttpURLConnection) url.openConnection();</span>
+
+            // Utiliser POST comme méthode de fallback pour simuler PATCH
+<span class="nc" id="L265">            conn.setRequestMethod(&quot;POST&quot;);</span>
+<span class="nc" id="L266">            conn.setRequestProperty(&quot;X-HTTP-Method-Override&quot;, &quot;PATCH&quot;); // Indique que la requête est un PATCH</span>
+<span class="nc" id="L267">            conn.setRequestProperty(&quot;Content-Type&quot;, &quot;application/json; utf-8&quot;);</span>
+<span class="nc" id="L268">            conn.setDoOutput(true);</span>
+
+            // Construire le JSON pour la préférence horaire
+<span class="nc" id="L271">            String jsonInputString = String.format(</span>
+                &quot;{\&quot;jour\&quot;: \&quot;%s\&quot;, \&quot;heureDebut\&quot;: \&quot;%s\&quot;, \&quot;heureFin\&quot;: \&quot;%s\&quot;}&quot;,
+                jour, heureDebut, heureFin
+            );
+
+<span class="nc" id="L276">            try (OutputStream os = conn.getOutputStream()) {</span>
+<span class="nc" id="L277">                byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);</span>
+<span class="nc" id="L278">                os.write(input, 0, input.length);</span>
+            }
+
+<span class="nc bnc" id="L281" title="All 2 branches missed.">            return conn.getResponseCode() == 200;</span>
+<span class="nc" id="L282">        } catch (Exception e) {</span>
+<span class="nc" id="L283">            e.printStackTrace();</span>
+        }
+<span class="nc" id="L285">        return false;</span>
+    }
+
+
+    /**
+     * Supprime une préférence horaire d'un utilisateur via l'API.
+     *
+     * @param userId L'ID de l'utilisateur pour lequel la préférence horaire
+     *              doit être supprimée.
+     * @param jour   Le jour de la semaine pour lequel la préférence horaire
+     *               doit être supprimée.
+     * @return true si la préférence horaire a été supprimée avec succès,
+     * false sinon.
+     */
+    public static boolean supprimerPreferenceHoraire(String userId, String jour) {
+        try {
+<span class="nc" id="L301">            URL url = new URL(BASE_URL + &quot;/&quot; + userId + &quot;/preferencesHoraires/&quot; + jour);</span>
+<span class="nc" id="L302">            HttpURLConnection conn = (HttpURLConnection) url.openConnection();</span>
+<span class="nc" id="L303">            conn.setRequestMethod(&quot;DELETE&quot;);</span>
+
+<span class="nc bnc" id="L305" title="All 2 branches missed.">            return conn.getResponseCode() == 200;</span>
+<span class="nc" id="L306">        } catch (Exception e) {</span>
+<span class="nc" id="L307">            e.printStackTrace();</span>
+        }
+<span class="nc" id="L309">        return false;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

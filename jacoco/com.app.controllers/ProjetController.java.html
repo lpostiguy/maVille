@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProjetController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.controllers</a> &gt; <span class="el_source">ProjetController.java</span></div><h1>ProjetController.java</h1><pre class="source lang-java linenums">package com.app.controllers;
+
+import com.app.MongoDBConnection;
+import com.app.models.Projet;
+import com.app.models.User.User;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.client.MongoCollection;
+import io.javalin.Javalin;
+import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+import static com.app.utils.GenerateurId.RandomIDGenerator;
+
+/**
+ * Contrôleur responsable de la gestion des projets dans l'application.
+ * Permet la création, la modification, la consultation et la mise à jour des projets.
+ */
+<span class="nc" id="L33">public class ProjetController {</span>
+
+<span class="nc" id="L35">    private static final Logger logger =</span>
+<span class="nc" id="L36">        LoggerFactory.getLogger(ProjetController.class);</span>
+<span class="nc" id="L37">    private static final MongoCollection&lt;Document&gt; collectionProjets =</span>
+<span class="nc" id="L38">        MongoDBConnection.getDatabase().getCollection(&quot;projets&quot;);</span>
+
+    /**
+     * Enregistre les routes du contrôleur pour l'application Javalin.
+     *
+     * @param app Instance de l'application Javalin
+     */
+    public static void registerRoutes(Javalin app) {
+
+<span class="nc" id="L47">        app.get(&quot;/projets&quot;, ctx -&gt; {</span>
+            try {
+<span class="nc" id="L49">                List&lt;Document&gt; projets = collectionProjets.find().into(new ArrayList&lt;&gt;());</span>
+<span class="nc" id="L50">                ctx.json(projets);</span>
+<span class="nc" id="L51">            } catch (Exception e) {</span>
+<span class="nc" id="L52">                logger.error(&quot;Erreur lors de la récupération des projets: &quot;, e);</span>
+<span class="nc" id="L53">                ctx.status(500).result(&quot;Erreur Serveur&quot;);</span>
+<span class="nc" id="L54">            }</span>
+<span class="nc" id="L55">        });</span>
+
+
+<span class="nc" id="L58">        app.get(&quot;/projets/{idSoumissionnaireProjet}&quot;, ctx -&gt; {</span>
+            try {
+<span class="nc" id="L60">                String idSoumissionnaireProjet = ctx.pathParam(&quot;idSoumissionnaireProjet&quot;);</span>
+
+<span class="nc" id="L62">                ObjectMapper mapper = new ObjectMapper();</span>
+
+<span class="nc" id="L64">                List&lt;Projet&gt; projets = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L65">                collectionProjets.find(new Document(&quot;idSoumissionnaireProjet&quot;</span>
+<span class="nc" id="L66">                    , idSoumissionnaireProjet)).forEach(document -&gt; {</span>
+                    try {
+<span class="nc" id="L68">                        Projet projet =</span>
+<span class="nc" id="L69">                            mapper.readValue(document.toJson(),</span>
+                                Projet.class);
+<span class="nc" id="L71">                        projets.add(projet);</span>
+<span class="nc" id="L72">                    } catch (Exception e) {</span>
+<span class="nc" id="L73">                        logger.error(&quot;Erreur lors du mapping du document: &quot; + e);</span>
+<span class="nc" id="L74">                    }</span>
+<span class="nc" id="L75">                });</span>
+<span class="nc" id="L76">                ctx.json(projets);</span>
+<span class="nc" id="L77">            } catch (Exception e) {</span>
+<span class="nc" id="L78">                logger.error(&quot;Erreur lors de la récupération des projets : &quot;, e);</span>
+<span class="nc" id="L79">                ctx.status(500).result(&quot;Erreur Serveur&quot;);</span>
+<span class="nc" id="L80">            }</span>
+<span class="nc" id="L81">        });</span>
+
+<span class="nc" id="L83">        app.post(&quot;/projets&quot;, ctx -&gt; {</span>
+            try {
+<span class="nc" id="L85">                Projet projet = ctx.bodyAsClass(Projet.class);</span>
+<span class="nc" id="L86">                projet.setId(RandomIDGenerator());</span>
+
+                // Validation des champs requis
+<span class="nc bnc" id="L89" title="All 18 branches missed.">                if ( projet.getId() == null || projet.getIdSoumissionnaireProjet() == null || projet.getTitre() == null || projet.getDescription() == null || projet.getTypeTravaux() == null || projet.getDateDebut() == null || projet.getDateFin() == null || projet.getQuartiersAffectes() == null || projet.getRuesAffectees() == null) {</span>
+<span class="nc" id="L90">                    ctx.status(400).result(&quot;Tous les champs sont requis.&quot;);</span>
+<span class="nc" id="L91">                    return;</span>
+                }
+
+                // Insertion dans MongoDB
+<span class="nc" id="L95">                Document doc = new Document(&quot;id&quot;, projet.getId()).append(</span>
+<span class="nc" id="L96">                    &quot;idSoumissionnaireProjet&quot;, projet.getIdSoumissionnaireProjet()).append(</span>
+<span class="nc" id="L97">                    &quot;titre&quot;, projet.getTitre()).append(&quot;description&quot;,</span>
+<span class="nc" id="L98">                    projet.getDescription()).append(&quot;typeTravaux&quot;,</span>
+<span class="nc" id="L99">                    projet.getTypeTravaux()).append(&quot;dateDebut&quot;, projet.getDateDebut()).append(&quot;dateFin&quot;, projet.getDateFin()).append(&quot;quartiersAffectes&quot;, projet.getQuartiersAffectes()).append(&quot;ruesAffectees&quot;, projet.getRuesAffectees()).append(&quot;statut&quot;, projet.getStatut());</span>
+<span class="nc" id="L100">                collectionProjets.insertOne(doc);</span>
+
+<span class="nc" id="L102">                ctx.status(201).result(&quot;Projet ajoutée avec &quot; + &quot;succès.&quot;);</span>
+<span class="nc" id="L103">            } catch (Exception e) {</span>
+<span class="nc" id="L104">                logger.error(&quot;Erreur lors de la création du projet: &quot;, e);</span>
+<span class="nc" id="L105">                ctx.status(500).result(&quot;Erreur Serveur&quot;);</span>
+<span class="nc" id="L106">            }</span>
+<span class="nc" id="L107">        });</span>
+
+<span class="nc" id="L109">        app.patch(&quot;/projets/{id}&quot;, ctx -&gt; {</span>
+            try {
+                // Récupérer le paramètre de l'URL
+<span class="nc" id="L112">                String id = ctx.pathParam(&quot;id&quot;);</span>
+
+                // Construire le filtre pour identifier le document
+<span class="nc" id="L115">                Document filter = new Document(&quot;id&quot;, id); // Utiliser le</span>
+                // champ &quot;id&quot; (String)
+
+                // Récupérer les mises à jour du corps du projet
+<span class="nc" id="L119">                Document updates = Document.parse(ctx.body());</span>
+
+                // Valider les champs
+<span class="nc bnc" id="L122" title="All 2 branches missed.">                if (!updates.containsKey(&quot;statut&quot;)) {</span>
+<span class="nc" id="L123">                    ctx.status(400).result(&quot;Le champ 'statut' est requis.&quot;);</span>
+<span class="nc" id="L124">                    return;</span>
+                }
+
+                // Construire les modifications
+<span class="nc" id="L128">                Document update = new Document(&quot;$set&quot;, updates);</span>
+
+                // Mettre à jour dans MongoDB
+<span class="nc" id="L131">                var result = collectionProjets.updateOne(filter, update);</span>
+
+                // Vérifier si un document a été mis à jour
+<span class="nc bnc" id="L134" title="All 2 branches missed.">                if (result.getModifiedCount() &gt; 0) {</span>
+<span class="nc" id="L135">                    ctx.status(200).result(&quot;Statut du projet mise à jour avec succès.&quot;);</span>
+                } else {
+<span class="nc" id="L137">                    System.out.println(&quot;Le statut du projet n’a pas été modifié, soit parce que le projet est introuvable, soit parce que le statut est déjà identique.&quot;);</span>
+                }
+<span class="nc" id="L139">            } catch (Exception e) {</span>
+<span class="nc" id="L140">                ctx.status(500).result(&quot;Erreur serveur : &quot; + e.getMessage());</span>
+<span class="nc" id="L141">            }</span>
+<span class="nc" id="L142">        });</span>
+<span class="nc" id="L143">    }</span>
+
+    /**
+     * Soumet un projet via une requête HTTP POST.
+     *
+     * @param idSoumissionnaireProjet Identifiant du soumissionnaire
+     * @param titre Titre du projet
+     * @param description Description du projet
+     * @param typeTravaux Type des travaux à réaliser
+     * @param dateDebut Date de début des travaux
+     * @param dateFin Date de fin des travaux
+     * @param quartiersAffectes List des quartiers affectés par le projet
+     * @param ruesAffectees List des rues affectées par le projet
+     * @param statut Statut du projet
+     * @return Message indiquant si la soumission a été réussie ou non
+     */
+    public static String soumettreProjet(String idSoumissionnaireProjet,
+                                                 String titre,
+                                                 String description,
+                                                 String typeTravaux,
+                                                 String dateDebut,
+                                                 String dateFin,
+                                                 List&lt;String&gt; quartiersAffectes,
+                                                 List&lt;String&gt; ruesAffectees,
+                                         String statut) {
+        try {
+<span class="nc" id="L169">            URL url = new URL(&quot;http://localhost:8000/projets&quot;);</span>
+<span class="nc" id="L170">            HttpURLConnection conn = (HttpURLConnection) url.openConnection();</span>
+<span class="nc" id="L171">            conn.setRequestMethod(&quot;POST&quot;);</span>
+<span class="nc" id="L172">            conn.setRequestProperty(&quot;Content-Type&quot;, &quot;application/json; utf-8&quot;);</span>
+<span class="nc" id="L173">            conn.setDoOutput(true);</span>
+
+            // Construire les données JSON en fonction des entrées utilisateur
+<span class="nc" id="L176">            String quartiersAffectesJson = quartiersAffectes.stream()</span>
+<span class="nc" id="L177">                .map(quartier -&gt; &quot;\&quot;&quot; + quartier + &quot;\&quot;&quot;)</span>
+<span class="nc" id="L178">                .collect(Collectors.joining(&quot;, &quot;, &quot;[&quot;, &quot;]&quot;));</span>
+
+<span class="nc" id="L180">            String ruesAffecteesJson = ruesAffectees.stream()</span>
+<span class="nc" id="L181">                .map(rue -&gt; &quot;\&quot;&quot; + rue + &quot;\&quot;&quot;)</span>
+<span class="nc" id="L182">                .collect(Collectors.joining(&quot;, &quot;, &quot;[&quot;, &quot;]&quot;));</span>
+
+<span class="nc" id="L184">            String jsonInputString = String.format(</span>
+                &quot;{ \&quot;id\&quot;: \&quot;%s\&quot;, &quot; +
+                    &quot;\&quot;idSoumissionnaireProjet\&quot;: \&quot;%s\&quot;, &quot; +
+                    &quot;\&quot;titre\&quot;: \&quot;%s\&quot;, &quot; +
+                    &quot;\&quot;description\&quot;: \&quot;%s\&quot;, &quot; +
+                    &quot;\&quot;typeTravaux\&quot;: \&quot;%s\&quot;, &quot; +
+                    &quot;\&quot;dateDebut\&quot;: \&quot;%s\&quot;, &quot; +
+                    &quot;\&quot;dateFin\&quot;: \&quot;%s\&quot;, &quot; +
+                    &quot;\&quot;quartiersAffectes\&quot;: %s, &quot; +
+                    &quot;\&quot;ruesAffectees\&quot;: %s, &quot; +
+                    &quot;\&quot;statut\&quot;: \&quot;%s\&quot; }&quot;,
+<span class="nc" id="L195">                RandomIDGenerator(), idSoumissionnaireProjet, titre,</span>
+                description, typeTravaux,
+                dateDebut, dateFin, quartiersAffectesJson, ruesAffecteesJson,
+                statut
+            );
+
+
+<span class="nc" id="L202">            try (OutputStream os = conn.getOutputStream()) {</span>
+<span class="nc" id="L203">                byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);</span>
+<span class="nc" id="L204">                os.write(input, 0, input.length);</span>
+            }
+
+<span class="nc bnc" id="L207" title="All 2 branches missed.">            if (conn.getResponseCode() == 201) {</span>
+<span class="nc" id="L208">                return &quot;Projets ajoutés avec succès.&quot;;</span>
+            } else {
+<span class="nc" id="L210">                return &quot;Erreur : &quot; + conn.getResponseCode();</span>
+            }
+<span class="nc" id="L212">        } catch (Exception e) {</span>
+<span class="nc" id="L213">            return &quot;Erreur lors de la soumission du projet.&quot;;</span>
+        }
+    }
+
+    /**
+     * Récupère la liste des projets pour tous les intervenants via l'API.
+     *
+     * @return Liste des projets récupérés depuis l'API
+     */
+    public static List&lt;Projet&gt; consulterProjets() {
+        try {
+<span class="nc" id="L224">            URL url = new URL(&quot;http://localhost:8000/projets&quot;);</span>
+<span class="nc" id="L225">            HttpURLConnection conn = (HttpURLConnection) url.openConnection();</span>
+<span class="nc" id="L226">            conn.setRequestMethod(&quot;GET&quot;);</span>
+
+<span class="nc bnc" id="L228" title="All 2 branches missed.">            if (conn.getResponseCode() == 200) {</span>
+<span class="nc" id="L229">                StringBuilder reponse = new StringBuilder();</span>
+<span class="nc" id="L230">                try (Scanner scanner = new Scanner(conn.getInputStream())) {</span>
+<span class="nc bnc" id="L231" title="All 2 branches missed.">                    while (scanner.hasNextLine()) {</span>
+<span class="nc" id="L232">                        reponse.append(scanner.nextLine());</span>
+                    }
+                }
+<span class="nc" id="L235">                ObjectMapper objectMapper = new ObjectMapper();</span>
+<span class="nc" id="L236">                List&lt;Projet&gt; projets =</span>
+<span class="nc" id="L237">                    objectMapper.readValue(reponse.toString(),</span>
+<span class="nc" id="L238">                        new TypeReference&lt;&gt;() {</span>
+                        });
+<span class="nc" id="L240">                return projets;</span>
+
+            } else {
+<span class="nc" id="L243">                System.out.println(&quot;Erreur : &quot; + conn.getResponseCode());</span>
+            }
+<span class="nc" id="L245">        } catch (Exception e) {</span>
+            //e.printStackTrace();
+<span class="nc" id="L247">        }</span>
+<span class="nc" id="L248">        return null;</span>
+    }
+
+    /**
+     * Récupère la liste des projets pour un intervenant spécifique via l'API.
+     * @param user Intervenant qui a créé le projet
+     * @return Liste des projets récupérés depuis l'API
+     */
+    public static List&lt;Projet&gt; consulterProjet(User user) {
+        try {
+<span class="nc" id="L258">            URL url =</span>
+<span class="nc" id="L259">                new URL(&quot;http://localhost:8000/projets/&quot; + user.getUserId());</span>
+<span class="nc" id="L260">            HttpURLConnection conn = (HttpURLConnection) url.openConnection();</span>
+<span class="nc" id="L261">            conn.setRequestMethod(&quot;GET&quot;);</span>
+
+<span class="nc bnc" id="L263" title="All 2 branches missed.">            if (conn.getResponseCode() == 200) {</span>
+<span class="nc" id="L264">                StringBuilder reponse = new StringBuilder();</span>
+<span class="nc" id="L265">                try (Scanner scanner = new Scanner(conn.getInputStream())) {</span>
+<span class="nc bnc" id="L266" title="All 2 branches missed.">                    while (scanner.hasNextLine()) {</span>
+<span class="nc" id="L267">                        reponse.append(scanner.nextLine());</span>
+                    }
+                }
+<span class="nc" id="L270">                ObjectMapper objectMapper = new ObjectMapper();</span>
+<span class="nc" id="L271">                List&lt;Projet&gt; projets =</span>
+<span class="nc" id="L272">                    objectMapper.readValue(reponse.toString(),</span>
+<span class="nc" id="L273">                        new TypeReference&lt;List&lt;Projet&gt;&gt;() {</span>
+                        });
+<span class="nc" id="L275">                return projets;</span>
+
+            } else {
+<span class="nc" id="L278">                System.out.println(&quot;Erreur : &quot; + conn.getResponseCode());</span>
+            }
+<span class="nc" id="L280">        } catch (Exception e) {</span>
+            //e.printStackTrace();
+<span class="nc" id="L282">        }</span>
+<span class="nc" id="L283">        return null;</span>
+    }
+
+    /**
+     * Modifie un projet existant via l'API.
+     *
+     * @param statut Statut du projet à mettre à jour
+     * @param projet Projet existant à mettre à jour
+     * @return True si le projet a été mis à jour avec succès, false sinon.
+     */
+    public static boolean mettreAJourStatutProjet(String statut,
+                                                          Projet projet) {
+        try {
+            // Vérification de l'identifiant de la requête
+<span class="nc" id="L297">            String idValue = projet.getId();</span>
+<span class="nc bnc" id="L298" title="All 2 branches missed.">            if (idValue == null) {</span>
+<span class="nc" id="L299">                throw new IllegalArgumentException(&quot;L'identifiant 'id' est &quot; +</span>
+                    &quot;manquant ou invalide.&quot;);
+            }
+
+            // Construire l'URL de la requête
+<span class="nc" id="L304">            String url = &quot;http://localhost:8000/projets/&quot; + idValue;</span>
+
+            // Construire le corps de la requête JSON
+<span class="nc" id="L307">            String chargeJson = String.format(&quot;{\&quot;statut\&quot;: \&quot;%s\&quot;}&quot;, statut);</span>
+
+            // Créer un client HTTP
+<span class="nc" id="L310">            HttpClient client = HttpClient.newHttpClient();</span>
+
+            // Construire la requête PATCH
+            HttpRequest request =
+<span class="nc" id="L314">                HttpRequest.newBuilder().uri(URI.create(url)).method(&quot;PATCH&quot;,</span>
+<span class="nc" id="L315">                    HttpRequest.BodyPublishers.ofString(chargeJson)).header(</span>
+<span class="nc" id="L316">                    &quot;Content-Type&quot;, &quot;application/json; utf-8&quot;).build();</span>
+
+            // Envoyer la requête
+<span class="nc" id="L319">            HttpResponse&lt;String&gt; response = client.send(request,</span>
+<span class="nc" id="L320">                HttpResponse.BodyHandlers.ofString());</span>
+
+            // Vérifier la réponse
+<span class="nc bnc" id="L323" title="All 2 branches missed.">            if (response.statusCode() == 200) {</span>
+<span class="nc" id="L324">                    System.out.println(&quot;Statut mise à jour&quot;);</span>
+<span class="nc" id="L325">                return true;</span>
+            } else {
+<span class="nc" id="L327">                System.err.println(&quot;Erreur lors de la mise à jour : HTTP &quot; + response.statusCode());</span>
+<span class="nc" id="L328">                System.err.println(&quot;Message d'erreur : &quot; + response.body());</span>
+            }
+<span class="nc" id="L330">        } catch (Exception e) {</span>
+<span class="nc" id="L331">            System.err.println(&quot;Une exception s'est produite : &quot; + e.getMessage());</span>
+<span class="nc" id="L332">            e.printStackTrace();</span>
+<span class="nc" id="L333">        }</span>
+<span class="nc" id="L334">        return false;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RequeteTravailController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.controllers</a> &gt; <span class="el_source">RequeteTravailController.java</span></div><h1>RequeteTravailController.java</h1><pre class="source lang-java linenums">package com.app.controllers;
+
+import com.app.models.RequeteTravail;
+import com.app.models.User.User;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.client.MongoCollection;
+import io.javalin.Javalin;
+import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
+
+import static com.app.utils.GenerateurId.RandomIDGenerator;
+
+/**
+ * Ce contrôleur gère les actions liées aux requêtes de travail.
+ * Elle permet de créer, récupérer, mettre à jour et supprimer des requêtes
+ * de travail via l'API utilisant le framework Javalin et la base de données
+ * MongoDB.
+ */
+<span class="nc" id="L34">public class RequeteTravailController {</span>
+
+<span class="fc" id="L36">    private static final Logger logger =</span>
+<span class="fc" id="L37">        LoggerFactory.getLogger(RequeteTravailController.class);</span>
+    private static MongoCollection&lt;Document&gt; collectionRequeteTravail;
+
+    /**
+     * Enregistre les routes du contrôleur pour l'application Javalin.
+     *
+     * @param app Instance de l'application Javalin
+     */
+    public static void registerRoutes(Javalin app) {
+
+<span class="fc" id="L47">        app.get(&quot;/requete-travail&quot;, ctx -&gt; {</span>
+
+<span class="nc" id="L49">            Document filter = new Document(&quot;actif&quot;, true);</span>
+
+            try {
+<span class="nc" id="L52">                List&lt;Document&gt; requetes =</span>
+<span class="nc" id="L53">                    collectionRequeteTravail.find(filter).into(new ArrayList&lt;&gt;());</span>
+<span class="nc" id="L54">                ctx.json(requetes);</span>
+<span class="nc" id="L55">            } catch (Exception e) {</span>
+<span class="nc" id="L56">                logger.error(&quot;Erreur lors de la récupération des requêtes de &quot;</span>
+                    + &quot;travail : &quot;, e);
+<span class="nc" id="L58">                ctx.status(500).result(&quot;Erreur Serveur&quot;);</span>
+<span class="nc" id="L59">            }</span>
+<span class="nc" id="L60">        });</span>
+
+<span class="fc" id="L62">        app.get(&quot;/requete-travail/{demandeurRequete}&quot;, ctx -&gt; {</span>
+            try {
+<span class="nc" id="L64">                String demandeurRequete = ctx.pathParam(&quot;demandeurRequete&quot;);</span>
+
+<span class="nc" id="L66">                ObjectMapper mapper = new ObjectMapper();</span>
+
+<span class="nc" id="L68">                List&lt;RequeteTravail&gt; requetes = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L69">                collectionRequeteTravail.find(new Document(&quot;demandeurRequete&quot;</span>
+<span class="nc" id="L70">                    , demandeurRequete)).forEach(document -&gt; {</span>
+                    try {
+<span class="nc" id="L72">                        RequeteTravail requete =</span>
+<span class="nc" id="L73">                            mapper.readValue(document.toJson(),</span>
+                                RequeteTravail.class);
+<span class="nc" id="L75">                        requetes.add(requete);</span>
+<span class="nc" id="L76">                    } catch (Exception e) {</span>
+<span class="nc" id="L77">                        logger.error(&quot;Erreur lors du mapping du document: &quot; + e);</span>
+<span class="nc" id="L78">                    }</span>
+<span class="nc" id="L79">                });</span>
+<span class="nc" id="L80">                ctx.json(requetes);</span>
+<span class="nc" id="L81">            } catch (Exception e) {</span>
+<span class="nc" id="L82">                logger.error(&quot;Erreur lors de la récupération des requêtes de &quot;</span>
+                    + &quot;travail : &quot;, e);
+<span class="nc" id="L84">                ctx.status(500).result(&quot;Erreur Serveur&quot;);</span>
+<span class="nc" id="L85">            }</span>
+<span class="nc" id="L86">        });</span>
+
+<span class="fc" id="L88">        app.post(&quot;/requete-travail&quot;, ctx -&gt; {</span>
+            try {
+<span class="fc" id="L90">                RequeteTravail requeteTravail = ctx.bodyAsClass(RequeteTravail.class);</span>
+<span class="fc" id="L91">                requeteTravail.setId(RandomIDGenerator());</span>
+
+<span class="fc" id="L93">                List&lt;Document&gt; candidaturesInitiales = new ArrayList&lt;&gt;();</span>
+
+                // Validation des champs requis
+<span class="pc bpc" id="L96" title="4 of 10 branches missed.">                if (Objects.equals(requeteTravail.getTitre(), &quot;null&quot;) || Objects.equals(requeteTravail.getDescription(), &quot;null&quot;) || Objects.equals(requeteTravail.getTypeTravaux(), &quot;null&quot;) || Objects.equals(requeteTravail.getDateDebutEspere(), &quot;null&quot;) || Objects.equals(requeteTravail.getDemandeurRequete(), &quot;null&quot;)) {</span>
+<span class="fc" id="L97">                    ctx.status(400).result(&quot;Tous les champs sont requis.&quot;);</span>
+<span class="fc" id="L98">                    return;</span>
+                }
+
+                // Insertion dans MongoDB
+<span class="fc" id="L102">                Document doc = new Document(&quot;id&quot;, requeteTravail.getId()).append(&quot;titre&quot;, requeteTravail.getTitre()).append(&quot;description&quot;, requeteTravail.getDescription()).append(&quot;typeTravaux&quot;, requeteTravail.getTypeTravaux()).append(&quot;dateDebutEspere&quot;, requeteTravail.getDateDebutEspere()).append(&quot;demandeurRequete&quot;, requeteTravail.getDemandeurRequete()).append(&quot;actif&quot;, requeteTravail.getActif())</span>
+<span class="fc" id="L103">                    .append(&quot;candidatures&quot;, candidaturesInitiales);</span>
+<span class="fc" id="L104">                collectionRequeteTravail.insertOne(doc);</span>
+
+<span class="fc" id="L106">                ctx.status(201).result(&quot;Requête de travail ajoutée avec &quot; + &quot;succès.&quot;);</span>
+<span class="nc" id="L107">            } catch (Exception e) {</span>
+<span class="nc" id="L108">                logger.error(&quot;Erreur lors de la création de la requête de &quot; + &quot;travail : &quot;, e);</span>
+<span class="nc" id="L109">                ctx.status(500).result(&quot;Erreur Serveur&quot;);</span>
+<span class="fc" id="L110">            }</span>
+<span class="fc" id="L111">        });</span>
+
+<span class="fc" id="L113">        app.patch(&quot;/requete-travail/{id}&quot;, ctx -&gt; {</span>
+            try {
+                // Récupérer le paramètre de l'URL
+<span class="nc" id="L116">                String id = ctx.pathParam(&quot;id&quot;);</span>
+
+                // Construire le filtre pour identifier le document
+<span class="nc" id="L119">                Document filter = new Document(&quot;id&quot;, id); // Utiliser le</span>
+                // champ &quot;id&quot; (String)
+
+                // Récupérer les mises à jour du corps de la requête
+<span class="nc" id="L123">                Document updates = Document.parse(ctx.body());</span>
+
+                // Valider les champs
+<span class="nc bnc" id="L126" title="All 2 branches missed.">                if (!updates.containsKey(&quot;actif&quot;)) {</span>
+<span class="nc" id="L127">                    ctx.status(400).result(&quot;Le champ 'actif' est requis.&quot;);</span>
+<span class="nc" id="L128">                    return;</span>
+                }
+
+                // Construire les modifications
+<span class="nc" id="L132">                Document update = new Document(&quot;$set&quot;, updates);</span>
+
+                // Mettre à jour dans MongoDB
+<span class="nc" id="L135">                var result = collectionRequeteTravail.updateOne(filter, update);</span>
+
+                // Vérifier si un document a été mis à jour
+<span class="nc bnc" id="L138" title="All 2 branches missed.">                if (result.getModifiedCount() &gt; 0) {</span>
+<span class="nc" id="L139">                    ctx.status(200).result(&quot;Requête mise à jour avec succès.&quot;);</span>
+                } else {
+<span class="nc" id="L141">                    ctx.status(404).result(&quot;Aucune requête trouvée pour l'ID &quot;</span>
+                        + &quot;spécifié.&quot;);
+                }
+<span class="nc" id="L144">            } catch (Exception e) {</span>
+<span class="nc" id="L145">                ctx.status(500).result(&quot;Erreur serveur : &quot; + e.getMessage());</span>
+<span class="nc" id="L146">            }</span>
+<span class="nc" id="L147">        });</span>
+
+<span class="fc" id="L149">        app.delete(&quot;/requete-travail/{id}&quot;, ctx -&gt; {</span>
+            try {
+                // Récupérer le paramètre de l'URL
+<span class="nc" id="L152">                String id = ctx.pathParam(&quot;id&quot;);</span>
+
+                // Construire le filtre pour identifier le document
+<span class="nc" id="L155">                Document filter = new Document(&quot;id&quot;, id); // Utiliser le</span>
+                // champ &quot;id&quot; (String)
+
+                // Mettre à jour dans MongoDB
+<span class="nc" id="L159">                var result = collectionRequeteTravail.deleteOne(filter);</span>
+
+                // Vérifier si un document a été mis à jour
+<span class="nc bnc" id="L162" title="All 2 branches missed.">                if (result.getDeletedCount() &gt; 0) {</span>
+<span class="nc" id="L163">                    ctx.status(200).result(&quot;Requête effacé avec succès.&quot;);</span>
+                } else {
+<span class="nc" id="L165">                    ctx.status(404).result(&quot;Aucune requête trouvée pour l'ID &quot; + &quot;spécifié.&quot;);</span>
+                }
+<span class="nc" id="L167">            } catch (Exception e) {</span>
+<span class="nc" id="L168">                ctx.status(500).result(&quot;Erreur serveur : &quot; + e.getMessage());</span>
+<span class="nc" id="L169">            }</span>
+<span class="nc" id="L170">        });</span>
+<span class="fc" id="L171">    }</span>
+
+    /**
+     * Soumet une nouvelle requête de travail via une requête HTTP POST.
+     *
+     * @param titre            Le titre de la requête de travail.
+     * @param description      La description de la requête de travail.
+     * @param typeTravaux      Le type de travaux demandés.
+     * @param dateDebutEspere  La date de début souhaitée pour les travaux.
+     * @param demandeurRequete L'utilisateur qui soumet la requête de travail.
+     * @param actif            Indicateur si la requête est active.
+     * @return Un message indiquant si la requête a été ajoutée avec succès ou
+     * non.
+     */
+    public static String soumettreRequeteTravail(String titre,
+                                                 String description,
+                                                 String typeTravaux,
+                                                 String dateDebutEspere,
+                                                 String demandeurRequete,
+                                                 boolean actif) {
+        try {
+<span class="fc" id="L192">            URL url = new URL(&quot;http://localhost:8000/requete-travail&quot;);</span>
+<span class="fc" id="L193">            HttpURLConnection conn = (HttpURLConnection) url.openConnection();</span>
+<span class="fc" id="L194">            conn.setRequestMethod(&quot;POST&quot;);</span>
+<span class="fc" id="L195">            conn.setRequestProperty(&quot;Content-Type&quot;, &quot;application/json; utf-8&quot;);</span>
+<span class="fc" id="L196">            conn.setDoOutput(true);</span>
+
+            // Construire les données JSON en fonction des entrées utilisateur
+<span class="fc" id="L199">            String jsonInputString = String.format(&quot;{ \&quot;titre\&quot;: \&quot;%s\&quot;, &quot; +</span>
+                &quot;\&quot;description\&quot;: \&quot;%s\&quot;, \&quot;typeTravaux\&quot;: \&quot;%s\&quot;, &quot; +
+                &quot;\&quot;dateDebutEspere\&quot;: \&quot;%s\&quot;, \&quot;demandeurRequete\&quot;: \&quot;%s\&quot;, &quot; +
+                &quot;\&quot;actif\&quot;: \&quot;%s\&quot;}&quot;,
+                titre, description, typeTravaux,
+<span class="fc" id="L204">                dateDebutEspere, demandeurRequete, actif);</span>
+
+<span class="fc" id="L206">            try (OutputStream os = conn.getOutputStream()) {</span>
+<span class="fc" id="L207">                byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);</span>
+<span class="fc" id="L208">                os.write(input, 0, input.length);</span>
+            }
+
+<span class="fc bfc" id="L211" title="All 2 branches covered.">            if (conn.getResponseCode() == 201) {</span>
+<span class="fc" id="L212">                return &quot;Requête de travail ajoutée avec succès.&quot;;</span>
+            } else {
+<span class="fc" id="L214">                return &quot;Erreur : &quot; + conn.getResponseCode();</span>
+            }
+<span class="fc" id="L216">        } catch (Exception e) {</span>
+<span class="fc" id="L217">            return &quot;Erreur lors de la soumission de la requête &quot; + &quot;de&quot; + &quot; &quot; + &quot;travail.&quot;;</span>
+        }
+    }
+
+    /**
+     * Consulte toutes les requêtes de travail actives.
+     *
+     * @return Une liste de toutes les requêtes de travail active.
+     */
+    public static List&lt;RequeteTravail&gt; consulterRequetesTravail() {
+        try {
+<span class="nc" id="L228">            URL url = new URL(&quot;http://localhost:8000/requete-travail&quot;);</span>
+<span class="nc" id="L229">            HttpURLConnection conn = (HttpURLConnection) url.openConnection();</span>
+<span class="nc" id="L230">            conn.setRequestMethod(&quot;GET&quot;);</span>
+
+<span class="nc bnc" id="L232" title="All 2 branches missed.">            if (conn.getResponseCode() == 200) {</span>
+<span class="nc" id="L233">                StringBuilder reponse = new StringBuilder();</span>
+<span class="nc" id="L234">                try (Scanner scanner = new Scanner(conn.getInputStream())) {</span>
+<span class="nc bnc" id="L235" title="All 2 branches missed.">                    while (scanner.hasNextLine()) {</span>
+<span class="nc" id="L236">                            reponse.append(scanner.nextLine());</span>
+                    }
+                }
+<span class="nc" id="L239">                ObjectMapper objectMapper = new ObjectMapper();</span>
+<span class="nc" id="L240">                List&lt;RequeteTravail&gt; requetes =</span>
+<span class="nc" id="L241">                    objectMapper.readValue(reponse.toString(),</span>
+<span class="nc" id="L242">                        new TypeReference&lt;&gt;() {</span>
+                        });
+<span class="nc" id="L244">                return requetes;</span>
+
+            } else {
+<span class="nc" id="L247">                System.out.println(&quot;Erreur : &quot; + conn.getResponseCode());</span>
+            }
+<span class="nc" id="L249">        } catch (Exception e) {</span>
+            //e.printStackTrace();
+<span class="nc" id="L251">        }</span>
+<span class="nc" id="L252">        return null;</span>
+    }
+
+    /**
+     * Consulte les requêtes de travail soumises par un utilisateur spécifique.
+     *
+     * @param user L'utilisateur dont on souhaite récupérer les requêtes.
+     * @return Une liste de requêtes de travail soumises par l'utilisateur.
+     */
+    public static List&lt;RequeteTravail&gt; consulterRequetesTravail(User user) {
+        try {
+<span class="nc" id="L263">            URL url =</span>
+<span class="nc" id="L264">                new URL(&quot;http://localhost:8000/requete-travail/&quot; + user.getUserId());</span>
+<span class="nc" id="L265">            HttpURLConnection conn = (HttpURLConnection) url.openConnection();</span>
+<span class="nc" id="L266">            conn.setRequestMethod(&quot;GET&quot;);</span>
+
+<span class="nc bnc" id="L268" title="All 2 branches missed.">            if (conn.getResponseCode() == 200) {</span>
+<span class="nc" id="L269">                StringBuilder reponse = new StringBuilder();</span>
+<span class="nc" id="L270">                try (Scanner scanner = new Scanner(conn.getInputStream())) {</span>
+<span class="nc bnc" id="L271" title="All 2 branches missed.">                    while (scanner.hasNextLine()) {</span>
+<span class="nc" id="L272">                        reponse.append(scanner.nextLine());</span>
+                    }
+                }
+<span class="nc" id="L275">                ObjectMapper objectMapper = new ObjectMapper();</span>
+<span class="nc" id="L276">                List&lt;RequeteTravail&gt; requetes =</span>
+<span class="nc" id="L277">                    objectMapper.readValue(reponse.toString(),</span>
+<span class="nc" id="L278">                        new TypeReference&lt;List&lt;RequeteTravail&gt;&gt;() {</span>
+                });
+<span class="nc" id="L280">                return requetes;</span>
+
+            } else {
+<span class="nc" id="L283">                System.out.println(&quot;Erreur : &quot; + conn.getResponseCode());</span>
+            }
+<span class="nc" id="L285">        } catch (Exception e) {</span>
+            //e.printStackTrace();
+<span class="nc" id="L287">        }</span>
+<span class="nc" id="L288">        return null;</span>
+    }
+
+    /**
+     * Met à jour le statut d'une requête de travail.
+     *
+     * @param actif          Le nouvel état actif de la requête (true pour
+     *                      actif, false pour archivé).
+     * @param requeteTravail La requête de travail à mettre à jour.
+     * @return true si la mise à jour a été effectuée avec succès, false sinon.
+     */
+    public static boolean mettreAJourStatutRequeteTravail(Boolean actif,
+                                                          RequeteTravail requeteTravail) {
+        try {
+            // Vérification de l'identifiant de la requête
+<span class="nc" id="L303">            String idValue = requeteTravail.getId();</span>
+<span class="nc bnc" id="L304" title="All 2 branches missed.">            if (idValue == null) {</span>
+<span class="nc" id="L305">                throw new IllegalArgumentException(&quot;L'identifiant 'id' est &quot; +</span>
+                    &quot;manquant ou invalide.&quot;);
+            }
+
+            // Construire l'URL de la requête
+<span class="nc" id="L310">            String url = &quot;http://localhost:8000/requete-travail/&quot; + idValue;</span>
+
+            // Construire le corps de la requête JSON
+<span class="nc" id="L313">            String chargeJson = String.format(&quot;{\&quot;actif\&quot;: %b}&quot;, actif);</span>
+
+            // Créer un client HTTP
+<span class="nc" id="L316">            HttpClient client = HttpClient.newHttpClient();</span>
+
+            // Construire la requête PATCH
+            HttpRequest request =
+<span class="nc" id="L320">                HttpRequest.newBuilder().uri(URI.create(url)).method(&quot;PATCH&quot;,</span>
+<span class="nc" id="L321">                    HttpRequest.BodyPublishers.ofString(chargeJson)).header(</span>
+<span class="nc" id="L322">                        &quot;Content-Type&quot;, &quot;application/json; utf-8&quot;).build();</span>
+
+            // Envoyer la requête
+<span class="nc" id="L325">            HttpResponse&lt;String&gt; response = client.send(request,</span>
+<span class="nc" id="L326">                HttpResponse.BodyHandlers.ofString());</span>
+
+            // Vérifier la réponse
+<span class="nc bnc" id="L329" title="All 2 branches missed.">            if (response.statusCode() == 200) {</span>
+<span class="nc bnc" id="L330" title="All 2 branches missed.">                if(actif) {</span>
+<span class="nc" id="L331">                    System.out.println(&quot;Requête désarchivé&quot;);</span>
+                }
+                else {
+<span class="nc" id="L334">                    System.out.println(&quot;Requête Archivé&quot;);</span>
+                }
+<span class="nc" id="L336">                return true;</span>
+            } else {
+<span class="nc" id="L338">                System.err.println(&quot;Erreur lors de la mise à jour : HTTP &quot; + response.statusCode());</span>
+<span class="nc" id="L339">                System.err.println(&quot;Message d'erreur : &quot; + response.body());</span>
+            }
+<span class="nc" id="L341">        } catch (Exception e) {</span>
+<span class="nc" id="L342">            System.err.println(&quot;Une exception s'est produite : &quot; + e.getMessage());</span>
+<span class="nc" id="L343">            e.printStackTrace();</span>
+<span class="nc" id="L344">        }</span>
+<span class="nc" id="L345">        return false;</span>
+    }
+
+    /**
+     * Supprime une requête de travail.
+     *
+     * @param requeteTravail La requête de travail à supprimer.
+     * @return true si la suppression a été effectuée avec succès, false sinon.
+     */
+    public static boolean deleteRequeteTravail(RequeteTravail requeteTravail) {
+        try {
+            // Vérification de l'identifiant de la requête
+<span class="nc" id="L357">            String idValue = requeteTravail.getId();</span>
+<span class="nc bnc" id="L358" title="All 2 branches missed.">            if (idValue == null) {</span>
+<span class="nc" id="L359">                throw new IllegalArgumentException(&quot;L'identifiant 'id' est &quot; +</span>
+                    &quot;manquant ou invalide.&quot;);
+            }
+
+            // Construire l'URL de la requête
+<span class="nc" id="L364">            URL url =</span>
+                new URL(&quot;http://localhost:8000/requete-travail/&quot; + idValue);
+<span class="nc" id="L366">            HttpURLConnection conn = (HttpURLConnection) url.openConnection();</span>
+<span class="nc" id="L367">            conn.setRequestMethod(&quot;DELETE&quot;);</span>
+<span class="nc" id="L368">            conn.setRequestProperty(&quot;Content-Type&quot;, &quot;application/json; utf-8&quot;);</span>
+
+            // Vérifier la réponse
+<span class="nc bnc" id="L371" title="All 2 branches missed.">            if (conn.getResponseCode() == 200) {</span>
+<span class="nc" id="L372">                System.out.println(&quot;Requête de travail effacé&quot;);</span>
+<span class="nc" id="L373">                return true;</span>
+            } else {
+<span class="nc" id="L375">                System.err.println(&quot;Erreur lors de la mise à jour : HTTP &quot; + conn.getResponseCode());</span>
+<span class="nc" id="L376">                System.err.println(&quot;Message d'erreur : &quot; + conn.getResponseMessage());</span>
+            }
+<span class="nc" id="L378">        } catch (Exception e) {</span>
+<span class="nc" id="L379">            System.err.println(&quot;Une exception s'est produite : &quot; + e.getMessage());</span>
+<span class="nc" id="L380">            e.printStackTrace();</span>
+<span class="nc" id="L381">        }</span>
+<span class="nc" id="L382">        return false;</span>
+    }
+
+    public static void setCollectionRequeteTravail(MongoCollection&lt;Document&gt; collectionRequeteTravail) {
+<span class="fc" id="L386">        RequeteTravailController.collectionRequeteTravail = collectionRequeteTravail;</span>
+<span class="fc" id="L387">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

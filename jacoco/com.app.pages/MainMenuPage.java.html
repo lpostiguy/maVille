@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainMenuPage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.pages</a> &gt; <span class="el_source">MainMenuPage.java</span></div><h1>MainMenuPage.java</h1><pre class="source lang-java linenums">package com.app.pages;
+
+import com.app.models.User.Resident;
+
+import java.util.Objects;
+import java.util.Scanner;
+
+import static com.app.controllers.NotificationsController.consulterNotificationsNonLues;
+
+/**
+ * Classe responsable de la gestion des menus principaux.
+ * Elle permet d'afficher différentes options de navigation en fonction de
+ * l'état de connexion de l'utilisateur.
+ * Il existe trois types de menus :
+ * 1. Menu principal (avant connexion)
+ * 2. Menu principal pour un résident connecté
+ * 3. Menu principal pour un intervenant connecté
+ */
+<span class="nc" id="L19">public class MainMenuPage {</span>
+
+<span class="nc" id="L21">    static Scanner scanner = new Scanner(System.in);</span>
+
+    /**
+     * Affiche le menu principal pour un utilisateur non connecté et permet de
+     * choisir entre la connexion ou l'inscription.
+     *
+     * @return Une chaîne de caractères représentant l'option choisie
+     * (&quot;Connexion&quot; ou &quot;Inscription&quot;).
+     */
+    public static String mainMenu() {
+        while(true) {
+<span class="nc" id="L32">            System.out.println(&quot;Entrez un numéro pour être redirigé vers ces &quot;</span>
+                + &quot;pages:&quot;);
+<span class="nc" id="L34">            System.out.println(&quot;[1] Connexion&quot;);</span>
+<span class="nc" id="L35">            System.out.println(&quot;[2] Inscription&quot;);</span>
+<span class="nc" id="L36">            String response = scanner.nextLine();</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">            if (Objects.equals(response, &quot;1&quot;)) {</span>
+<span class="nc" id="L38">                return &quot;Connexion&quot;;</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">            } else if (Objects.equals(response, &quot;2&quot;)) {</span>
+<span class="nc" id="L40">                return &quot;Inscription&quot;;</span>
+            }
+<span class="nc" id="L42">        }</span>
+    }
+    /**
+     * Affiche le menu principal pour un résident connecté et permet de choisir
+     * parmi les différentes options disponibles. Ce menu propose des actions
+     * spécifiques aux résidents comme la consultation de projets, la soumission
+     * de requêtes, et la gestion des notifications.
+     *
+     * @param resident L'utilisateur résident connecté.
+     * @return Une chaîne de caractères représentant l'option choisie
+     * (par exemple &quot;Consulter ou rechercher des travaux&quot;).
+     */
+    public static String mainMenuLoggedResident(Resident resident) {
+        while (true) {
+<span class="nc" id="L56">            System.out.println(&quot;\nEntrez un numéro pour être redirigé vers ces &quot;</span>
+                + &quot;pages:&quot;);
+<span class="nc" id="L58">            System.out.println(&quot;---------- Menu Principal ----------&quot;);</span>
+<span class="nc" id="L59">            System.out.println(&quot;[1] Consulter ou rechercher des travaux et &quot; +</span>
+                &quot;projets&quot;);
+<span class="nc" id="L61">            System.out.println(&quot;[2] Consulter les entraves routières&quot;);</span>
+<span class="nc" id="L62">            System.out.println(&quot;[3] Soumettre une requête de travail&quot;);</span>
+<span class="nc" id="L63">            System.out.println(&quot;[4] Faire le suivi d'une requête de travail&quot;);</span>
+<span class="nc" id="L64">            System.out.println(&quot;[5] Notifications &quot; + &quot;(&quot; +</span>
+<span class="nc" id="L65">                consulterNotificationsNonLues(resident).size() + &quot;) non vue&quot;);</span>
+<span class="nc" id="L66">            System.out.println(&quot;[6] Consulter son profil&quot;);</span>
+<span class="nc" id="L67">            System.out.println(&quot;[7] Se Déconnecter&quot;);</span>
+<span class="nc" id="L68">            System.out.println(&quot;------------------------------------&quot;);</span>
+<span class="nc" id="L69">            String response = scanner.nextLine();</span>
+<span class="nc bnc" id="L70" title="All 8 branches missed.">            switch (response) {</span>
+                case &quot;1&quot; -&gt; {
+<span class="nc" id="L72">                    return &quot;Consulter ou rechercher des travaux&quot;;</span>
+                }
+                case &quot;2&quot; -&gt; {
+<span class="nc" id="L75">                    return &quot;Consulter les entraves routières&quot;;</span>
+                }
+                case &quot;3&quot; -&gt; {
+<span class="nc" id="L78">                    return &quot;Soumettre une requête de travail&quot;;</span>
+                }
+                case &quot;4&quot; -&gt; {
+<span class="nc" id="L81">                    return &quot;Faire le suivi d'une requête de travail&quot;;</span>
+                }
+                case &quot;5&quot; -&gt; {
+<span class="nc" id="L84">                    return &quot;Notifications&quot;;</span>
+                }
+                case &quot;6&quot; -&gt; {
+<span class="nc" id="L87">                    return &quot;Consulter son profil&quot;;</span>
+                }
+                case &quot;7&quot; -&gt; {
+<span class="nc" id="L90">                    return &quot;Se Déconnecter&quot;;</span>
+                }
+                case null, default -&gt; {
+<span class="nc" id="L93">                    System.out.println(&quot;Vous n'avez pas choisi de choix valide.&quot;);</span>
+                }
+            }
+<span class="nc" id="L96">        }</span>
+    }
+
+    /**
+     * Affiche le menu principal pour un intervenant connecté et permet de
+     * choisir parmi les différentes options disponibles. Ce menu propose des
+     * actions spécifiques aux intervenants comme la consultation de requêtes
+     * et la gestion de projets.
+     *
+     * @return Une chaîne de caractères représentant l'option choisie (par
+     * exemple &quot;Consulter la liste des requêtes de travail&quot;).
+     */
+    public static String mainMenuLoggedIntervenant() {
+        while(true) {
+<span class="nc" id="L110">            System.out.println(&quot;\nEntrez un numéro pour être redirigé vers ces &quot;</span>
+                + &quot;pages:&quot;);
+<span class="nc" id="L112">            System.out.println(&quot;---------- Menu Principal ----------&quot;);</span>
+<span class="nc" id="L113">            System.out.println(&quot;[1] Consulter la liste des requêtes de travail&quot;);</span>
+<span class="nc" id="L114">            System.out.println(&quot;[2] Soumettre ou consulter des projets&quot;);</span>
+<span class="nc" id="L115">            System.out.println(&quot;[3] Consulter son profil&quot;);</span>
+<span class="nc" id="L116">            System.out.println(&quot;[4] Se Déconnecter&quot;);</span>
+<span class="nc" id="L117">            System.out.println(&quot;------------------------------------&quot;);</span>
+<span class="nc" id="L118">            String response = scanner.nextLine();</span>
+<span class="nc bnc" id="L119" title="All 5 branches missed.">            switch (response) {</span>
+                case &quot;1&quot; -&gt; {
+<span class="nc" id="L121">                    return &quot;Consulter la liste des requêtes de travail&quot;;</span>
+                }
+                case &quot;2&quot; -&gt; {
+<span class="nc" id="L124">                    return &quot;Soumettre ou consulter des projets&quot;;</span>
+                }
+                case &quot;3&quot; -&gt; {
+<span class="nc" id="L127">                    return &quot;Consulter son profil&quot;;</span>
+                }
+                case &quot;4&quot; -&gt; {
+<span class="nc" id="L130">                    return &quot;Se Déconnecter&quot;;</span>
+                }
+                case null, default -&gt; {
+<span class="nc" id="L133">                    System.out.println(&quot;Vous n'avez pas choisi de choix valide.&quot;);</span>
+                }
+            }
+<span class="nc" id="L136">        }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

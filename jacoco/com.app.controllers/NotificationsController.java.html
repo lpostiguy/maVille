@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NotificationsController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.controllers</a> &gt; <span class="el_source">NotificationsController.java</span></div><h1>NotificationsController.java</h1><pre class="source lang-java linenums">package com.app.controllers;
+
+import com.app.MongoDBConnection;
+import com.app.models.Notification;
+import com.app.models.User.User;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.UpdateOptions;
+import io.javalin.Javalin;
+import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+/**
+ * Contrôleur responsable de la gestion des notifications pour les résidents.
+ * Publie, modifie et récupère les notifications des résidents.
+ */
+<span class="nc" id="L31">public class NotificationsController {</span>
+
+<span class="nc" id="L33">    private static final Logger logger =</span>
+<span class="nc" id="L34">        LoggerFactory.getLogger(NotificationsController.class);</span>
+<span class="nc" id="L35">    private static final MongoCollection&lt;Document&gt; collectionUsers =</span>
+<span class="nc" id="L36">        MongoDBConnection.getDatabase().getCollection(&quot;users&quot;);</span>
+
+    /**
+     * Enregistre les routes du contrôleur pour l'application Javalin.
+     *
+     * @param app Instance de l'application Javalin
+     */
+    public static void registerRoutes(Javalin app) {
+
+        // Pour chercher toutes les notifications
+<span class="nc" id="L46">        app.get(&quot;/users/{userId}/notifications/&quot;, ctx -&gt; {</span>
+            try {
+                // Récupérer l'userId depuis l'URL
+<span class="nc" id="L49">                String userId = ctx.pathParam(&quot;userId&quot;);</span>
+
+                // Rechercher l'utilisateur correspondant dans MongoDB
+<span class="nc" id="L52">                Document userDoc = collectionUsers.find(new Document(&quot;userId&quot;</span>
+<span class="nc" id="L53">                    , userId)).first();</span>
+
+<span class="nc bnc" id="L55" title="All 2 branches missed.">                if (userDoc != null) {</span>
+                    // Extraire les notifications
+<span class="nc" id="L57">                    List&lt;Document&gt; notifications = userDoc.getList(</span>
+                        &quot;notifications&quot;, Document.class);
+
+                    // Retourner les notifications en JSON
+<span class="nc" id="L61">                    ctx.json(notifications);</span>
+<span class="nc" id="L62">                } else {</span>
+                    // Si l'utilisateur n'est pas trouvé
+<span class="nc" id="L64">                    ctx.status(404).result(&quot;Utilisateur non trouvé.&quot;);</span>
+                }
+<span class="nc" id="L66">            } catch (Exception e) {</span>
+<span class="nc" id="L67">                logger.error(&quot;Erreur lors de la récupération des &quot; +</span>
+                    &quot;notifications : &quot;, e);
+<span class="nc" id="L69">                ctx.status(500).result(&quot;Erreur Serveur&quot;);</span>
+<span class="nc" id="L70">            }</span>
+<span class="nc" id="L71">        });</span>
+
+<span class="nc" id="L73">        app.post(&quot;/users/{receveurId}/notifications&quot;, ctx -&gt; {</span>
+            try {
+<span class="nc" id="L75">                String receveurId = ctx.pathParam(&quot;receveurId&quot;);</span>
+
+<span class="nc" id="L77">                Notification notification = ctx.bodyAsClass(Notification.class);</span>
+
+<span class="nc" id="L79">                Document userDoc = collectionUsers.find(new Document(&quot;userId&quot;</span>
+<span class="nc" id="L80">                    , receveurId)).first();</span>
+
+<span class="nc bnc" id="L82" title="All 2 branches missed.">                if (userDoc == null) {</span>
+<span class="nc" id="L83">                    ctx.status(404).result(&quot;Utilisateur avec l'ID spécifié non trouvé.&quot;);</span>
+<span class="nc" id="L84">                    return;</span>
+                }
+
+                // Construire la notification en tant que Document
+<span class="nc" id="L88">                Document notificationDoc = new Document()</span>
+<span class="nc" id="L89">                    .append(&quot;id&quot;, notification.getId())</span>
+<span class="nc" id="L90">                    .append(&quot;msg&quot;, notification.getMsg())</span>
+<span class="nc" id="L91">                    .append(&quot;vu&quot;, notification.isVu());</span>
+
+                // Ajouter la notification à la liste des notifications de l'utilisateur
+<span class="nc" id="L94">                var updateResult = collectionUsers.updateOne(</span>
+                    new Document(&quot;userId&quot;, receveurId),
+                    new Document(&quot;$push&quot;, new Document(&quot;notifications&quot;, notificationDoc))
+                );
+
+<span class="nc bnc" id="L99" title="All 2 branches missed.">                if (updateResult.getModifiedCount() &gt; 0) {</span>
+<span class="nc" id="L100">                    ctx.status(201).result(&quot;Notification envoyée avec succès.&quot;);</span>
+                } else {
+<span class="nc" id="L102">                    ctx.status(500).result(&quot;Erreur lors de l'ajout de la notification.&quot;);</span>
+                }
+<span class="nc" id="L104">            } catch (Exception e) {</span>
+<span class="nc" id="L105">                logger.error(&quot;Erreur lors de l'envoi de la notification : &quot;, e);</span>
+<span class="nc" id="L106">                ctx.status(500).result(&quot;Erreur Serveur&quot;);</span>
+<span class="nc" id="L107">            }</span>
+<span class="nc" id="L108">        });</span>
+
+        // Pour chercher les notifications non vues
+<span class="nc" id="L111">        app.get(&quot;/users/{userId}/notifications/nonVue&quot;, ctx -&gt; {</span>
+            try {
+<span class="nc" id="L113">                String userId = ctx.pathParam(&quot;userId&quot;);</span>
+
+<span class="nc" id="L115">                Document userDoc = collectionUsers.find(new Document(&quot;userId&quot;</span>
+<span class="nc" id="L116">                    , userId)).first();</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">                if (userDoc != null) {</span>
+<span class="nc" id="L118">                    List&lt;Document&gt; notifications = userDoc.getList(</span>
+                        &quot;notifications&quot;, Document.class);
+                    // Filtrer uniquement les notifications non lues
+<span class="nc" id="L121">                    List&lt;Document&gt; unreadNotifications =</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">                        notifications.stream().filter(notification -&gt; !notification.getBoolean(&quot;vu&quot;)).toList();</span>
+
+<span class="nc" id="L124">                    ctx.json(unreadNotifications);</span>
+<span class="nc" id="L125">                } else {</span>
+<span class="nc" id="L126">                    ctx.status(404).result(&quot;Utilisateur non trouvé.&quot;);</span>
+                }
+<span class="nc" id="L128">            } catch (Exception e) {</span>
+<span class="nc" id="L129">                logger.error(&quot;Erreur lors de la récupération des &quot; +</span>
+                    &quot;notifications non lues : &quot;, e);
+<span class="nc" id="L131">                ctx.status(500).result(&quot;Erreur Serveur&quot;);</span>
+<span class="nc" id="L132">            }</span>
+<span class="nc" id="L133">        });</span>
+
+<span class="nc" id="L135">        app.patch(&quot;/users/{userId}/notifications/update/{id}&quot;, ctx -&gt; {</span>
+            try {
+<span class="nc" id="L137">                String id = ctx.pathParam(&quot;id&quot;);</span>
+<span class="nc" id="L138">                String userId = ctx.pathParam(&quot;userId&quot;);</span>
+<span class="nc" id="L139">                Document updates = Document.parse(ctx.body());</span>
+
+                // Filtre : chercher l'utilisateur et la notification spécifique
+<span class="nc" id="L142">                Document filter = new Document(&quot;userId&quot;, userId).append(</span>
+                    &quot;notifications.id&quot;, id);
+
+                // Mise à jour : cibler uniquement la notification spécifique
+<span class="nc" id="L146">                Document update = new Document(&quot;$set&quot;, new Document(</span>
+<span class="nc" id="L147">                    &quot;notifications.$[elem].vu&quot;, updates.getBoolean(&quot;vu&quot;)));</span>
+
+                // Utiliser un tableau de filtres pour identifier l'élément
+                // spécifique
+<span class="nc" id="L151">                var result = collectionUsers.updateOne(filter, update,</span>
+<span class="nc" id="L152">                    new UpdateOptions().arrayFilters(List.of(new Document(</span>
+                        &quot;elem.id&quot;, id))));
+
+<span class="nc bnc" id="L155" title="All 2 branches missed.">                if (result.getModifiedCount() &gt; 0) {</span>
+<span class="nc" id="L156">                    ctx.status(200).result(&quot;Notification mise à jour avec &quot; +</span>
+                        &quot;succès.&quot;);
+                } else {
+<span class="nc" id="L159">                    ctx.status(404).result(&quot;Aucune notification trouvée pour &quot; +</span>
+                        &quot;l'ID spécifié.&quot;);
+                }
+<span class="nc" id="L162">            } catch (Exception e) {</span>
+                //logger.error(&quot;Erreur lors de la mise à jour de la &quot; +
+                    //&quot;notification : &quot;, e);
+                //ctx.status(500).result(&quot;Erreur serveur : &quot; + e.getMessage());
+<span class="nc" id="L166">            }</span>
+<span class="nc" id="L167">        });</span>
+<span class="nc" id="L168">    }</span>
+
+    /**
+     * Met à jour le statut de la notification pour un résident.
+     *
+     * @param vu           Le statut de la notification (lue ou non lue)
+     * @param user         L'utilisateur pour lequel les notifications sont
+     *                    mises à jour
+     * @param notifications La liste des notifications à mettre à jour
+     * @return true si toutes les mises à jour ont réussi, sinon false
+     */
+    public static boolean mettreAJourStatutNotification(Boolean vu, User user
+        , List&lt;Notification&gt; notifications) {
+<span class="nc" id="L181">        String userId = user.getUserId();</span>
+
+<span class="nc" id="L183">        boolean allUpdatesSuccessful = false;</span>
+
+<span class="nc bnc" id="L185" title="All 2 branches missed.">        for (Notification notification : notifications) {</span>
+            try {
+                // Vérification de l'identifiant de la requête
+<span class="nc" id="L188">                String idNotification = notification.getId();</span>
+<span class="nc bnc" id="L189" title="All 4 branches missed.">                if (idNotification == null || idNotification.isEmpty()) {</span>
+<span class="nc" id="L190">                    System.err.println(&quot;L'identifiant 'id' est manquant ou &quot; +</span>
+                        &quot;invalide.&quot;);
+<span class="nc" id="L192">                    allUpdatesSuccessful = false;</span>
+<span class="nc" id="L193">                    continue;</span>
+                }
+
+                // Construire l'URL de la requête
+<span class="nc" id="L197">                String url = &quot;http://localhost:8000/users/&quot; + userId +</span>
+                    &quot;/notifications/update/&quot; + idNotification;
+
+                // Construire le corps de la requête JSON
+<span class="nc" id="L201">                String chargeJson = String.format(&quot;{\&quot;vu\&quot;: %b}&quot;, vu);</span>
+
+                // Créer un client HTTP
+<span class="nc" id="L204">                HttpClient client = HttpClient.newHttpClient();</span>
+
+                // Construire la requête PATCH
+                HttpRequest request =
+<span class="nc" id="L208">                    HttpRequest.newBuilder().uri(URI.create(url)).method(</span>
+                        &quot;PATCH&quot;,
+<span class="nc" id="L210">                        HttpRequest.BodyPublishers.ofString(chargeJson)).header(&quot;Content-Type&quot;, &quot;application/json; utf-8&quot;).build();</span>
+
+                // Envoyer la requête
+<span class="nc" id="L213">                HttpResponse&lt;String&gt; response = client.send(request,</span>
+<span class="nc" id="L214">                    HttpResponse.BodyHandlers.ofString());</span>
+
+                // Vérifier la réponse
+<span class="nc bnc" id="L217" title="All 2 branches missed.">                if (response.statusCode() != 200) {</span>
+                    //System.err.println(&quot;Erreur lors de la mise à jour : HTTP &quot;
+                    //    + response.statusCode());
+                    //System.err.println(&quot;Message d'erreur : &quot; + response
+                    // .body());
+<span class="nc" id="L222">                    allUpdatesSuccessful = false;</span>
+                }
+
+<span class="nc" id="L225">            } catch (Exception e) {</span>
+<span class="nc" id="L226">                System.err.println(&quot;Une exception s'est produite : &quot; + e.getMessage());</span>
+<span class="nc" id="L227">                e.printStackTrace();</span>
+<span class="nc" id="L228">                allUpdatesSuccessful = false;</span>
+<span class="nc" id="L229">            }</span>
+<span class="nc" id="L230">        }</span>
+
+<span class="nc" id="L232">        return allUpdatesSuccessful;</span>
+    }
+
+    /**
+     * Consulter les notifications non lues pour un résident.
+     *
+     * @param user L'utilisateur pour lequel les notifications non lues
+     *            sont consultées
+     * @return Liste des notifications non lues
+     */
+    public static List&lt;Document&gt; consulterNotificationsNonLues(User user) {
+        try {
+            // Construire l'URL pour l'endpoint des notifications non lues
+<span class="nc" id="L245">            URL url =</span>
+<span class="nc" id="L246">                new URL(&quot;http://localhost:8000/users/&quot; + user.getUserId() +</span>
+                    &quot;/notifications/nonVue&quot;);
+<span class="nc" id="L248">            HttpURLConnection conn = (HttpURLConnection) url.openConnection();</span>
+<span class="nc" id="L249">            conn.setRequestMethod(&quot;GET&quot;);</span>
+
+            // Vérifier le code de réponse HTTP
+<span class="nc bnc" id="L252" title="All 2 branches missed.">            if (conn.getResponseCode() == 200) {</span>
+<span class="nc" id="L253">                StringBuilder reponse = new StringBuilder();</span>
+
+                // Lire la réponse JSON
+<span class="nc" id="L256">                try (Scanner scanner = new Scanner(conn.getInputStream())) {</span>
+<span class="nc bnc" id="L257" title="All 2 branches missed.">                    while (scanner.hasNextLine()) {</span>
+<span class="nc" id="L258">                        reponse.append(scanner.nextLine());</span>
+                    }
+                }
+
+                // Désérialiser la réponse JSON en une liste de documents (ou
+                // un autre type)
+<span class="nc" id="L264">                ObjectMapper objectMapper = new ObjectMapper();</span>
+<span class="nc" id="L265">                List&lt;Document&gt; notifications =</span>
+<span class="nc" id="L266">                    objectMapper.readValue(reponse.toString(),</span>
+<span class="nc" id="L267">                        new TypeReference&lt;List&lt;Document&gt;&gt;() {</span>
+                });
+
+<span class="nc" id="L270">                return notifications;</span>
+
+            } else {
+<span class="nc" id="L273">                System.out.println(&quot;Erreur : &quot; + conn.getResponseCode());</span>
+            }
+<span class="nc" id="L275">        } catch (Exception e) {</span>
+<span class="nc" id="L276">            e.printStackTrace();</span>
+<span class="nc" id="L277">        }</span>
+
+        // Retourner une liste vide en cas d'erreur
+<span class="nc" id="L280">        return new ArrayList&lt;&gt;();</span>
+    }
+
+    /**
+     * Consulter toutes les notifications d'un résident.
+     *
+     * @param user L'utilisateur pour lequel toutes les notifications
+     *            sont consultées
+     * @return Liste de toutes les notifications
+     */
+    public static List&lt;Document&gt; consulterToutesLesNotifications(User user) {
+        try {
+            // Construire l'URL pour l'endpoint des notifications non lues
+<span class="nc" id="L293">            URL url =</span>
+<span class="nc" id="L294">                new URL(&quot;http://localhost:8000/users/&quot; + user.getUserId() +</span>
+                    &quot;/notifications&quot;);
+<span class="nc" id="L296">            HttpURLConnection conn = (HttpURLConnection) url.openConnection();</span>
+<span class="nc" id="L297">            conn.setRequestMethod(&quot;GET&quot;);</span>
+
+            // Vérifier le code de réponse HTTP
+<span class="nc bnc" id="L300" title="All 2 branches missed.">            if (conn.getResponseCode() == 200) {</span>
+<span class="nc" id="L301">                StringBuilder reponse = new StringBuilder();</span>
+
+                // Lire la réponse JSON
+<span class="nc" id="L304">                try (Scanner scanner = new Scanner(conn.getInputStream())) {</span>
+<span class="nc bnc" id="L305" title="All 2 branches missed.">                    while (scanner.hasNextLine()) {</span>
+<span class="nc" id="L306">                        reponse.append(scanner.nextLine());</span>
+                    }
+                }
+
+                // Désérialiser la réponse JSON en une liste de documents (ou
+                // un autre type)
+<span class="nc" id="L312">                ObjectMapper objectMapper = new ObjectMapper();</span>
+<span class="nc" id="L313">                List&lt;Document&gt; notifications =</span>
+<span class="nc" id="L314">                    objectMapper.readValue(reponse.toString(),</span>
+<span class="nc" id="L315">                        new TypeReference&lt;List&lt;Document&gt;&gt;() {</span>
+                });
+
+<span class="nc" id="L318">                return notifications;</span>
+
+            } else {
+<span class="nc" id="L321">                System.out.println(&quot;Erreur : &quot; + conn.getResponseCode());</span>
+            }
+<span class="nc" id="L323">        } catch (Exception e) {</span>
+<span class="nc" id="L324">            e.printStackTrace();</span>
+<span class="nc" id="L325">        }</span>
+
+        // Retourner une liste vide en cas d'erreur
+<span class="nc" id="L328">        return new ArrayList&lt;&gt;();</span>
+    }
+
+    /**
+     * Envoie une notification à un résident.
+     *
+     * @param msg        Le message de la notification
+     * @param receveurId L'identifiant du résident receveur
+     */
+    public static void envoyerNotification(String msg,
+                                           String receveurId) {
+        try {
+<span class="nc" id="L340">            URL url = new URL(&quot;http://localhost:8000/users/&quot; + receveurId + &quot;/notifications&quot;);</span>
+<span class="nc" id="L341">            HttpURLConnection conn = (HttpURLConnection) url.openConnection();</span>
+<span class="nc" id="L342">            conn.setRequestMethod(&quot;POST&quot;);</span>
+<span class="nc" id="L343">            conn.setRequestProperty(&quot;Content-Type&quot;, &quot;application/json; utf-8&quot;);</span>
+<span class="nc" id="L344">            conn.setDoOutput(true);</span>
+
+            // Construire les données JSON en fonction des entrées utilisateur
+<span class="nc" id="L347">            String jsonInputString = String.format(&quot;{ \&quot;id\&quot;: \&quot;%s\&quot;, &quot; +</span>
+<span class="nc" id="L348">                    &quot;\&quot;msg\&quot;: \&quot;%s\&quot;, \&quot;vu\&quot;: %b}&quot;, receveurId, msg, false);</span>
+
+<span class="nc" id="L350">            try (OutputStream os = conn.getOutputStream()) {</span>
+<span class="nc" id="L351">                byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);</span>
+<span class="nc" id="L352">                os.write(input, 0, input.length);</span>
+            }
+
+<span class="nc bnc" id="L355" title="All 2 branches missed.">            if (conn.getResponseCode() == 201) {</span>
+            } else {
+<span class="nc" id="L357">                conn.getResponseCode();</span>
+            }
+<span class="nc" id="L359">        } catch (Exception e) {</span>
+<span class="nc" id="L360">        }</span>
+<span class="nc" id="L361">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

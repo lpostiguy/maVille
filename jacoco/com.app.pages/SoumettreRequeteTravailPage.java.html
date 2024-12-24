@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SoumettreRequeteTravailPage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.pages</a> &gt; <span class="el_source">SoumettreRequeteTravailPage.java</span></div><h1>SoumettreRequeteTravailPage.java</h1><pre class="source lang-java linenums">package com.app.pages;
+
+import com.app.MongoDBConnection;
+import com.app.controllers.RequeteTravailController;
+import com.app.models.User.User;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import static com.app.controllers.RequeteTravailController.soumettreRequeteTravail;
+import static com.app.utils.RegexChecker.estFormatDateValide;
+
+/**
+ * Cette classe gère l'interface utilisateur pour la soumission d'une requête
+ * de travail. Elle permet à un résident de soumettre une nouvelle requête
+ * en entrant les informations nécessaires.
+ */
+
+<span class="nc" id="L19">public class SoumettreRequeteTravailPage {</span>
+
+    /**
+     * Affiche le menu pour soumettre une nouvelle requête de travail et guide
+     * l'utilisateur dans la saisie des informations nécessaires à la création
+     * de la requête. Après la soumission, l'utilisateur peut retourner au menu
+     * principal.
+     *
+     * @param user L'utilisateur connecté qui soumet la requête de travail
+     *             (résident)
+     */
+    public static void soumettreRequeteTravailMenu(User user) {
+<span class="nc" id="L31">        Scanner scanner = new Scanner(System.in);</span>
+
+<span class="nc" id="L33">        System.out.println(&quot;\nVeuillez entrer les informations suivantes pour&quot; +</span>
+            &quot; &quot; + &quot;soumettre une nouvelle requête de travail.&quot;);
+
+<span class="nc" id="L36">        System.out.print(&quot;Titre : &quot;);</span>
+<span class="nc" id="L37">        String titre = scanner.nextLine();</span>
+
+<span class="nc" id="L39">        System.out.print(&quot;Description : &quot;);</span>
+<span class="nc" id="L40">        String description = scanner.nextLine();</span>
+
+<span class="nc" id="L42">        System.out.print(&quot;Type de travaux : &quot;);</span>
+<span class="nc" id="L43">        String typeTravaux = scanner.nextLine();</span>
+
+<span class="nc" id="L45">        boolean dateDebutEspereValide = false;</span>
+<span class="nc" id="L46">        String dateDebutEspere = &quot;&quot;;</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        while (!dateDebutEspereValide) {</span>
+<span class="nc" id="L48">            System.out.println(&quot;Date de début espérée (format YYYY-MM-DD):&quot;);</span>
+<span class="nc" id="L49">            dateDebutEspere = scanner.nextLine();</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">            if (estFormatDateValide(dateDebutEspere)) {</span>
+<span class="nc" id="L51">                dateDebutEspereValide = true;</span>
+            } else {
+<span class="nc" id="L53">                System.out.println(&quot;La date de début espérée entrée n'est &quot; + &quot;pas du format YYYY-MM-DD&quot;);</span>
+            }
+        }
+
+        // Appel de la méthode pour soumettre la requête avec les données
+        // entrées
+<span class="nc" id="L59">        System.out.println(soumettreRequeteTravail(titre, description,</span>
+<span class="nc" id="L60">            typeTravaux, dateDebutEspere, user.getUserId(), true));</span>
+<span class="nc" id="L61">        System.out.println(&quot;\n[1] Retour au menu principal&quot;);</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        while (!scanner.nextLine().equals(&quot;1&quot;)) {</span>
+<span class="nc" id="L63">            System.out.println(&quot;\n[1] Retour au menu principal&quot;);</span>
+        }
+<span class="nc" id="L65">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

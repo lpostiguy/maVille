@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConsulterTravauxPage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.pages</a> &gt; <span class="el_source">ConsulterTravauxPage.java</span></div><h1>ConsulterTravauxPage.java</h1><pre class="source lang-java linenums">package com.app.pages;
+
+import com.app.models.Projet;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
+
+import static com.app.controllers.ConsulterTravauxController.consulterTravauxEnCours;
+import static com.app.controllers.ProjetController.consulterProjets;
+
+
+/**
+ * Cette classe représente la page permettant de consulter les travaux et
+ * projets. Elle fournit un menu interactif pour effectuer des recherches,
+ * appliquer des filtres, et consulter les projets actifs.
+ */
+
+<span class="nc" id="L19">public class ConsulterTravauxPage {</span>
+
+    /**
+     * Affiche le menu principal pour consulter les travaux et projets du côté
+     * du résident. Permet au résident de naviguer dans différentes options pour
+     * rechercher, filtrer ou consulter les travaux en cours, ainsi que de
+     * consulter la liste des projets.
+     */
+    public static void consulterTravauxMenu() {
+<span class="nc" id="L28">        Scanner scanner = new Scanner(System.in);</span>
+        boolean filtrer;
+        boolean rechercher;
+        while (true) {
+<span class="nc" id="L32">            System.out.println(&quot;\n------ Menu Consulter Travaux et Projets------&quot;);</span>
+<span class="nc" id="L33">            System.out.println(&quot;[1] Retour au menu principal&quot;);</span>
+<span class="nc" id="L34">            System.out.println(&quot;[2] Rechercher des travaux&quot;);</span>
+<span class="nc" id="L35">            System.out.println(&quot;[3] Filtrer les travaux en cours&quot;);</span>
+<span class="nc" id="L36">            System.out.println(&quot;[4] Consulter les projets&quot;);</span>
+<span class="nc" id="L37">            System.out.println(&quot;------------------------------------&quot;);</span>
+<span class="nc" id="L38">            String responseMenu = scanner.nextLine();</span>
+<span class="nc bnc" id="L39" title="All 5 branches missed.">            switch (responseMenu) {</span>
+                case &quot;1&quot; -&gt; {
+<span class="nc" id="L41">                    return;</span>
+                }
+                case &quot;2&quot; -&gt; {
+<span class="nc" id="L44">                    rechercher = true;</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">                    while (rechercher) {</span>
+<span class="nc" id="L46">                        boolean validEntry = false;</span>
+<span class="nc" id="L47">                        String responseRecherche = null;</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">                        while (!validEntry) {</span>
+<span class="nc" id="L49">                            System.out.println(&quot;\n----- Menu Recherche &quot; +</span>
+                                &quot;Travaux&quot; +
+                                &quot; -----&quot;);
+<span class="nc" id="L52">                            System.out.println(&quot;\n[1] Retour&quot;);</span>
+<span class="nc" id="L53">                            System.out.println(&quot;[2] Rechercher des travaux &quot; + &quot;par titre&quot;);</span>
+<span class="nc" id="L54">                            System.out.println(&quot;[3] Rechercher des travaux &quot; + &quot;par type de travaux&quot;);</span>
+<span class="nc" id="L55">                            System.out.println(&quot;[4] Rechercher des travaux &quot; + &quot;par quartier&quot;);</span>
+<span class="nc" id="L56">                            System.out.println(&quot;------------------------------------&quot;);</span>
+<span class="nc" id="L57">                            responseRecherche = scanner.nextLine();</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">                            switch (responseRecherche) {</span>
+<span class="nc" id="L59">                                case &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot; -&gt; validEntry = true;</span>
+                                default -&gt;
+<span class="nc" id="L61">                                    System.out.println(&quot;Entrée invalide&quot;);</span>
+<span class="nc" id="L62">                            }</span>
+                        }
+<span class="nc bnc" id="L64" title="All 5 branches missed.">                        switch (responseRecherche) {</span>
+                            case &quot;1&quot; -&gt; {
+<span class="nc" id="L66">                                rechercher = false;</span>
+<span class="nc" id="L67">                            }</span>
+                            case &quot;2&quot; -&gt; {
+<span class="nc" id="L69">                                System.out.println(&quot;Entrer un titre de &quot; +</span>
+                                    &quot;travaux à rechercher:&quot;);
+<span class="nc" id="L71">                                String titreRecherche = scanner.nextLine();</span>
+<span class="nc" id="L72">                                consulterTravauxEnCours(&quot;occupancy_name&quot;,</span>
+                                    titreRecherche, true);
+<span class="nc" id="L74">                            }</span>
+                            case &quot;3&quot; -&gt; {
+<span class="nc" id="L76">                                System.out.println(&quot;Type de travaux: &quot;);</span>
+<span class="nc" id="L77">                                System.out.println(&quot;– Travaux routiers&quot;);</span>
+<span class="nc" id="L78">                                System.out.println(&quot;– Travaux de gaz ou &quot; +</span>
+                                    &quot;électricité&quot;);
+<span class="nc" id="L80">                                System.out.println(&quot;– Construction ou &quot; + &quot;r&quot; +</span>
+                                    &quot;énovation&quot;);
+<span class="nc" id="L82">                                System.out.println(&quot;– Entretien paysager&quot;);</span>
+<span class="nc" id="L83">                                System.out.println(&quot;– Travaux liés aux &quot; +</span>
+                                    &quot;transports en commun&quot;);
+<span class="nc" id="L85">                                System.out.println(&quot;– Travaux de &quot; +</span>
+                                    &quot;signalisation et éclairage&quot;);
+<span class="nc" id="L87">                                System.out.println(&quot;– Travaux souterrains&quot;);</span>
+<span class="nc" id="L88">                                System.out.println(&quot;– Travaux résidentiel&quot;);</span>
+<span class="nc" id="L89">                                System.out.println(&quot;– Entretien urbain&quot;);</span>
+<span class="nc" id="L90">                                System.out.println(&quot;– Entretien des réseaux &quot; + &quot;de télécommunication&quot;);</span>
+<span class="nc" id="L91">                                System.out.println(</span>
+                                    &quot;----------------------------&quot;);
+<span class="nc" id="L93">                                System.out.println(&quot;Entrer un type de &quot; +</span>
+                                    &quot;travaux à rechercher:&quot;);
+<span class="nc" id="L95">                                String typeRecherche = scanner.nextLine();</span>
+<span class="nc" id="L96">                                consulterTravauxEnCours(&quot;reason_category&quot;,</span>
+                                    typeRecherche, true);
+<span class="nc" id="L98">                            }</span>
+                            case &quot;4&quot; -&gt; {
+<span class="nc" id="L100">                                System.out.println(&quot;Entrer un quartier à &quot; +</span>
+                                    &quot;rechercher:&quot;);
+<span class="nc" id="L102">                                String quartierRecherche = scanner.nextLine();</span>
+<span class="nc" id="L103">                                consulterTravauxEnCours(&quot;boroughid&quot;,</span>
+                                    quartierRecherche, true);
+<span class="nc" id="L105">                            }</span>
+                            default -&gt; {
+<span class="nc" id="L107">                                System.out.println(&quot;Voici la liste de tout &quot; + &quot;les &quot; + &quot;travaux, sans recherche: &quot;);</span>
+<span class="nc" id="L108">                                consulterTravauxEnCours(null, null, true);</span>
+                            }
+                        }
+<span class="nc bnc" id="L111" title="All 2 branches missed.">                        if (rechercher) {</span>
+<span class="nc" id="L112">                            validEntry = false;</span>
+<span class="nc" id="L113">                            String responseExit = null;</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">                            while (!validEntry) {</span>
+<span class="nc" id="L115">                                System.out.println(&quot;\n[1] Retour&quot;);</span>
+<span class="nc" id="L116">                                System.out.println(&quot;[2] Faire une autre &quot; +</span>
+                                    &quot;recherche&quot;);
+<span class="nc" id="L118">                                responseExit = scanner.nextLine();</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">                                switch (responseExit) {</span>
+<span class="nc" id="L120">                                    case &quot;1&quot;, &quot;2&quot; -&gt; validEntry = true;</span>
+                                    default -&gt;
+<span class="nc" id="L122">                                        System.out.println(&quot;Entrée invalide&quot;);</span>
+<span class="nc" id="L123">                                }</span>
+                            }
+<span class="nc" id="L125">                            responseExit = scanner.nextLine();</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">                            if (Objects.equals(responseExit, &quot;1&quot;)) {</span>
+<span class="nc" id="L127">                                rechercher = false;</span>
+<span class="nc" id="L128">                                break;</span>
+                            }
+                        }
+<span class="nc" id="L131">                    }</span>
+                }
+                case &quot;3&quot; -&gt; {
+<span class="nc" id="L134">                    filtrer = true;</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">                    while (filtrer) {</span>
+<span class="nc" id="L136">                        System.out.println(&quot;\n------ Menu Filtrer &quot; +</span>
+                            &quot;Travaux&quot; +
+                            &quot;------&quot;);
+<span class="nc" id="L139">                        System.out.println(&quot;\n[1] Retour&quot;);</span>
+<span class="nc" id="L140">                        System.out.println(&quot;[2] Filter les travaux en cours &quot; + &quot;par type de travaux&quot;);</span>
+<span class="nc" id="L141">                        System.out.println(&quot;[3] Filter les travaux en cours &quot; + &quot;par quartier&quot;);</span>
+<span class="nc" id="L142">                        System.out.println(&quot;[4] Ne pas filter les travaux en &quot;</span>
+                            + &quot;cours.&quot;);
+<span class="nc" id="L144">                        System.out.println(&quot;------------------------------------&quot;);</span>
+<span class="nc" id="L145">                        String responseFilter = scanner.nextLine();</span>
+<span class="nc bnc" id="L146" title="All 4 branches missed.">                        switch (responseFilter) {</span>
+                            case &quot;1&quot; -&gt; {
+<span class="nc" id="L148">                                filtrer = false;</span>
+<span class="nc" id="L149">                            }</span>
+                            case &quot;2&quot; -&gt; {
+<span class="nc" id="L151">                                System.out.println(&quot;Voici la liste de tout &quot; + &quot;les travaux groupés par type de travaux:&quot; + &quot; &quot;);</span>
+<span class="nc" id="L152">                                consulterTravauxEnCours(&quot;reason_category&quot;,</span>
+                                    null, false);
+<span class="nc" id="L154">                            }</span>
+                            case &quot;3&quot; -&gt; {
+<span class="nc" id="L156">                                System.out.println(&quot;Voici la liste de tout &quot; + &quot;les travaux groupés par quartier: &quot;);</span>
+<span class="nc" id="L157">                                consulterTravauxEnCours(&quot;boroughid&quot;, null,</span>
+                                    false);
+<span class="nc" id="L159">                            }</span>
+                            default -&gt; {
+<span class="nc" id="L161">                                System.out.println(&quot;Voici la liste de tout &quot; + &quot;les travaux en cours sans filtre: &quot;);</span>
+<span class="nc" id="L162">                                consulterTravauxEnCours(null, null, false);</span>
+                            }
+                        }
+<span class="nc bnc" id="L165" title="All 2 branches missed.">                        if (filtrer) {</span>
+<span class="nc" id="L166">                            boolean validEntry = false;</span>
+<span class="nc" id="L167">                            String responseExit = null;</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">                            while (!validEntry) {</span>
+<span class="nc" id="L169">                                System.out.println(&quot;\n[1] Retour&quot;);</span>
+<span class="nc" id="L170">                                System.out.println(&quot;[2] Appliquer un filtre&quot;);</span>
+<span class="nc" id="L171">                                responseExit = scanner.nextLine();</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">                                switch (responseExit) {</span>
+<span class="nc" id="L173">                                    case &quot;1&quot;, &quot;2&quot; -&gt; validEntry = true;</span>
+                                    default -&gt;
+<span class="nc" id="L175">                                        System.out.println(&quot;Entrée invalide&quot;);</span>
+<span class="nc" id="L176">                                }</span>
+                            }
+<span class="nc" id="L178">                            responseExit = scanner.nextLine();</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">                            if (Objects.equals(responseExit, &quot;1&quot;)) {</span>
+<span class="nc" id="L180">                                filtrer = false;</span>
+                            }
+                        }
+<span class="nc" id="L183">                    }</span>
+                }
+                case &quot;4&quot; -&gt; {
+<span class="nc" id="L186">                    List&lt;Projet&gt; projets = consulterProjets();</span>
+<span class="nc bnc" id="L187" title="All 2 branches missed.">                    if(projets.isEmpty()) {</span>
+<span class="nc" id="L188">                        System.out.println(&quot;Aucun projets n'existe pour le moment&quot;);</span>
+                    }
+                    else {
+<span class="nc" id="L191">                        System.out.println(&quot;Voici la liste des projets:&quot;);</span>
+<span class="nc bnc" id="L192" title="All 2 branches missed.">                        for (Projet projet : projets) {</span>
+<span class="nc" id="L193">                            System.out.println(projets.toString());</span>
+<span class="nc" id="L194">                        }</span>
+                    }
+<span class="nc" id="L196">                    System.out.println(&quot;\n[1] Retour&quot;);</span>
+<span class="nc bnc" id="L197" title="All 2 branches missed.">                    while (!scanner.nextLine().equals(&quot;1&quot;)) {</span>
+<span class="nc" id="L198">                        System.out.println(&quot;\n[1] Retour&quot;);</span>
+                    }
+                }
+            }
+<span class="nc" id="L202">        }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

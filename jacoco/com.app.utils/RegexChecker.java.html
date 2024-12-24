@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RegexChecker.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.utils</a> &gt; <span class="el_source">RegexChecker.java</span></div><h1>RegexChecker.java</h1><pre class="source lang-java linenums">package com.app.utils;
+
+/**
+ * Cette classe fournit des méthodes pour valider divers formats de données.
+ */
+<span class="nc" id="L6">public class RegexChecker {</span>
+
+    /**
+     * Valide si la chaîne de caractères représente une date dans le format &quot;YYYY-MM-DD&quot;.
+     *
+     * @param date La chaîne de caractères représentant une date.
+     * @return {@code true} si la date est dans le format valide, sinon
+     * {@code false}.
+     */
+    public static boolean estFormatDateValide(String date) {
+        // Valider le format de la date (YYYY-MM-DD)
+<span class="fc" id="L17">        String regex = &quot;\\d{4}-\\d{2}-\\d{2}&quot;;</span>
+<span class="fc" id="L18">        return date.matches(regex);</span>
+    }
+
+    /**
+     * Valide si la chaîne de caractères représente un numéro de téléphone dans
+     * le format &quot;000-000-0000&quot;.
+     *
+     * @param numeroTelephone La chaîne de caractères représentant un numéro de
+     *                       téléphone.
+     * @return {@code true} si le numéro de téléphone est dans le format valide,
+     * sinon {@code false}.
+     */
+    public static boolean estFormatNumeroTelephoneValide(String numeroTelephone) {
+        // Valider le numéro de téléphone, format 000-000-0000
+<span class="fc" id="L32">        String regex = &quot;\\d{3}-\\d{3}-\\d{4}&quot;;</span>
+<span class="fc" id="L33">        return numeroTelephone.matches(regex);</span>
+    }
+
+    /**
+     * Valide si la chaîne de caractères représente un jour valide de la semaine.
+     * La validation est insensible à la casse (par exemple &quot;Lundi&quot; et &quot;lundi&quot;
+     * sont valides).
+     *
+     * @param jour La chaîne de caractères représentant un jour de la semaine.
+     * @return {@code true} si le jour est valide, sinon {@code false}.
+     */
+    public static boolean estJourSemaineValide(String jour) {
+        // Valider si l'entrée est un jour valide de la semaine (insensible à la casse)
+<span class="nc" id="L46">        String regex = &quot;(?i)Lundi|Mardi|Mercredi|Jeudi|Vendredi|Samedi|Dimanche&quot;;</span>
+<span class="nc" id="L47">        return jour.matches(regex);</span>
+    }
+
+    /**
+     * Valide si la chaîne de caractères représente une heure dans le format
+     * &quot;HH:mm&quot; (horloge 24 heures).
+     *
+     * @param heure La chaîne de caractères représentant une heure.
+     * @return {@code true} si l'heure est dans le format valide, sinon
+     * {@code false}.
+     */
+    public static boolean estFormatHeureValide(String heure) {
+        // Valider le format de l'heure HH:mm (horloge 24 heures)
+<span class="fc" id="L60">        String regex = &quot;([01]\\d|2[0-3]):[0-5]\\d&quot;;</span>
+<span class="fc" id="L61">        return heure.matches(regex);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

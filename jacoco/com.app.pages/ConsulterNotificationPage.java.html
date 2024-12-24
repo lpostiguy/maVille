@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConsulterNotificationPage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.pages</a> &gt; <span class="el_source">ConsulterNotificationPage.java</span></div><h1>ConsulterNotificationPage.java</h1><pre class="source lang-java linenums">package com.app.pages;
+
+import com.app.models.Notification;
+import com.app.models.User.Resident;
+import org.bson.Document;
+
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+import static com.app.controllers.NotificationsController.*;
+
+/**
+ * Cette classe gère l'affichage et la gestion des notifications pour un
+ * résident. Elle permet de consulter les notifications non lues, d'afficher
+ * toutes les notifications, et de mettre à jour leur statut.
+ */
+<span class="nc" id="L18">public class ConsulterNotificationPage {</span>
+
+    /**
+     * Permet à un résident de consulter ses notifications.
+     * Affiche les notifications non lues en priorité, puis toutes les
+     * notifications si aucune n'est non lue. Les notifications non lues sont
+     * marquées comme lues après consultation.
+     *
+     * @param resident l'utilisateur de type résident pour lequel les
+     * notifications sont affichées.
+     */
+    public static void consulterNotifications(Resident resident) {
+        try {
+<span class="nc" id="L31">            List&lt;Document&gt; notificationsNonLues = consulterNotificationsNonLues(resident);</span>
+
+<span class="nc bnc" id="L33" title="All 2 branches missed.">            if (!notificationsNonLues.isEmpty()) {</span>
+<span class="nc" id="L34">                afficherNotifications(&quot;Notifications non lues :&quot;, notificationsNonLues);</span>
+<span class="nc" id="L35">                mettreAJourStatutNotification(true, resident, convertirEnNotifications(notificationsNonLues));</span>
+            } else {
+<span class="nc" id="L37">                List&lt;Document&gt; toutesLesNotifications = consulterToutesLesNotifications(resident);</span>
+<span class="nc" id="L38">                afficherNotifications(&quot;\nToutes les notifications :&quot;,</span>
+                    toutesLesNotifications);
+            }
+<span class="nc" id="L41">            Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L42">            System.out.println(&quot;\n[1] Retour au menu principal&quot;);</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">            while (!scanner.nextLine().equals(&quot;1&quot;)) {</span>
+<span class="nc" id="L44">                System.out.println(&quot;[1] Retour au menu principal&quot;);</span>
+            }
+<span class="nc" id="L46">        } catch (Exception e) {</span>
+<span class="nc" id="L47">            System.err.println(&quot;Erreur lors de la consultation des notifications : &quot; + e.getMessage());</span>
+<span class="nc" id="L48">        }</span>
+<span class="nc" id="L49">    }</span>
+
+    private static void afficherNotifications(String titre, List&lt;Document&gt; documents) {
+<span class="nc" id="L52">        List&lt;Notification&gt; notifications = convertirEnNotifications(documents);</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if(!notifications.isEmpty()) {</span>
+<span class="nc" id="L54">        System.out.println(titre);</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        for (int i = 0; i &lt; notifications.size(); i++) {</span>
+<span class="nc" id="L56">            System.out.println(&quot;\nMessage notification &quot; + (i + 1) + &quot; : \n&quot; + notifications.get(i).getMsg());</span>
+        }
+        }
+        else {
+<span class="nc" id="L60">            System.out.println(&quot;Vous n'avez pas encore reçu de notifications&quot;);</span>
+        }
+<span class="nc" id="L62">    }</span>
+
+    private static List&lt;Notification&gt; convertirEnNotifications(List&lt;Document&gt; documents) {
+<span class="nc" id="L65">        return documents.stream().map(Notification::fromDocument).collect(Collectors.toList());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

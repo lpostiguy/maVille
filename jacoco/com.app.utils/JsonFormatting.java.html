@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JsonFormatting.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.utils</a> &gt; <span class="el_source">JsonFormatting.java</span></div><h1>JsonFormatting.java</h1><pre class="source lang-java linenums">package com.app.utils;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import java.util.Map;
+
+<span class="nc" id="L10">public class JsonFormatting {</span>
+
+    public static String jsonToTextRequeteTravail(String jsonString) {
+<span class="fc" id="L13">        Gson gson = new GsonBuilder().create();</span>
+<span class="fc" id="L14">        JsonElement jsonElement = gson.fromJson(jsonString, JsonElement.class);</span>
+
+<span class="fc" id="L16">        StringBuilder plainText = new StringBuilder();</span>
+<span class="pc bpc" id="L17" title="1 of 2 branches missed.">        if (jsonElement.isJsonArray()) {</span>
+<span class="nc bnc" id="L18" title="All 2 branches missed.">            for (JsonElement element : jsonElement.getAsJsonArray()) {</span>
+<span class="nc" id="L19">                plainText.append(parseJsonObject(element.getAsJsonObject())).append(&quot;\n&quot;);</span>
+<span class="nc" id="L20">            }</span>
+<span class="pc bpc" id="L21" title="1 of 2 branches missed.">        } else if (jsonElement.isJsonObject()) {</span>
+<span class="fc" id="L22">            plainText.append(parseJsonObject(jsonElement.getAsJsonObject()));</span>
+        }
+<span class="fc" id="L24">        return plainText.toString();</span>
+    }
+
+    private static String parseJsonObject(JsonObject jsonObject) {
+<span class="fc" id="L28">        StringBuilder plainText = new StringBuilder();</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        for (Map.Entry&lt;String, JsonElement&gt; entry : jsonObject.entrySet()) {</span>
+<span class="pc bpc" id="L30" title="4 of 8 branches missed.">            if (entry.getKey().equals(&quot;_id&quot;) || entry.getKey().equals(&quot;id&quot;) || entry.getKey().equals(&quot;demandeurRequete&quot;) || entry.getKey().equals(&quot;actif&quot;)) {</span>
+<span class="nc" id="L31">                continue;</span>
+            }
+<span class="fc" id="L33">            plainText.append(entry.getKey()).append(&quot;: &quot;);</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">            if (entry.getValue().isJsonPrimitive()) {</span>
+<span class="fc" id="L35">                plainText.append(entry.getValue().getAsString());</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">            } else if (entry.getValue().isJsonArray()) {</span>
+<span class="nc" id="L37">                plainText.append(entry.getValue().getAsJsonArray().toString().replaceAll(&quot;[\\[\\]\&quot;]&quot;, &quot;&quot;));</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">            } else if (entry.getValue().isJsonObject()) {</span>
+<span class="nc" id="L39">                plainText.append(parseJsonObject(entry.getValue().getAsJsonObject()));</span>
+            }
+<span class="fc" id="L41">            plainText.append(&quot;\n&quot;);</span>
+<span class="fc" id="L42">        }</span>
+<span class="fc" id="L43">        return plainText.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

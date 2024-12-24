@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Entrave.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.models</a> &gt; <span class="el_source">Entrave.java</span></div><h1>Entrave.java</h1><pre class="source lang-java linenums">package com.app.models;
+
+import com.google.gson.annotations.SerializedName;
+
+/**
+ * Cette classe représente une entrave avec des informations sur
+ * son identification, sa durée, son emplacement et d'autres métadonnées
+ * associées. Elle est utilisée pour désérialiser l'information dans l'API
+ * Entrave et travaux de la ville de Montréal.
+ */
+<span class="nc" id="L11">public class Entrave {</span>
+
+    // Attributs
+    @SerializedName(&quot;_id&quot;)
+    private int _id;
+    @SerializedName(&quot;id_request&quot;)
+    private String id_request;
+    private String streetid;
+    private String streetimpactwidth;
+    private String streetimpacttype;
+    private String nbfreeparkingplace;
+    private String sidewalk_blockedtype;
+    private String backsidewalk_blockedtype;
+    private String bikepath_blockedtype;
+    private String name;
+    private String shortname;
+    private String fromname;
+    private String fromshortname;
+    private String toname;
+    private String toshortname;
+    private String length;
+    private String isarterial;
+    private String stmimpact_blockedtype;
+    private String otherproviderimpact_blockedtype;
+    private String reservedlane_blockedtype;
+
+
+    // Getters
+
+    public int get_id() {
+<span class="nc" id="L41">        return _id;</span>
+    }
+
+    public String getId_request() {
+<span class="nc" id="L45">        return id_request;</span>
+    }
+
+    public String getStreetid() {
+<span class="nc" id="L49">        return streetid;</span>
+    }
+
+    public String getStreetimpactwidth() {
+<span class="nc" id="L53">        return streetimpactwidth;</span>
+    }
+
+    public String getStreetimpacttype() {
+<span class="nc" id="L57">        return streetimpacttype;</span>
+    }
+
+    public String getNbfreeparkingplace() {
+<span class="nc" id="L61">        return nbfreeparkingplace;</span>
+    }
+
+    public String getSidewalk_blockedtype() {
+<span class="nc" id="L65">        return sidewalk_blockedtype;</span>
+    }
+
+    public String getBacksidewalk_blockedtype() {
+<span class="nc" id="L69">        return backsidewalk_blockedtype;</span>
+    }
+
+    public String getBikepath_blockedtype() {
+<span class="nc" id="L73">        return bikepath_blockedtype;</span>
+    }
+
+    public String getName() {
+<span class="nc" id="L77">        return name;</span>
+    }
+
+    public String getShortname() {
+<span class="nc" id="L81">        return shortname;</span>
+    }
+
+    public String getFromname() {
+<span class="nc" id="L85">        return fromname;</span>
+    }
+
+    public String getFromshortname() {
+<span class="nc" id="L89">        return fromshortname;</span>
+    }
+
+    public String getToname() {
+<span class="nc" id="L93">        return toname;</span>
+    }
+
+    public String getToshortname() {
+<span class="nc" id="L97">        return toshortname;</span>
+    }
+
+    public String getLength() {
+<span class="nc" id="L101">        return length;</span>
+    }
+
+    public String getIsarterial() {
+<span class="nc" id="L105">        return isarterial;</span>
+    }
+
+    public String getStmimpact_blockedtype() {
+<span class="nc" id="L109">        return stmimpact_blockedtype;</span>
+    }
+
+    public String getOtherproviderimpact_blockedtype() {
+<span class="nc" id="L113">        return otherproviderimpact_blockedtype;</span>
+    }
+
+    public String getReservedlane_blockedtype() {
+<span class="nc" id="L117">        return reservedlane_blockedtype;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

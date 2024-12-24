@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Intervenant.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.models.User</a> &gt; <span class="el_source">Intervenant.java</span></div><h1>Intervenant.java</h1><pre class="source lang-java linenums">package com.app.models.User;
+
+import com.app.models.Notification;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
+
+import static com.app.utils.GenerateurId.RandomIDGenerator;
+/**
+ * Cette classe représente un utilisateur ayant un rôle spécifique
+ * d'Intervenant.
+ * Cette classe étend la classe `User` et ajoute des attributs spécifiques à
+ * l'intervenant.
+ */
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Intervenant extends User {
+
+    // Constructeur par défaut (obligatoire pour la désérialisation)
+<span class="nc" id="L19">    public Intervenant() {</span>
+<span class="nc" id="L20">        setUserRole(&quot;INTERVENANT&quot;);</span>
+<span class="nc" id="L21">    }</span>
+
+    // Constructeur pour création de compte
+    public Intervenant(String firstName, String lastName, String email,
+<span class="nc" id="L25">                       String entityType, String cityId, int password) {</span>
+<span class="nc" id="L26">        setFirstName(firstName);</span>
+<span class="nc" id="L27">        setLastName(lastName);</span>
+<span class="nc" id="L28">        setEmail(email);</span>
+<span class="nc" id="L29">        setEntityType(entityType);</span>
+<span class="nc" id="L30">        setCityId(cityId);</span>
+<span class="nc" id="L31">        setPassword(password);</span>
+<span class="nc" id="L32">        setUserRole(&quot;INTERVENANT&quot;);</span>
+<span class="nc" id="L33">        setUserId(RandomIDGenerator());</span>
+<span class="nc" id="L34">    }</span>
+
+    // Constructeur pour se connecter
+    public Intervenant(String firstName, String lastName, String email,
+                       String entityType, String cityId, int password,
+<span class="nc" id="L39">                       String userId, List&lt;Notification&gt; notifications) {</span>
+<span class="nc" id="L40">        setFirstName(firstName);</span>
+<span class="nc" id="L41">        setLastName(lastName);</span>
+<span class="nc" id="L42">        setEmail(email);</span>
+<span class="nc" id="L43">        setEntityType(entityType);</span>
+<span class="nc" id="L44">        setCityId(cityId);</span>
+<span class="nc" id="L45">        setPassword(password);</span>
+<span class="nc" id="L46">        setUserRole(&quot;INTERVENANT&quot;);</span>
+<span class="nc" id="L47">        setUserId(userId);</span>
+<span class="nc" id="L48">    }</span>
+
+
+    // Attributes
+    private String cityId;
+    private String entityType;
+
+    // Getters
+    public String getCityId() {
+<span class="nc" id="L57">        return cityId;</span>
+    }
+
+    public String getEntityType() {
+<span class="nc" id="L61">        return entityType;</span>
+    }
+
+    // Setters
+    public void setCityId(String cityId) {
+<span class="nc" id="L66">        this.cityId = cityId;</span>
+<span class="nc" id="L67">    }</span>
+
+    public void setEntityType(String entityType) {
+<span class="nc" id="L70">        this.entityType = entityType;</span>
+<span class="nc" id="L71">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

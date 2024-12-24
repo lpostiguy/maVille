@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Resident.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.models.User</a> &gt; <span class="el_source">Resident.java</span></div><h1>Resident.java</h1><pre class="source lang-java linenums">package com.app.models.User;
+
+import com.app.models.Notification;
+import com.app.models.PreferenceHoraire;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
+import java.util.Objects;
+
+import static com.app.utils.GenerateurId.RandomIDGenerator;
+/**
+ * Cette classe représente un utilisateur ayant un rôle spécifique
+ * de Résident.
+ * Cette classe étend la classe `User` et ajoute des attributs spécifiques au
+ * résident.
+ */
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Resident extends User {
+
+    // Constructeur par défaut
+<span class="nc" id="L22">    public Resident() {</span>
+<span class="nc" id="L23">        setUserRole(&quot;RESIDENT&quot;);</span>
+<span class="nc" id="L24">    }</span>
+
+    // Constructor pour création de compte
+    public Resident(String firstName, String lastName, String email,
+                    String phoneNumber, String dateOfBirth,
+<span class="nc" id="L29">                    String homeAddress, int password, String boroughId) {</span>
+<span class="nc" id="L30">        setFirstName(firstName);</span>
+<span class="nc" id="L31">        setLastName(lastName);</span>
+<span class="nc" id="L32">        setEmail(email);</span>
+<span class="nc" id="L33">        setDateOfBirth(dateOfBirth);</span>
+<span class="nc" id="L34">        setHomeAddress(homeAddress);</span>
+<span class="nc" id="L35">        setPassword(password);</span>
+<span class="nc" id="L36">        setUserRole(&quot;RESIDENT&quot;);</span>
+<span class="nc" id="L37">        setUserId(RandomIDGenerator());</span>
+<span class="nc" id="L38">        setBoroughId(boroughId);</span>
+
+        // Phone number is optional
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (!Objects.equals(phoneNumber, &quot;&quot;)) {</span>
+<span class="nc" id="L42">            setPhoneNumber(phoneNumber);</span>
+        }
+<span class="nc" id="L44">    }</span>
+
+    // Constructor pour se connecter
+    public Resident(String firstName, String lastName, String email,
+                    String phoneNumber, String dateOfBirth,
+                    String homeAddress, int password, String userId,
+                    String boroughId, List&lt;Notification&gt; notifications,
+<span class="nc" id="L51">                    List&lt;PreferenceHoraire&gt; preferencesHoraires) {</span>
+
+<span class="nc" id="L53">        setFirstName(firstName);</span>
+<span class="nc" id="L54">        setLastName(lastName);</span>
+<span class="nc" id="L55">        setEmail(email);</span>
+<span class="nc" id="L56">        setDateOfBirth(dateOfBirth);</span>
+<span class="nc" id="L57">        setHomeAddress(homeAddress);</span>
+<span class="nc" id="L58">        setPassword(password);</span>
+<span class="nc" id="L59">        setUserRole(&quot;RESIDENT&quot;);</span>
+<span class="nc" id="L60">        setUserId(userId);</span>
+<span class="nc" id="L61">        setBoroughId(boroughId);</span>
+<span class="nc" id="L62">        setNotifications(notifications);</span>
+<span class="nc" id="L63">        setPreferencesHoraires(preferencesHoraires);</span>
+
+        // Phone number is optional
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (!Objects.equals(phoneNumber, &quot;&quot;)) {</span>
+<span class="nc" id="L67">            setPhoneNumber(phoneNumber);</span>
+        }
+<span class="nc" id="L69">    }</span>
+
+    // Attributes
+    private String phoneNumber;
+    private String dateOfBirth;
+    private String homeAddress;
+    private String boroughId;
+    @JsonProperty(&quot;preferencesHoraires&quot;)
+    private List&lt;PreferenceHoraire&gt; preferencesHoraires;
+    @JsonProperty(&quot;notifications&quot;)
+    private List&lt;Notification&gt; notifications;
+
+    // Getters
+    public String getPhoneNumber() {
+<span class="nc" id="L83">        return phoneNumber;</span>
+    }
+
+    public String getDateOfBirth() {
+<span class="nc" id="L87">        return dateOfBirth;</span>
+    }
+
+    public String getHomeAddress() {
+<span class="nc" id="L91">        return homeAddress;</span>
+    }
+
+    public String getBoroughId() {
+<span class="nc" id="L95">        return boroughId;</span>
+    }
+
+    public List&lt;PreferenceHoraire&gt; getPreferencesHoraires() {
+<span class="nc" id="L99">        return preferencesHoraires;</span>
+    }
+
+    public List&lt;Notification&gt; getNotifications() {
+<span class="nc" id="L103">        return notifications;</span>
+    }
+
+
+    // Setters
+    public void setPhoneNumber(String phoneNumber) {
+<span class="nc" id="L109">        this.phoneNumber = phoneNumber;</span>
+<span class="nc" id="L110">    }</span>
+
+    public void setDateOfBirth(String dateOfBirth) {
+<span class="nc" id="L113">        this.dateOfBirth = dateOfBirth;</span>
+<span class="nc" id="L114">    }</span>
+
+    public void setHomeAddress(String homeAddress) {
+<span class="nc" id="L117">        this.homeAddress = homeAddress;</span>
+<span class="nc" id="L118">    }</span>
+
+    public void setBoroughId(String boroughId) {
+<span class="nc" id="L121">        this.boroughId = boroughId;</span>
+<span class="nc" id="L122">    }</span>
+
+    public void setPreferencesHoraires(List&lt;PreferenceHoraire&gt; preferencesHoraires) {
+<span class="nc" id="L125">        this.preferencesHoraires = preferencesHoraires;</span>
+<span class="nc" id="L126">    }</span>
+
+    public void setNotifications(List&lt;Notification&gt; notifications) {
+<span class="nc" id="L129">        this.notifications = notifications;</span>
+<span class="nc" id="L130">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

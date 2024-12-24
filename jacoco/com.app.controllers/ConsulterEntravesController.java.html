@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConsulterEntravesController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.controllers</a> &gt; <span class="el_source">ConsulterEntravesController.java</span></div><h1>ConsulterEntravesController.java</h1><pre class="source lang-java linenums">package com.app.controllers;
+
+import com.app.models.Entrave;
+import com.app.models.RequeteTravail;
+import com.app.models.Travail;
+import com.app.utils.ReponseApi;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+/**
+ * Classe qui gère la consultation des entraves via l'API de la ville de
+ * Montréal. Cette classe permet d'effectuer des recherches, de filtrer et
+ * d'afficher les informations des entraves.
+ */
+<span class="nc" id="L25">public class ConsulterEntravesController {</span>
+
+    private static void displayEntrave(Entrave entrave) {
+<span class="nc" id="L28">        System.out.println(&quot;Nom de la rue affectée : &quot; + entrave.getName());</span>
+<span class="nc" id="L29">        System.out.println(&quot;Impact sur la rue : &quot; + entrave.getStreetimpacttype());</span>
+<span class="nc" id="L30">        System.out.println(&quot;Impact sur le trottoir : &quot; + entrave.getSidewalk_blockedtype());</span>
+<span class="nc" id="L31">        System.out.println(&quot;Type de blocage de la &quot; + &quot;voie réservée : &quot; + entrave.getReservedlane_blockedtype());</span>
+<span class="nc" id="L32">        System.out.println(&quot;Nom de début de rue : &quot; + entrave.getFromname());</span>
+<span class="nc" id="L33">        System.out.println(&quot;Nom de fin de rue : &quot; + entrave.getToname());</span>
+<span class="nc" id="L34">        System.out.println(&quot;Longueur de l'impact : &quot; + entrave.getLength() + &quot; mètres&quot;);</span>
+<span class="nc" id="L35">        System.out.println(&quot;----------------------------&quot;);</span>
+<span class="nc" id="L36">        }</span>
+
+    /**
+     * Consulte les entraves à partir de l'API ouverte de la ville de Montréal.
+     * Cette méthode permet de filtrer et d'afficher les résultats en fonction
+     * des critères donnés.
+     *
+     * @param filterPar        Le champ par lequel les entraves doivent être
+     *                         regroupées, par exemple &quot;street_id&quot;.
+     *                         Peut être null si aucun regroupement n'est
+     *                         nécessaire.
+     * @param recherche        Le terme de recherche à utiliser pour filtrer les
+     *                         entraves. Si effectuerRecherche est true
+     *                         et recherche est non vide, la recherche sera
+     *                         effectuée sur ce champ.
+     * @param effectuerRecherche Indicateur booléen pour savoir si une recherche
+     *                          doit être effectuée.
+     *                          Si true, la méthode applique la recherche selon
+     *                          filterPar et recherche.
+     */
+    public static void consulterEntraves(String filterPar, String recherche, boolean effectuerRecherche) {
+        try {
+<span class="nc" id="L58">            URL url =</span>
+                new URL(&quot;https://donnees.montreal&quot; + &quot;.ca/api/3/action&quot; +
+                    &quot;/datastore_search?resource_id=a2bc8014-488c&quot; + &quot;-495d&quot; + &quot;-941b&quot; + &quot;-e7ae1999d1bd&quot;);
+<span class="nc" id="L61">            HttpURLConnection conn = (HttpURLConnection) url.openConnection();</span>
+<span class="nc" id="L62">            conn.setRequestMethod(&quot;GET&quot;);</span>
+
+<span class="nc bnc" id="L64" title="All 2 branches missed.">            if (conn.getResponseCode() == 200) {</span>
+<span class="nc" id="L65">                Gson gson = new Gson();</span>
+<span class="nc" id="L66">                try (InputStreamReader reader =</span>
+<span class="nc" id="L67">                         new InputStreamReader(conn.getInputStream())) {</span>
+<span class="nc" id="L68">                    ReponseApi reponse = gson.fromJson(reader,</span>
+                        ReponseApi.class);
+
+<span class="nc bnc" id="L71" title="All 6 branches missed.">                    if (reponse != null &amp;&amp; reponse.isSuccess() &amp;&amp; reponse.getResult() != null) {</span>
+<span class="nc" id="L72">                        ReponseApi.ResultatEntraves resultatEntraves =</span>
+<span class="nc" id="L73">                            gson.fromJson(gson.toJson(reponse.getResult()),</span>
+                                ReponseApi.ResultatEntraves.class);
+
+<span class="nc" id="L76">                        List&lt;Entrave&gt; entraves =</span>
+<span class="nc" id="L77">                            resultatEntraves.getEntraveRecords();</span>
+
+<span class="nc bnc" id="L79" title="All 2 branches missed.">                        if (entraves != null) {</span>
+<span class="nc bnc" id="L80" title="All 6 branches missed.">                            if (effectuerRecherche &amp;&amp; recherche != null &amp;&amp; !recherche.isEmpty()) {</span>
+<span class="nc" id="L81">                                System.out.println(&quot;Recherche en cours...&quot;);</span>
+
+<span class="nc" id="L83">                                System.out.println(&quot;Résultat de &quot; + &quot;votre &quot; + &quot;recherche pour &quot; + recherche + &quot;:\n&quot;);</span>
+<span class="nc bnc" id="L84" title="All 3 branches missed.">                                switch (filterPar.toLowerCase()) {</span>
+                                    case &quot;request_id&quot;:
+<span class="nc" id="L86">                                        entraves =</span>
+<span class="nc bnc" id="L87" title="All 4 branches missed.">                                            entraves.stream().filter(t -&gt; t.getId_request() != null &amp;&amp; recherche.equals(t.getId_request())).toList();</span>
+<span class="nc" id="L88">                                        break;</span>
+
+                                    case &quot;street_id&quot;:
+<span class="nc" id="L91">                                        List&lt;String&gt; motsRecherche =</span>
+<span class="nc" id="L92">                                            Arrays.stream(recherche.split(&quot;\\s+&quot;)).toList();</span>
+<span class="nc" id="L93">                                        entraves =</span>
+<span class="nc bnc" id="L94" title="All 4 branches missed.">                                            entraves.stream().filter(t -&gt; t.getStreetid() != null &amp;&amp; motsRecherche.stream().anyMatch(word -&gt; t.getStreetid().toLowerCase().contains(word.toLowerCase()))).collect(Collectors.toList());</span>
+<span class="nc" id="L95">                                        break;</span>
+
+                                    default:
+<span class="nc" id="L98">                                        System.out.println(&quot;Type de &quot; +</span>
+                                            &quot;recherche&quot; + &quot; inconnu : &quot; + filterPar);
+<span class="nc" id="L100">                                        return;</span>
+                                }
+
+<span class="nc" id="L103">                                entraves.forEach(entrave -&gt; displayEntrave(entrave));</span>
+
+                            }
+
+<span class="nc bnc" id="L107" title="All 4 branches missed.">                            if (!effectuerRecherche &amp;&amp; filterPar != null) {</span>
+<span class="nc" id="L108">                                Map&lt;String, List&lt;Entrave&gt;&gt; groupedEntraves =</span>
+<span class="nc" id="L109">                                    entraves.stream().collect(Collectors.groupingBy(Entrave::getStreetid));</span>
+
+<span class="nc" id="L111">                                groupedEntraves.forEach((key, group) -&gt; {</span>
+<span class="nc" id="L112">                                    System.out.println(&quot;\n&quot; + filterPar + &quot;: &quot;</span>
+                                        + key + &quot;\n&quot;);
+<span class="nc" id="L114">                                    group.forEach(entrave -&gt; displayEntrave(entrave));</span>
+<span class="nc" id="L115">                                });</span>
+<span class="nc" id="L116">                            }</span>
+                        } else {
+<span class="nc" id="L118">                            System.out.println(&quot;Erreur : La réponse ne contient &quot; + &quot;pas les données attendues.&quot;);</span>
+                        }
+                    }
+<span class="nc" id="L121">                }</span>
+<span class="nc" id="L122">            } else {</span>
+<span class="nc" id="L123">                    System.out.println(&quot;Erreur HTTP : &quot; + conn.getResponseCode());</span>
+                }
+        }
+<span class="nc" id="L126">        catch (Exception e) {</span>
+<span class="nc" id="L127">            System.err.println(&quot;Une erreur s'est produite lors de la &quot; +</span>
+<span class="nc" id="L128">                &quot;consultation des entraves : &quot; + e.getMessage());</span>
+<span class="nc" id="L129">        }</span>
+<span class="nc" id="L130">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

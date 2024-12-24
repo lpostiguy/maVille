@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProjetPage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.pages</a> &gt; <span class="el_source">ProjetPage.java</span></div><h1>ProjetPage.java</h1><pre class="source lang-java linenums">package com.app.pages;
+
+import com.app.models.Projet;
+import com.app.models.User.User;
+import org.bson.Document;
+
+import java.util.*;
+
+import static com.app.controllers.NotificationsController.envoyerNotification;
+import static com.app.controllers.PreferenceHoraireController.recupererPreferencesHoraires;
+import static com.app.controllers.ProjetController.*;
+import static com.app.controllers.ProjetController.soumettreProjet;
+import static com.app.controllers.UserController.*;
+import static com.app.utils.RegexChecker.estFormatDateValide;
+
+/**
+ * Cette classe gère les pages et les interactions liées aux projets dans
+ * l'application. Elle permet à un intervenant de consulter ses projets, de
+ * soumettre un nouveau projet, et de modifier le statut d'un projet existant.
+ * Elle gère également l'envoi de notifications aux utilisateurs concernés par
+ * les projets soumis ou modifiés.
+ */
+<span class="nc" id="L23">public class ProjetPage {</span>
+<span class="nc" id="L24">    private static final Scanner scanner = new Scanner(System.in);</span>
+
+    private static void consulterProjets(User user) {
+<span class="nc" id="L27">        System.out.println(&quot;\n------ Vos Projets -----&quot;);</span>
+
+<span class="nc" id="L29">        List&lt;Projet&gt; projets = consulterProjet(user);</span>
+<span class="nc" id="L30">        int i = 0;</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        if (projets.isEmpty()) {</span>
+<span class="nc" id="L32">            System.out.println(&quot;Vous n'avez pas encore soumis de &quot; + &quot;projet&quot;);</span>
+        } else {
+<span class="nc" id="L34">            System.out.println(&quot;projets.size()&quot; + projets.size());</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">            for (i = 0; i &lt; projets.size();) {</span>
+<span class="nc" id="L36">                i++;</span>
+<span class="nc" id="L37">                System.out.printf(&quot;\n[%d] %s%n&quot;, i,</span>
+<span class="nc" id="L38">                    projets.get(i - 1).toString());</span>
+            }
+        }
+<span class="nc" id="L41">        boolean entreValide = false;</span>
+
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        while (!entreValide) {</span>
+<span class="nc" id="L44">            System.out.println(&quot;\n[1] Retour&quot;);</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">            if (!projets.isEmpty()) {</span>
+<span class="nc" id="L46">                System.out.println(&quot;[2] Modifier le statut d'un projet&quot;);</span>
+            }
+<span class="nc" id="L48">            Scanner scanner2 = new Scanner(System.in);</span>
+<span class="nc" id="L49">            String choix2 = scanner2.nextLine();</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">            if (Objects.equals(choix2, &quot;1&quot;)) {</span>
+<span class="nc" id="L51">                entreValide = true;</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">            } else if (Objects.equals(choix2, &quot;2&quot;)) {</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">                if (!projets.isEmpty()) {</span>
+<span class="nc" id="L54">                    entreValide = true;</span>
+<span class="nc" id="L55">                    System.out.println(&quot;Veuillez entrer le numéro du &quot; +</span>
+                        &quot;projet dont vous souhaitez modifier le statut:&quot;);
+<span class="nc" id="L57">                    Scanner scanner3 = new Scanner(System.in);</span>
+<span class="nc" id="L58">                    int numProjet = scanner3.nextInt() - 1;</span>
+
+<span class="nc bnc" id="L60" title="All 2 branches missed.">                    while (!(numProjet &lt;= i )) {</span>
+<span class="nc" id="L61">                        System.out.print(&quot;\nEntrez un numéro valide : &quot;);</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">                        if (scanner.hasNextInt()) {</span>
+<span class="nc" id="L63">                            numProjet = scanner.nextInt();</span>
+                        } else {
+<span class="nc" id="L65">                            scanner.next();</span>
+                        }
+                    }
+<span class="nc" id="L68">                    System.out.print(&quot;\nEntrer un statut (En cours, Suspendu, Terminé): &quot;);</span>
+<span class="nc" id="L69">                    String statut = scanner2.nextLine();</span>
+<span class="nc" id="L70">                    boolean miseAJour = mettreAJourStatutProjet(statut, projets.get(numProjet));</span>
+
+
+<span class="nc bnc" id="L73" title="All 2 branches missed.">                    if (miseAJour) {</span>
+<span class="nc" id="L74">                        List&lt;String&gt; userIds = new ArrayList&lt;&gt;();</span>
+                        for (String quartierAffecte :
+<span class="nc bnc" id="L76" title="All 2 branches missed.">                            projets.get(numProjet).getQuartiersAffectes()) {</span>
+<span class="nc" id="L77">                            List&lt;String&gt; userBoroughIds = findUsersByBoroughId(quartierAffecte);</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">                            if (!userBoroughIds.isEmpty()) {</span>
+<span class="nc" id="L79">                                userIds.addAll(userBoroughIds);</span>
+                            }
+<span class="nc" id="L81">                        }</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">                        if (!userIds.isEmpty()) {</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">                            for (String userId : userIds) {</span>
+<span class="nc" id="L84">                                envoyerNotification(&quot;Le statut du &quot; +</span>
+<span class="nc" id="L85">                                        &quot;projet &quot; + projets.get(numProjet).getTitre() +</span>
+                                        &quot; dans votre quartier a été &quot; +
+<span class="nc" id="L87">                                        &quot;mis à jour de: '&quot; + projets.get(numProjet).getStatut() + &quot;' à: '&quot; + statut + &quot;'.&quot;,</span>
+                                    userId);
+<span class="nc" id="L89">                            }</span>
+                        }
+                    }
+                }
+            }
+<span class="nc" id="L94">        }</span>
+<span class="nc" id="L95">    }</span>
+
+    private static void soumettreProjetForm(User user) {
+<span class="nc" id="L98">        System.out.println(&quot;\nVeuillez entrer les informations suivantes pour soumettre un projet.&quot;);</span>
+
+<span class="nc" id="L100">        System.out.print(&quot;Titre du projet: &quot;);</span>
+<span class="nc" id="L101">        String titre = scanner.nextLine();</span>
+
+<span class="nc" id="L103">        System.out.print(&quot;Description du projet: &quot;);</span>
+<span class="nc" id="L104">        String description = scanner.nextLine();</span>
+
+<span class="nc" id="L106">        System.out.print(&quot;Type de travaux : &quot;);</span>
+<span class="nc" id="L107">        String typeTravaux = scanner.nextLine();</span>
+
+        // Collecte des quartiers affectés
+<span class="nc" id="L110">        List&lt;String&gt; quartiersAffectes = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L111">        System.out.println(&quot;Entrez les quartiers affectés (tapez 'fin' pour terminer) :&quot;);</span>
+        while (true) {
+<span class="nc" id="L113">            System.out.print(&quot;Quartier : &quot;);</span>
+<span class="nc" id="L114">            String quartier = scanner.nextLine();</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">            if (quartier.equalsIgnoreCase(&quot;fin&quot;)) {</span>
+<span class="nc" id="L116">                break;</span>
+            }
+<span class="nc" id="L118">            quartiersAffectes.add(quartier);</span>
+<span class="nc" id="L119">        }</span>
+
+        // Collecte des rues affectées
+<span class="nc" id="L122">        List&lt;String&gt; ruesAffectees = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L123">        System.out.println(&quot;Entrez les rues affectées (tapez 'fin' pour terminer) :&quot;);</span>
+        while (true) {
+<span class="nc" id="L125">            System.out.print(&quot;Rue : &quot;);</span>
+<span class="nc" id="L126">            String rue = scanner.nextLine();</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">            if (rue.equalsIgnoreCase(&quot;fin&quot;)) {</span>
+<span class="nc" id="L128">                break;</span>
+            }
+<span class="nc" id="L130">            ruesAffectees.add(rue);</span>
+<span class="nc" id="L131">        }</span>
+
+<span class="nc" id="L133">        boolean dateDebutValide = false;</span>
+<span class="nc" id="L134">        String dateDebut = &quot;&quot;;</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">        while (!dateDebutValide) {</span>
+<span class="nc" id="L136">            System.out.println(&quot;Date de début (format YYYY-MM-DD):&quot;);</span>
+<span class="nc" id="L137">            dateDebut = scanner.nextLine();</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">            if (estFormatDateValide(dateDebut)) {</span>
+<span class="nc" id="L139">                dateDebutValide = true;</span>
+            } else {
+<span class="nc" id="L141">                System.out.println(&quot;La date de début entrée n'est pas du format YYYY-MM-DD&quot;);</span>
+            }
+        }
+
+<span class="nc" id="L145">        boolean dateFinValide = false;</span>
+<span class="nc" id="L146">        String dateFin = &quot;&quot;;</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">        while (!dateFinValide) {</span>
+<span class="nc" id="L148">            System.out.println(&quot;Date de fin (format YYYY-MM-DD):&quot;);</span>
+<span class="nc" id="L149">            dateFin = scanner.nextLine();</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">            if (estFormatDateValide(dateFin)) {</span>
+<span class="nc" id="L151">                dateFinValide = true;</span>
+            } else {
+<span class="nc" id="L153">                System.out.println(&quot;La date de fin entrée n'est pas du format YYYY-MM-DD&quot;);</span>
+            }
+        }
+
+<span class="nc" id="L157">        List&lt;String&gt; userIds = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L158" title="All 2 branches missed.">        for (String quartierAffecte : quartiersAffectes) {</span>
+<span class="nc" id="L159">            List&lt;String&gt; boroughIdsUsers =</span>
+<span class="nc" id="L160">                findUsersByBoroughId(quartierAffecte);</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">            if (!boroughIdsUsers.isEmpty()) {</span>
+<span class="nc" id="L162">                userIds.addAll(boroughIdsUsers);</span>
+            }
+<span class="nc" id="L164">        }</span>
+
+        // Liste pour les noms des utilisateurs
+<span class="nc" id="L167">        List&lt;String&gt; nomUsers = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">        for (String userId : userIds) {</span>
+<span class="nc" id="L169">            List&lt;String&gt; infosUsers = findUsersNameByUserId(userId);</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">            if (!infosUsers.isEmpty()) {</span>
+<span class="nc" id="L171">                nomUsers.addAll(infosUsers);</span>
+            }
+<span class="nc" id="L173">        }</span>
+
+<span class="nc bnc" id="L175" title="All 2 branches missed.">        if (!nomUsers.isEmpty()) {</span>
+<span class="nc" id="L176">            System.out.println(&quot;\nVoici tous les conflits d'horaires &quot; + &quot;avec les résidents des quartiers affectés par votre &quot; + &quot;projet:&quot;);</span>
+
+<span class="nc" id="L178">            int userIndex = 0;</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">            for (String userId : userIds) {</span>
+<span class="nc" id="L180">                List&lt;Document&gt; preferences = recupererPreferencesHoraires(userId);</span>
+
+                // Afficher l'utilisateur et ses préférences
+<span class="nc" id="L183">                System.out.println(&quot;\nUtilisateur : &quot; + nomUsers.get(userIndex) + &quot; :&quot;);</span>
+
+<span class="nc bnc" id="L185" title="All 2 branches missed.">                if (preferences.isEmpty()) {</span>
+<span class="nc" id="L186">                    System.out.println(&quot;  Aucune préférence horaire disponible.&quot;);</span>
+                } else {
+<span class="nc" id="L188">                    System.out.println(&quot;  Préférences horaires :&quot;);</span>
+<span class="nc bnc" id="L189" title="All 2 branches missed.">                    for (Document preference : preferences) {</span>
+<span class="nc" id="L190">                        String jour = preference.getString(&quot;jour&quot;);</span>
+<span class="nc" id="L191">                        String heureDebut = preference.getString(&quot;heureDebut&quot;);</span>
+<span class="nc" id="L192">                        String heureFin = preference.getString(&quot;heureFin&quot;);</span>
+
+                        // Affichage formaté
+<span class="nc" id="L195">                        System.out.printf(&quot;    - Jour : %s, Heure de début : %s, Heure de fin : %s%n&quot;, jour, heureDebut, heureFin);</span>
+<span class="nc" id="L196">                    }</span>
+                }
+<span class="nc" id="L198">                userIndex++;</span>
+<span class="nc" id="L199">            }</span>
+        }
+
+<span class="nc" id="L202">        boolean entreValide = false;</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">        while (!entreValide) {</span>
+<span class="nc bnc" id="L204" title="All 2 branches missed.">            if (!nomUsers.isEmpty()) {</span>
+<span class="nc" id="L205">                System.out.println(&quot;\n[1] Ne pas envoyer le projet et&quot; + &quot; revenir au menu des projets&quot;);</span>
+<span class="nc" id="L206">                System.out.println(&quot;[2] Soumettre ce projet malgré &quot; + &quot;les conflits horaires&quot;);</span>
+            } else {
+<span class="nc" id="L208">                System.out.println(&quot;\n[1] Annuler la soumission &quot; +</span>
+                    &quot;du projet&quot;);
+<span class="nc" id="L210">                System.out.println(&quot;[2] Confirmer la soumission &quot; +</span>
+                    &quot;du projet&quot;);
+            }
+<span class="nc" id="L213">            Scanner scanner2 = new Scanner(System.in);</span>
+<span class="nc" id="L214">            String choix2 = scanner2.nextLine();</span>
+<span class="nc bnc" id="L215" title="All 2 branches missed.">            if (Objects.equals(choix2, &quot;1&quot;)) {</span>
+<span class="nc" id="L216">                entreValide = true;</span>
+<span class="nc bnc" id="L217" title="All 2 branches missed.">            } else if (Objects.equals(choix2, &quot;2&quot;)) {</span>
+<span class="nc" id="L218">                entreValide = true;</span>
+                // Appel de la méthode pour soumettre le projet avec les données entrées
+<span class="nc" id="L220">                System.out.println(soumettreProjet(user.getUserId(), titre, description, typeTravaux, dateDebut, dateFin, quartiersAffectes, ruesAffectees, &quot;prévu&quot;));</span>
+<span class="nc bnc" id="L221" title="All 2 branches missed.">                if (!userIds.isEmpty()) {</span>
+<span class="nc" id="L222">                    String message = &quot;Un nouveau projet à été &quot; +</span>
+                        &quot;créé dans votre quartier: \n&quot; +
+                        &quot;------------------------------------\n&quot; +
+                        &quot;Titre : '&quot; + titre + &quot;'\n&quot; +
+                        &quot;Description : '&quot; + description + &quot;'\n&quot; +
+                        &quot;Date de Debut : '&quot; + dateDebut + &quot;'\n&quot; +
+                        &quot;Date de Fin : '&quot; + dateFin + &quot;'\n&quot; +
+                        &quot;Type de Travaux : '&quot; + typeTravaux + &quot;'\n&quot; +
+                        &quot;Quartiers Affectés : &quot; + quartiersAffectes + &quot;\n&quot; +
+                        &quot;Rues Affectées : &quot; + ruesAffectees + &quot;\n&quot; +
+                        &quot;Statut : 'prévu'&quot;;
+<span class="nc" id="L233">                    String jsonSafeMessage = message.replace(&quot;\n&quot;, &quot;\\n&quot;);</span>
+<span class="nc bnc" id="L234" title="All 2 branches missed.">                    for (String userId : userIds) {</span>
+<span class="nc" id="L235">                        envoyerNotification(jsonSafeMessage, userId);</span>
+<span class="nc" id="L236">                    }</span>
+                }
+            }
+<span class="nc" id="L239">        }</span>
+<span class="nc" id="L240">    }</span>
+
+    // Méthode de menu pour l'utilisateur
+    public static void projetMenu(User user) {
+
+        while (true) {
+<span class="nc" id="L246">            System.out.println(&quot;\n------ Menu Projets ------&quot;);</span>
+<span class="nc" id="L247">            System.out.println(&quot;[1] Retour au menu principal&quot;);</span>
+<span class="nc" id="L248">            System.out.println(&quot;[2] Consulter ses projets&quot;);</span>
+<span class="nc" id="L249">            System.out.println(&quot;[3] Soumettre un projet&quot;);</span>
+<span class="nc" id="L250">            System.out.println(&quot;---------------------------&quot;);</span>
+<span class="nc" id="L251">            String responseMenu = scanner.nextLine();</span>
+<span class="nc bnc" id="L252" title="All 4 branches missed.">            switch (responseMenu) {</span>
+                case &quot;1&quot; -&gt; {
+<span class="nc" id="L254">                    return;</span>
+                }
+                case &quot;2&quot; -&gt; {
+<span class="nc" id="L257">                    consulterProjets(user);</span>
+<span class="nc" id="L258">                }</span>
+                case &quot;3&quot; -&gt; {
+<span class="nc" id="L260">                    soumettreProjetForm(user);</span>
+                }
+            }
+<span class="nc" id="L263">        }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

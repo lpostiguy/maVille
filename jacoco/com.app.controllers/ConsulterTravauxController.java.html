@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConsulterTravauxController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.controllers</a> &gt; <span class="el_source">ConsulterTravauxController.java</span></div><h1>ConsulterTravauxController.java</h1><pre class="source lang-java linenums">package com.app.controllers;
+
+import com.app.models.Travail;
+import com.app.utils.ReponseApi;
+import com.google.gson.Gson;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+/**
+ * Classe qui gère la consultation des travaux en cours via l'API de la ville de
+ * Montréal. Cette classe permet de récupérer, de filtrer et d'afficher les
+ * travaux en fonction des critères fournis par l'utilisateur.
+ */
+<span class="nc" id="L24">public class ConsulterTravauxController {</span>
+
+    private static void displayTravail(Travail travail, boolean verifierActif) {
+<span class="nc bnc" id="L27" title="All 4 branches missed.">        if (!verifierActif | travailEstActif(travail)) {</span>
+<span class="nc" id="L28">            System.out.println(&quot;Titre : &quot; + travail.getOccupancy_name());</span>
+<span class="nc" id="L29">            System.out.println(&quot;Type de travaux : &quot; + travail.getReason_category());</span>
+<span class="nc" id="L30">            System.out.println(&quot;Quartier  : &quot; + travail.getBoroughid());</span>
+<span class="nc" id="L31">            System.out.println(&quot;Date de début : &quot; + travail.getDuration_start_date());</span>
+<span class="nc" id="L32">            System.out.println(&quot;Date de fin : &quot; + travail.getDuration_end_date());</span>
+<span class="nc" id="L33">            System.out.println(&quot;----------------------------&quot;);</span>
+        }
+<span class="nc" id="L35">    }</span>
+
+    /**
+     * Consulte les travaux en cours en fonction des critères de filtrage
+     * spécifiés.
+     *
+     * @param filterPar        Le critère par lequel les travaux doivent être
+     *                        regroupés (par exemple, &quot;reason_category&quot; ou
+     *                        &quot;boroughid&quot;).
+     * @param recherche        Le terme de recherche à utiliser pour filtrer les
+     *                        travaux.
+     * @param effectuerRecherche Si true, effectue une recherche sur les travaux
+     *                          en fonction de &quot;filterPar&quot; et &quot;recherche&quot;.
+     */
+    public static void consulterTravauxEnCours(String filterPar,
+                                               String recherche,
+                                               boolean effectuerRecherche) {
+        try {
+<span class="nc" id="L53">            URL url = new URL(&quot;https://donnees.montreal&quot; + &quot;.ca/api/3/action&quot; +</span>
+                &quot;/datastore_search?resource_id=cc41b532-f12d&quot; + &quot;-40fb-9f55&quot; +
+                &quot;-eb58c9a2b12b&quot;);
+<span class="nc" id="L56">            HttpURLConnection conn = (HttpURLConnection) url.openConnection();</span>
+<span class="nc" id="L57">            conn.setRequestMethod(&quot;GET&quot;);</span>
+
+<span class="nc bnc" id="L59" title="All 2 branches missed.">            if (conn.getResponseCode() == 200) {</span>
+<span class="nc" id="L60">                Gson gson = new Gson();</span>
+<span class="nc" id="L61">                try (InputStreamReader reader =</span>
+<span class="nc" id="L62">                         new InputStreamReader(conn.getInputStream())) {</span>
+<span class="nc" id="L63">                    ReponseApi reponse = gson.fromJson(reader,</span>
+                        ReponseApi.class);
+
+<span class="nc bnc" id="L66" title="All 6 branches missed.">                    if (reponse != null &amp;&amp; reponse.isSuccess() &amp;&amp; reponse.getResult() != null) {</span>
+<span class="nc" id="L67">                        ReponseApi.ResultatTravaux resultatTravaux =</span>
+<span class="nc" id="L68">                            gson.fromJson(gson.toJson(reponse.getResult()),</span>
+                                ReponseApi.ResultatTravaux.class);
+
+<span class="nc" id="L71">                        List&lt;Travail&gt; travaux =</span>
+<span class="nc" id="L72">                            resultatTravaux.getTravauxRecords();</span>
+
+<span class="nc bnc" id="L74" title="All 2 branches missed.">                        if (travaux != null) {</span>
+<span class="nc bnc" id="L75" title="All 6 branches missed.">                            if (effectuerRecherche &amp;&amp; recherche != null &amp;&amp; !recherche.isEmpty()) {</span>
+<span class="nc" id="L76">                                System.out.println(&quot;Recherche en cours...&quot;);</span>
+<span class="nc" id="L77">                                List&lt;String&gt; motsRecherche =</span>
+<span class="nc" id="L78">                                    Arrays.stream(recherche.split(&quot;\\s+&quot;)).toList();</span>
+<span class="nc" id="L79">                                System.out.println(&quot;Résultat de &quot; + &quot;votre &quot; + &quot;recherche pour &quot; + recherche + &quot;:&quot;);</span>
+<span class="nc bnc" id="L80" title="All 4 branches missed.">                                switch (filterPar.toLowerCase()) {</span>
+                                    case &quot;occupancy_name&quot;:
+<span class="nc" id="L82">                                        travaux =</span>
+<span class="nc bnc" id="L83" title="All 4 branches missed.">                                            travaux.stream().filter(t -&gt; t.getOccupancy_name() != null &amp;&amp; motsRecherche.stream().anyMatch(word -&gt; t.getOccupancy_name().toLowerCase().contains(word.toLowerCase()))).collect(Collectors.toList());</span>
+<span class="nc" id="L84">                                        break;</span>
+
+                                    case &quot;reason_category&quot;:
+<span class="nc" id="L87">                                        travaux =</span>
+<span class="nc bnc" id="L88" title="All 4 branches missed.">                                            travaux.stream().filter(t -&gt; t.getReason_category() != null &amp;&amp; motsRecherche.stream().anyMatch(word -&gt; t.getReason_category().toLowerCase().contains(word.toLowerCase()))).collect(Collectors.toList());</span>
+<span class="nc" id="L89">                                        break;</span>
+
+                                    case &quot;boroughid&quot;:
+<span class="nc" id="L92">                                        travaux =</span>
+<span class="nc bnc" id="L93" title="All 4 branches missed.">                                            travaux.stream().filter(t -&gt; t.getBoroughid() != null &amp;&amp; motsRecherche.stream().anyMatch(word -&gt; t.getBoroughid().toLowerCase().contains(word.toLowerCase()))).collect(Collectors.toList());</span>
+<span class="nc" id="L94">                                        break;</span>
+
+                                    default:
+<span class="nc" id="L97">                                        System.out.println(&quot;Type de &quot; +</span>
+                                            &quot;recherche&quot; + &quot; inconnu : &quot; + filterPar);
+<span class="nc" id="L99">                                        return;</span>
+                                }
+
+<span class="nc" id="L102">                                travaux.forEach(travail -&gt; displayTravail(travail, true));</span>
+<span class="nc bnc" id="L103" title="All 4 branches missed.">                            } else if (!effectuerRecherche &amp;&amp; filterPar != null) {</span>
+<span class="nc" id="L104">                                Map&lt;String, List&lt;Travail&gt;&gt; groupedTravaux =</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">                                    travaux.stream().collect(Collectors.groupingBy(filterPar.equalsIgnoreCase(&quot;reason_category&quot;) ? Travail::getReason_category : Travail::getBoroughid));</span>
+
+<span class="nc" id="L107">                                groupedTravaux.forEach((key, group) -&gt; {</span>
+<span class="nc" id="L108">                                    System.out.println(&quot;\n&quot; + filterPar + &quot;: &quot;</span>
+                                        + key);
+<span class="nc" id="L110">                                    group.forEach(travail -&gt; displayTravail(travail, true));</span>
+<span class="nc" id="L111">                                });</span>
+<span class="nc" id="L112">                            }</span>
+                            // Par défaut : Tout montrer
+                            else {
+<span class="nc" id="L115">                                travaux.forEach(travail -&gt; displayTravail(travail, true));</span>
+                            }
+                        } else {
+<span class="nc" id="L118">                            System.out.println(&quot;Aucune donnée trouvée dans &quot; +</span>
+                                &quot;la&quot; + &quot; liste des travaux.&quot;);
+                        }
+<span class="nc" id="L121">                    } else {</span>
+<span class="nc" id="L122">                        System.out.println(&quot;Aucune donnée trouvée ou erreur &quot; + &quot;dans la réponse de l'API.&quot;);</span>
+                    }
+<span class="nc" id="L124">                }</span>
+<span class="nc" id="L125">            } else {</span>
+<span class="nc" id="L126">                System.out.println(&quot;Erreur HTTP : &quot; + conn.getResponseCode());</span>
+            }
+<span class="nc" id="L128">        } catch (Exception e) {</span>
+<span class="nc" id="L129">            System.err.println(&quot;Une erreur s'est produite lors de la &quot; +</span>
+<span class="nc" id="L130">                &quot;consultation des travaux : &quot; + e.getMessage());</span>
+<span class="nc" id="L131">        }</span>
+<span class="nc" id="L132">    }</span>
+
+
+    // Méthode qui vérifie que les travaux sont en cours ou planifiés pour
+    // les trois prochains mois seulement.
+    private static boolean travailEstActif(Travail travail) {
+<span class="nc" id="L138">        LocalDate dateActuelle = LocalDate.now();</span>
+<span class="nc" id="L139">        LocalDate dansTroisMois = dateActuelle.plusMonths(3);</span>
+
+        // Utilisation du format ISO 8601 avec fuseau horaire
+<span class="nc" id="L142">        DateTimeFormatter formatteur = DateTimeFormatter.ISO_DATE_TIME;</span>
+
+        try {
+            // Conversion des chaînes de caractères en LocalDateTime puis en
+            // LocalDate
+<span class="nc" id="L147">            LocalDate dateDebut =</span>
+<span class="nc" id="L148">                LocalDateTime.parse(travail.getDuration_start_date(),</span>
+<span class="nc" id="L149">                    formatteur).atZone(ZoneId.of(&quot;UTC&quot;)).toLocalDate();</span>
+<span class="nc" id="L150">            LocalDate dateFin =</span>
+<span class="nc" id="L151">                LocalDateTime.parse(travail.getDuration_end_date(),</span>
+<span class="nc" id="L152">                    formatteur).atZone(ZoneId.of(&quot;UTC&quot;)).toLocalDate();</span>
+
+            // Vérification de la date de début et de la date de fin du
+            // travail, pour savoir s'il est actif
+<span class="nc bnc" id="L156" title="All 4 branches missed.">            if (dateDebut.isBefore(dansTroisMois) &amp;&amp; dateFin.isAfter(dateActuelle)) {</span>
+<span class="nc" id="L157">                return true;</span>
+            }
+<span class="nc" id="L159">        } catch (Exception e) {</span>
+<span class="nc" id="L160">            System.err.println(&quot;Erreur lors de l'analyse des dates : &quot; + e.getMessage());</span>
+<span class="nc" id="L161">        }</span>
+
+<span class="nc" id="L163">        return false;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

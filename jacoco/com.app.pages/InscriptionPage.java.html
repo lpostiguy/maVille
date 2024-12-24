@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InscriptionPage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.pages</a> &gt; <span class="el_source">InscriptionPage.java</span></div><h1>InscriptionPage.java</h1><pre class="source lang-java linenums">package com.app.pages;
+
+
+import java.util.Objects;
+import java.util.Scanner;
+
+
+import com.app.utils.PasswordEncryption;
+import com.app.models.User.Intervenant;
+import com.app.models.User.Resident;
+import com.app.models.User.User;
+import com.app.utils.PostalCodeMapping;
+
+import static com.app.controllers.UserController.addNewUser;
+import static com.app.controllers.UserController.findUserByEmail;
+import static com.app.controllers.UserController.findUserByCityId;
+import static com.app.utils.InscriptionUtils.*;
+import static com.app.utils.RegexChecker.*;
+
+/**
+ * Cette classe est responsable de la gestion de l'inscription des utilisateurs.
+ * Elle permet l'inscription en tant que Résident ou Intervenant,
+ * avec validation des données utilisateur et enregistrement dans le système.
+ */
+
+<span class="nc" id="L26">public class InscriptionPage {</span>
+
+<span class="nc" id="L28">    static Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L29">    static PasswordEncryption passwordEncryption = new PasswordEncryption();</span>
+<span class="nc" id="L30">    static User user = new User();</span>
+    static String role;
+
+    // Attributs communs à tous les utilisateurs
+    static String firstName;
+    static String lastName;
+    static String email;
+    static String password;
+    static int encryptedPassword;
+
+    // Attributs uniques au résident
+    static String phoneNumber;
+    static String dateOfBirth;
+    static String homeAddress;
+    static String boroughId;
+
+    // Attributs uniques à l'intervenant
+    static String entityType;
+    static String cityId;
+
+    /**
+     * Méthode principale pour afficher la page d'inscription.
+     * Propose le choix de rôle (Résident ou Intervenant)
+     * et gère le processus d'inscription complet.
+     *
+     * @return L'utilisateur inscrit (instance de &quot;Resident&quot; ou &quot;Intervenant&quot;),
+     * ou `null` si l'utilisateur revient au menu.
+     */
+    public static User inscriptionPage() {
+<span class="nc" id="L59">        System.out.println(&quot;\n----------- Inscription -----------&quot;);</span>
+<span class="nc" id="L60">        System.out.println(&quot;[1] Retour&quot;);</span>
+<span class="nc" id="L61">        System.out.println(&quot;[2] S'inscrire comme résident&quot;);</span>
+<span class="nc" id="L62">        System.out.println(&quot;[3] S'inscrire comme intervenant&quot;);</span>
+<span class="nc" id="L63">        System.out.println(&quot;-----------------------------------&quot;);</span>
+<span class="nc" id="L64">        String choice = scanner.nextLine();</span>
+<span class="nc bnc" id="L65" title="All 4 branches missed.">        switch (choice) {</span>
+            case &quot;1&quot;:
+<span class="nc" id="L67">                return null;</span>
+            case &quot;2&quot;:
+<span class="nc" id="L69">                role = &quot;Résident&quot;;</span>
+<span class="nc" id="L70">                break;</span>
+            case &quot;3&quot;:
+<span class="nc" id="L72">                role = &quot;Intervenant&quot;;</span>
+<span class="nc" id="L73">                break;</span>
+            case null, default:
+<span class="nc" id="L75">                return inscriptionPage();</span>
+            }
+<span class="nc" id="L77">        System.out.println(&quot;Suivre les instructions suivantes pour &quot; + &quot;s&quot; +</span>
+            &quot;'inscrire.&quot;);
+<span class="nc" id="L79">        boolean validFirstName = false;</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        while (!validFirstName) {</span>
+<span class="nc" id="L81">            System.out.println(&quot;Entrez votre prénom:&quot;);</span>
+<span class="nc" id="L82">            firstName = scanner.nextLine();</span>
+            // Verify that the firstName is not null
+<span class="nc bnc" id="L84" title="All 2 branches missed.">            if (!Objects.equals(firstName, &quot;&quot;)) {</span>
+<span class="nc" id="L85">                validFirstName = true;</span>
+            }
+        }
+<span class="nc" id="L88">        boolean validLastName = false;</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        while (!validLastName) {</span>
+<span class="nc" id="L90">            System.out.println(&quot;Entrez votre nom de famille:&quot;);</span>
+<span class="nc" id="L91">            lastName = scanner.nextLine();</span>
+            // Verify that the lastName is not null
+<span class="nc bnc" id="L93" title="All 2 branches missed.">            if (!Objects.equals(lastName, &quot;&quot;)) {</span>
+<span class="nc" id="L94">                validLastName = true;</span>
+            }
+        }
+
+<span class="nc" id="L98">        boolean validEmail = false;</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        while (!validEmail) {</span>
+<span class="nc" id="L100">            System.out.println(&quot;Entrez votre adresse courriel:&quot;);</span>
+<span class="nc" id="L101">            email = scanner.nextLine();</span>
+            // Verify that the email is valid and not used
+<span class="nc bnc" id="L103" title="All 2 branches missed.">            if (findUserByEmail(email) != null) {</span>
+<span class="nc" id="L104">                System.out.println(&quot;Cette adresse courriel est déjà associée à un compte.&quot; +</span>
+                    &quot; Veuillez entrer une autre adresse courriel.&quot;);
+            }
+<span class="nc bnc" id="L107" title="All 2 branches missed.">            else if (email.contains(&quot;@&quot;)) {</span>
+<span class="nc" id="L108">                validEmail = true;</span>
+            }
+        }
+
+        // Specific required fields for Résidents
+<span class="nc bnc" id="L113" title="All 2 branches missed.">        if (Objects.equals(role, &quot;Résident&quot;)) {</span>
+
+<span class="nc" id="L115">            boolean validDateOfBirth = false;</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">            while (!validDateOfBirth) {</span>
+<span class="nc" id="L117">                System.out.println(&quot;Entrez votre date de naissance afin de &quot; + &quot;valider votre age. (format YYYY-MM-DD):&quot;);</span>
+<span class="nc" id="L118">                dateOfBirth = scanner.nextLine();</span>
+                // Verify that the dateOfBirth is valid format
+<span class="nc bnc" id="L120" title="All 2 branches missed.">                if (estFormatDateValide(dateOfBirth)) {</span>
+<span class="nc" id="L121">                    validDateOfBirth = true;</span>
+                } else {
+<span class="nc" id="L123">                    System.out.println(&quot;La date de naissance entrée n'est &quot; + &quot;pas du format YYYY-MM-DD&quot;);</span>
+                }
+            }
+
+<span class="nc" id="L127">            boolean validPhoneNumber = false;</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">            while (!validPhoneNumber) {</span>
+<span class="nc" id="L129">                System.out.println(&quot;Entrez votre numéro de téléphone:&quot;);</span>
+<span class="nc" id="L130">                System.out.println(&quot;(N'entrez rien pour sauter cette étape.)&quot;);</span>
+<span class="nc" id="L131">                phoneNumber = scanner.nextLine();</span>
+                // Verify that the phoneNumber is valid format
+<span class="nc bnc" id="L133" title="All 4 branches missed.">                if (estFormatNumeroTelephoneValide(phoneNumber) || phoneNumber.isEmpty()) {</span>
+<span class="nc" id="L134">                    validPhoneNumber = true;</span>
+                } else {
+<span class="nc" id="L136">                    System.out.println(&quot;Le numéro de téléphone entrée n'est &quot; + &quot;pas du format &quot; + &quot;0000-000-000&quot;);</span>
+                }
+            }
+
+<span class="nc" id="L140">            boolean validAddress = false;</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">            while (!validAddress) {</span>
+<span class="nc" id="L142">                System.out.println(&quot;Entrez votre adresse de résidence: &quot; +</span>
+                    &quot;Numéro, rue, code postal&quot;);
+<span class="nc" id="L144">                homeAddress = scanner.nextLine();</span>
+<span class="nc" id="L145">                PostalCodeMapping postalCodeMapping = new PostalCodeMapping(</span>
+                    &quot;codesPostaux.csv&quot;);
+<span class="nc" id="L147">                String borough =</span>
+<span class="nc" id="L148">                    postalCodeMapping.getDistrictByPostalCode(homeAddress);</span>
+<span class="nc bnc" id="L149" title="All 2 branches missed.">                if (borough == null)</span>
+<span class="nc" id="L150">                    System.out.println(&quot;Veuillez respecter le format.&quot;);</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">                else if (borough.equals(&quot;Quartier inconnu&quot;)) {</span>
+<span class="nc" id="L152">                    System.out.println(&quot;Quartier inconnu. Veuillez réessayer.&quot;);</span>
+                } else {
+<span class="nc" id="L154">                    validAddress = true;</span>
+<span class="nc" id="L155">                    boroughId = borough;</span>
+                }
+
+<span class="nc" id="L158">            }</span>
+<span class="nc" id="L159">        }</span>
+
+        // Specific required fields for Intervenants
+        else {
+<span class="nc" id="L163">            boolean validEntityType = false;</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">            while (!validEntityType) {</span>
+<span class="nc" id="L165">                System.out.println(&quot;Entrez votre type d'entité (&quot; +</span>
+                    &quot;Entreprise&quot; + &quot; &quot; + &quot;publique, &quot; + &quot;Entrepreneur &quot; + &quot;priv&quot;
+                    + &quot;é, Particulier):&quot;);
+<span class="nc" id="L168">                entityType = scanner.nextLine();</span>
+                // Verify that the entityType is not null
+<span class="nc bnc" id="L170" title="All 2 branches missed.">                if (!Objects.equals(entityType, &quot;&quot;)) {</span>
+<span class="nc" id="L171">                    validEntityType = true;</span>
+                }
+            }
+
+<span class="nc" id="L175">            boolean validCityId = false;</span>
+<span class="nc bnc" id="L176" title="All 2 branches missed.">            while (!validCityId) {</span>
+<span class="nc" id="L177">                System.out.println(&quot;Entrez votre identifiant de la ville (8 &quot; +</span>
+                    &quot;chiffres):&quot;);
+<span class="nc" id="L179">                cityId = scanner.nextLine();</span>
+                // Verify that the cityId is valid
+<span class="nc bnc" id="L181" title="All 2 branches missed.">                if (cityId.length() != 8) {</span>
+<span class="nc" id="L182">                    System.out.println(&quot;Cet identifiant de la ville n'est pas valide. Veuillez réessayer.&quot;);</span>
+                }
+<span class="nc bnc" id="L184" title="All 2 branches missed.">                else if (findUserByCityId(cityId) == null) {</span>
+<span class="nc" id="L185">                    validCityId = true;</span>
+                }
+                else {
+<span class="nc" id="L188">                    System.out.println(&quot;Cet identifiant est déjà associé à un compte. Veuillez réessayer.&quot;);</span>
+                }
+            }
+        }
+
+<span class="nc" id="L193">        boolean validPassword = false;</span>
+<span class="nc bnc" id="L194" title="All 2 branches missed.">        while (!validPassword) {</span>
+<span class="nc" id="L195">            System.out.println(&quot;Créer votre mot de passe:&quot;);</span>
+<span class="nc" id="L196">            password = scanner.nextLine();</span>
+<span class="nc bnc" id="L197" title="All 2 branches missed.">            if (Objects.equals(isValidPassword(password), &quot;&quot;)) {</span>
+<span class="nc" id="L198">                validPassword = true;</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">            } else if (Objects.equals(isValidPassword(password),</span>
+                &quot;Minimum &quot; + &quot;of&quot; + &quot; 8 character required&quot;)) {
+<span class="nc" id="L201">                System.out.println(&quot;Minimum de 8 caractères requis&quot;);</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">            } else if (Objects.equals(isValidPassword(password),</span>
+                &quot;Minimum &quot; + &quot;of&quot; + &quot; 1 capital &quot; + &quot;letter and 1 &quot; + &quot;number&quot;
+                    + &quot; &quot; + &quot;required&quot;)) {
+<span class="nc" id="L205">                System.out.println(&quot;Minimum de 1 lettre majuscule et 1 &quot; +</span>
+                    &quot;chiffre requis&quot;);
+            }
+        }
+<span class="nc" id="L209">        boolean validPasswordConfirmation = false;</span>
+<span class="nc bnc" id="L210" title="All 2 branches missed.">        while (!validPasswordConfirmation) {</span>
+<span class="nc" id="L211">            System.out.println(&quot;Confirmez votre mot de passe:&quot;);</span>
+<span class="nc bnc" id="L212" title="All 2 branches missed.">            if (isSamePassword(password, scanner.nextLine())) {</span>
+<span class="nc" id="L213">                validPasswordConfirmation = true;</span>
+<span class="nc" id="L214">                encryptedPassword = passwordEncryption.encrypt(password);</span>
+            } else {
+<span class="nc" id="L216">                System.out.println(&quot;Le mot de passe ne correspond &quot; + &quot;pas &quot; + &quot;à&quot; + &quot; &quot; + &quot;celui rentré au par avant.&quot;);</span>
+            }
+        }
+
+<span class="nc bnc" id="L220" title="All 2 branches missed.">        if (Objects.equals(role, &quot;Résident&quot;)) {</span>
+<span class="nc bnc" id="L221" title="All 2 branches missed.">            if (isAgeAbove16(dateOfBirth)) {</span>
+<span class="nc" id="L222">                Resident resident = new Resident(firstName, lastName, email,</span>
+                    phoneNumber, dateOfBirth, homeAddress, encryptedPassword,
+                    boroughId);
+<span class="nc" id="L225">                addNewUser(resident.getUserId(), firstName, lastName, email,</span>
+                    phoneNumber, dateOfBirth, homeAddress, &quot;&quot;, &quot;&quot;,
+<span class="nc" id="L227">                    String.valueOf(encryptedPassword), resident.getUserRole()</span>
+                    , boroughId);
+<span class="nc" id="L229">                System.out.println(&quot;Inscription réussite !&quot;);</span>
+<span class="nc" id="L230">                user = resident;</span>
+<span class="nc" id="L231">                return resident;</span>
+            } else {
+<span class="nc" id="L233">                inscriptionPage();</span>
+            }
+        } else {
+<span class="nc" id="L236">            Intervenant intervenant = new Intervenant(firstName, lastName,</span>
+                email, entityType, cityId, encryptedPassword);
+<span class="nc" id="L238">            addNewUser(intervenant.getUserId(), firstName, lastName, email,</span>
+                phoneNumber, dateOfBirth, homeAddress, entityType, cityId,
+<span class="nc" id="L240">                String.valueOf(encryptedPassword), intervenant.getUserRole(),</span>
+                boroughId);
+<span class="nc" id="L242">            System.out.println(&quot;Inscription réussite !&quot;);</span>
+<span class="nc" id="L243">            user = intervenant;</span>
+<span class="nc" id="L244">            return intervenant;</span>
+        }
+<span class="nc" id="L246">        return user;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

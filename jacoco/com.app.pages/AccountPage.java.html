@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AccountPage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype</a> &gt; <a href="index.source.html" class="el_package">com.app.pages</a> &gt; <span class="el_source">AccountPage.java</span></div><h1>AccountPage.java</h1><pre class="source lang-java linenums">package com.app.pages;
+
+import com.app.controllers.PreferenceHoraireController;
+import com.app.models.User.User;
+import com.app.models.User.Resident;
+import com.app.models.User.Intervenant;
+import com.app.utils.RegexChecker;
+import org.bson.Document;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
+
+/**
+ * Cette classe gère les fonctionnalités liées à la gestion des
+ * informations de compte utilisateur, y compris la visualisation des données,
+ * les préférences horaires pour les résidents, et les informations spécifiques
+ * aux intervenants.
+ */
+
+<span class="nc" id="L21">public class AccountPage {</span>
+
+<span class="nc" id="L23">    static Scanner scanner = new Scanner(System.in);</span>
+
+    /**
+     * Affiche le menu de la page de compte et permet à l'utilisateur de
+     * naviguer entre différentes options, telles que la visualisation des
+     * données utilisateur et la gestion des préférences horaires (pour les
+     * résidents)
+     *
+     * @param user l'utilisateur connecté
+     * @return {@code false} si l'utilisateur choisit de quitter la page de
+     * compte, sinon reste dans le menu.
+     */
+
+    public static boolean accountPageMenu(User user) {
+<span class="nc" id="L37">        System.out.println(&quot;\nEntrez un numéro pour être redirigé vers ces pages:&quot;);</span>
+<span class="nc" id="L38">        System.out.println(&quot;-------- Menu Info Compte --------&quot;);</span>
+<span class="nc" id="L39">        System.out.println(&quot;[1] Retour au menu principal&quot;);</span>
+<span class="nc" id="L40">        System.out.println(&quot;[2] Voir toutes mes données&quot;);</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (Objects.equals(user.getUserRole(), &quot;RESIDENT&quot;)) {</span>
+<span class="nc" id="L42">            System.out.println(&quot;[3] Voir mes préférences horaires&quot;);</span>
+        }
+<span class="nc" id="L44">        System.out.println(&quot;-----------------------------------&quot;);</span>
+<span class="nc" id="L45">        String responseMenu = scanner.nextLine();</span>
+<span class="nc bnc" id="L46" title="All 4 branches missed.">        switch (responseMenu) {</span>
+            case &quot;1&quot; -&gt; {
+<span class="nc" id="L48">                return false;</span>
+            }
+            case &quot;2&quot; -&gt; {
+<span class="nc" id="L51">                System.out.println(&quot;Voici toutes les données associées avec votre compte:&quot;);</span>
+<span class="nc" id="L52">                System.out.println(&quot;Prénom: &quot; + user.getFirstName());</span>
+<span class="nc" id="L53">                System.out.println(&quot;Nom: &quot; + user.getLastName());</span>
+<span class="nc" id="L54">                System.out.println(&quot;Adresse courriel: &quot; + user.getEmail());</span>
+                // Information spécifique au rôle RESIDENT
+<span class="nc bnc" id="L56" title="All 2 branches missed.">                if (Objects.equals(user.getUserRole(), &quot;RESIDENT&quot;)) {</span>
+<span class="nc" id="L57">                    residentPrintInfo((Resident) user);</span>
+                }
+                // Information spécifique au rôle INTERVENANT
+                else {
+<span class="nc" id="L61">                    intervenantPrintInfo((Intervenant) user);</span>
+                }
+<span class="nc" id="L63">                System.out.println(&quot;\n[1] Retour&quot;);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">                while (!scanner.nextLine().equals(&quot;1&quot;)) {</span>
+<span class="nc" id="L65">                    System.out.println(&quot;[1] Retour&quot;);</span>
+                }
+<span class="nc" id="L67">                accountPageMenu(user);</span>
+<span class="nc" id="L68">            }</span>
+            case &quot;3&quot; -&gt; {
+<span class="nc bnc" id="L70" title="All 2 branches missed.">                if (user instanceof Resident resident) {</span>
+<span class="nc" id="L71">                    gérerPreferencesHoraires(resident.getUserId());</span>
+                } else {
+<span class="nc" id="L73">                    return accountPageMenu(user);</span>
+                }
+            }
+            default -&gt; {
+<span class="nc" id="L77">                return accountPageMenu(user);</span>
+            }
+        }
+<span class="nc" id="L80">        return false;</span>
+    }
+
+    /**
+     * Gère les préférences horaires d'un résident, y compris leur récupération,
+     * leur ajout ou modification, et leur suppression.
+     *
+     * @param userId l'identifiant du résidnet.
+     */
+
+    private static void gérerPreferencesHoraires(String userId) {
+<span class="nc" id="L91">        Boolean isValidInput = false;</span>
+
+        while (true) {
+<span class="nc" id="L94">            System.out.println(&quot;\n-------- Mes préférences horaires --------&quot;);</span>
+            // Appeler le contrôleur pour récupérer les préférences horaires
+<span class="nc" id="L96">            List&lt;Document&gt; preferencesHoraires = PreferenceHoraireController.recupererPreferencesHoraires(userId);</span>
+
+<span class="nc bnc" id="L98" title="All 2 branches missed.">            if (preferencesHoraires.isEmpty()) {</span>
+<span class="nc" id="L99">                System.out.println(&quot;Aucune préférence horaire trouvée.&quot;);</span>
+            } else {
+<span class="nc" id="L101">                System.out.println(&quot;Voici vos préférences horaires :&quot;);</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">                for (Document preference : preferencesHoraires) {</span>
+<span class="nc" id="L103">                    System.out.println(&quot;- &quot; + preference.getString(&quot;jour&quot;) + &quot; : &quot; +</span>
+<span class="nc" id="L104">                        preference.getString(&quot;heureDebut&quot;) + &quot; - &quot; +</span>
+<span class="nc" id="L105">                        preference.getString(&quot;heureFin&quot;));</span>
+<span class="nc" id="L106">                }</span>
+            }
+
+<span class="nc" id="L109">            System.out.println(&quot;\n[1] Retour au menu principal&quot;);</span>
+<span class="nc" id="L110">            System.out.println(&quot;[2] Ajouter ou modifier une préférence horaire&quot;);</span>
+<span class="nc" id="L111">            System.out.println(&quot;[3] Supprimer une préférence horaire&quot;);</span>
+<span class="nc" id="L112">            String choix = scanner.nextLine();</span>
+
+<span class="nc bnc" id="L114" title="All 4 branches missed.">            switch (choix) {</span>
+                case &quot;1&quot; -&gt; {
+<span class="nc" id="L116">                    return;</span>
+                }
+                case &quot;2&quot; -&gt; {
+<span class="nc" id="L119">                    isValidInput = false;</span>
+<span class="nc" id="L120">                    String jour = &quot;&quot;;</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">                    while (!isValidInput) {</span>
+<span class="nc" id="L122">                        System.out.print(&quot;Entrez le jour (ex: Lundi) : &quot;);</span>
+<span class="nc" id="L123">                        jour = scanner.nextLine().trim();</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">                        if (!RegexChecker.estJourSemaineValide(jour)) {</span>
+<span class="nc" id="L125">                            System.out.println(&quot;Jour invalide. Veuillez entrer un jour valide (ex: Lundi).&quot;);</span>
+                        }
+                        else {
+<span class="nc" id="L128">                            isValidInput = true;</span>
+                        }
+                    }
+
+<span class="nc" id="L132">                    String heureDebut = &quot;&quot;;</span>
+<span class="nc" id="L133">                    isValidInput = false;</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">                    while (!isValidInput) {</span>
+<span class="nc" id="L135">                        System.out.print(&quot;Entrez l'heure de début (format HH:mm) : &quot;);</span>
+<span class="nc" id="L136">                        heureDebut = scanner.nextLine().trim();</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">                        if (!RegexChecker.estFormatHeureValide(heureDebut)) {</span>
+<span class="nc" id="L138">                            System.out.println(&quot;Format de l'heure invalide. Veuillez entrer une heure au format HH:mm.&quot;);</span>
+                        }
+                        else {
+<span class="nc" id="L141">                            isValidInput = true;</span>
+                        }
+                    }
+
+<span class="nc" id="L145">                    String heureFin = &quot;&quot;;</span>
+<span class="nc" id="L146">                    isValidInput = false;</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">                    while (!isValidInput) {</span>
+<span class="nc" id="L148">                        System.out.print(&quot;Entrez l'heure de fin (format HH:mm) : &quot;);</span>
+<span class="nc" id="L149">                        heureFin = scanner.nextLine().trim();</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">                        if (!RegexChecker.estFormatHeureValide(heureFin)) {</span>
+<span class="nc" id="L151">                            System.out.println(&quot;Format de l'heure invalide. Veuillez entrer une heure au format HH:mm.&quot;);</span>
+                        } else {
+<span class="nc" id="L153">                            isValidInput = true;</span>
+                        }
+                    }
+
+<span class="nc" id="L157">                    boolean success = PreferenceHoraireController.ajouterOuModifierPreferenceHoraire(userId, jour, heureDebut, heureFin);</span>
+<span class="nc bnc" id="L158" title="All 2 branches missed.">                    if (success) {</span>
+<span class="nc" id="L159">                        System.out.println(&quot;Préférence horaire ajoutée ou modifiée avec succès.&quot;);</span>
+                    } else {
+<span class="nc" id="L161">                        System.out.println(&quot;Erreur lors de la modification de la préférence horaire.&quot;);</span>
+                    }
+<span class="nc" id="L163">                }</span>
+                case &quot;3&quot; -&gt; {
+<span class="nc" id="L165">                    String jour = &quot;&quot;;</span>
+<span class="nc" id="L166">                    isValidInput = false;</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">                    while (!isValidInput) {</span>
+<span class="nc" id="L168">                        System.out.print(&quot;Entrez le jour à supprimer (ex: Lundi) : &quot;);</span>
+<span class="nc" id="L169">                        jour = scanner.nextLine().trim();</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">                        if (!RegexChecker.estJourSemaineValide(jour)) {</span>
+<span class="nc" id="L171">                            System.out.println(&quot;Jour invalide. Veuillez entrer un jour valide (ex: Lundi).&quot;);</span>
+                        }
+                        else {
+<span class="nc" id="L174">                            isValidInput = true;</span>
+                        }
+                    }
+
+<span class="nc" id="L178">                    boolean success = PreferenceHoraireController.supprimerPreferenceHoraire(userId, jour);</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">                    if (success) {</span>
+<span class="nc" id="L180">                        System.out.println(&quot;Préférence horaire supprimée avec succès.&quot;);</span>
+                    } else {
+<span class="nc" id="L182">                        System.out.println(&quot;Erreur lors de la suppression de la préférence horaire.&quot;);</span>
+                    }
+<span class="nc" id="L184">                }</span>
+                default -&gt; {
+<span class="nc" id="L186">                    System.out.println(&quot;Choix invalide. Veuillez réessayer.&quot;);</span>
+                }
+            }
+<span class="nc" id="L189">        }</span>
+    }
+
+    /**
+     * Affiche les informations spécifiques à un utilisateur de type résident.
+     *
+     * @param resident l'utilisateur résident
+     */
+    public static void residentPrintInfo(Resident resident) {
+<span class="nc" id="L198">        System.out.println(&quot;Adresse de résidence: &quot; + resident.getHomeAddress());</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">        if (!Objects.equals(resident.getPhoneNumber(), &quot;&quot;)) {</span>
+<span class="nc" id="L200">            System.out.println(&quot;Numéro de téléphone: &quot; + resident.getPhoneNumber());</span>
+        }
+<span class="nc" id="L202">        System.out.println(&quot;Date de naissance: &quot; + resident.getDateOfBirth());</span>
+<span class="nc" id="L203">    }</span>
+
+    /**
+     * Affiche les informations spécifiques à un utilisateur de type
+     * intervenant.
+     *
+     * @param intervenant l'utilisateur intervenant
+     */
+    public static void intervenantPrintInfo(Intervenant intervenant) {
+<span class="nc" id="L212">        System.out.println(&quot;Type d'entité: &quot; + intervenant.getEntityType());</span>
+<span class="nc" id="L213">        System.out.println(&quot;Identifiant de la ville: &quot; + intervenant.getCityId());</span>
+<span class="nc" id="L214">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
