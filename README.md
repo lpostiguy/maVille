@@ -93,8 +93,8 @@ mot de passe : QwErTyUiOp12
   email: olivier.cloutier@example.com  
   mot de passe : P@ssW0rd!123  
 
-Exemple de donnée "Résident" dans la base de donnée :
-<img src="images/imagesReadMe/residentEx.png" width="300">
+Exemple de donnée "Résident" dans la base de donnée :  
+<img src="images/imagesReadMe/residentEx.png" width="500">
 
 
 Intervenants:  
@@ -124,53 +124,53 @@ type d'entité : Particulier
   mot de passe : YxZ1WvT2Q3!  
   type d'entité : Entrepreneur privé
 
-Exemple de donnée "Intervenant" dans la base de donnée :
-<img src="images/imagesReadMe/intervenantEx.png" width="300">
+Exemple de donnée "Intervenant" dans la base de donnée :  
+<img src="images/imagesReadMe/intervenantEx.png" width="500">
 
 --------------------------------------------
 Projets:
 
 Projet 1:  
-<img src="images/imagesReadMe/projet1.png" width="300">
+<img src="images/imagesReadMe/projet1.png" width="500">
 
 Projet 2:  
-<img src="images/imagesReadMe/projet2.png" width="300">
+<img src="images/imagesReadMe/projet2.png" width="500">
 
 Projet 3:  
-<img src="images/imagesReadMe/projet3.png" width="300">
+<img src="images/imagesReadMe/projet3.png" width="500">
 
 Projet 4:  
-<img src="images/imagesReadMe/projet4.png" width="300">
+<img src="images/imagesReadMe/projet4.png" width="500">
 
 Projet 5:  
-<img src="images/imagesReadMe/projet5.png" width="300">
+<img src="images/imagesReadMe/projet5.png" width="500">
 
 Projet 6:  
-<img src="images/imagesReadMe/projet6.png" width="300">
+<img src="images/imagesReadMe/projet6.png" width="500">
 
 --------------------------------------------
 Requêtes de travail: 
 
 Requete de travail 1:  
-<img src="images/imagesReadMe/requete1.png" width="300">
+<img src="images/imagesReadMe/requete1.png" width="500">
 
 Requete de travail 2:  
-<img src="images/imagesReadMe/requete2.png" width="300">
+<img src="images/imagesReadMe/requete2.png" width="500">
 
 Requete de travail 3:  
-<img src="images/imagesReadMe/requete3.png" width="300">
+<img src="images/imagesReadMe/requete3.png" width="500">
 
 Requete de travail 4:  
-<img src="images/imagesReadMe/requete4.png" width="300">
+<img src="images/imagesReadMe/requete4.png" width="500">
 
 Requete de travail 5:  
-<img src="images/imagesReadMe/requete5.png" width="300">
+<img src="images/imagesReadMe/requete5.png" width="500">
 
 Requete de travail 6:  
-<img src="images/imagesReadMe/requete6.png" width="300">
+<img src="images/imagesReadMe/requete6.png" width="500">
 
 Requete de travail 7:  
-<img src="images/imagesReadMe/requete7.png" width="300">
+<img src="images/imagesReadMe/requete7.png" width="500">
 
 POUR RUN LES TESTS UNITAIRES:
 Pour exécuter tous les tests unitaires en même temps, vous devez aller dans src/test/java/com/example/AppTest.java 
