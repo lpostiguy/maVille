@@ -4,11 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] Intervenant informé conflit préférences horaires résidents soumission projet">
+    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] README.md ajout des infos résident et intervenant">
+      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/projet1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/projet2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/projet3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/projet4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/projet5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/projet6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/requete1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/requete2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/requete3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/requete4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/requete5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/requete6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/requete7.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterRequetesTravailPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ConsulterRequetesTravailPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/InscriptionPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/InscriptionPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ProjetPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/prototype/src/main/java/com/app/pages/ProjetPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +100,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ostil\Documents\Université\Automne2024\Génie_Logiciel\equipe11_projet\IFT2255-A24-SessionProject-equipe-11\images\imagesReadMe" />
       <recent name="C:\Users\antho\Documents\IFT2255-A24-SessionProject-equipe" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -332,7 +344,31 @@
       <option name="project" value="LOCAL" />
       <updated>1734982271388</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="[PROTOTYPE] Minor bug fix">
+      <option name="closed" value="true" />
+      <created>1734993608630</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1734993608630</updated>
+    </task>
+    <task id="LOCAL-00016" summary="[PROTOTYPE] Correction ProjetPage.java">
+      <option name="closed" value="true" />
+      <created>1734996597863</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1734996597863</updated>
+    </task>
+    <task id="LOCAL-00017" summary="[PROTOTYPE] README.md ajout des infos résident et intervenant">
+      <option name="closed" value="true" />
+      <created>1734996641095</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1734996641095</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -362,6 +398,9 @@
     <MESSAGE value="[PROTOTYPE] Filtrer/Chercher entrave" />
     <MESSAGE value="[PROTOTYPE] Consulter et Soumettre Projets ajoutés" />
     <MESSAGE value="[PROTOTYPE] Intervenant informé conflit préférences horaires résidents soumission projet" />
-    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] Intervenant informé conflit préférences horaires résidents soumission projet" />
+    <MESSAGE value="[PROTOTYPE] Minor bug fix" />
+    <MESSAGE value="[PROTOTYPE] Correction ProjetPage.java" />
+    <MESSAGE value="[PROTOTYPE] README.md ajout des infos résident et intervenant" />
+    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] README.md ajout des infos résident et intervenant" />
   </component>
 </project>

@@ -9,25 +9,44 @@ FONCTIONNALITÉS DE L'APPLICATION PAR RÔLE
 
 Lorsqu'un résident est connecté dans l'applicaition MaVille, il peut:
 - Créer un compte
+  - Vérification regex
+  - Vérification que le compte en cours de création n'utilise pas une adresse courriel déjà associée à un utilisateur existant.
 - Se connecter/déconnecter
-- Voir ses notifications
+- Voir ses notifications non lues
 - Consulter les travaux en cours
 - Consulter les travaux à venir (3 prochains mois)
-- Chercher ou filtrer les travaux par quartier
+- Chercher et filtrer les travaux par quartier
 - Consulter les entraves engendrées par un travail
-- Chercher ou filtrer les entraves par rue
+- Chercher et filtrer les entraves par rue
 - Soumettre une requête de travail
 - Faire le suivi d'une requête de travail
+  - Archiver requête de travail
+  - Désarchiver requête de travail
+  - Effacer requête de travail
+  - Consulter les candidatures
+    - Accepter la candidature
+    - Refuser la candidature
+- Consulter son profil
+  - Voir toutes les données utilisateur
+  - Voir ses préférences horaires
+    - Ajouter ou modifier une préférence horaire
+    - Supprimer une préférence horaire
     
 Lorsqu'un intervenant est connecté dans l'applicaition MaVille, il peut:
 - Créer un compte
+  - Vérification regex 
+  - Vérification que le compte en cours de création n'utilise pas une adresse courriel ou un même cityId déjà associée à un utilisateur existant.
 - Se connecter/déconnecter
-- Consulter les requêtes de travai
-- Soumettre/Soustraire sa candidature
+- Consulter les requêtes de travail
+  - Soumettre sa candidature 
 - Faire le suivi de sa candidature
+  - Soustraire sa candidature 
 - Soumettre un projet
+  - Envoi une notification aux résidents du quartier. 
 - Modifier le statut d'un projet
-
+  - Envoi une notification aux résidents du quartier.
+- Consulter son profil
+  - Voir toutes les données utilisateur
 --------------------------------------------
 
 ORGANISATION DU RÉPERTOIRE :
@@ -97,9 +116,51 @@ type d'entité : Particulier
 - Intervenant 5  
   email: lucas.bouchard@example.com  
   mot de passe : YxZ1WvT2Q3!  
-  type d'entité : Entrepreneur privé  
+  type d'entité : Entrepreneur privé
 
 --------------------------------------------
+Projets:
+
+Projet 1:
+![img.png](images/imagesReadMe/projet1.png)
+
+Projet 2:
+![img.png](images/imagesReadMe/projet2.png)
+Projet 3:
+![img.png](images/imagesReadMe/projet3.png)
+
+Projet 4:
+![img.png](images/imagesReadMe/projet4.png)
+
+Projet 5:
+![img.png](images/imagesReadMe/projet5.png)
+
+Projet 6:
+![img.png](images/imagesReadMe/projet6.png)
+
+--------------------------------------------
+Requêtes de travail: 
+
+Requete de travail 1:
+![img.png](images/imagesReadMe/requete1.png)
+
+Requete de travail 2:
+![img.png](images/imagesReadMe/requete2.png)
+
+Requete de travail 3:
+![img.png](images/imagesReadMe/requete3.png)
+
+Requete de travail 4:
+![img.png](images/imagesReadMe/requete4.png)
+
+Requete de travail 5:
+![img.png](images/imagesReadMe/requete5.png)
+
+Requete de travail 6:
+![img.png](images/imagesReadMe/requete6.png)
+
+Requete de travail 7:
+![img.png](images/imagesReadMe/requete7.png)
 
 POUR RUN LES TESTS UNITAIRES:
 Pour exécuter tous les tests unitaires en même temps, vous devez aller dans src/test/java/com/example/AppTest.java 
