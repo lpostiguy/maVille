@@ -9,6 +9,7 @@ public class Main {
     public static void main(String[] args) {
         Javalin app = Javalin.create().start(8000);
 
+        RequeteTravailController.setCollectionRequeteTravail(MongoDBConnection.getDatabase().getCollection("requete-travail"));
         RequeteTravailController.registerRoutes(app);
         UserController.registerRoutes(app);
         NotificationsController.registerRoutes(app);
