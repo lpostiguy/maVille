@@ -134,8 +134,7 @@ public class ProjetController {
                 if (result.getModifiedCount() > 0) {
                     ctx.status(200).result("Statut du projet mise à jour avec succès.");
                 } else {
-                    ctx.status(404).result("Aucun projet trouvé pour l'ID "
-                        + "spécifié.");
+                    System.out.println("Le statut du projet n’a pas été modifié, soit parce que le projet est introuvable, soit parce que le statut est déjà identique.");
                 }
             } catch (Exception e) {
                 ctx.status(500).result("Erreur serveur : " + e.getMessage());
