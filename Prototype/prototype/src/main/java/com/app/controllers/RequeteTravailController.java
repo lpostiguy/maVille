@@ -1,6 +1,5 @@
 package com.app.controllers;
 
-import com.app.MongoDBConnection;
 import com.app.models.RequeteTravail;
 import com.app.models.User.User;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -21,6 +20,7 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 import static com.app.utils.GenerateurId.RandomIDGenerator;
@@ -35,8 +35,7 @@ public class RequeteTravailController {
 
     private static final Logger logger =
         LoggerFactory.getLogger(RequeteTravailController.class);
-    private static final MongoCollection<Document> collectionRequeteTravail =
-        MongoDBConnection.getDatabase().getCollection("requete-travail");
+    private static MongoCollection<Document> collectionRequeteTravail;
 
     /**
      * Enregistre les routes du contrôleur pour l'application Javalin.
@@ -94,7 +93,7 @@ public class RequeteTravailController {
                 List<Document> candidaturesInitiales = new ArrayList<>();
 
                 // Validation des champs requis
-                if (requeteTravail.getTitre() == null || requeteTravail.getDescription() == null || requeteTravail.getTypeTravaux() == null || requeteTravail.getDateDebutEspere() == null || requeteTravail.getDemandeurRequete() == null) {
+                if (Objects.equals(requeteTravail.getTitre(), "null") || Objects.equals(requeteTravail.getDescription(), "null") || Objects.equals(requeteTravail.getTypeTravaux(), "null") || Objects.equals(requeteTravail.getDateDebutEspere(), "null") || Objects.equals(requeteTravail.getDemandeurRequete(), "null")) {
                     ctx.status(400).result("Tous les champs sont requis.");
                     return;
                 }
@@ -381,5 +380,9 @@ public class RequeteTravailController {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static void setCollectionRequeteTravail(MongoCollection<Document> collectionRequeteTravail) {
+        RequeteTravailController.collectionRequeteTravail = collectionRequeteTravail;
     }
 }

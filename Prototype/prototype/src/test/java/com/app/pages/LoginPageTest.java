@@ -1,24 +1,13 @@
 package com.app.pages;
 
-import com.app.MongoDBConnection;
-import com.app.controllers.RequeteTravailController;
 import com.app.controllers.UserController;
-import com.app.models.User.Intervenant;
-import com.app.models.User.Resident;
 import com.app.models.User.User;
-import com.mongodb.client.MongoCollection;
 import io.javalin.Javalin;
 import org.bson.Document;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-
-import static com.app.pages.InscriptionPage.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LoginPageTest {
