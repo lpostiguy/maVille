@@ -91,7 +91,7 @@ mot de passe : QwErTyUiOp12
   mot de passe : P@ssW0rd!123  
 
 Exemple de donnée "Résident" dans la base de donnée :
-![img.png](images/imagesReadMe/residentEx.png)
+<img src="images/imagesReadMe/residentEx.png" width="300">
 
 
 Intervenants:  
@@ -122,52 +122,52 @@ type d'entité : Particulier
   type d'entité : Entrepreneur privé
 
 Exemple de donnée "Intervenant" dans la base de donnée :
-![img.png](images/imagesReadMe/intervenantEx.png)
-
+<img src="images/imagesReadMe/intervenantEx.png" width="300">
 
 --------------------------------------------
 Projets:
 
-Projet 1:
-![img.png](images/imagesReadMe/projet1.png)
+Projet 1:  
+<img src="images/imagesReadMe/projet1.png" width="300">
 
-Projet 2:
-![img.png](images/imagesReadMe/projet2.png)
-Projet 3:
-![img.png](images/imagesReadMe/projet3.png)
+Projet 2:  
+<img src="images/imagesReadMe/projet2.png" width="300">
 
-Projet 4:
-![img.png](images/imagesReadMe/projet4.png)
+Projet 3:  
+<img src="images/imagesReadMe/projet3.png" width="300">
 
-Projet 5:
-![img.png](images/imagesReadMe/projet5.png)
+Projet 4:  
+<img src="images/imagesReadMe/projet4.png" width="300">
 
-Projet 6:
-![img.png](images/imagesReadMe/projet6.png)
+Projet 5:  
+<img src="images/imagesReadMe/projet5.png" width="300">
+
+Projet 6:  
+<img src="images/imagesReadMe/projet6.png" width="300">
 
 --------------------------------------------
 Requêtes de travail: 
 
-Requete de travail 1:
-![img.png](images/imagesReadMe/requete1.png)
+Requete de travail 1:  
+<img src="images/imagesReadMe/requete1.png" width="300">
 
-Requete de travail 2:
-![img.png](images/imagesReadMe/requete2.png)
+Requete de travail 2:  
+<img src="images/imagesReadMe/requete2.png" width="300">
 
-Requete de travail 3:
-![img.png](images/imagesReadMe/requete3.png)
+Requete de travail 3:  
+<img src="images/imagesReadMe/requete3.png" width="300">
 
-Requete de travail 4:
-![img.png](images/imagesReadMe/requete4.png)
+Requete de travail 4:  
+<img src="images/imagesReadMe/requete4.png" width="300">
 
-Requete de travail 5:
-![img.png](images/imagesReadMe/requete5.png)
+Requete de travail 5:  
+<img src="images/imagesReadMe/requete5.png" width="300">
 
-Requete de travail 6:
-![img.png](images/imagesReadMe/requete6.png)
+Requete de travail 6:  
+<img src="images/imagesReadMe/requete6.png" width="300">
 
-Requete de travail 7:
-![img.png](images/imagesReadMe/requete7.png)
+Requete de travail 7:  
+<img src="images/imagesReadMe/requete7.png" width="300">
 
 POUR RUN LES TESTS UNITAIRES:
 Pour exécuter tous les tests unitaires en même temps, vous devez aller dans src/test/java/com/example/AppTest.java 
