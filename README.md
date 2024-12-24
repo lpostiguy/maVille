@@ -69,6 +69,7 @@ MaVille est une application en ligne de commande développée en Java, conçue p
    ```bash
    mvn -v
 
+---
 ## **Exécution des tests unitaires**
 
 Pour exécuter les tests unitaires, suivez ces étapes :
@@ -77,13 +78,15 @@ Pour exécuter les tests unitaires, suivez ces étapes :
 2. Naviguez vers le répertoire du projet dans un terminal :
    ```bash
    cd Prototype/prototype
-
-
+3. Entrer la commande :
+   ```bash
+   mvn test
+---
 ## **POUR TESTER L'APPLICATION**
 
 ### **Comptes disponibles :**
 
-#### Résidents:
+### **Résidents:**
 
 - **Résident 1**  
   email: emile.tremblay@example.com  
@@ -105,12 +108,12 @@ Pour exécuter les tests unitaires, suivez ces étapes :
   email: olivier.cloutier@example.com  
   mot de passe : P@ssW0rd!123
 
-Exemple de donnée "Résident" dans la base de données :  
+**Exemple de donnée "Résident" dans la base de données :**  
 <img src="images/imagesReadMe/residentEx.png" width="500">
 
 ---
 
-#### Intervenants:
+### **Intervenants:**
 
 - **Intervenant 1**  
   email: gabriel.tremblay@example.com  
@@ -137,52 +140,58 @@ Exemple de donnée "Résident" dans la base de données :
   mot de passe : YxZ1WvT2Q3!  
   type d'entité : Entrepreneur privé
 
-Exemple de donnée "Intervenant" dans la base de données :  
+**Exemple de donnée "Intervenant" dans la base de données :**  
 <img src="images/imagesReadMe/intervenantEx.png" width="500">
-
-
-**Données storées dans Mongo DB**
+---
+ **POUR EXÉCUTER L'APPLICATION**
 --------------------------------------------
-Projets:
+1. Entrer la commande dans le répertoire du projet:
+   ```bash
+   java -jar maville-prototype.jar
+---
+## **Données storées dans Mongo DB**
+
+--------------------------------------------
+### **Projets:**
 
 Projet 1:  
-<img src="images/imagesReadMe/projet1.png" width="500">
+<img src="images/imagesReadMe/projet1.png" width="600">
 
 Projet 2:  
-<img src="images/imagesReadMe/projet2.png" width="500">
+<img src="images/imagesReadMe/projet2.png" width="600">
 
 Projet 3:  
-<img src="images/imagesReadMe/projet3.png" width="500">
+<img src="images/imagesReadMe/projet3.png" width="600">
 
 Projet 4:  
-<img src="images/imagesReadMe/projet4.png" width="500">
+<img src="images/imagesReadMe/projet4.png" width="600">
 
 Projet 5:  
-<img src="images/imagesReadMe/projet5.png" width="500">
+<img src="images/imagesReadMe/projet5.png" width="600">
 
 Projet 6:  
-<img src="images/imagesReadMe/projet6.png" width="500">
+<img src="images/imagesReadMe/projet6.png" width="600">
 
 --------------------------------------------
-Requêtes de travail:
+### **Requêtes de travail:**
 
 Requete de travail 1:  
-<img src="images/imagesReadMe/requete1.png" width="500">
+<img src="images/imagesReadMe/requete1.png" width="600">
 
 Requete de travail 2:  
-<img src="images/imagesReadMe/requete2.png" width="500">
+<img src="images/imagesReadMe/requete2.png" width="600">
 
 Requete de travail 3:  
-<img src="images/imagesReadMe/requete3.png" width="500">
+<img src="images/imagesReadMe/requete3.png" width="600">
 
 Requete de travail 4:  
-<img src="images/imagesReadMe/requete4.png" width="500">
+<img src="images/imagesReadMe/requete4.png" width="600">
 
 Requete de travail 5:  
-<img src="images/imagesReadMe/requete5.png" width="500">
+<img src="images/imagesReadMe/requete5.png" width="600">
 
 Requete de travail 6:  
-<img src="images/imagesReadMe/requete6.png" width="500">
+<img src="images/imagesReadMe/requete6.png" width="600">
 
 Requete de travail 7:  
-<img src="images/imagesReadMe/requete7.png" width="500">
+<img src="images/imagesReadMe/requete7.png" width="600">
