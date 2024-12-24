@@ -54,14 +54,14 @@ Lorsqu'un intervenant est connecté dans l'applicaition MaVille, il peut:
 
 ORGANISATION DU RÉPERTOIRE :
 - Rapport de l'équipe : Comprend toutes les précisions, l'analyse des exigences, et les cas d'utilisation de l'application
-- Prototype en ligne de commande : Un prototype simple permettant de simuler l'inscription, la connexion, et la navigation des menus
+- Prototype en ligne de commande : Un prototype simple permettant de simuler les actions des résidents et des intervenants.
 - Diagrammes d'activités: Un fichier avec tous les diagrammes d'activité est présent dans le répertoire /images/diagrammes
 
 --------------------------------------------
 
 POUR EXÉCUTER L'APPLICATION:
 
-Pour exécuter le programme de commande, vous devez utiliser la commande: "java -jar prototype-1.1.jar" 
+Pour exécuter le programme de commande, vous devez utiliser la commande: "java -jar maville-prototype.jar" 
 dans le répertoire du projet.
 
 --------------------------------------------
@@ -173,5 +173,4 @@ Requete de travail 7:
 <img src="images/imagesReadMe/requete7.png" width="500">
 
 POUR RUN LES TESTS UNITAIRES:
-Pour exécuter tous les tests unitaires en même temps, vous devez aller dans src/test/java/com/example/AppTest.java 
-et run la classe AppTest.
+Vous aurez besoin d'une version Maven assez récente (3.9+). Dans le répertoire du code, allez à Prototype\prototype et entrez "mvn test".
