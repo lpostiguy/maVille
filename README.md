@@ -29,7 +29,7 @@ Lorsqu'un résident est connecté dans l'applicaition MaVille, il peut:
 - Consulter son profil
   - Voir toutes les données utilisateur
   - Voir ses préférences horaires
-    - Ajouter ou modifier une préférence horaire
+    - Ajouter et modifier une préférence horaire
     - Supprimer une préférence horaire
     
 Lorsqu'un intervenant est connecté dans l'applicaition MaVille, il peut:
@@ -90,6 +90,9 @@ mot de passe : QwErTyUiOp12
   email: olivier.cloutier@example.com  
   mot de passe : P@ssW0rd!123  
 
+Exemple de donnée "Résident" dans la base de donnée :
+![img.png](images/imagesReadMe/residentEx.png)
+
 
 Intervenants:  
 
@@ -117,6 +120,10 @@ type d'entité : Particulier
   email: lucas.bouchard@example.com  
   mot de passe : YxZ1WvT2Q3!  
   type d'entité : Entrepreneur privé
+
+Exemple de donnée "Intervenant" dans la base de donnée :
+![img.png](images/imagesReadMe/intervenantEx.png)
+
 
 --------------------------------------------
 Projets:

@@ -4,20 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] README.md ajout des infos résident et intervenant">
-      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/projet1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/projet2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/projet3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/projet4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/projet5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/projet6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/requete1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/requete2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/requete3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/requete4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/requete5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/requete6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/requete7.png" afterDir="false" />
+    <list default="true" id="f0a005fb-31c6-4218-9bcf-4f71e05483ea" name="Changes" comment="[PROTOTYPE] README.md ajout des données présentes dans la base de donnée.">
+      <change afterPath="$PROJECT_DIR$/images/imagesReadMe/residentEx.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
@@ -368,7 +356,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734996641095</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="[PROTOTYPE] README.md ajout des données présentes dans la base de donnée.">
+      <option name="closed" value="true" />
+      <created>1734999240563</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1734999240563</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -401,6 +397,7 @@
     <MESSAGE value="[PROTOTYPE] Minor bug fix" />
     <MESSAGE value="[PROTOTYPE] Correction ProjetPage.java" />
     <MESSAGE value="[PROTOTYPE] README.md ajout des infos résident et intervenant" />
-    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] README.md ajout des infos résident et intervenant" />
+    <MESSAGE value="[PROTOTYPE] README.md ajout des données présentes dans la base de donnée." />
+    <option name="LAST_COMMIT_MESSAGE" value="[PROTOTYPE] README.md ajout des données présentes dans la base de donnée." />
   </component>
 </project>
