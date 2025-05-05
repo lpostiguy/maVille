@@ -54,22 +54,60 @@ MaVille est une application en ligne de commande développée en Java, conçue p
 
 ### **Étape 1 : Installer Java**
 1. Téléchargez la dernière version de Java :
-- [Oracle Java](https://www.oracle.com/java/technologies/javase-downloads.html)
-- [OpenJDK](https://openjdk.org/)
+  - [Oracle Java](https://www.oracle.com/java/technologies/javase-downloads.html)
+  - [OpenJDK](https://openjdk.org/)
 2. Suivez les instructions d’installation.
 3. Vérifiez l’installation :
    ```bash
    java -version
+   ```
 
 ### **Étape 2 : Installer Maven**
 
 1. Téléchargez Maven : [https://maven.apache.org/download.cgi](https://maven.apache.org/download.cgi)
 2. Configurez le chemin du dossier `bin` dans les variables d’environnement.
-3. Vérifiez l’installation en exécutant la commande suivante dans un terminal :
+3. Vérifiez l’installation :
    ```bash
    mvn -v
+   ```
+
+### **Étape 3 : Ajouter un fichier `.env` pour la base de données**
+
+L'application utilise une base de données MongoDB. Pour des raisons de sécurité, les informations de connexion ne sont **pas codées en dur** dans le projet. Elles doivent être définies dans un fichier `.env`.
+
+#### **1. Créer un fichier `.env` à la racine du projet**
+
+Ajoutez un fichier nommé `.env` dans le dossier racine du projet (au même niveau que `pom.xml` ou `maville-prototype.jar`), contenant les lignes suivantes :
+
+```env
+MONGODB_URI=mongodb+srv://<UTILISATEUR>:<MOT_DE_PASSE>@<CLUSTER>.mongodb.net/?retryWrites=true&w=majority&appName=MaVilleCluster
+MONGODB_DB=MaVilleDataBase
+```
+
+**⚠️ Remplacez** `<UTILISATEUR>`, `<MOT_DE_PASSE>` et `<CLUSTER>` par vos propres identifiants MongoDB.
+
+#### **2. Ne jamais versionner ce fichier**
+
+Assurez-vous que le fichier `.env` est **exclu** du dépôt Git. Le fichier `.gitignore` doit contenir :
+
+```
+.env
+```
+
+#### **3. Vérifiez que la librairie `dotenv-java` est installée**
+
+Le projet utilise la librairie [`dotenv-java`](https://github.com/cdimascio/dotenv-java) pour lire automatiquement les variables définies dans le `.env`. Cette dépendance est déjà ajoutée dans le `pom.xml`. Sinon, ajoutez :
+
+```xml
+<dependency>
+    <groupId>io.github.cdimascio</groupId>
+    <artifactId>dotenv-java</artifactId>
+    <version>3.0.0</version>
+</dependency>
+```
 
 ---
+
 ## **Exécution des tests unitaires**
 
 Pour exécuter les tests unitaires, suivez ces étapes :
@@ -78,10 +116,14 @@ Pour exécuter les tests unitaires, suivez ces étapes :
 2. Naviguez vers le répertoire du projet dans un terminal :
    ```bash
    cd Prototype/prototype
-3. Entrer la commande :
+   ```
+3. Entrez la commande :
    ```bash
    mvn test
+   ```
+
 ---
+
 ## **POUR TESTER L'APPLICATION**
 
 ### **Comptes disponibles :**
@@ -142,13 +184,18 @@ Pour exécuter les tests unitaires, suivez ces étapes :
 
 **Exemple de donnée "Intervenant" dans la base de données :**  
 <img src="images/imagesReadMe/intervenantEx.png" width="500">
+
 ---
- **POUR EXÉCUTER L'APPLICATION**
+
+## **POUR EXÉCUTER L'APPLICATION**
 --------------------------------------------
-1. Entrer la commande dans le répertoire du projet:
+1. Entrer la commande dans le répertoire du projet :
    ```bash
    java -jar maville-prototype.jar
+   ```
+
 ---
+
 ## **Données storées dans Mongo DB**
 
 --------------------------------------------
